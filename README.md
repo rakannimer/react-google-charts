@@ -119,6 +119,7 @@ The examples directory has some code examples. But for the lazy :
 ```
 
 ### Listen to chart events
+
 ```javascript
 	componentDidMount: function() {
 		var chart_events = [
@@ -136,42 +137,28 @@ The examples directory has some code examples. But for the lazy :
 ```
 
 
-## Setup
-
-
 
 ## Development
-#### Gulp tasks
-```
-	gulp watch-all
-```
-When you're working on server and client-side coding.
-Will run nodemon and gulp watch on css and client-side js files 
 
-Also starts Mongodb instance on Port 27017
+Fork and clone the repo.
 
 ```
-	gulp watch-scripts
+npm install
 ```
-When you're working on client-side code only.
-Will gulp-watch css and js changes and recompile.	
-```
-	gulp nodemon
-```
-As the name suggests will run nodemon and listen to changes on server.js and files in ./server/
+
+And
 
 ```
-	gulp build-remote
+	gulp 
 ```
-Builds an environment on top of an empty Ubuntu Machine ready to start listening and archiving tweets. Installs all dependent software, clones repo, and prepares environment. For more details, see the [Deployment](#deployment) section
+Will browserify and reactify the files, put them in the dist folder and serve them on localhost:8000 with livereload on changes
 
 ```
-	gulp deploy --branch {{branch}}
+	gulp dist
 ```
-After committing your changes and pushing them to the repo, deploy the new code on the server on the selected branch.
-if the branch argument is not passed master will be used.
+
+Will browserify and reactify the files, uglify them and put them in the dist folder.
 
 
 
-## Deployment
 
