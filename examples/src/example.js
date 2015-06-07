@@ -1,6 +1,6 @@
 var React = require('react');
-var Chart = require('../../src/').Chart;
-var sample_data = require('../../src/').sample_data;
+var Chart = require('../../src').Chart;
+var sample_data = require('../../src').sample_data;
 
 var App = React.createClass({
 

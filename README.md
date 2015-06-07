@@ -36,7 +36,7 @@ You can also show and hide columns in the chart by clicking on the legend if you
 
 ## Examples
 
-I will put some live examples in requirebin but meanwhile : 
+The examples directory has some code examples. But for the lazy :
 ### Initialize from array : 
 
 ```javascript
@@ -119,15 +119,12 @@ I will put some live examples in requirebin but meanwhile :
 ```
 
 ### Listen to chart events
-
-The events to use are events specific to the rendered chart as described in the Google Charts API.
-
 ```javascript
 	componentDidMount: function() {
 		var chart_events = [
         {
         	eventName : 'onmouseover',
-            callback  : funtion() {console.log("mouseover");}
+            callback  : funtion() {console.log("mouseover the chart");}
         }
         ];
 
@@ -139,27 +136,40 @@ The events to use are events specific to the rendered chart as described in the 
 ```
 
 
+## Setup
+
+
+
 ## Development
-
-Fork and clone the repo.
-Then run 
+#### Gulp tasks
 ```
-npm install
+	gulp watch-all
 ```
+When you're working on server and client-side coding.
+Will run nodemon and gulp watch on css and client-side js files 
 
-And
-
-
-```
-	gulp 
-```
-Will browserify and reactify the files, put them in the dist folder and serve them on localhost:8000 with livereload on changes
+Also starts Mongodb instance on Port 27017
 
 ```
-	gulp dist
+	gulp watch-scripts
 ```
+When you're working on client-side code only.
+Will gulp-watch css and js changes and recompile.	
+```
+	gulp nodemon
+```
+As the name suggests will run nodemon and listen to changes on server.js and files in ./server/
 
-Will browserify and reactify the files, uglify them and put them in the dist folder.
+```
+	gulp build-remote
+```
+Builds an environment on top of an empty Ubuntu Machine ready to start listening and archiving tweets. Installs all dependent software, clones repo, and prepares environment. For more details, see the [Deployment](#deployment) section
+
+```
+	gulp deploy --branch {{branch}}
+```
+After committing your changes and pushing them to the repo, deploy the new code on the server on the selected branch.
+if the branch argument is not passed master will be used.
 
 
 

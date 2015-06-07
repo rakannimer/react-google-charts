@@ -41,7 +41,6 @@ gulp.task('examples', function() {
 gulp.task('dist', function() {
        return browserify({entries:['./src/index.js'], debug:true})
                .transform(reactify)
-               .transform(stringify(['.html']))
                 .bundle()
                 .pipe(source('react-google-charts.min.js'))
                 .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
@@ -54,7 +53,6 @@ gulp.task('scripts', function() {
 
      return browserify({entries:['./src/index.js'], debug:true})
                .transform(reactify)
-               .transform(stringify(['.html']))
                 .bundle()
                 .pipe(source('react-google-charts.min.js'))
                 .pipe(gulp.dest('./dist/'))
@@ -87,7 +85,7 @@ gulp.task('ex', ['examples', 'watch-examples'], function(){
   gulp.start('webserver');
 });
 
-gulp.task('watch-examples',['examples'], function() {
+gulp.task('watch-examples',['scripts', 'examples'], function() {
     gulp.watch([ './examples/src/*.js' ], ['examples']).on('error', handleError);
 });
 

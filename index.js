@@ -1,1 +1,1 @@
-module.exports = require('./dist/react-google-charts.min');
+module.exports = require('./src/index');

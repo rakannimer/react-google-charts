@@ -1,8 +1,7 @@
 {
   "name": "react-google-charts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React Google Charts Wrapper",
-  "main": "dist/react-google-charts.min",
   "scripts": {
     "test": "karma start"
   },
