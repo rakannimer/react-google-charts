@@ -6,6 +6,7 @@ var Chart = React.createClass({
 	chart: null,
 	wrapper: null,
 	hidden_columns: [],
+	data_table: [],
 	getInitialState: function() {
 		return { 
 		};
@@ -82,9 +83,11 @@ var Chart = React.createClass({
 			containerId: this.props.graph_id
 		});
 
+		this.data_table = this.wrapper.getDataTable();
+
         var self = this;
         
-        google.visualization.events.addListener(this.wrapper, 'ready', function() { 
+        google.visualization.events.addOneTimeListener(this.wrapper, 'ready', function() { 
         	self.chart = self.wrapper.getChart();
         	self.listen_to_chart_events.call(this);
         });
@@ -100,8 +103,17 @@ var Chart = React.createClass({
     },
     listen_to_chart_events: function() {
     	
+    	var self = this;
+    	var event_data;
   		for (var i = 0; i < this.props.chartEvents.length; i++) {
-    		google.visualization.events.addListener(this.chart, this.props.chartEvents[i].eventName, this.props.chartEvents[i].callback);
+  			if (this.props.chartEvents[i].eventName === 'ready') {
+  				this.props.chartEvents[i].callback(this);
+  			}
+  			else {
+  				var callback = self.props.chartEvents[i].callback;
+  				google.visualization.events.addListener(this.chart, this.props.chartEvents[i].eventName, function(){ callback(self); });
+  			}
+    		
 		}
 
     	
@@ -142,10 +154,7 @@ var Chart = React.createClass({
 		
 		//Need to show legend !! 
 
-
-
-    	var view = new google.visualization.DataView(this.data_table);
-
+    	var view = new google.visualization.DataView(this.wrapper.getDataTable());
     	var column_count = view.getNumberOfColumns();
     	var colors = [],
     		columns = [],
@@ -159,7 +168,6 @@ var Chart = React.createClass({
 			// If user clicked on legend 
 			if (i === column ) {
 				
-				console.log("deleted ",this.data_table.getColumnLabel(i));
 				column_hidden = (typeof this.hidden_columns[i] !== 'undefined');
 				
 				//User wants to hide values

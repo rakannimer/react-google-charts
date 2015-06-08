@@ -1,4 +1,6 @@
 //GoogleChartLoader Singleton
+
+// Based on http://blog.arkency.com/2014/09/react-dot-js-and-google-charts/
 var q = require('q');
 var $ = require('jquery');
 
@@ -28,8 +30,6 @@ var GoogleChartLoader = function(){
 	    		google.load("visualization", "1", {
 	      			packages:self.packages,
 	      			callback: function() {
-	      				console.log('AJAX DONE');
-
 	      				self.is_loaded = true;
 	        			self.google_promise.resolve();
 	      			}

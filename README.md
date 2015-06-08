@@ -120,22 +120,28 @@ The examples directory has some code examples. But for the lazy :
 
 ### Listen to chart events
 
+Set the chart-specific events you want to listen to and the corresponding callback.
+The callback has the component as an argument.
+
 ```javascript
+
+
 	componentDidMount: function() {
 		var chart_events = [
         {
         	eventName : 'onmouseover',
-            callback  : funtion() {console.log("mouseover the chart");}
+            callback  : function(Chart) { console.log("mouseover the chart"); }
         }
         ];
 
 	},
     render: function() {
-        <Chart chartType = "ScatterChart" rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options} graph_id = "ScatterChart"  width={"100%"} height={"400px"}  legend_toggle={true} />
+        <Chart chartType = "ScatterChart" rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options} graph_id = "ScatterChart"  width={"100%"} height={"400px"} chartEvents = {chart_events} />
 
     }
 ```
 
+For more example code check : 
 
 
 ## Development
