@@ -31,8 +31,8 @@ var ScatterCharts = React.createClass({
 	componentDidMount: function() {
 
 
-		var randomWalk = function(Chart) {
-			var dataTable = Chart.wrapper.getDataTable(),
+		var randomWalk = function(Wrapper) {
+			var dataTable = Wrapper.getDataTable(),
 				x = Chart.props.rows[Chart.props.rows.length - 1][0],
 	        	y = Chart.props.rows[Chart.props.rows.length - 1][1],
 	        	radius = 100;

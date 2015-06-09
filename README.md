@@ -14,7 +14,7 @@ npm install react-google-charts
 The library can be used as a simple wrapper to the Google Charts API ([Full Detailed Guide](https://developers.google.com/chart/)) : 
 
 ```javascript
- <Chart  chartType = "LineChart" data = {this.state.data} options = {this.state.options}  width={"100%"} height={"300px"} graph_id = "linechart_graph"  /> 
+ <Chart chartType = "LineChart" data = {this.state.data} options = {this.state.options}  width={"100%"} height={"300px"} graph_id = "linechart_graph"  /> 
 ```
 
 Where data and options are the dataTable and options parameters of [ChartWrapper](https://developers.google.com/chart/interactive/docs/reference#chartwrapperobject)
@@ -23,7 +23,7 @@ For convenience, you can optionally use the rows and columns parameters and the 
 
 ```javascript
 
- <Chart  chartType = "LineChart" width={"100%"} height={"300px"} rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options}  graph_id = "linechart_graph"  />  
+ <Chart chartType = "LineChart" width={"100%"} height={"300px"} rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options}  graph_id = "linechart_graph"  />  
 
 ```
 
@@ -36,7 +36,13 @@ You can also show and hide columns in the chart by clicking on the legend if you
 
 ## Examples
 
-The examples directory has some code examples. But for the lazy :
+The examples directory is the source code of : http://rakannimer.github.io/react-google-charts/
+
+So check it out.
+
+
+## Quick Walkthrough
+
 ### Initialize from array : 
 
 ```javascript
@@ -130,7 +136,10 @@ The callback has the component as an argument.
 		var chart_events = [
         {
         	eventName : 'onmouseover',
-            callback  : function(Chart) { console.log("mouseover the chart"); }
+            callback  : function(Chart) { 
+                // Returns Chart so you can access props and  the ChartWrapper object from chart.wrapper
+                console.log("mouseover the chart"); 
+            }
         }
         ];
 
@@ -141,18 +150,14 @@ The callback has the component as an argument.
     }
 ```
 
-For more example code check : 
 
 
 ## Development
 
-Fork and clone the repo.
+Fork and clone
 
 ```
 npm install
-```
-
-And
 
 ```
 	gulp 
@@ -164,7 +169,14 @@ Will browserify and reactify the files, put them in the dist folder and serve th
 ```
 
 Will browserify and reactify the files, uglify them and put them in the dist folder.
+ 
 
 
+### Examples : 
 
-
+```
+git clone https://github.com/RakanNimer/react-google-charts/
+cd react-google-charts && cd examples
+npm install
+gulp
+```
