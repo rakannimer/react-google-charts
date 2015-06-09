@@ -161,13 +161,13 @@ npm install
 
 ```
 ```
-	gulp 
+gulp 
 ```
 
 Will browserify and reactify the files, put them in the dist folder and serve them on localhost:8000 with livereload on changes
 
 ```
-	gulp dist
+gulp dist
 ```
 
 Will browserify and reactify the files, uglify them and put them in the dist folder.
