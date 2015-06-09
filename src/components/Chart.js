@@ -55,6 +55,7 @@ var Chart = React.createClass({
 		return React.DOM.div({id: this.props.graph_id, style: {height: this.props.height, width:this.props.width}});
 	},
 	build_data_table : function() {
+
 		var data_table = new google.visualization.DataTable();
 		for (var i = 0 ; i < this.props.columns.length; i++) {
 			data_table.addColumn(this.props.columns[i].type, this.props.columns[i].label);
@@ -69,11 +70,19 @@ var Chart = React.createClass({
 	drawChart: function() {
 
 		if (this.props.data !== null ) {
+			if (this.props.data.length === 0 ) {
+				// Initialized. Do nothing and wait for data
+				return;
+			}
+
 			this.data_table = this.props.data;
+		}
+		else if (this.props.columns.length === 0) {
+			return;
 		}
 		else {
 			this.data_table = this.build_data_table();
-		} 
+		}
 		
 		
 		this.wrapper = new google.visualization.ChartWrapper({
