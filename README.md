@@ -160,8 +160,10 @@ Fork and clone
 npm install
 
 ```
+```
 	gulp 
 ```
+
 Will browserify and reactify the files, put them in the dist folder and serve them on localhost:8000 with livereload on changes
 
 ```
@@ -169,10 +171,10 @@ Will browserify and reactify the files, put them in the dist folder and serve th
 ```
 
 Will browserify and reactify the files, uglify them and put them in the dist folder.
- 
 
 
 ### Examples : 
+
 
 ```
 git clone https://github.com/RakanNimer/react-google-charts/
