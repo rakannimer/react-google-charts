@@ -2,13 +2,20 @@ var React = require('react');
 var GoogleChartLoader = require('./GoogleChartLoader');
 var DEFAULT_COLORS = require('../constants/DEFAULT_CHART_COLORS');
 
+var uniqueId = 0;
+var generateUniqueId = function() {
+    uniqueId++;
+    return "reactgooglegraph" + uniqueId;
+};
+
 var Chart = React.createClass({
 	chart: null,
 	wrapper: null,
 	hidden_columns: [],
 	data_table: [],
 	getInitialState: function() {
-		return { 
+		return {
+            graph_id: this.props.graph_id || generateUniqueId()
 		};
 	},
 	componentDidMount: function(){
@@ -28,7 +35,6 @@ var Chart = React.createClass({
 	getDefaultProps: function() {
 		return {
 			chartType : 'LineChart',
-			graph_id: 'graph',
 			rows: [],
 			columns: [],
 			options: {
@@ -52,7 +58,7 @@ var Chart = React.createClass({
 
 
 	render: function() {
-		return React.DOM.div({id: this.props.graph_id, style: {height: this.props.height, width:this.props.width}});
+		return React.DOM.div({id: this.state.graph_id, style: {height: this.props.height, width:this.props.width}});
 	},
 	build_data_table : function() {
 
@@ -89,7 +95,7 @@ var Chart = React.createClass({
 			chartType: this.props.chartType,
 			dataTable: this.data_table,
 			options : this.props.options,
-			containerId: this.props.graph_id
+			containerId: this.state.graph_id
 		});
 
 		this.data_table = this.wrapper.getDataTable();
