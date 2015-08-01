@@ -18,7 +18,7 @@ var GoogleChartLoader = function(){
 		}
 
 		this.is_loading = true;
-		self = this;
+		var self = this;
 
 	 	var options = {
 	    	dataType: "script",
