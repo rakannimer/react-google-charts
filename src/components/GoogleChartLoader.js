@@ -11,7 +11,8 @@ var GoogleChartLoader = function(){
 	this.google_promise = q.defer();
 	this.url = "https://www.google.com/jsapi";
 	this.packages = ["corechart"];
-	this.init = function() {
+	this.version = "1";
+	this.init = function(packages, version) {
 
 		if (this.is_loading) {
 			return this.google_promise.promise;
@@ -27,8 +28,8 @@ var GoogleChartLoader = function(){
 	  	};
 	  	$.ajax(options).done(
 	  		function(){
-	    		google.load("visualization", "1", {
-	      			packages:self.packages,
+	    		google.load("visualization", version || self.version, {
+	      			packages: packages || self.packages,
 	      			callback: function() {
 	      				self.is_loaded = true;
 	        			self.google_promise.resolve();
