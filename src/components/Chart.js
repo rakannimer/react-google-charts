@@ -126,7 +126,7 @@ var Chart = React.createClass({
   			}
   			else {
   				var callback = self.props.chartEvents[i].callback;
-  				google.visualization.events.addListener(this.chart, this.props.chartEvents[i].eventName, function(){ callback(self); });
+  				google.visualization.events.addListener(this.chart, this.props.chartEvents[i].eventName, function(e){ callback(self, e); });
   			}
     		
 		}
