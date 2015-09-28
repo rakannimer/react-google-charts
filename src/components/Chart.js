@@ -1,6 +1,7 @@
 var React = require('react');
 var GoogleChartLoader = require('./GoogleChartLoader');
 var DEFAULT_COLORS = require('../constants/DEFAULT_CHART_COLORS');
+var _ = require('lodash');
 
 var uniqueId = 0;
 var generateUniqueId = function() {
@@ -23,14 +24,25 @@ var Chart = React.createClass({
 
 	    GoogleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(function(){
 	      self.drawChart();
-	    });     
+	    });
+	    window.addEventListener('resize', this.onResize);
+	    this.onResize = _.debounce(this.onResize, 200);     
 	},
 
 	componentDidUpdate: function(){
 		if (GoogleChartLoader.is_loaded){
 			this.drawChart();	
 		};
-  	},
+  },
+
+  componentWillUnmount: function() {
+  	window.removeEventListener('resize', this.onResize);
+  },
+
+  onResize: function() {
+  	console.log('Chart::onResize');
+  	this.drawChart();
+  },
 
 	getDefaultProps: function() {
 		return {
