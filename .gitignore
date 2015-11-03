@@ -1,2 +1,3 @@
 node_modules
 test/bower_components
+**/.DS_Store
