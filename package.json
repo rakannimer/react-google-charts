@@ -23,7 +23,7 @@
     "gulp-webserver": "^0.9.1",
     "gutil": "^1.6.4",
     "jasmine-core": "^2.3.4",
-    "jest-cli": "^0.4.5",
+    "jest-cli": "^0.7.0",
     "karma": "^0.12.36",
     "karma-browserify": "^4.2.1",
     "karma-chrome-launcher": "^0.1.12",
