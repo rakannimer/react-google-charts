@@ -96,6 +96,7 @@ var Chart = React.createClass({
       this.data_table = this.build_data_table();
     }
 
+    // creates the google wrapper
     this.wrapper = new google.visualization.ChartWrapper({
       chartType: this.props.chartType,
       dataTable: this.data_table,
@@ -106,13 +107,25 @@ var Chart = React.createClass({
     this.data_table = this.wrapper.getDataTable();
 
     var self = this;
-
     google.visualization.events.addOneTimeListener(
       this.wrapper,
       'ready',
       function() {
+        // when the wrapper is ready, define the chart
         self.chart = self.wrapper.getChart();
+        // add the chart events
         self.listen_to_chart_events.call(this);
+
+        // if any action was specified, add it to the chart
+        if (self.props.chartAction != null){
+          var action_parameters = self.props.chartAction;
+          self.chart.setAction({
+            id: action_parameters.id,
+            text: action_parameters.text,
+            // bind the chart back to the action callback so we can get the chart information
+            action: action_parameters.action.bind(self.chart),
+          });
+        }
       }
     );
 
@@ -130,13 +143,6 @@ var Chart = React.createClass({
         'select',
         function() { self.props.onSelect(self, self.chart.getSelection()); }
       );
-    }
-
-    if (this.props.chartAction){
-      var action_parameters = this.props.action;
-      // pass the chart wrapper back to the action callback
-      action_parameters.action = action_parameters.action.callback(this)
-      this.wrapper.setAction(action_parameters);
     }
 
     self.wrapper.draw();
