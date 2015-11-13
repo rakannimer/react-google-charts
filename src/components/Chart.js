@@ -50,7 +50,6 @@ var Chart = React.createClass({
         height: '300px'
       },
       chartEvents : [],
-      chartAction: null,
       data: null,
       onSelect: null,
       legend_toggle: false
@@ -115,17 +114,6 @@ var Chart = React.createClass({
         self.chart = self.wrapper.getChart();
         // add the chart events
         self.listen_to_chart_events.call(this);
-
-        // if any action was specified, add it to the chart
-        if (self.props.chartAction != null){
-          var action_parameters = self.props.chartAction;
-          self.chart.setAction({
-            id: action_parameters.id,
-            text: action_parameters.text,
-            // bind the chart back to the action callback so we can get the chart information
-            action: action_parameters.action.bind(self.chart),
-          });
-        }
       }
     );
 
@@ -153,6 +141,16 @@ var Chart = React.createClass({
     for (var i = 0; i < this.props.chartEvents.length; i++) {
       if (this.props.chartEvents[i].eventName === 'ready') {
         this.props.chartEvents[i].callback(this);
+      }
+      else if (this.props.chartEvents[i].eventName === 'action') {
+        // if any action was specified, add it to the chart
+        var action_parameters = this.props.chartEvents[i].callback;
+        self.chart.setAction({
+          id: action_parameters.id,
+          text: action_parameters.text,
+          // bind the chart back to the action callback so we can get the chart information
+          action: action_parameters.action.bind(self.chart),
+        });
       }
       else {
         (function(callback){
