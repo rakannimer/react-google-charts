@@ -49,6 +49,7 @@ var Chart = React.createClass({
 
 	      	},
 	      	chartEvents : [],
+	      	chartActions : null,
 	      	data: null,
 	      	onSelect: null,
 	        legend_toggle: false
@@ -105,6 +106,7 @@ var Chart = React.createClass({
         google.visualization.events.addOneTimeListener(this.wrapper, 'ready', function() {
         	self.chart = self.wrapper.getChart();
         	self.listen_to_chart_events.call(this);
+        	self.add_chart_actions.call(this);
         });
 
         if (this.props.legend_toggle) {
@@ -134,12 +136,20 @@ var Chart = React.createClass({
               });
           })(self.props.chartEvents[i].callback)
   			}
-
-		}
-
-
+		  }
     },
-
+    add_chart_actions: function () {
+    	var self = this;
+      // if any action was specified, add it to the chart
+      if (this.props.chartActions != null) {
+        self.chart.setAction({
+          id: this.props.chartActions.id,
+          text: this.props.chartActions.text,
+          // bind the chart back to the action callback so we can get the chart information
+          action: this.props.chartActions.action.bind(self.chart)
+        });
+      };
+    },
     default_chart_select: function() {
 		var selection = this.chart.getSelection();
 	    // if selection length is 0, we deselected an element
