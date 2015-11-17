@@ -6,6 +6,7 @@ var LineCharts = require('./Examples/LineCharts');
 var ScatterCharts = require('./Examples/ScatterCharts');
 var BarCharts = require('./Examples/BarCharts');
 var Histograms = require('./Examples/Histograms');
+var ColumnCharts = require('./Examples/ColumnCharts');
 var BubbleCharts = require('./Examples/BubbleCharts');
 var CodeHolder = require('./CodeHolder');
 
@@ -13,14 +14,14 @@ var Menu = require('./Menu');
 
 
 var Examples = React.createClass({
-	
+
 	getInitialState: function() {
 		return {
 		};
 	},
 
 	render: function() {
-		
+
 		return (
 			<div>
 				<div className="examples">
@@ -35,7 +36,9 @@ var Examples = React.createClass({
 					<CodeHolder codeUrl = {"src/components/Examples/BarCharts.js"} />
 					<Histograms />
 					<CodeHolder codeUrl = {"src/components/Examples/Histograms.js"} />
-					
+					<ColumnCharts />
+					<CodeHolder codeUrl = {"src/components/Examples/ColumnCharts.js"} />
+
 				</div>
 			</div>
 		);

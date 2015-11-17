@@ -9,6 +9,7 @@ var React = require('react'),
 	BarCharts = require('./components/Examples/BarCharts'),
 	Histograms = require('./components/Examples/Histograms'),
 	BubbleCharts = require('./components/Examples/BubbleCharts'),
+	ColumnCharts = require('./components/Examples/ColumnCharts'),
 	CodeHolder = require('./components/CodeHolder');
 
 var App = React.createClass({
@@ -18,7 +19,7 @@ var App = React.createClass({
     routes: {
         '/': 'home_handler',
         '/examples/:chartType':'examples_handler'
-       
+
     },
     home_handler: function() {
     	return (
@@ -38,7 +39,7 @@ var App = React.createClass({
     	);
     },
     examples: function(chartType) {
-    	
+
     	switch(chartType){
     		case 'BarCharts':
     			return (
@@ -72,6 +73,14 @@ var App = React.createClass({
     				</div>
     			);
     			break;
+				case 'ColumnCharts':
+					return (
+							<div className = "examples">
+								<ColumnCharts />
+								<CodeHolder codeUrl = {"src/components/Examples/ColumnCharts.js"} />
+							</div>
+					);
+					break;
     		case 'Histograms':
 				return (
     				<div className = "examples">
@@ -105,7 +114,7 @@ var App = React.createClass({
     			);
     			break;
     		default:
-    			
+
     			break;
     	}
     },
@@ -140,7 +149,7 @@ var BubbleChartData = require('./sample_data/BubbleChart');
 
 
 var App = React.createClass({
-	
+
 	getInitialState: function() {
 		return {
 			AirPassengersChart: {
@@ -150,7 +159,7 @@ var App = React.createClass({
 			},
 			UKGasChart: {
 				data: [],
-				chartType: ""	
+				chartType: ""
 			},
 			HistogramChart: {
 				data: [],
@@ -212,7 +221,7 @@ var App = React.createClass({
 			'BarChart': BarChart,
 			'BubbleChart' : BubbleChart
 		});
-		
+
 	},
 
 	render: function() {
@@ -229,7 +238,7 @@ var App = React.createClass({
 				<Chart chartType={this.state.BarChart.chartType} width={"600px"} height={"400px"} data={this.state.BarChart.data} options = {this.state.BarChart.options} graph_id={this.state.BarChart.div_id} />
 				<h3> Bubble Chart </h3>
 				<Chart chartType={this.state.BubbleChart.chartType} width={"600px"} height={"400px"} data={this.state.BubbleChart.data} options = {this.state.BubbleChart.options} graph_id={this.state.BubbleChart.div_id } />
-				
+
 			</div>
 		);
 	}

@@ -23,7 +23,7 @@
     "gulp-webserver": "^0.9.1",
     "gutil": "^1.6.4",
     "jasmine-core": "^2.3.4",
-    "jest-cli": "^0.4.5",
+    "jest-cli": "^0.7.0",
     "karma": "^0.12.36",
     "karma-browserify": "^4.2.1",
     "karma-chrome-launcher": "^0.1.12",
@@ -58,9 +58,9 @@
   },
   "homepage": "https://github.com/rakannimer/react-google-charts",
   "dependencies": {
+    "jquery": "^2.1.4",
     "q": "^1.4.1",
     "react": "^0.13.3",
-    "react-tools": "^0.13.3",
-    "jquery": "^2.1.4"
+    "react-tools": "^0.13.3"
   }
 }

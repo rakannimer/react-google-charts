@@ -65,7 +65,11 @@ var Chart = React.createClass({
 
 		var data_table = new google.visualization.DataTable();
 		for (var i = 0 ; i < this.props.columns.length; i++) {
-			data_table.addColumn(this.props.columns[i].type, this.props.columns[i].label);
+			data_table.addColumn({
+				type: this.props.columns[i].type,
+				label: this.props.columns[i].label,
+				role: this.props.columns[i].role
+			});
 		}
 
 		if (this.props.rows.length > 0) {
