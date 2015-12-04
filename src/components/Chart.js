@@ -3,7 +3,7 @@ var GoogleChartLoader = require('./GoogleChartLoader');
 var DEFAULT_COLORS = require('../constants/DEFAULT_CHART_COLORS');
 
 var uniqueId = 0;
-var generateUniqueId = function () {
+var generateUniqueId = function() {
 	uniqueId++;
 	return "reactgooglegraph" + uniqueId;
 };
@@ -13,29 +13,28 @@ var Chart = React.createClass({
 	wrapper: null,
 	hidden_columns: [],
 	data_table: [],
-	getInitialState: function () {
+	getInitialState: function() {
 		return {
 			graph_id: this.props.graph_id || generateUniqueId()
 		};
 	},
-	componentDidMount: function () {
+	componentDidMount: function(){
 		var self = this;
 
-		GoogleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(function () {
+		GoogleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(function(){
 			self.drawChart();
 		});
 	},
 
-	componentDidUpdate: function () {
-		if (GoogleChartLoader.is_loaded) {
+	componentDidUpdate: function(){
+		if (GoogleChartLoader.is_loaded){
 			this.drawChart();
-		}
-		;
+		};
 	},
 
-	getDefaultProps: function () {
+	getDefaultProps: function() {
 		return {
-			chartType: 'LineChart',
+			chartType : 'LineChart',
 			rows: [],
 			columns: [],
 			options: {
@@ -49,8 +48,8 @@ var Chart = React.createClass({
 				height: '300px'
 
 			},
-			chartEvents: [],
-			chartActions: null,
+			chartEvents : [],
+			chartActions : null,
 			data: null,
 			onSelect: null,
 			legend_toggle: false
@@ -58,13 +57,14 @@ var Chart = React.createClass({
 	},
 
 
-	render: function () {
-		return React.DOM.div({id: this.state.graph_id, style: {height: this.props.height, width: this.props.width}});
+
+	render: function() {
+		return React.DOM.div({id: this.state.graph_id, style: {height: this.props.height, width:this.props.width}});
 	},
-	build_data_table: function () {
+	build_data_table : function() {
 
 		var data_table = new google.visualization.DataTable();
-		for (var i = 0; i < this.props.columns.length; i++) {
+		for (var i = 0 ; i < this.props.columns.length; i++) {
 			data_table.addColumn(this.props.columns[i]);
 		}
 
@@ -73,8 +73,7 @@ var Chart = React.createClass({
 		}
 		return data_table;
 	},
-
-	update_data_table: function () {
+	update_data_table : function() {
 		this.data_table.removeRows(0, this.data_table.getNumberOfRows());
 		this.data_table.removeColumns(0, this.data_table.getNumberOfColumns());
 
@@ -87,7 +86,7 @@ var Chart = React.createClass({
 		}
 	},
 
-	drawChart: function () {
+	drawChart: function() {
 
 		if ((this.props.data !== null && this.props.data.length === 0) || this.props.columns.length === 0) {
 			return;
@@ -132,8 +131,7 @@ var Chart = React.createClass({
 		}
 		this.wrapper.draw();
 	},
-
-	listen_to_chart_events: function () {
+	listen_to_chart_events: function() {
 
 		var self = this;
 		var event_data;
@@ -142,11 +140,11 @@ var Chart = React.createClass({
 				this.props.chartEvents[i].callback(this);
 			}
 			else {
-				(function (callback) {
+				(function(callback){
 					google
 							.visualization
 							.events
-							.addListener(self.chart, self.props.chartEvents[i].eventName, function (e) {
+							.addListener(self.chart, self.props.chartEvents[i].eventName, function (e){
 								callback(self, e);
 							});
 				})(self.props.chartEvents[i].callback)
@@ -163,10 +161,9 @@ var Chart = React.createClass({
 				// bind the chart back to the action callback so we can get the chart information
 				action: this.props.chartActions.action.bind(self.chart)
 			});
-		}
-		;
+		};
 	},
-	default_chart_select: function () {
+	default_chart_select: function() {
 		var selection = this.chart.getSelection();
 		// if selection length is 0, we deselected an element
 		if (selection.length > 0) {
@@ -178,7 +175,7 @@ var Chart = React.createClass({
 		}
 	},
 
-	build_empty_column: function (index) {
+	build_empty_column: function(index) {
 
 		return {
 			label: this.data_table.getColumnLabel(index),
@@ -189,7 +186,7 @@ var Chart = React.createClass({
 		};
 	},
 
-	build_column_from_src: function (index) {
+	build_column_from_src: function(index) {
 		return {
 			label: this.data_table.getColumnLabel(index),
 			type: this.data_table.getColumnType(index),
@@ -197,7 +194,7 @@ var Chart = React.createClass({
 		};
 	},
 
-	toggle_points: function (column) {
+	toggle_points: function(column) {
 
 		//Need to show legend !!
 
@@ -213,17 +210,17 @@ var Chart = React.createClass({
 		for (var i = 0; i < column_count; i++) {
 
 			// If user clicked on legend
-			if (i === column) {
+			if (i === column ) {
 
 				column_hidden = (typeof this.hidden_columns[i] !== 'undefined');
 
 				//User wants to hide values
-				if (!column_hidden) {
+				if (!column_hidden ) {
 					// Null out the values of the column
-					empty_column = this.build_empty_column(i);
+					empty_column =  this.build_empty_column(i);
 					columns.push(empty_column);
 
-					this.hidden_columns[i] = {color: this.get_column_color(i - 1)};
+					this.hidden_columns[i] = { color : this.get_column_color(i-1) };
 					colors.push('#CCCCCC');
 				}
 				//User wants to show values
@@ -237,7 +234,7 @@ var Chart = React.createClass({
 				}
 			}
 			else if (typeof this.hidden_columns[i] !== 'undefined') {
-				empty_column = this.build_empty_column(i);
+				empty_column =  this.build_empty_column(i);
 				columns.push(empty_column);
 				colors.push('#CCCCCC');
 			}
@@ -246,7 +243,7 @@ var Chart = React.createClass({
 				columns.push(column_from_src);
 
 				if (i !== 0) {
-					colors.push(this.get_column_color(i - 1));
+					colors.push(this.get_column_color(i-1));
 				}
 			}
 		}
@@ -258,7 +255,7 @@ var Chart = React.createClass({
 	},
 
 
-	get_column_color: function (column_index) {
+	get_column_color: function(column_index) {
 		if (this.props.options.colors) {
 			if (this.props.options.colors[column_index]) {
 				return this.props.options.colors[column_index];
