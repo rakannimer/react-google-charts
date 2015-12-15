@@ -14,7 +14,7 @@ npm install react-google-charts
 The library can be used as a simple wrapper to the Google Charts API ([Full Detailed Guide](https://developers.google.com/chart/)) : 
 
 ```javascript
- <Chart chartType = "LineChart" data = {this.state.data} options = {this.state.options}  width={"100%"} height={"300px"} graph_id = "linechart_graph"  /> 
+<Chart chartType = "LineChart" data = {this.state.data} options = {this.state.options}  width={"100%"} height={"300px"} graph_id = "linechart_graph"  /> 
 ```
 
 Where data and options are the dataTable and options parameters of [ChartWrapper](https://developers.google.com/chart/interactive/docs/reference#chartwrapperobject)
@@ -22,15 +22,14 @@ Where data and options are the dataTable and options parameters of [ChartWrapper
 For convenience, you can optionally use the rows and columns parameters and the component will build the data table for the chart. 
 
 ```javascript
-
- <Chart chartType = "LineChart" width={"100%"} height={"300px"} rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options}  graph_id = "linechart_graph"  />  
+<Chart chartType = "LineChart" width={"100%"} height={"300px"} rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options}  graph_id = "linechart_graph"  />  
 
 ```
 
 You can also show and hide columns in the chart by clicking on the legend if you set legend_toggle to true : 
 
 ```javascript
- <Chart  chartType = "ScatterChart" width={"100%"} height={"300px"} rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options}  graph_id = "linechart_graph" legend_toggle={true} />  
+<Chart  chartType = "ScatterChart" width={"100%"} height={"300px"} rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options}  graph_id = "linechart_graph" legend_toggle={true} />  
 ```
 
 
@@ -47,32 +46,32 @@ So check it out.
 
 ```javascript
 
-	componentDidMount: function() {
+componentDidMount: function() {
 
-        var options = {
-          	title: 'Age vs. Weight comparison',
-          	hAxis: {title: 'Age', minValue: 0, maxValue: 15},
-          	vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
-        	legend: 'none'
-        };
+    var options = {
+        title: 'Age vs. Weight comparison',
+        hAxis: {title: 'Age', minValue: 0, maxValue: 15},
+        vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
+        legend: 'none'
+    };
 
-	    var data = [
-        	['Age', 'Weight'],
-        	[ 8,      12],
-        	[ 4,      5.5],
-        	[ 11,     14],
-        	[ 4,      5],
-        	[ 3,      3.5],
-        	[ 6.5,    7]
-        ];
-      	this.setState({
-        	'data' : data,
-        	'options' : options
+    var data = [
+       	['Age', 'Weight'],
+       	[ 8,      12],
+       	[ 4,      5.5],
+       	[ 11,     14],
+       	[ 4,      5],
+       	[ 3,      3.5],
+       	[ 6.5,    7]
+    ];
+    this.setState({
+       	'data' : data,
+       	'options' : options
       });
 
 
 	},
-    render: function() {
+render: function() {
         <Chart chartType = "ScatterChart" data = {this.state.data} options = {this.state.options} graph_id = "ScatterChart"  width={"100%"} height={"400px"}  legend_toggle={true} />
 
     }
@@ -81,47 +80,47 @@ So check it out.
 
 ```javascript
 
-	componentDidMount: function() {
+componentDidMount: function() {
 
-        var options = {
-          	title: 'Age vs. Weight comparison',
-          	hAxis: {title: 'Age', minValue: 0, maxValue: 15},
-          	vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
-        	legend: 'none'
-        };
+    var options = {
+       	title: 'Age vs. Weight comparison',
+        hAxis: {title: 'Age', minValue: 0, maxValue: 15},
+        vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
+        legend: 'none'
+    };
 
-	     var rows = [
-        	[ 8,      12],
-        	[ 4,      5.5],
-        	[ 11,     14],
-        	[ 4,      5],
-        	[ 3,      3.5],
-        	[ 6.5,    7]
-        ];
+    var rows = [
+       	[ 8,      12],
+       	[ 4,      5.5],
+       	[ 11,     14],
+       	[ 4,      5],
+       	[ 3,      3.5],
+       	[ 6.5,    7]
+    ];
 
-        var columns = [
-			{
-				'type': 'number',
-				'label' : 'Age'
-			}, 
-			{
-				'type' : 'number',
-				'label' : 'Weight'
-			}
-		];
+    var columns = [
+	{
+		'type': 'number',
+		'label' : 'Age'
+	}, 
+	{
+		'type' : 'number',
+		'label' : 'Weight'
+	}
+	];
 
       	this.setState({
-        	'rows' : rows,
+            'rows' : rows,
             'columns' : columns,
-        	'options' : options
-      });
+            'options' : options
+        });
 
 
-	},
-    render: function() {
+},
+render: function() {
         <Chart chartType = "ScatterChart" rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options} graph_id = "ScatterChart"  width={"100%"} height={"400px"}  legend_toggle={true} />
 
-    }
+}
 ```
 
 ### Listen to chart events
@@ -130,12 +129,10 @@ Set the chart-specific events you want to listen to and the corresponding callba
 The callback has the component as an argument.
 
 ```javascript
-
-
-	componentDidMount: function() {
-		var chart_events = [
+componentDidMount: function() {
+	var chart_events = [
         {
-        	eventName : 'onmouseover',
+       	    eventName : 'onmouseover',
             callback  : function(Chart) { 
                 // Returns Chart so you can access props and  the ChartWrapper object from chart.wrapper
                 console.log("mouseover the chart"); 
@@ -143,11 +140,11 @@ The callback has the component as an argument.
         }
         ];
 
-	},
-    render: function() {
+},
+render: function() {
         <Chart chartType = "ScatterChart" rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options} graph_id = "ScatterChart"  width={"100%"} height={"400px"} chartEvents = {chart_events} />
 
-    }
+}
 ```
 
 
@@ -158,7 +155,6 @@ Fork and clone
 
 ```
 npm install
-
 ```
 ```
 gulp 
