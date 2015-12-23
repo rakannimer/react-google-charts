@@ -18,11 +18,12 @@ var GoogleChartLoader = function(){
 		if (this.is_loading) {
 			return this.google_promise.promise;
 		}
+		this.is_loading = true
 		script("https://www.gstatic.com/charts/loader.js", function() {
 			google.charts.load(version || 'current', {packages: packages || ['corechart']});
 			google.charts.setOnLoadCallback(function() {
-			self.is_loaded = true;
-  			self.google_promise.resolve();
+				self.is_loaded = true;
+  				self.google_promise.resolve();
 			})
 		})
 
