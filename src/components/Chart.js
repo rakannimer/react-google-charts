@@ -59,7 +59,7 @@ var Chart = React.createClass({
 
 
 	render: function() {
-		return React.DOM.div({id: this.state.graph_id, style: {height: this.props.height, width:this.props.width}});
+		return React.createElement("div", {id: this.state.graph_id, style: {height: this.props.height, width:this.props.width}})
 	},
 	build_data_table : function() {
 
