@@ -122,6 +122,7 @@ var Chart = React.createClass({
 				});
 			}
 		} else {
+			this.wrapper.setOptions(this.props.options);
 			if (this.props.data !== null) {
 				this.wrapper.setDataTable(this.props.data);
 				this.data_table = this.wrapper.getDataTable();
