@@ -88,7 +88,7 @@ var Chart = React.createClass({
 
 	drawChart: function() {
 
-		if ((this.props.data !== null && this.props.data.length === 0) || this.props.columns.length === 0) {
+		if ((this.props.data !== null && this.props.data.length === 0) || (this.props.data === null && this.props.columns.length === 0)) {
 			return;
 		}
 
