@@ -1,6 +1,6 @@
 {
   "name": "react-google-charts",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React Google Charts Wrapper",
   "scripts": {
     "test": "karma start"
@@ -52,7 +52,7 @@
     "charts"
   ],
   "author": "Rakan Nimer",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rakannimer/react-google-charts/issues"
   },
