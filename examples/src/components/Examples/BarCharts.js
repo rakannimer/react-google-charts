@@ -1,9 +1,9 @@
 var React = require('react');
 var Chart = require('react-google-charts').Chart;
-var BarChartData = require('../../sample_data/Barchart');
+var BarChartData = require('../../sample_data/BarChart');
 
 var BarCharts = React.createClass({
-	
+
 	getInitialState: function() {
 		return {
 			BarChart: {
@@ -23,16 +23,16 @@ var BarCharts = React.createClass({
 		};
 
 
-		
+
 
 		this.setState({
 			'BarChart': BarChart
 		});
-		
+
 	},
 
 	render: function() {
-		
+
 		return (
 			<div className="Examples">
 				<h3> Bar Chart </h3>
