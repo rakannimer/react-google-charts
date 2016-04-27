@@ -123,6 +123,7 @@ var Chart = React.createClass({
 			}
 		} else {
 			this.wrapper.setOptions(this.props.options);
+			this.wrapper.setChartType(this.props.chartType);
 			if (this.props.data !== null) {
 				this.wrapper.setDataTable(this.props.data);
 				this.data_table = this.wrapper.getDataTable();
