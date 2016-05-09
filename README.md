@@ -32,6 +32,9 @@ You can also show and hide columns in the chart by clicking on the legend if you
 <Chart  chartType = "ScatterChart" width={"100%"} height={"300px"} rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options}  graph_id = "linechart_graph" legend_toggle={true} />  
 ```
 
+##Isomorphic support
+If you are rendering the component on the server make sure you set the
+graph_id prop on the component to suppress the checksum warnings.
 
 ## Examples
 
