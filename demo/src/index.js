@@ -106,7 +106,7 @@ class Demo extends React.Component {
     let chartComponents = this.state.charts.map((chartState, i)=>{
 
         return (<div key={i}>
-          <Chart chartType = {chartState.chartType} width={chartState.width} height={chartState.height} rows = {chartState.rows} columns =  {chartState.columns} data ={chartState.data} options = {chartState.options} legend_toggle = {chartState.legend_toggle} chartPackages={['corechart','table','timeline','treemap', 'wordtree']}/>
+          <Chart chartType = {chartState.chartType} width={chartState.width} height={chartState.height} rows = {chartState.rows} columns =  {chartState.columns} data ={chartState.data} options = {chartState.options} legend_toggle = {chartState.legend_toggle} chartPackages={['corechart','table','timeline','treemap', 'wordtree','gantt']}/>
           <StateEditor inputValue = {JSON.stringify(chartState)} chartIndex={i} onSubmit= {this.handleFormSubmit.bind(this)}/>
         </div>)
 
