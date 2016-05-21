@@ -23,13 +23,15 @@
     "scriptjs": "^2.5.8"
   },
   "peerDependencies": {
-    "react": "0.14.x"
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
   },
   "devDependencies": {
     "jsdoc": "^3.4.0",
     "nwb": "0.8.x",
-    "react": "0.14.x",
-    "react-dom": "0.14.x"
+    "react": "15.0.x",
+    "react-router": "^2.4.1",
+    "react-dom": "15.0.x"
   },
   "author": "",
   "homepage": "",
