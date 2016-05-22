@@ -92,7 +92,6 @@ export default class Chart extends React.Component {
   drawChart() {
     debug("drawChart", this);
     if (!this.wrapper) {
-      console.log("!this.wrapper")
       let chartConfig = {
         chartType: this.props.chartType,
         options: this.props.options,
@@ -110,12 +109,10 @@ export default class Chart extends React.Component {
       });
     }
     else {
-      console.log("this.wrapper EXISTS")
       this.updateDataTable.bind(this)();
       this.wrapper.setDataTable(this.dataTable);
       this.wrapper.setChartType(this.props.chartType)
       this.wrapper.setOptions(this.props.options)
-      console.log(this.props.chartType)
 
     }
     this.wrapper.draw();
@@ -272,7 +269,7 @@ export default class Chart extends React.Component {
   render() {
     debug('render', this.props, this.state);
     let divStyle= {height: this.props.height || this.props.options.height, width: this.props.width || this.props.options.width};
-    return <div id={this.state.graphID} style={divStyle}> CHART </div>
+    return <div id={this.state.graphID} style={divStyle}> Rendering Chart... </div>
   }
 };
 
