@@ -35,3 +35,8 @@
     margin-left: -1.5em;
     content: "";
 }
+.PropsEditor {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

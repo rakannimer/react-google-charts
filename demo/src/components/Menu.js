@@ -11,8 +11,10 @@ export default class Menu extends React.Component {
         return (
             <div>
                 <nav className="menu">
-                    <h1 className="link">  Supported Charts  </h1>
+                    <h1 className="link"><a href="#/"> Usage </a></h1>
+                    <h1 className="link"><a href="#/examples/ScatterChart">  Charts Playground </a></h1>
                     {supportedChartsLinks}
+                    <h1 className="link"><a href="https://www.github.com/RakanNimer/react-google-charts"> Source </a></h1>
                 </nav>
             </div>
         );

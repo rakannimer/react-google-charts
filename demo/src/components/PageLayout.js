@@ -21,19 +21,12 @@ export default class PageLayout extends React.Component {
                             <div id ="content" className="examples">
                                 {this.props.children}
                             </div>
-                            <div id="home" className = "examples">
-                                <h2> Installation </h2>
-                                <pre>
-                                    <code>
-                                        npm install react-google-charts
-                                    </code>
-                                </pre>
-                            </div>
+
                         </section>
                     </div>
                     <footer style={{textAlign:'center'}}>
                         <p>
-                            This page uses the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a> found on <a href= " pages.github.com"> Github Pages </a>
+                            This page layout is inpired by the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a> found on <a href= " pages.github.com"> Github Pages </a>
                         </p>
                     </footer>
                 </div>
