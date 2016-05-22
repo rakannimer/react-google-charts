@@ -18,9 +18,10 @@ export default class StateEditor extends React.Component {
     }
     render(){
         return (
-            <div>
+            <div className={"PropsEditor"}>
+                <h2> Props </h2>
                 <textarea style={{'width':'500px', 'height':'200px'}} value={this.state.inputValue} onChange={this.handleChange.bind(this)}></textarea>
-                <button onClick={this.onSubmit.bind(this)}>Update</button>
+                <div><button onClick={this.onSubmit.bind(this)}>Update</button></div>
             </div>
         )
     }
