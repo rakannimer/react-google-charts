@@ -23,8 +23,8 @@
     "scriptjs": "^2.5.8"
   },
   "peerDependencies": {
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
+    "react": ">=0.13.x <=15.x.x",
+    "react-dom": ">=0.13.x <=15.x.x"
   },
   "devDependencies": {
     "jsdoc": "^3.4.0",
