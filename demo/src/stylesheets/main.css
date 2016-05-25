@@ -1,0 +1,42 @@
+.examples {
+    width: 690px;
+    float: left;
+    margin-left: 57px;
+}
+
+.menu {
+    width: 190px;
+    float:left;
+    border-right: solid 2px #dedede;
+}
+
+#main-content h1 {
+    font-size: 1.5em;
+    line-height: 1.9em;
+}
+
+#main-content h2 {
+    font-size: 1.0em;
+    padding-left: 30px;
+}
+.link {
+    border-bottom: solid 1px #cecece;
+    padding-bottom: 2px;
+}
+
+#main-content h2:before {
+    padding-right: 0.3em;
+    margin-left: -1.5em;
+    content: "";
+}
+
+#main-content h3:before {
+    padding-right: 0.3em;
+    margin-left: -1.5em;
+    content: "";
+}
+.PropsEditor {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

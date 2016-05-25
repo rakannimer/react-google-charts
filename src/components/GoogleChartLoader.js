@@ -1,35 +1,41 @@
 //GoogleChartLoader Singleton
 
 // Based on http://blog.arkency.com/2014/09/react-dot-js-and-google-charts/
-var q = require('q');
-var script = require("scriptjs")
+import Promise from 'bluebird';
+import script from 'scriptjs';
+const debug = require('debug')('react-google-charts:GoogleChartLoader');
 
-var GoogleChartLoader = function(){
+const googleChartLoader = {
 
-	this.is_loading = false;
-	this.is_loaded = false;
-	this.google_promise = q.defer();
+  isLoaded : false,
+  isLoading: false,
+  initPromise: {},
+  init(packages, version) {
+    debug('init', packages, version);
 
-	var self = this;
+    if (this.isLoading || this.isLoaded) {
+      return this.initPromise;
+    }
+    this.isLoading = true;
+    this.initPromise =  new Promise((resolve, reject)=> {
+      if(typeof window !== 'undefined') {
+        script("https://www.gstatic.com/charts/loader.js", () => {
 
-	this.init = function(packages, version) {
-		// Charts can only be loaded once because of the way google implemented this
-		// Remember to load all packages you need at the first call
-		if (this.is_loading) {
-			return this.google_promise.promise;
-		}
-		this.is_loading = true
-		script("https://www.gstatic.com/charts/loader.js", function() {
-			google.charts.load(version || 'current', {packages: packages || ['corechart']});
-			google.charts.setOnLoadCallback(function() {
-				self.is_loaded = true;
-  				self.google_promise.resolve();
-			})
-		})
+          google.charts.load(version || 'current', {packages: packages || ['corechart']});
+          google.charts.setOnLoadCallback(() => {
+            debug('Chart Loaded');
+            this.isLoaded = true;
+            this.isLoading = false;
+            resolve();
+          });
+        });
+      }
+      else {
+        resolve();
+      }
+    });
+    return this.initPromise;
+  }
+}
 
-		return this.google_promise.promise;
-	};
-};
-
-module.exports = new GoogleChartLoader();
-
+export default googleChartLoader;

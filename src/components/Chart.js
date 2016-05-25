@@ -1,279 +1,305 @@
-var React = require('react');
-var GoogleChartLoader = require('./GoogleChartLoader');
-var DEFAULT_COLORS = require('../constants/DEFAULT_CHART_COLORS');
+import React from 'react'
+import Promise from 'bluebird';
 
-var uniqueId = 0;
-var generateUniqueId = function() {
-	uniqueId++;
-	return "reactgooglegraph" + uniqueId;
+const debug = require('debug')('react-google-charts:Chart');
+import DEFAULT_COLORS from '../constants/DEFAULT_CHART_COLORS';
+import googleChartLoader from './GoogleChartLoader'
+
+let uniqueID = 0;
+
+const generateUniqueID = () => {
+  uniqueID++;
+  return "reactgooglegraph-" + uniqueID;
+}
+
+const googleErrorHandler = (id, message) => {
+  console.error("Google Charts encountered an error : ")
+  console.error(`Error ID : ${id}`);
+  console.error(`Error MESSAGE : ${message}`);
+}
+
+export default class Chart extends React.Component {
+  constructor(props) {
+    if (process.env.NODE_ENV === 'development') {
+      localStorage.debug="react-google-charts:*";
+    }
+    debug('constructor', props);
+    super(props);
+    this.state = {graphID: props.graph_id || generateUniqueID()};
+    this.chart = null;
+    this.wrapper = null;
+    this.hidden_columns = {};
+    this.dataTable = [];
+  }
+  componentDidMount(){
+    debug('componentDidMount');
+    googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then((asd)=>{
+      this.drawChart()
+    });
+  }
+  componentWillUnmount() {
+    try {
+      google.visualization.events.removeAllListeners(this.wrapper);
+    }
+    catch(err) {
+      console.error("Error removing events, error : ", err);
+    }
+
+  }
+  componentDidUpdate(){
+    debug('componentDidUpdate');
+    if (googleChartLoader.isLoading){
+      googleChartLoader.initPromise.then(()=>{
+        this.drawChart.bind(this)();
+      })
+		}
+    else if (googleChartLoader.isLoaded) {
+      this.drawChart.bind(this)();
+    }
+  }
+  buildDataTableFromProps() {
+    debug('buildDataTableFromProps', this.props);
+    if (this.props.data === null && this.props.rows.length === 0){
+      throw new Error("Can't build DataTable from rows and columns: rows array in props is empty");
+    }
+    else if (this.props.data === null && this.props.columns.length === 0) {
+      throw new Error("Can't build DataTable from rows and columns: columns array in props is empty");
+    }
+    if (this.props.data !== null) {
+      try {
+          this.wrapper.setDataTable(this.props.data);
+          let dataTable = this.wrapper.getDataTable();
+          return dataTable;
+      }
+      catch(err) {
+        console.log('Failed to set DataTable from data props ! ', err);
+        throw new Error('Failed to set DataTable from data props ! ', err);
+      }
+    }
+
+    let dataTable = new google.visualization.DataTable();
+    this.props.columns.forEach((column)=>{
+      dataTable.addColumn(column);
+    });
+    dataTable.addRows(this.props.rows);
+    return dataTable;
+  }
+  updateDataTable() {
+    debug("updateDataTable");
+    google.visualization.errors.removeAll(document.getElementById(this.wrapper.getContainerId()));
+    this.dataTable.removeRows(0, this.dataTable.getNumberOfRows());
+    this.dataTable.removeColumns(0, this.dataTable.getNumberOfColumns());
+    this.dataTable = this.buildDataTableFromProps.bind(this)();
+    return this.dataTable;
+  }
+  //DEPRECATED AND NOT USED
+  getDataTableFromProps() {
+    debug("getDataTableFromProps");
+    return this.props.data !== null ? this.props.data : this.buildDataTableFromProps.bind(this)();
+  }
+  drawChart() {
+    debug("drawChart", this);
+    if (!this.wrapper) {
+      let chartConfig = {
+        chartType: this.props.chartType,
+        options: this.props.options,
+        containerId: this.state.graphID
+      };
+      this.wrapper = new google.visualization.ChartWrapper(chartConfig);
+      this.dataTable = this.buildDataTableFromProps.bind(this)();
+      this.wrapper.setDataTable(this.dataTable)
+
+
+      google.visualization.events.addOneTimeListener(this.wrapper, 'ready', ()=>{
+        this.chart = this.wrapper.getChart();
+        this.listenToChartEvents.bind(this)();
+        this.addChartActions.bind(this)();
+      });
+    }
+    else {
+      this.updateDataTable.bind(this)();
+      this.wrapper.setDataTable(this.dataTable);
+      this.wrapper.setChartType(this.props.chartType)
+      this.wrapper.setOptions(this.props.options)
+
+    }
+    this.wrapper.draw();
+  }
+
+  addChartActions() {
+    debug('addChartActions', this.props.chartActions);
+    if (this.props.chartActions === null) {
+      return;
+    }
+    this.chart.setAction({
+      id: this.props.chartActions.id,
+      text: this.props.chartActions.text,
+      action: this.props.chartActions.action.bind(this, this.chart)
+    })
+
+  }
+  listenToChartEvents() {
+    debug('listenToChartEvents', this.props.legend_toggle, this.props.chartEvents);
+    if (this.props.legend_toggle) {
+      google.visualization.events.addListener(this.wrapper, 'select', this.onSelectToggle.bind(this));
+    }
+    this.props.chartEvents.forEach((chartEvent)=>{
+      if (chartEvent.eventName === 'ready') {
+        chartEvent.callback(this);
+      }
+      else {
+        ((chartEvent)=>{
+            google.visualization.events.addListener(this.chart, chartEvent.eventName, (e)=>{
+              chartEvent.callback(this, e);
+            });
+        })(chartEvent);
+      }
+      });
+  }
+  onSelectToggle() {
+    debug('onSelectToggle');
+    let selection = this.chart.getSelection();
+    if (selection.length > 0) {
+      if (selection[0].row == null) {
+        let column = selection[0].column;
+        this.togglePoints.bind(this)(column);
+      }
+    }
+  }
+  getColumnColor(columnIndex) {
+    if (this.props.options.colors) {
+      if (this.props.options.colors[columnIndex]) {
+        return this.props.options.colors[columnIndex];
+      }
+    }
+    else {
+      if (typeof DEFAULT_COLORS[columnIndex] !== undefined) {
+        return DEFAULT_COLORS[columnIndex];
+      }
+      else {
+        return DEFAULT_COLORS[0];
+      }
+    }
+  }
+
+  buildColumnFromSourceData(columnIndex) {
+    debug('buildColumnFromSourceData', columnIndex);
+    return {
+      label: this.dataTable.getColumnLabel(columnIndex),
+      type: this.dataTable.getColumnType(columnIndex),
+      sourceColumn: columnIndex
+    };
+  }
+
+  buildEmptyColumnFromSourceData(columnIndex) {
+    debug('buildEmptyColumnFromSourceData', columnIndex);
+    return {
+      label: this.dataTable.getColumnLabel(columnIndex),
+      type: this.dataTable.getColumnType(columnIndex),
+      calc: function () {
+        return null;
+      }
+    };
+  }
+  addEmptyColumnTo(columns, columnIndex) {
+    debug('addEmptyColumnTo', columns, columnIndex);
+    let emptyColumn =  this.buildEmptyColumnFromSourceData(columnIndex);
+    columns.push(emptyColumn);
+  }
+
+  hideColumn(colors, columnIndex) {
+    debug('hideColumn', colors, columnIndex);
+    if (!this.isHidden(columnIndex)) {
+      this.hidden_columns[columnIndex] = { color : this.getColumnColor(columnIndex-1) };
+    }
+    colors.push('#CCCCCC');
+  }
+  addSourceColumnTo(columns, columnIndex) {
+    debug('addSourceColumnTo', columns, columnIndex);
+    let sourceColumn = this.buildColumnFromSourceData(columnIndex);
+    columns.push(sourceColumn);
+  }
+  isHidden(columnIndex) {
+    return this.hidden_columns[columnIndex] !== undefined
+  }
+  restoreColorTo(colors, columnIndex) {
+    debug('restoreColorTo', colors, columnIndex);
+    debug('hidden_columns',this.hidden_columns);
+    let previousColor;
+    if (this.isHidden(columnIndex)) {
+      previousColor = this.hidden_columns[columnIndex].color;
+      delete this.hidden_columns[columnIndex];
+    }
+    else {
+      previousColor = this.getColumnColor(columnIndex-1)
+    }
+    if (columnIndex !== 0) {
+			colors.push(previousColor);
+		}
+  }
+
+  togglePoints(column) {
+    debug('togglePoints', column);
+    let view = new google.visualization.DataView(this.wrapper.getDataTable());
+    let columnCount = view.getNumberOfColumns();
+    let colors = [];
+    let columns = [];
+    for (var i = 0; i < columnCount; i++) {
+      // If user clicked on legend
+      if (i === 0) {
+        this.addSourceColumnTo.bind(this)(columns, i);
+      }
+      else if (i === column ) {
+        if (this.isHidden(i)) {
+          this.addSourceColumnTo.bind(this)(columns, i);
+          this.restoreColorTo.bind(this)(colors, i);
+        }
+        else {
+          this.addEmptyColumnTo.bind(this)(columns,i);
+          this.hideColumn.bind(this)(colors, i);
+        }
+      }
+      else {
+        if (this.isHidden(i)) {
+          this.addEmptyColumnTo.bind(this)(columns,i);
+          this.hideColumn.bind(this)(colors, i);
+        }
+        else {
+          this.addSourceColumnTo.bind(this)(columns, i);
+          this.restoreColorTo.bind(this)(colors, i);
+        }
+      }
+    }
+    view.setColumns(columns);
+    this.props.options.colors = colors;
+    this.chart.draw(view, this.props.options);
+  }
+  render() {
+    debug('render', this.props, this.state);
+    let divStyle= {height: this.props.height || this.props.options.height, width: this.props.width || this.props.options.width};
+    return <div id={this.state.graphID} style={divStyle}> Rendering Chart... </div>
+  }
 };
 
-var Chart = React.createClass({
-	chart: null,
-	wrapper: null,
-	hidden_columns: [],
-	data_table: [],
-	getInitialState: function() {
-		return {
-			graph_id: this.props.graph_id || generateUniqueId()
-		};
-	},
-	componentDidMount: function(){
-		var self = this;
-
-		GoogleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(function(){
-			self.drawChart();
-		});
-	},
-
-	componentDidUpdate: function(){
-		if (GoogleChartLoader.is_loaded){
-			this.drawChart();
-		};
-	},
-
-	getDefaultProps: function() {
-		return {
-			chartType : 'LineChart',
-			rows: [],
-			columns: [],
-			options: {
-				chart: {
-					title: 'Chart Title',
-					subtitle: 'Subtitle'
-				},
-				hAxis: {title: 'X Label'},
-				vAxis: {title: 'Y Label'},
-				width: '400px',
-				height: '300px'
-
-			},
-			chartEvents : [],
-			chartActions : null,
-			data: null,
-			onSelect: null,
-			legend_toggle: false
-		};
-	},
-
-
-
-	render: function() {
-		return React.createElement("div", {id: this.state.graph_id, style: {height: this.props.height, width:this.props.width}})
-	},
-	build_data_table : function() {
-
-		var data_table = new google.visualization.DataTable();
-		for (var i = 0 ; i < this.props.columns.length; i++) {
-			data_table.addColumn(this.props.columns[i]);
-		}
-
-		if (this.props.rows.length > 0) {
-			data_table.addRows(this.props.rows);
-		}
-		return data_table;
-	},
-	update_data_table : function() {
-		this.data_table.removeRows(0, this.data_table.getNumberOfRows());
-		this.data_table.removeColumns(0, this.data_table.getNumberOfColumns());
-
-		for (var i = 0; i < this.props.columns.length; i++) {
-			this.data_table.addColumn(this.props.columns[i]);
-		}
-
-		if (this.props.rows.length > 0) {
-			this.data_table.addRows(this.props.rows);
-		}
-	},
-
-	drawChart: function() {
-
-		if ((this.props.data !== null && this.props.data.length === 0) || (this.props.data === null && this.props.columns.length === 0)) {
-			return;
-		}
-
-		if (!this.wrapper) {
-			this.data_table = this.props.data !== null ? this.props.data : this.build_data_table();
-			this.wrapper = new google.visualization.ChartWrapper({
-				chartType: this.props.chartType,
-				dataTable: this.data_table,
-				options: this.props.options,
-				containerId: this.state.graph_id
-			});
-
-			this.data_table = this.wrapper.getDataTable();
-
-			var self = this;
-
-			google.visualization.events.addOneTimeListener(this.wrapper, 'ready', function () {
-				self.chart = self.wrapper.getChart();
-				self.listen_to_chart_events.call(this);
-				self.add_chart_actions.call(this);
-			});
-
-			if (this.props.legend_toggle) {
-				google.visualization.events.addListener(this.wrapper, 'select', function () {
-					self.default_chart_select.call(this);
-				});
-			}
-			if (this.props.onSelect !== null) {
-				google.visualization.events.addListener(this.wrapper, 'select', function () {
-					self.props.onSelect(self, self.chart.getSelection());
-				});
-			}
-		} else {
-			this.wrapper.setOptions(this.props.options);
-			this.wrapper.setChartType(this.props.chartType);
-			if (this.props.data !== null) {
-				this.wrapper.setDataTable(this.props.data);
-				this.data_table = this.wrapper.getDataTable();
-			} else {
-				this.update_data_table();
-			}
-		}
-		this.wrapper.draw();
-	},
-	listen_to_chart_events: function() {
-
-		var self = this;
-		var event_data;
-		for (var i = 0; i < this.props.chartEvents.length; i++) {
-			if (this.props.chartEvents[i].eventName === 'ready') {
-				this.props.chartEvents[i].callback(this);
-			}
-			else {
-				(function(callback){
-					google
-							.visualization
-							.events
-							.addListener(self.chart, self.props.chartEvents[i].eventName, function (e){
-								callback(self, e);
-							});
-				})(self.props.chartEvents[i].callback)
-			}
-		}
-	},
-	add_chart_actions: function () {
-		var self = this;
-		// if any action was specified, add it to the chart
-		if (this.props.chartActions != null) {
-			self.chart.setAction({
-				id: this.props.chartActions.id,
-				text: this.props.chartActions.text,
-				// bind the chart back to the action callback so we can get the chart information
-				action: this.props.chartActions.action.bind(self.chart)
-			});
-		};
-	},
-	default_chart_select: function() {
-		var selection = this.chart.getSelection();
-		// if selection length is 0, we deselected an element
-		if (selection.length > 0) {
-			// if row is undefined, we clicked on the legend
-			if (selection[0].row == null) {
-				var column = selection[0].column;
-				this.toggle_points(column);
-			}
-		}
-	},
-
-	build_empty_column: function(index) {
-
-		return {
-			label: this.data_table.getColumnLabel(index),
-			type: this.data_table.getColumnType(index),
-			calc: function () {
-				return null;
-			}
-		};
-	},
-
-	build_column_from_src: function(index) {
-		return {
-			label: this.data_table.getColumnLabel(index),
-			type: this.data_table.getColumnType(index),
-			sourceColumn: index
-		};
-	},
-
-	toggle_points: function(column) {
-
-		//Need to show legend !!
-
-		var view = new google.visualization.DataView(this.wrapper.getDataTable());
-		var column_count = view.getNumberOfColumns();
-		var colors = [],
-				columns = [],
-				empty_columns = [],
-				column_hidden,
-				empty_column,
-				column_from_src;
-
-		for (var i = 0; i < column_count; i++) {
-
-			// If user clicked on legend
-			if (i === column ) {
-
-				column_hidden = (typeof this.hidden_columns[i] !== 'undefined');
-
-				//User wants to hide values
-				if (!column_hidden ) {
-					// Null out the values of the column
-					empty_column =  this.build_empty_column(i);
-					columns.push(empty_column);
-
-					this.hidden_columns[i] = { color : this.get_column_color(i-1) };
-					colors.push('#CCCCCC');
-				}
-				//User wants to show values
-				else {
-					column_from_src = this.build_column_from_src(i);
-					columns.push(column_from_src);
-
-					var previous_color = this.hidden_columns[i].color;
-					delete this.hidden_columns[i];
-					colors.push(previous_color);
-				}
-			}
-			else if (typeof this.hidden_columns[i] !== 'undefined') {
-				empty_column =  this.build_empty_column(i);
-				columns.push(empty_column);
-				colors.push('#CCCCCC');
-			}
-			else {
-				column_from_src = this.build_column_from_src(i);
-				columns.push(column_from_src);
-
-				if (i !== 0) {
-					colors.push(this.get_column_color(i-1));
-				}
-			}
-		}
-
-		view.setColumns(columns);
-		this.props.options.colors = colors;
-
-		this.chart.draw(view, this.props.options);
-	},
-
-
-	get_column_color: function(column_index) {
-		if (this.props.options.colors) {
-			if (this.props.options.colors[column_index]) {
-				return this.props.options.colors[column_index];
-			}
-		}
-		else {
-			if (typeof DEFAULT_COLORS[column_index] !== 'undefined') {
-				return DEFAULT_COLORS[column_index];
-			}
-			else {
-				return DEFAULT_COLORS[0];
-			}
-
-		}
-	}
-
-});
-
-module.exports = Chart;
+Chart.defaultProps = {
+  chartType : 'LineChart',
+  rows: [],
+  columns: [],
+  options: {
+    chart: {
+      title: 'Chart Title',
+      subtitle: 'Subtitle'
+    },
+    hAxis: {title: 'X Label'},
+    vAxis: {title: 'Y Label'},
+    width: '400px',
+    height: '300px'
+  },
+  width: '400px',
+  height: '300px',
+  chartEvents : [],
+  chartActions : null,
+  data: null,
+  onSelect: null,
+  legend_toggle: false
+}

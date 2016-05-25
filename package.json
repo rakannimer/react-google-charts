@@ -1,67 +1,45 @@
 {
   "name": "react-google-charts",
-  "version": "0.2.2",
-  "description": "React Google Charts Wrapper",
+  "version": "1.0.0",
+  "description": "react-google-charts React component",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "karma start"
+    "deploy": "gh-pages-deploy",
+    "build": "nwb build",
+    "clean": "nwb clean",
+    "start": "nwb serve",
+    "test": "nwb test",
+    "test:watch": "nwb test --server"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "debug": "^2.2.0",
+    "scriptjs": "^2.5.8"
+  },
+  "peerDependencies": {
+    "react": ">= 0.13.x",
+    "react-dom": ">= 0.13.x"
   },
   "devDependencies": {
-    "browserify": "^9.0.8",
-    "debowerify": "^1.2.1",
-    "del": "^1.1.1",
-    "gulp": "^3.8.10",
-    "gulp-concat": "^2.4.3",
-    "gulp-jshint": "^1.9.0",
-    "gulp-livereload": "^3.8.0",
-    "gulp-minify-css": "^0.3.13",
-    "gulp-notify": "^2.2.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-server-livereload": "^1.2.4",
-    "gulp-streamify": "0.0.5",
-    "gulp-uglify": "^1.0.2",
-    "gulp-util": "^3.0.4",
-    "gulp-webserver": "^0.9.1",
-    "gutil": "^1.6.4",
-    "jasmine-core": "^2.3.4",
-    "jest-cli": "^0.4.5",
-    "karma": "^0.12.36",
-    "karma-browserify": "^4.2.1",
-    "karma-chrome-launcher": "^0.1.12",
-    "karma-firefox-launcher": "^0.1.6",
-    "karma-ie-launcher": "^0.1.5",
-    "karma-jasmine": "^0.3.5",
-    "karma-jasmine-jquery": "^0.1.1",
-    "karma-phantomjs-launcher": "^0.2.0",
-    "mapbox": "^0.1.0",
-    "phantomjs": "^1.9.17",
-    "reactify": "^1.1.1",
-    "stringify": "^3.1.0",
-    "underscore": "^1.8.3",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.2.1",
-    "yargs": "^3.8.0"
+    "jsdoc": "^3.4.0",
+    "nwb": "0.8.x",
+    "react": "15.0.x",
+    "react-dom": "15.0.x",
+    "react-router": "^2.4.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rakannimer/react-google-charts"
+  "gh-pages-deploy": {
+    "staticpath": "demo/dist/"
   },
+  "bugs": {
+    "url": "https://github.com/rakannimer/react-google-charts/issues"
+  },
+  "author": "Rakan Nimer",
+  "homepage": "https://rakannimer.github.io/react-google-charts/",
+  "license": "UNLICENSE",
+  "repository": "https://github.com/RakanNimer/react-google-charts",
   "keywords": [
     "react",
     "google",
     "charts"
-  ],
-  "author": "Rakan Nimer",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rakannimer/react-google-charts/issues"
-  },
-  "homepage": "https://github.com/rakannimer/react-google-charts",
-  "dependencies": {
-    "q": "^1.4.1",
-    "scriptjs": "^2.5.8"
-  },
-  "peerDependencies": {
-    "react": ">=0.14.0"
-  }
+  ]
 }

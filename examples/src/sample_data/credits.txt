@@ -1,2 +1,0 @@
-Data is taken from https://developers.google.com/chart/interactive/docs/ for chart type examples
-AND From https://vincentarelbundock.github.io/Rdatasets/datasets.html
