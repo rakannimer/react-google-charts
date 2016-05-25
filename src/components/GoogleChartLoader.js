@@ -12,21 +12,27 @@ const googleChartLoader = {
   initPromise: {},
   init(packages, version) {
     debug('init', packages, version);
+
     if (this.isLoading || this.isLoaded) {
       return this.initPromise;
     }
     this.isLoading = true;
     this.initPromise =  new Promise((resolve, reject)=> {
-      script("https://www.gstatic.com/charts/loader.js", () => {
+      if(typeof window !== 'undefined') {
+        script("https://www.gstatic.com/charts/loader.js", () => {
 
-        google.charts.load(version || 'current', {packages: packages || ['corechart']});
-        google.charts.setOnLoadCallback(() => {
-          debug('Chart Loaded');
-          this.isLoaded = true;
-          this.isLoading = false;
-          resolve();
+          google.charts.load(version || 'current', {packages: packages || ['corechart']});
+          google.charts.setOnLoadCallback(() => {
+            debug('Chart Loaded');
+            this.isLoaded = true;
+            this.isLoading = false;
+            resolve();
+          });
         });
-      });
+      }
+      else {
+        resolve();
+      }
     });
     return this.initPromise;
   }

@@ -139,6 +139,10 @@ render: function() {
 }
 ```
 
+##Isomorphic support
+ If you are rendering the component on the server make sure you set the
+ graph_id prop on the component to suppress the checksum warnings.
+
 ## Examples
 
 The [demo](demo) directory is the source code of : http://rakannimer.github.io/react-google-charts/
