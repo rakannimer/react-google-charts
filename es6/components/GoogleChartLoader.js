@@ -16,21 +16,26 @@ var googleChartLoader = {
     var _this = this;
 
     debug('init', packages, version);
+
     if (this.isLoading || this.isLoaded) {
       return this.initPromise;
     }
     this.isLoading = true;
     this.initPromise = new Promise(function (resolve, reject) {
-      script("https://www.gstatic.com/charts/loader.js", function () {
+      if (typeof window !== 'undefined') {
+        script("https://www.gstatic.com/charts/loader.js", function () {
 
-        google.charts.load(version || 'current', { packages: packages || ['corechart'] });
-        google.charts.setOnLoadCallback(function () {
-          debug('Chart Loaded');
-          _this.isLoaded = true;
-          _this.isLoading = false;
-          resolve();
+          google.charts.load(version || 'current', { packages: packages || ['corechart'] });
+          google.charts.setOnLoadCallback(function () {
+            debug('Chart Loaded');
+            _this.isLoaded = true;
+            _this.isLoading = false;
+            resolve();
+          });
         });
-      });
+      } else {
+        resolve();
+      }
     });
     return this.initPromise;
   }

@@ -1,6 +1,6 @@
 /*!
  * react-google-charts 1.0.0
- * MIT Licensed
+ * UNLICENSE Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -6328,6 +6328,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    }
 	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      try {
+	        google.visualization.events.removeAllListeners(this.wrapper);
+	      } catch (err) {
+	        console.error("Error removing events, error : ", err);
+	      }
+	    }
+	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
 	      var _this2 = this;
@@ -6653,21 +6662,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _this = this;
 
 	    debug('init', packages, version);
+
 	    if (this.isLoading || this.isLoaded) {
 	      return this.initPromise;
 	    }
 	    this.isLoading = true;
 	    this.initPromise = new _bluebird2['default'](function (resolve, reject) {
-	      (0, _scriptjs2['default'])("https://www.gstatic.com/charts/loader.js", function () {
+	      if (typeof window !== 'undefined') {
+	        (0, _scriptjs2['default'])("https://www.gstatic.com/charts/loader.js", function () {
 
-	        google.charts.load(version || 'current', { packages: packages || ['corechart'] });
-	        google.charts.setOnLoadCallback(function () {
-	          debug('Chart Loaded');
-	          _this.isLoaded = true;
-	          _this.isLoading = false;
-	          resolve();
+	          google.charts.load(version || 'current', { packages: packages || ['corechart'] });
+	          google.charts.setOnLoadCallback(function () {
+	            debug('Chart Loaded');
+	            _this.isLoaded = true;
+	            _this.isLoading = false;
+	            resolve();
+	          });
 	        });
-	      });
+	      } else {
+	        resolve();
+	      }
 	    });
 	    return this.initPromise;
 	  }
