@@ -4,6 +4,7 @@
   "description": "react-google-charts React component",
   "main": "lib/index.js",
   "scripts": {
+    "deploy": "gh-pages-deploy",
     "build": "nwb build",
     "clean": "nwb clean",
     "start": "nwb serve",
@@ -23,14 +24,22 @@
     "jsdoc": "^3.4.0",
     "nwb": "0.8.x",
     "react": "15.0.x",
-    "react-router": "^2.4.1",
-    "react-dom": "15.0.x"
+    "react-dom": "15.0.x",
+    "react-router": "^2.4.1"
   },
-  "author": "",
-  "homepage": "",
+  "gh-pages-deploy": {
+    "staticpath": "demo/dist/"
+  },
+  "bugs": {
+    "url": "https://github.com/rakannimer/react-google-charts/issues"
+  },
+  "author": "Rakan Nimer",
+  "homepage": "https://rakannimer.github.io/react-google-charts/",
   "license": "UNLICENSE",
-  "repository": "",
+  "repository": "https://github.com/RakanNimer/react-google-charts",
   "keywords": [
-    "react-component"
+    "react",
+    "google",
+    "charts"
   ]
 }
