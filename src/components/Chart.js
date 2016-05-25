@@ -37,7 +37,15 @@ export default class Chart extends React.Component {
       this.drawChart()
     });
   }
+  componentWillUnmount() {
+    try {
+      google.visualization.events.removeAllListeners(this.wrapper);
+    }
+    catch(err) {
+      console.error("Error removing events, error : ", err);
+    }
 
+  }
   componentDidUpdate(){
     debug('componentDidUpdate');
     if (googleChartLoader.isLoading){
@@ -229,7 +237,7 @@ export default class Chart extends React.Component {
 			colors.push(previousColor);
 		}
   }
-  
+
   togglePoints(column) {
     debug('togglePoints', column);
     let view = new google.visualization.DataView(this.wrapper.getDataTable());
