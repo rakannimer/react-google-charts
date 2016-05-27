@@ -140,8 +140,8 @@ render: function() {
 ```
 
 ##Isomorphic support
- If you are rendering the component on the server make sure you set the
- graph_id prop on the component to suppress the checksum warnings.
+
+ No support yet, looking for [contributions](CONTRIBUTING.md) !
 
 ## Examples
 
