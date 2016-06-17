@@ -33,9 +33,13 @@ export default class Chart extends React.Component {
   }
   componentDidMount(){
     debug('componentDidMount');
-    googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then((asd)=>{
-      this.drawChart()
-    });
+    if(this.props.loadCharts) {
+      googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then((asd)=>{
+        this.drawChart()
+      });
+    } else {
+      this.drawChart();
+    }
   }
   componentWillUnmount() {
     try {
@@ -48,7 +52,9 @@ export default class Chart extends React.Component {
   }
   componentDidUpdate(){
     debug('componentDidUpdate');
-    if (googleChartLoader.isLoading){
+    if (!this.props.loadCharts){
+      this.drawChart();
+    } else if(googleChartLoader.isLoading){
       googleChartLoader.initPromise.then(()=>{
         this.drawChart.bind(this)();
       })
@@ -301,5 +307,6 @@ Chart.defaultProps = {
   chartActions : null,
   data: null,
   onSelect: null,
-  legend_toggle: false
+  legend_toggle: false,
+  loadCharts: true
 }
