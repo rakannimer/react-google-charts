@@ -1,5 +1,5 @@
 /*!
- * react-google-charts 1.0.0
+ * react-google-charts 1.0.0 - https://rakannimer.github.io/react-google-charts/
  * UNLICENSE Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -95,7 +95,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//import googleChartLoader from './components/GoogleChartLoader';
 
-	var _componentsChart = __webpack_require__(8);
+	var _componentsChart = __webpack_require__(5);
 
 	var _componentsChart2 = _interopRequireDefault(_componentsChart);
 
@@ -215,7 +215,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * 
 	 */
 	/**
-	 * bluebird build version 3.3.4
+	 * bluebird build version 3.4.0
 	 * Features enabled: core, race, call_get, generators, map, nodeify, promisify, props, reduce, settle, some, using, timers, filter, any, each
 	*/
 	!function(e){if(true)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Promise=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
@@ -250,6 +250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var util = _dereq_("./util");
 
 	function Async() {
+	    this._customScheduler = false;
 	    this._isTickUsed = false;
 	    this._lateQueue = new Queue(16);
 	    this._normalQueue = new Queue(16);
@@ -261,6 +262,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    this._schedule = schedule;
 	}
+
+	Async.prototype.setScheduler = function(fn) {
+	    var prev = this._schedule;
+	    this._schedule = fn;
+	    this._customScheduler = true;
+	    return prev;
+	};
+
+	Async.prototype.hasCustomScheduler = function() {
+	    return this._customScheduler;
+	};
 
 	Async.prototype.enableTrampoline = function() {
 	    this._trampolineEnabled = true;
@@ -1240,8 +1252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (returnValue === undefined && promiseCreated !== null &&
 	        wForgottenReturn) {
 	        if (parent !== undefined && parent._returnedNonUndefined()) return;
-	        var bitField = promise._bitField;
-	        if ((bitField & 65535) === 0) return;
+	        if ((promise._bitField & 65535) === 0) return;
 
 	        if (name) name = name + " ";
 	        var msg = "a promise was created in a " + name +
@@ -2143,9 +2154,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	function PromiseSpawn(generatorFunction, receiver, yieldHandler, stack) {
-	    var promise = this._promise = new Promise(INTERNAL);
-	    promise._captureStackTrace();
-	    promise._setOnCancel(this);
+	    if (debug.cancellation()) {
+	        var internal = new Promise(INTERNAL);
+	        var _finallyPromise = this._finallyPromise = new Promise(INTERNAL);
+	        this._promise = internal.lastly(function() {
+	            return _finallyPromise;
+	        });
+	        internal._captureStackTrace();
+	        internal._setOnCancel(this);
+	    } else {
+	        var promise = this._promise = new Promise(INTERNAL);
+	        promise._captureStackTrace();
+	    }
 	    this._stack = stack;
 	    this._generatorFunction = generatorFunction;
 	    this._receiver = receiver;
@@ -2154,6 +2174,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        ? [yieldHandler].concat(yieldHandlers)
 	        : yieldHandlers;
 	    this._yieldedPromise = null;
+	    this._cancellationPhase = false;
 	}
 	util.inherits(PromiseSpawn, Proxyable);
 
@@ -2163,6 +2184,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	PromiseSpawn.prototype._cleanup = function() {
 	    this._promise = this._generator = null;
+	    if (debug.cancellation() && this._finallyPromise !== null) {
+	        this._finallyPromise._fulfill();
+	        this._finallyPromise = null;
+	    }
 	};
 
 	PromiseSpawn.prototype._promiseCancelled = function() {
@@ -2179,22 +2204,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        result = tryCatch(this._generator["throw"]).call(this._generator,
 	                                                         reason);
 	        this._promise._popContext();
-	        if (result === errorObj && result.e === reason) {
-	            result = null;
-	        }
 	    } else {
 	        this._promise._pushContext();
 	        result = tryCatch(this._generator["return"]).call(this._generator,
 	                                                          undefined);
 	        this._promise._popContext();
 	    }
-	    var promise = this._promise;
-	    this._cleanup();
-	    if (result === errorObj) {
-	        promise._rejectCallback(result.e, false);
-	    } else {
-	        promise.cancel();
-	    }
+	    this._cancellationPhase = true;
+	    this._yieldedPromise = null;
+	    this._continue(result);
 	};
 
 	PromiseSpawn.prototype._promiseFulfilled = function(value) {
@@ -2219,7 +2237,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this._yieldedPromise instanceof Promise) {
 	        var promise = this._yieldedPromise;
 	        this._yieldedPromise = null;
-	        this._promiseCancelled();
 	        promise.cancel();
 	    }
 	};
@@ -2239,13 +2256,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var promise = this._promise;
 	    if (result === errorObj) {
 	        this._cleanup();
-	        return promise._rejectCallback(result.e, false);
+	        if (this._cancellationPhase) {
+	            return promise.cancel();
+	        } else {
+	            return promise._rejectCallback(result.e, false);
+	        }
 	    }
 
 	    var value = result.value;
 	    if (result.done === true) {
 	        this._cleanup();
-	        return promise._resolveCallback(value);
+	        if (this._cancellationPhase) {
+	            return promise.cancel();
+	        } else {
+	            return promise._resolveCallback(value);
+	        }
 	    } else {
 	        var maybePromise = tryConvertToPromise(value, this._promise);
 	        if (!(maybePromise instanceof Promise)) {
@@ -2602,9 +2627,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (typeof fn !== "function") {
 	        return apiRejection("expecting a function but got " + util.classString(fn));
 	    }
-	    var limit = typeof options === "object" && options !== null
-	        ? options.concurrency
-	        : 0;
+
+	    var limit = 0;
+	    if (options !== undefined) {
+	        if (typeof options === "object" && options !== null) {
+	            if (typeof options.concurrency !== "number") {
+	                return Promise.reject(
+	                    new TypeError("'concurrency' must be a number but it is " +
+	                                    util.classString(options.concurrency)));
+	            }
+	            limit = options.concurrency;
+	        } else {
+	            return Promise.reject(new TypeError(
+	                            "options argument must be an object but it is " +
+	                             util.classString(options)));
+	        }
+	    }
 	    limit = typeof limit === "number" &&
 	        isFinite(limit) && limit >= 1 ? limit : 0;
 	    return new MappingPromiseArray(promises, fn, limit, _filter).promise();
@@ -3003,9 +3041,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (typeof fn !== "function") {
 	        throw new TypeError("expecting a function but got " + util.classString(fn));
 	    }
-	    var prev = async._schedule;
-	    async._schedule = fn;
-	    return prev;
+	    return async.setScheduler(fn);
 	};
 
 	Promise.prototype._then = function (
@@ -3114,6 +3150,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	Promise.prototype._setAsyncGuaranteed = function() {
+	    if (async.hasCustomScheduler()) return;
 	    this._bitField = this._bitField | 134217728;
 	};
 
@@ -3518,21 +3555,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	_dereq_("./join")(
 	    Promise, PromiseArray, tryConvertToPromise, INTERNAL, debug);
 	Promise.Promise = Promise;
+	Promise.version = "3.4.0";
 	_dereq_('./map.js')(Promise, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL, debug);
+	_dereq_('./call_get.js')(Promise);
 	_dereq_('./using.js')(Promise, apiRejection, tryConvertToPromise, createContext, INTERNAL, debug);
 	_dereq_('./timers.js')(Promise, INTERNAL, debug);
 	_dereq_('./generators.js')(Promise, apiRejection, INTERNAL, tryConvertToPromise, Proxyable, debug);
 	_dereq_('./nodeify.js')(Promise);
-	_dereq_('./call_get.js')(Promise);
+	_dereq_('./promisify.js')(Promise, INTERNAL);
 	_dereq_('./props.js')(Promise, PromiseArray, tryConvertToPromise, apiRejection);
 	_dereq_('./race.js')(Promise, INTERNAL, tryConvertToPromise, apiRejection);
 	_dereq_('./reduce.js')(Promise, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL, debug);
 	_dereq_('./settle.js')(Promise, PromiseArray, debug);
 	_dereq_('./some.js')(Promise, PromiseArray, apiRejection);
-	_dereq_('./promisify.js')(Promise, INTERNAL);
-	_dereq_('./any.js')(Promise);
-	_dereq_('./each.js')(Promise, INTERNAL);
 	_dereq_('./filter.js')(Promise, INTERNAL);
+	_dereq_('./each.js')(Promise, INTERNAL);
+	_dereq_('./any.js')(Promise);
 	                                                         
 	    util.toFastProperties(Promise);                                          
 	    util.toFastProperties(Promise.prototype);                                
@@ -4494,12 +4532,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	var noAsyncScheduler = function() {
 	    throw new Error("No async scheduler available\u000a\u000a    See http://goo.gl/MqrFmX\u000a");
 	};
+	var NativePromise = util.getNativePromise();
 	if (util.isNode && typeof MutationObserver === "undefined") {
 	    var GlobalSetImmediate = global.setImmediate;
 	    var ProcessNextTick = process.nextTick;
 	    schedule = util.isRecentNode
 	                ? function(fn) { GlobalSetImmediate.call(global, fn); }
 	                : function(fn) { ProcessNextTick.call(process, fn); };
+	} else if (typeof NativePromise === "function") {
+	    var nativePromise = NativePromise.resolve();
+	    schedule = function(fn) {
+	        nativePromise.then(fn);
+	    };
 	} else if ((typeof MutationObserver !== "undefined") &&
 	          !(typeof window !== "undefined" &&
 	            window.navigator &&
@@ -4511,23 +4555,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var div2 = document.createElement("div");
 	        var o2 = new MutationObserver(function() {
 	            div.classList.toggle("foo");
-	          toggleScheduled = false;
+	            toggleScheduled = false;
 	        });
 	        o2.observe(div2, opts);
 
 	        var scheduleToggle = function() {
 	            if (toggleScheduled) return;
-	          toggleScheduled = true;
-	          div2.classList.toggle("foo");
-	        };
+	                toggleScheduled = true;
+	                div2.classList.toggle("foo");
+	            };
 
-	        return function schedule(fn) {
-	          var o = new MutationObserver(function() {
-	            o.disconnect();
-	            fn();
-	          });
-	          o.observe(div, opts);
-	          scheduleToggle();
+	            return function schedule(fn) {
+	            var o = new MutationObserver(function() {
+	                o.disconnect();
+	                fn();
+	            });
+	            o.observe(div, opts);
+	            scheduleToggle();
 	        };
 	    })();
 	} else if (typeof setImmediate !== "undefined") {
@@ -4885,7 +4929,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var hasProp = {}.hasOwnProperty;
 	function isAnyBluebirdPromise(obj) {
-	    return hasProp.call(obj, "_promise0");
+	    try {
+	        return hasProp.call(obj, "_promise0");
+	    } catch (e) {
+	        return false;
+	    }
 	}
 
 	function doThenable(x, then, context) {
@@ -5023,6 +5071,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var inherits = _dereq_("./util").inherits;
 	    var errorObj = util.errorObj;
 	    var tryCatch = util.tryCatch;
+	    var NULL = {};
 
 	    function thrower(e) {
 	        setTimeout(function(){throw e;}, 0);
@@ -5083,14 +5132,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (this.promise().isFulfilled()) {
 	            return this.promise().value();
 	        }
-	        return null;
+	        return NULL;
 	    };
 
 	    Disposer.prototype.tryDispose = function(inspection) {
 	        var resource = this.resource();
 	        var context = this._context;
 	        if (context !== undefined) context._pushContext();
-	        var ret = resource !== null
+	        var ret = resource !== NULL
 	            ? this.doDispose(resource, inspection) : null;
 	        if (context !== undefined) context._popContext();
 	        this._promise._unsetDisposable();
@@ -5558,6 +5607,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return isNode ? process.env[key] : def;
 	}
 
+	function getNativePromise() {
+	    if (typeof Promise === "function") {
+	        try {
+	            var promise = new Promise(function(){});
+	            if ({}.toString.call(promise) === "[object Promise]") {
+	                return Promise;
+	            }
+	        } catch (e) {}
+	    }
+	}
+
 	var ret = {
 	    isClass: isClass,
 	    isIdentifier: isIdentifier,
@@ -5589,7 +5649,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                 typeof chrome.loadTimes === "function",
 	    isNode: isNode,
 	    env: env,
-	    global: globalObject
+	    global: globalObject,
+	    getNativePromise: getNativePromise
 	};
 	ret.isRecentNode = ret.isNode && (function() {
 	    var version = process.versions.node.split(".").map(Number);
@@ -5603,7 +5664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	},{"./es5":13}]},{},[4])(4)
 	});                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), (function() { return this; }()), __webpack_require__(1).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), (function() { return this; }()), __webpack_require__(1).setImmediate))
 
 /***/ },
 /* 3 */
@@ -5616,7 +5677,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Expose `debug()` as the module.
 	 */
 
-	exports = module.exports = __webpack_require__(5);
+	exports = module.exports = __webpack_require__(8);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -5789,469 +5850,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
-	/**
-	 * This is the common logic for both the Node.js and web browser
-	 * implementations of `debug()`.
-	 *
-	 * Expose `debug()` as the module.
-	 */
-
-	exports = module.exports = debug;
-	exports.coerce = coerce;
-	exports.disable = disable;
-	exports.enable = enable;
-	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(6);
-
-	/**
-	 * The currently active debug mode names, and names to skip.
-	 */
-
-	exports.names = [];
-	exports.skips = [];
-
-	/**
-	 * Map of special "%n" handling functions, for the debug "format" argument.
-	 *
-	 * Valid key names are a single, lowercased letter, i.e. "n".
-	 */
-
-	exports.formatters = {};
-
-	/**
-	 * Previously assigned color.
-	 */
-
-	var prevColor = 0;
-
-	/**
-	 * Previous log timestamp.
-	 */
-
-	var prevTime;
-
-	/**
-	 * Select a color.
-	 *
-	 * @return {Number}
-	 * @api private
-	 */
-
-	function selectColor() {
-	  return exports.colors[prevColor++ % exports.colors.length];
-	}
-
-	/**
-	 * Create a debugger with the given `namespace`.
-	 *
-	 * @param {String} namespace
-	 * @return {Function}
-	 * @api public
-	 */
-
-	function debug(namespace) {
-
-	  // define the `disabled` version
-	  function disabled() {
-	  }
-	  disabled.enabled = false;
-
-	  // define the `enabled` version
-	  function enabled() {
-
-	    var self = enabled;
-
-	    // set `diff` timestamp
-	    var curr = +new Date();
-	    var ms = curr - (prevTime || curr);
-	    self.diff = ms;
-	    self.prev = prevTime;
-	    self.curr = curr;
-	    prevTime = curr;
-
-	    // add the `color` if not set
-	    if (null == self.useColors) self.useColors = exports.useColors();
-	    if (null == self.color && self.useColors) self.color = selectColor();
-
-	    var args = Array.prototype.slice.call(arguments);
-
-	    args[0] = exports.coerce(args[0]);
-
-	    if ('string' !== typeof args[0]) {
-	      // anything else let's inspect with %o
-	      args = ['%o'].concat(args);
-	    }
-
-	    // apply any `formatters` transformations
-	    var index = 0;
-	    args[0] = args[0].replace(/%([a-z%])/g, function(match, format) {
-	      // if we encounter an escaped % then don't increase the array index
-	      if (match === '%%') return match;
-	      index++;
-	      var formatter = exports.formatters[format];
-	      if ('function' === typeof formatter) {
-	        var val = args[index];
-	        match = formatter.call(self, val);
-
-	        // now we need to remove `args[index]` since it's inlined in the `format`
-	        args.splice(index, 1);
-	        index--;
-	      }
-	      return match;
-	    });
-
-	    if ('function' === typeof exports.formatArgs) {
-	      args = exports.formatArgs.apply(self, args);
-	    }
-	    var logFn = enabled.log || exports.log || console.log.bind(console);
-	    logFn.apply(self, args);
-	  }
-	  enabled.enabled = true;
-
-	  var fn = exports.enabled(namespace) ? enabled : disabled;
-
-	  fn.namespace = namespace;
-
-	  return fn;
-	}
-
-	/**
-	 * Enables a debug mode by namespaces. This can include modes
-	 * separated by a colon and wildcards.
-	 *
-	 * @param {String} namespaces
-	 * @api public
-	 */
-
-	function enable(namespaces) {
-	  exports.save(namespaces);
-
-	  var split = (namespaces || '').split(/[\s,]+/);
-	  var len = split.length;
-
-	  for (var i = 0; i < len; i++) {
-	    if (!split[i]) continue; // ignore empty strings
-	    namespaces = split[i].replace(/\*/g, '.*?');
-	    if (namespaces[0] === '-') {
-	      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
-	    } else {
-	      exports.names.push(new RegExp('^' + namespaces + '$'));
-	    }
-	  }
-	}
-
-	/**
-	 * Disable debug output.
-	 *
-	 * @api public
-	 */
-
-	function disable() {
-	  exports.enable('');
-	}
-
-	/**
-	 * Returns true if the given mode name is enabled, false otherwise.
-	 *
-	 * @param {String} name
-	 * @return {Boolean}
-	 * @api public
-	 */
-
-	function enabled(name) {
-	  var i, len;
-	  for (i = 0, len = exports.skips.length; i < len; i++) {
-	    if (exports.skips[i].test(name)) {
-	      return false;
-	    }
-	  }
-	  for (i = 0, len = exports.names.length; i < len; i++) {
-	    if (exports.names[i].test(name)) {
-	      return true;
-	    }
-	  }
-	  return false;
-	}
-
-	/**
-	 * Coerce `val`.
-	 *
-	 * @param {Mixed} val
-	 * @return {Mixed}
-	 * @api private
-	 */
-
-	function coerce(val) {
-	  if (val instanceof Error) return val.stack || val.message;
-	  return val;
-	}
-
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	/**
-	 * Helpers.
-	 */
-
-	var s = 1000;
-	var m = s * 60;
-	var h = m * 60;
-	var d = h * 24;
-	var y = d * 365.25;
-
-	/**
-	 * Parse or format the given `val`.
-	 *
-	 * Options:
-	 *
-	 *  - `long` verbose formatting [false]
-	 *
-	 * @param {String|Number} val
-	 * @param {Object} options
-	 * @return {String|Number}
-	 * @api public
-	 */
-
-	module.exports = function(val, options){
-	  options = options || {};
-	  if ('string' == typeof val) return parse(val);
-	  return options.long
-	    ? long(val)
-	    : short(val);
-	};
-
-	/**
-	 * Parse the given `str` and return milliseconds.
-	 *
-	 * @param {String} str
-	 * @return {Number}
-	 * @api private
-	 */
-
-	function parse(str) {
-	  str = '' + str;
-	  if (str.length > 10000) return;
-	  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str);
-	  if (!match) return;
-	  var n = parseFloat(match[1]);
-	  var type = (match[2] || 'ms').toLowerCase();
-	  switch (type) {
-	    case 'years':
-	    case 'year':
-	    case 'yrs':
-	    case 'yr':
-	    case 'y':
-	      return n * y;
-	    case 'days':
-	    case 'day':
-	    case 'd':
-	      return n * d;
-	    case 'hours':
-	    case 'hour':
-	    case 'hrs':
-	    case 'hr':
-	    case 'h':
-	      return n * h;
-	    case 'minutes':
-	    case 'minute':
-	    case 'mins':
-	    case 'min':
-	    case 'm':
-	      return n * m;
-	    case 'seconds':
-	    case 'second':
-	    case 'secs':
-	    case 'sec':
-	    case 's':
-	      return n * s;
-	    case 'milliseconds':
-	    case 'millisecond':
-	    case 'msecs':
-	    case 'msec':
-	    case 'ms':
-	      return n;
-	  }
-	}
-
-	/**
-	 * Short format for `ms`.
-	 *
-	 * @param {Number} ms
-	 * @return {String}
-	 * @api private
-	 */
-
-	function short(ms) {
-	  if (ms >= d) return Math.round(ms / d) + 'd';
-	  if (ms >= h) return Math.round(ms / h) + 'h';
-	  if (ms >= m) return Math.round(ms / m) + 'm';
-	  if (ms >= s) return Math.round(ms / s) + 's';
-	  return ms + 'ms';
-	}
-
-	/**
-	 * Long format for `ms`.
-	 *
-	 * @param {Number} ms
-	 * @return {String}
-	 * @api private
-	 */
-
-	function long(ms) {
-	  return plural(ms, d, 'day')
-	    || plural(ms, h, 'hour')
-	    || plural(ms, m, 'minute')
-	    || plural(ms, s, 'second')
-	    || ms + ' ms';
-	}
-
-	/**
-	 * Pluralization helper.
-	 */
-
-	function plural(ms, n, name) {
-	  if (ms < n) return;
-	  if (ms < n * 1.5) return Math.floor(ms / n) + ' ' + name;
-	  return Math.ceil(ms / n) + ' ' + name + 's';
-	}
-
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  * $script.js JS loader & dependency manager
-	  * https://github.com/ded/script.js
-	  * (c) Dustin Diaz 2014 | License MIT
-	  */
-
-	(function (name, definition) {
-	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
-	  else if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (definition), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
-	  else this[name] = definition()
-	})('$script', function () {
-	  var doc = document
-	    , head = doc.getElementsByTagName('head')[0]
-	    , s = 'string'
-	    , f = false
-	    , push = 'push'
-	    , readyState = 'readyState'
-	    , onreadystatechange = 'onreadystatechange'
-	    , list = {}
-	    , ids = {}
-	    , delay = {}
-	    , scripts = {}
-	    , scriptpath
-	    , urlArgs
-
-	  function every(ar, fn) {
-	    for (var i = 0, j = ar.length; i < j; ++i) if (!fn(ar[i])) return f
-	    return 1
-	  }
-	  function each(ar, fn) {
-	    every(ar, function (el) {
-	      return !fn(el)
-	    })
-	  }
-
-	  function $script(paths, idOrDone, optDone) {
-	    paths = paths[push] ? paths : [paths]
-	    var idOrDoneIsDone = idOrDone && idOrDone.call
-	      , done = idOrDoneIsDone ? idOrDone : optDone
-	      , id = idOrDoneIsDone ? paths.join('') : idOrDone
-	      , queue = paths.length
-	    function loopFn(item) {
-	      return item.call ? item() : list[item]
-	    }
-	    function callback() {
-	      if (!--queue) {
-	        list[id] = 1
-	        done && done()
-	        for (var dset in delay) {
-	          every(dset.split('|'), loopFn) && !each(delay[dset], loopFn) && (delay[dset] = [])
-	        }
-	      }
-	    }
-	    setTimeout(function () {
-	      each(paths, function loading(path, force) {
-	        if (path === null) return callback()
-	        
-	        if (!force && !/^https?:\/\//.test(path) && scriptpath) {
-	          path = (path.indexOf('.js') === -1) ? scriptpath + path + '.js' : scriptpath + path;
-	        }
-	        
-	        if (scripts[path]) {
-	          if (id) ids[id] = 1
-	          return (scripts[path] == 2) ? callback() : setTimeout(function () { loading(path, true) }, 0)
-	        }
-
-	        scripts[path] = 1
-	        if (id) ids[id] = 1
-	        create(path, callback)
-	      })
-	    }, 0)
-	    return $script
-	  }
-
-	  function create(path, fn) {
-	    var el = doc.createElement('script'), loaded
-	    el.onload = el.onerror = el[onreadystatechange] = function () {
-	      if ((el[readyState] && !(/^c|loade/.test(el[readyState]))) || loaded) return;
-	      el.onload = el[onreadystatechange] = null
-	      loaded = 1
-	      scripts[path] = 2
-	      fn()
-	    }
-	    el.async = 1
-	    el.src = urlArgs ? path + (path.indexOf('?') === -1 ? '?' : '&') + urlArgs : path;
-	    head.insertBefore(el, head.lastChild)
-	  }
-
-	  $script.get = create
-
-	  $script.order = function (scripts, id, done) {
-	    (function callback(s) {
-	      s = scripts.shift()
-	      !scripts.length ? $script(s, id, done) : $script(s, callback)
-	    }())
-	  }
-
-	  $script.path = function (p) {
-	    scriptpath = p
-	  }
-	  $script.urlArgs = function (str) {
-	    urlArgs = str;
-	  }
-	  $script.ready = function (deps, ready, req) {
-	    deps = deps[push] ? deps : [deps]
-	    var missing = [];
-	    !each(deps, function (dep) {
-	      list[dep] || missing[push](dep);
-	    }) && every(deps, function (dep) {return list[dep]}) ?
-	      ready() : !function (key) {
-	      delay[key] = delay[key] || []
-	      delay[key][push](ready)
-	      req && req(missing)
-	    }(deps.join('|'))
-	    return $script
-	  }
-
-	  $script.done = function (idOrDone) {
-	    $script([null], idOrDone)
-	  }
-
-	  return $script
-	});
-
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
@@ -6276,11 +5874,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _bluebird2 = _interopRequireDefault(_bluebird);
 
-	var _constantsDEFAULT_CHART_COLORS = __webpack_require__(10);
+	var _constantsDEFAULT_CHART_COLORS = __webpack_require__(7);
 
 	var _constantsDEFAULT_CHART_COLORS2 = _interopRequireDefault(_constantsDEFAULT_CHART_COLORS);
 
-	var _GoogleChartLoader = __webpack_require__(9);
+	var _GoogleChartLoader = __webpack_require__(6);
 
 	var _GoogleChartLoader2 = _interopRequireDefault(_GoogleChartLoader);
 
@@ -6323,9 +5921,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _this = this;
 
 	      debug('componentDidMount');
-	      _GoogleChartLoader2['default'].init(this.props.chartPackages, this.props.chartVersion).then(function (asd) {
-	        _this.drawChart();
-	      });
+	      if (this.props.loadCharts) {
+	        _GoogleChartLoader2['default'].init(this.props.chartPackages, this.props.chartVersion).then(function (asd) {
+	          _this.drawChart();
+	        });
+	      } else {
+	        this.drawChart();
+	      }
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -6342,7 +5944,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _this2 = this;
 
 	      debug('componentDidUpdate');
-	      if (_GoogleChartLoader2['default'].isLoading) {
+	      if (!this.props.loadCharts) {
+	        this.drawChart();
+	      } else if (_GoogleChartLoader2['default'].isLoading) {
 	        _GoogleChartLoader2['default'].initPromise.then(function () {
 	          _this2.drawChart.bind(_this2)();
 	        });
@@ -6624,12 +6228,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  chartActions: null,
 	  data: null,
 	  onSelect: null,
-	  legend_toggle: false
+	  legend_toggle: false,
+	  loadCharts: true
 	};
 	module.exports = exports['default'];
 
 /***/ },
-/* 9 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//GoogleChartLoader Singleton
@@ -6647,7 +6252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _bluebird2 = _interopRequireDefault(_bluebird);
 
-	var _scriptjs = __webpack_require__(7);
+	var _scriptjs = __webpack_require__(11);
 
 	var _scriptjs2 = _interopRequireDefault(_scriptjs);
 
@@ -6691,7 +6296,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 10 */
+/* 7 */
 /***/ function(module, exports) {
 
 	//Taken from http://there4development.com/blog/2012/05/02/google-chart-color-list/
@@ -6701,12 +6306,371 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6', '#DD4477', '#66AA00', '#B82E2E', '#316395', '#994499', '#22AA99', '#AAAA11', '#6633CC', '#E67300', '#8B0707', '#329262', '#5574A6', '#3B3EAC'];
 
 /***/ },
-/* 11 */
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * This is the common logic for both the Node.js and web browser
+	 * implementations of `debug()`.
+	 *
+	 * Expose `debug()` as the module.
+	 */
+
+	exports = module.exports = debug;
+	exports.coerce = coerce;
+	exports.disable = disable;
+	exports.enable = enable;
+	exports.enabled = enabled;
+	exports.humanize = __webpack_require__(9);
+
+	/**
+	 * The currently active debug mode names, and names to skip.
+	 */
+
+	exports.names = [];
+	exports.skips = [];
+
+	/**
+	 * Map of special "%n" handling functions, for the debug "format" argument.
+	 *
+	 * Valid key names are a single, lowercased letter, i.e. "n".
+	 */
+
+	exports.formatters = {};
+
+	/**
+	 * Previously assigned color.
+	 */
+
+	var prevColor = 0;
+
+	/**
+	 * Previous log timestamp.
+	 */
+
+	var prevTime;
+
+	/**
+	 * Select a color.
+	 *
+	 * @return {Number}
+	 * @api private
+	 */
+
+	function selectColor() {
+	  return exports.colors[prevColor++ % exports.colors.length];
+	}
+
+	/**
+	 * Create a debugger with the given `namespace`.
+	 *
+	 * @param {String} namespace
+	 * @return {Function}
+	 * @api public
+	 */
+
+	function debug(namespace) {
+
+	  // define the `disabled` version
+	  function disabled() {
+	  }
+	  disabled.enabled = false;
+
+	  // define the `enabled` version
+	  function enabled() {
+
+	    var self = enabled;
+
+	    // set `diff` timestamp
+	    var curr = +new Date();
+	    var ms = curr - (prevTime || curr);
+	    self.diff = ms;
+	    self.prev = prevTime;
+	    self.curr = curr;
+	    prevTime = curr;
+
+	    // add the `color` if not set
+	    if (null == self.useColors) self.useColors = exports.useColors();
+	    if (null == self.color && self.useColors) self.color = selectColor();
+
+	    var args = Array.prototype.slice.call(arguments);
+
+	    args[0] = exports.coerce(args[0]);
+
+	    if ('string' !== typeof args[0]) {
+	      // anything else let's inspect with %o
+	      args = ['%o'].concat(args);
+	    }
+
+	    // apply any `formatters` transformations
+	    var index = 0;
+	    args[0] = args[0].replace(/%([a-z%])/g, function(match, format) {
+	      // if we encounter an escaped % then don't increase the array index
+	      if (match === '%%') return match;
+	      index++;
+	      var formatter = exports.formatters[format];
+	      if ('function' === typeof formatter) {
+	        var val = args[index];
+	        match = formatter.call(self, val);
+
+	        // now we need to remove `args[index]` since it's inlined in the `format`
+	        args.splice(index, 1);
+	        index--;
+	      }
+	      return match;
+	    });
+
+	    if ('function' === typeof exports.formatArgs) {
+	      args = exports.formatArgs.apply(self, args);
+	    }
+	    var logFn = enabled.log || exports.log || console.log.bind(console);
+	    logFn.apply(self, args);
+	  }
+	  enabled.enabled = true;
+
+	  var fn = exports.enabled(namespace) ? enabled : disabled;
+
+	  fn.namespace = namespace;
+
+	  return fn;
+	}
+
+	/**
+	 * Enables a debug mode by namespaces. This can include modes
+	 * separated by a colon and wildcards.
+	 *
+	 * @param {String} namespaces
+	 * @api public
+	 */
+
+	function enable(namespaces) {
+	  exports.save(namespaces);
+
+	  var split = (namespaces || '').split(/[\s,]+/);
+	  var len = split.length;
+
+	  for (var i = 0; i < len; i++) {
+	    if (!split[i]) continue; // ignore empty strings
+	    namespaces = split[i].replace(/\*/g, '.*?');
+	    if (namespaces[0] === '-') {
+	      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+	    } else {
+	      exports.names.push(new RegExp('^' + namespaces + '$'));
+	    }
+	  }
+	}
+
+	/**
+	 * Disable debug output.
+	 *
+	 * @api public
+	 */
+
+	function disable() {
+	  exports.enable('');
+	}
+
+	/**
+	 * Returns true if the given mode name is enabled, false otherwise.
+	 *
+	 * @param {String} name
+	 * @return {Boolean}
+	 * @api public
+	 */
+
+	function enabled(name) {
+	  var i, len;
+	  for (i = 0, len = exports.skips.length; i < len; i++) {
+	    if (exports.skips[i].test(name)) {
+	      return false;
+	    }
+	  }
+	  for (i = 0, len = exports.names.length; i < len; i++) {
+	    if (exports.names[i].test(name)) {
+	      return true;
+	    }
+	  }
+	  return false;
+	}
+
+	/**
+	 * Coerce `val`.
+	 *
+	 * @param {Mixed} val
+	 * @return {Mixed}
+	 * @api private
+	 */
+
+	function coerce(val) {
+	  if (val instanceof Error) return val.stack || val.message;
+	  return val;
+	}
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	/**
+	 * Helpers.
+	 */
+
+	var s = 1000;
+	var m = s * 60;
+	var h = m * 60;
+	var d = h * 24;
+	var y = d * 365.25;
+
+	/**
+	 * Parse or format the given `val`.
+	 *
+	 * Options:
+	 *
+	 *  - `long` verbose formatting [false]
+	 *
+	 * @param {String|Number} val
+	 * @param {Object} options
+	 * @return {String|Number}
+	 * @api public
+	 */
+
+	module.exports = function(val, options){
+	  options = options || {};
+	  if ('string' == typeof val) return parse(val);
+	  return options.long
+	    ? long(val)
+	    : short(val);
+	};
+
+	/**
+	 * Parse the given `str` and return milliseconds.
+	 *
+	 * @param {String} str
+	 * @return {Number}
+	 * @api private
+	 */
+
+	function parse(str) {
+	  str = '' + str;
+	  if (str.length > 10000) return;
+	  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str);
+	  if (!match) return;
+	  var n = parseFloat(match[1]);
+	  var type = (match[2] || 'ms').toLowerCase();
+	  switch (type) {
+	    case 'years':
+	    case 'year':
+	    case 'yrs':
+	    case 'yr':
+	    case 'y':
+	      return n * y;
+	    case 'days':
+	    case 'day':
+	    case 'd':
+	      return n * d;
+	    case 'hours':
+	    case 'hour':
+	    case 'hrs':
+	    case 'hr':
+	    case 'h':
+	      return n * h;
+	    case 'minutes':
+	    case 'minute':
+	    case 'mins':
+	    case 'min':
+	    case 'm':
+	      return n * m;
+	    case 'seconds':
+	    case 'second':
+	    case 'secs':
+	    case 'sec':
+	    case 's':
+	      return n * s;
+	    case 'milliseconds':
+	    case 'millisecond':
+	    case 'msecs':
+	    case 'msec':
+	    case 'ms':
+	      return n;
+	  }
+	}
+
+	/**
+	 * Short format for `ms`.
+	 *
+	 * @param {Number} ms
+	 * @return {String}
+	 * @api private
+	 */
+
+	function short(ms) {
+	  if (ms >= d) return Math.round(ms / d) + 'd';
+	  if (ms >= h) return Math.round(ms / h) + 'h';
+	  if (ms >= m) return Math.round(ms / m) + 'm';
+	  if (ms >= s) return Math.round(ms / s) + 's';
+	  return ms + 'ms';
+	}
+
+	/**
+	 * Long format for `ms`.
+	 *
+	 * @param {Number} ms
+	 * @return {String}
+	 * @api private
+	 */
+
+	function long(ms) {
+	  return plural(ms, d, 'day')
+	    || plural(ms, h, 'hour')
+	    || plural(ms, m, 'minute')
+	    || plural(ms, s, 'second')
+	    || ms + ' ms';
+	}
+
+	/**
+	 * Pluralization helper.
+	 */
+
+	function plural(ms, n, name) {
+	  if (ms < n) return;
+	  if (ms < n * 1.5) return Math.floor(ms / n) + ' ' + name;
+	  return Math.ceil(ms / n) + ' ' + name + 's';
+	}
+
+
+/***/ },
+/* 10 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
 
 	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
+	    }
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
+	    }
+	  }
+	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -6731,7 +6695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -6748,7 +6712,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -6760,7 +6724,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -6801,8 +6765,137 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  * $script.js JS loader & dependency manager
+	  * https://github.com/ded/script.js
+	  * (c) Dustin Diaz 2014 | License MIT
+	  */
+
+	(function (name, definition) {
+	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
+	  else if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (definition), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+	  else this[name] = definition()
+	})('$script', function () {
+	  var doc = document
+	    , head = doc.getElementsByTagName('head')[0]
+	    , s = 'string'
+	    , f = false
+	    , push = 'push'
+	    , readyState = 'readyState'
+	    , onreadystatechange = 'onreadystatechange'
+	    , list = {}
+	    , ids = {}
+	    , delay = {}
+	    , scripts = {}
+	    , scriptpath
+	    , urlArgs
+
+	  function every(ar, fn) {
+	    for (var i = 0, j = ar.length; i < j; ++i) if (!fn(ar[i])) return f
+	    return 1
+	  }
+	  function each(ar, fn) {
+	    every(ar, function (el) {
+	      return !fn(el)
+	    })
+	  }
+
+	  function $script(paths, idOrDone, optDone) {
+	    paths = paths[push] ? paths : [paths]
+	    var idOrDoneIsDone = idOrDone && idOrDone.call
+	      , done = idOrDoneIsDone ? idOrDone : optDone
+	      , id = idOrDoneIsDone ? paths.join('') : idOrDone
+	      , queue = paths.length
+	    function loopFn(item) {
+	      return item.call ? item() : list[item]
+	    }
+	    function callback() {
+	      if (!--queue) {
+	        list[id] = 1
+	        done && done()
+	        for (var dset in delay) {
+	          every(dset.split('|'), loopFn) && !each(delay[dset], loopFn) && (delay[dset] = [])
+	        }
+	      }
+	    }
+	    setTimeout(function () {
+	      each(paths, function loading(path, force) {
+	        if (path === null) return callback()
+	        
+	        if (!force && !/^https?:\/\//.test(path) && scriptpath) {
+	          path = (path.indexOf('.js') === -1) ? scriptpath + path + '.js' : scriptpath + path;
+	        }
+	        
+	        if (scripts[path]) {
+	          if (id) ids[id] = 1
+	          return (scripts[path] == 2) ? callback() : setTimeout(function () { loading(path, true) }, 0)
+	        }
+
+	        scripts[path] = 1
+	        if (id) ids[id] = 1
+	        create(path, callback)
+	      })
+	    }, 0)
+	    return $script
+	  }
+
+	  function create(path, fn) {
+	    var el = doc.createElement('script'), loaded
+	    el.onload = el.onerror = el[onreadystatechange] = function () {
+	      if ((el[readyState] && !(/^c|loade/.test(el[readyState]))) || loaded) return;
+	      el.onload = el[onreadystatechange] = null
+	      loaded = 1
+	      scripts[path] = 2
+	      fn()
+	    }
+	    el.async = 1
+	    el.src = urlArgs ? path + (path.indexOf('?') === -1 ? '?' : '&') + urlArgs : path;
+	    head.insertBefore(el, head.lastChild)
+	  }
+
+	  $script.get = create
+
+	  $script.order = function (scripts, id, done) {
+	    (function callback(s) {
+	      s = scripts.shift()
+	      !scripts.length ? $script(s, id, done) : $script(s, callback)
+	    }())
+	  }
+
+	  $script.path = function (p) {
+	    scriptpath = p
+	  }
+	  $script.urlArgs = function (str) {
+	    urlArgs = str;
+	  }
+	  $script.ready = function (deps, ready, req) {
+	    deps = deps[push] ? deps : [deps]
+	    var missing = [];
+	    !each(deps, function (dep) {
+	      list[dep] || missing[push](dep);
+	    }) && every(deps, function (dep) {return list[dep]}) ?
+	      ready() : !function (key) {
+	      delay[key] = delay[key] || []
+	      delay[key][push](ready)
+	      req && req(missing)
+	    }(deps.join('|'))
+	    return $script
+	  }
+
+	  $script.done = function (idOrDone) {
+	    $script([null], idOrDone)
+	  }
+
+	  return $script
+	});
+
+
+/***/ },
 /* 12 */
-11
+10
 /******/ ])))
 });
 ;

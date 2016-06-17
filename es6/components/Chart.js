@@ -51,9 +51,13 @@ var Chart = (function (_React$Component) {
       var _this = this;
 
       debug('componentDidMount');
-      googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(function (asd) {
-        _this.drawChart();
-      });
+      if (this.props.loadCharts) {
+        googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(function (asd) {
+          _this.drawChart();
+        });
+      } else {
+        this.drawChart();
+      }
     }
   }, {
     key: 'componentWillUnmount',
@@ -70,7 +74,9 @@ var Chart = (function (_React$Component) {
       var _this2 = this;
 
       debug('componentDidUpdate');
-      if (googleChartLoader.isLoading) {
+      if (!this.props.loadCharts) {
+        this.drawChart();
+      } else if (googleChartLoader.isLoading) {
         googleChartLoader.initPromise.then(function () {
           _this2.drawChart.bind(_this2)();
         });
@@ -351,5 +357,6 @@ Chart.defaultProps = {
   chartActions: null,
   data: null,
   onSelect: null,
-  legend_toggle: false
+  legend_toggle: false,
+  loadCharts: true
 };
