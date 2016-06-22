@@ -1,5 +1,5 @@
 /*!
- * react-google-charts 1.0.0 - https://rakannimer.github.io/react-google-charts/
+ * react-google-charts 1.0.2 - https://rakannimer.github.io/react-google-charts/
  * UNLICENSE Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -6305,9 +6305,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Chart(props) {
 	    _classCallCheck(this, Chart);
 
-	    if (true) {
-	      localStorage.debug = "react-google-charts:*";
-	    }
 	    debug('constructor', props);
 	    _get(Object.getPrototypeOf(Chart.prototype), 'constructor', this).call(this, props);
 	    this.state = { graphID: props.graph_id || generateUniqueID() };

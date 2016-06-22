@@ -27,9 +27,6 @@ import SAMPLE_DATA from '../../src/constants/SAMPLE_DATA';
 let routes = [];
 class Demo extends React.Component {
   constructor(props){
-    if (process.env.NODE_ENV === 'development') {
-      localStorage.debug = "react-google-charts:*";
-    }
     super(props);
     let charts = {};
     routes = SAMPLE_DATA.map((chart, i)=>{

@@ -20,9 +20,7 @@ const googleErrorHandler = (id, message) => {
 
 export default class Chart extends React.Component {
   constructor(props) {
-    if (process.env.NODE_ENV === 'development') {
-      localStorage.debug="react-google-charts:*";
-    }
+    
     debug('constructor', props);
     super(props);
     this.state = {graphID: props.graph_id || generateUniqueID()};
