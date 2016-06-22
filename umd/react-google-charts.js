@@ -1,5 +1,5 @@
 /*!
- * react-google-charts 1.0.0
+ * react-google-charts 1.0.0 - https://rakannimer.github.io/react-google-charts/
  * UNLICENSE Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -6323,9 +6323,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _this = this;
 
 	      debug('componentDidMount');
-	      _GoogleChartLoader2['default'].init(this.props.chartPackages, this.props.chartVersion).then(function (asd) {
-	        _this.drawChart();
-	      });
+	      if (this.props.loadCharts) {
+	        _GoogleChartLoader2['default'].init(this.props.chartPackages, this.props.chartVersion).then(function (asd) {
+	          _this.drawChart();
+	        });
+	      } else {
+	        this.drawChart();
+	      }
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -6342,7 +6346,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _this2 = this;
 
 	      debug('componentDidUpdate');
-	      if (_GoogleChartLoader2['default'].isLoading) {
+	      if (!this.props.loadCharts) {
+	        this.drawChart();
+	      } else if (_GoogleChartLoader2['default'].isLoading) {
 	        _GoogleChartLoader2['default'].initPromise.then(function () {
 	          _this2.drawChart.bind(_this2)();
 	        });
@@ -6624,7 +6630,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  chartActions: null,
 	  data: null,
 	  onSelect: null,
-	  legend_toggle: false
+	  legend_toggle: false,
+	  loadCharts: true
 	};
 	module.exports = exports['default'];
 
