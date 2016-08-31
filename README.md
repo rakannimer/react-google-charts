@@ -141,7 +141,7 @@ render: function() {
 
 ##Isomorphic support
 
- No support yet, looking for [contributions](CONTRIBUTING.md) !
+Supports isomorphic configurations out of the box thanks to [@voogryk](https://github.com/voogryk)
 
 ## Examples
 
