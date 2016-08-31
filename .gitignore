@@ -8,3 +8,4 @@ npm-debug.log
 /umd
 npm-debug.log*
 /dist
+/out
