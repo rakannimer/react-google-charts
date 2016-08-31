@@ -2,8 +2,8 @@
 
 // Based on http://blog.arkency.com/2014/09/react-dot-js-and-google-charts/
 import Promise from 'bluebird';
-import script from 'scriptjs';
 const debug = require('debug')('react-google-charts:GoogleChartLoader');
+const script = (typeof window !== 'undefined') ? require('scriptjs') : null;
 
 const googleChartLoader = {
 

@@ -4,8 +4,8 @@
 'use strict';
 
 import Promise from 'bluebird';
-import script from 'scriptjs';
 var debug = require('debug')('react-google-charts:GoogleChartLoader');
+var script = typeof window !== 'undefined' ? require('scriptjs') : null;
 
 var googleChartLoader = {
 
