@@ -2,3 +2,8 @@
 /node_modules
 npm-debug.log
 .idea/*
+/demo/dist
+/es6
+/lib
+/umd
+npm-debug.log*
