@@ -122,7 +122,7 @@ The callback has the component as an argument.
 
 ```javascript
 componentDidMount: function() {
-	var chart_events = [
+	var chartEvents = [
         {
        	    eventName : 'onmouseover',
             callback  : function(Chart) { 
@@ -134,7 +134,7 @@ componentDidMount: function() {
 
 },
 render: function() {
-        <Chart chartType = "ScatterChart" rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options} graph_id = "ScatterChart"  width={"100%"} height={"400px"} chartEvents = {chart_events} />
+        <Chart chartType = "ScatterChart" rows = {this.state.rows} columns = {this.state.columns} options = {this.state.options} graph_id = "ScatterChart"  width={"100%"} height={"400px"} chartEvents = {chartEvents} />
 
 }
 ```
