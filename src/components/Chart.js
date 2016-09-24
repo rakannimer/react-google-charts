@@ -284,7 +284,7 @@ export default class Chart extends React.Component {
   render() {
     debug('render', this.props, this.state);
     let divStyle= {height: this.props.height || this.props.options.height, width: this.props.width || this.props.options.width};
-    return <div id={this.state.graphID} style={divStyle}> Rendering Chart... </div>
+    return <div id={this.state.graphID} style={divStyle}> {this.props.loader ? this.props.loader : 'Rendering Chart...'} </div>
   }
 };
 
