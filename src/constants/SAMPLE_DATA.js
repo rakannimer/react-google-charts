@@ -209,7 +209,7 @@ const sampleData = [
       width: '600px'
     },
     width: "100%",
-    chartPackage: 'timeline'
+    chartPackages: ['timeline']
   },
   {
     chartType: 'TreeMap',
@@ -357,4 +357,3 @@ function onMouseOver(Chart) {
 }
 
 module.exports = sampleData;
-
