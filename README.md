@@ -1,6 +1,6 @@
 # react-google-charts
 
-[![NPM](https://nodei.co/npm/react-google-charts.png?downloads=true&downloadRank=true&stars=true)](https://npmjs.org/package/react-google-charts)
+[![NPM](https://nodei.co/npm/react-google-charts.png?downloads=true&downloadRank=true)](https://npmjs.org/package/react-google-charts)
 
 
 A React JS wrapper to make it easy and fun to work with Google Charts.
