@@ -1,6 +1,6 @@
 # react-google-charts
 
-[![npm package][npm-badge]][npm]]
+[![NPM](https://nodei.co/npm/react-google-charts.png?downloads=true&downloadRank=true)](https://npmjs.org/package/react-google-charts)
 
 
 A React JS wrapper to make it easy and fun to work with Google Charts.
@@ -199,6 +199,14 @@ Run the demo directory that contains the code powering : http://rakannimer.githu
   npm install
   npm start
 ```
+
+## FAQ
+
+### Timeline/table chart is not rendering.
+
+Chart loader is a singleton that only loads chartPackages once, and by default it loads the ```corechart``` packages.
+If you need to use packages like ```timeline```  or ```table```, add chartPackages prop with value ['corechart', 'timeline'] to your charts.
+
 
 ## Contributing
 
