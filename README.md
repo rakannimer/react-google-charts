@@ -208,6 +208,8 @@ Chart loader is a singleton that only loads chartPackages once, and by default i
 If you need to use packages like ```timeline```  or ```table```, add chartPackages prop with value ['corechart', 'timeline'] to your charts.
 
 
+## [Changelog](./CHANGELOG.md)
+
 ## Contributing
 
 Contributions are very welcome. Check out [CONTRIBUTING.md](CONTRIBUTING.md)
