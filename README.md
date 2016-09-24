@@ -200,6 +200,14 @@ Run the demo directory that contains the code powering : http://rakannimer.githu
   npm start
 ```
 
+## FAQ
+
+### Timeline/table chart is not rendering.
+
+Chart loader is a singleton that only loads chartPackages once, and by default it loads the ```corechart``` packages.
+If you need to use packages like ```timeline```  or ```table```, add chartPackages prop with value ['corechart', 'timeline'] to your charts.
+
+
 ## Contributing
 
 Contributions are very welcome. Check out [CONTRIBUTING.md](CONTRIBUTING.md)
