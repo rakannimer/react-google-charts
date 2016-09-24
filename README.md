@@ -34,7 +34,7 @@ render(<App/>, document.querySelector('#app'));
 
 ## Quick Walkthrough
 
-### Initialize from dataTable array :
+### Initialize from data array :
 
 ```javascript
 import {Chart} from 'react-google-charts';
