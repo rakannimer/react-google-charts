@@ -10,10 +10,9 @@ import PageLayout from './components/PageLayout'
 import ChartEditor from './components/ChartEditor'
 import Usage from './components/Usage'
 
-import {Chart} from '../../../react-google-charts-v2/'
-//import Chart from '../../src/components/Chart'
-import PropsEditor from '../../src/components/PropsEditor'
-import SAMPLE_DATA from '../../src/constants/SAMPLE_DATA';
+import {Chart} from 'react-google-charts'
+import PropsEditor from 'react-google-charts/src/components/PropsEditor'
+import SAMPLE_DATA from 'react-google-charts/src/constants/SAMPLE_DATA';
 
 //let charts = [
 //  {chartType: 'LineChart', rows: [], columns: [], options: {}, width: "400px", height:"300px",legend_toggle:true},
