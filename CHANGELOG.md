@@ -1,5 +1,11 @@
 ## Change Log
 
+### v1.2.1 (2016/09/24 10:14 +00:00)
+- [6b462af](https://github.com/RakanNimer/react-google-charts/commit/6b462af854f9ea504e02512206a5c5f2823624ee) Bumped to 1.2.1. (@RakanNimer)
+- [7c6ae84](https://github.com/RakanNimer/react-google-charts/commit/7c6ae84c8be9548e8c6f22aa8025564005596a32) Added npmignore (@RakanNimer)
+- [b2603ef](https://github.com/RakanNimer/react-google-charts/commit/b2603efdec608645823e90953f06e499c0901507) Added changelog link. (@RakanNimer)
+- [3f0494c](https://github.com/RakanNimer/react-google-charts/commit/3f0494c70fa545bbafab247ed6c3ffca690f83b4) Added changelog and devDependency + script for docs generation (@RakanNimer)
+
 ### v1.2.0 (2016/09/24 09:30 +00:00)
 - [497e8f1](https://github.com/RakanNimer/react-google-charts/commit/497e8f183cf59ceef92573ecce870b5e184cf193) Merge branch 'master' of github.com:RakanNimer/react-google-charts (@RakanNimer)
 - [9f1129c](https://github.com/RakanNimer/react-google-charts/commit/9f1129c5fb39661a92aa3fd6b2e5fcf42bfe1327) Bumped to 1.2.0 (@RakanNimer)
@@ -10,7 +16,7 @@
 - [18768db](https://github.com/RakanNimer/react-google-charts/commit/18768db69e99a8c0b1ed9c1980dec6ff818f250e) More detailed examples in docs and styling (@RakanNimer)
 - [af072a2](https://github.com/RakanNimer/react-google-charts/commit/af072a2acee43d0fb9dbac61f437030466a824a3) Fixed typo for timeline chartPackages (@RakanNimer)
 - [d9e3b2e](https://github.com/RakanNimer/react-google-charts/commit/d9e3b2e28aabbaa03f933b772c08bbada5ae9ea2) Add all node_modules to gitignore (@RakanNimer)
-- [50f378a](https://github.com/RakanNimer/react-google-charts/commit/50f378a57bf2d102f494eaf1f2bf06d81d609325) Fixed linting warnings. (@RakanNimer)
+- [50f378a](https://github.com/RakanNimer/react-google-charts/commit/50f378a57bf2d102f494eaf1f2bf06d81d609325) Fixed listing warnings. (@RakanNimer)
 - [51166e2](https://github.com/RakanNimer/react-google-charts/commit/51166e2b57dc05b43a95db7d63cb000bb87ab966) Added simple example app. (@RakanNimer)
 - [#68](https://github.com/RakanNimer/react-google-charts/pull/68) Merge pull request #68 from bcbrian/custom-loader (@bcbrian)
 - [fdcf034](https://github.com/RakanNimer/react-google-charts/commit/fdcf034c3586e64cc006b019e35ab5687aedc484) Minor event clarification in docs (@RakanNimer)
