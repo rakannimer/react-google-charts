@@ -1,18 +1,18 @@
 import React from 'react'
 import Promise from 'bluebird';
 
-const debug = require('debug')('react-google-charts:Chart');
+const debug=require('debug')('react-google-charts:Chart');
 import DEFAULT_COLORS from '../constants/DEFAULT_CHART_COLORS';
 import googleChartLoader from './GoogleChartLoader'
 
-let uniqueID = 0;
+let uniqueID=0;
 
-const generateUniqueID = () => {
+const generateUniqueID=() => {
   uniqueID++;
   return "reactgooglegraph-" + uniqueID;
 }
 
-const googleErrorHandler = (id, message) => {
+const googleErrorHandler=(id, message) => {
   console.error("Google Charts encountered an error : ")
   console.error(`Error ID : ${id}`);
   console.error(`Error MESSAGE : ${message}`);
@@ -20,26 +20,26 @@ const googleErrorHandler = (id, message) => {
 
 export default class Chart extends React.Component {
   constructor(props) {
-    
+
     debug('constructor', props);
     super(props);
-    this.state = {graphID: props.graph_id || generateUniqueID()};
-    this.chart = null;
-    this.wrapper = null;
-    this.hidden_columns = {};
-    this.dataTable = [];
+    this.state= {graphID: props.graph_id || generateUniqueID()};
+    this.chart= null;
+    this.wrapper= null;
+    this.hidden_columns= {};
+    this.dataTable= [];
   }
   componentDidMount(){
     debug('componentDidMount');
     if (this.props.loadCharts) {
       googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then((asd)=>{
         this.drawChart()
-      });  
+      });
     }
     else {
       this.drawChart();
     }
-    
+
   }
   componentWillUnmount() {
     try {
@@ -75,7 +75,7 @@ export default class Chart extends React.Component {
     if (this.props.data !== null) {
       try {
           this.wrapper.setDataTable(this.props.data);
-          let dataTable = this.wrapper.getDataTable();
+          let dataTable=this.wrapper.getDataTable();
           return dataTable;
       }
       catch(err) {
@@ -84,7 +84,7 @@ export default class Chart extends React.Component {
       }
     }
 
-    let dataTable = new google.visualization.DataTable();
+    let dataTable=new google.visualization.DataTable();
     this.props.columns.forEach((column)=>{
       dataTable.addColumn(column);
     });
@@ -96,7 +96,7 @@ export default class Chart extends React.Component {
     google.visualization.errors.removeAll(document.getElementById(this.wrapper.getContainerId()));
     this.dataTable.removeRows(0, this.dataTable.getNumberOfRows());
     this.dataTable.removeColumns(0, this.dataTable.getNumberOfColumns());
-    this.dataTable = this.buildDataTableFromProps.bind(this)();
+    this.dataTable= this.buildDataTableFromProps.bind(this)();
     return this.dataTable;
   }
   //DEPRECATED AND NOT USED
@@ -107,18 +107,18 @@ export default class Chart extends React.Component {
   drawChart() {
     debug("drawChart", this);
     if (!this.wrapper) {
-      let chartConfig = {
+      let chartConfig= {
         chartType: this.props.chartType,
         options: this.props.options,
         containerId: this.state.graphID
       };
-      this.wrapper = new google.visualization.ChartWrapper(chartConfig);
-      this.dataTable = this.buildDataTableFromProps.bind(this)();
+      this.wrapper= new google.visualization.ChartWrapper(chartConfig);
+      this.dataTable= this.buildDataTableFromProps.bind(this)();
       this.wrapper.setDataTable(this.dataTable)
 
 
       google.visualization.events.addOneTimeListener(this.wrapper, 'ready', ()=>{
-        this.chart = this.wrapper.getChart();
+        this.chart= this.wrapper.getChart();
         this.listenToChartEvents.bind(this)();
         this.addChartActions.bind(this)();
       });
@@ -165,10 +165,10 @@ export default class Chart extends React.Component {
   }
   onSelectToggle() {
     debug('onSelectToggle');
-    let selection = this.chart.getSelection();
+    let selection= this.chart.getSelection();
     if (selection.length > 0) {
       if (selection[0].row == null) {
-        let column = selection[0].column;
+        let column= selection[0].column;
         this.togglePoints.bind(this)(column);
       }
     }
@@ -210,20 +210,20 @@ export default class Chart extends React.Component {
   }
   addEmptyColumnTo(columns, columnIndex) {
     debug('addEmptyColumnTo', columns, columnIndex);
-    let emptyColumn =  this.buildEmptyColumnFromSourceData(columnIndex);
+    let emptyColumn= this.buildEmptyColumnFromSourceData(columnIndex);
     columns.push(emptyColumn);
   }
 
   hideColumn(colors, columnIndex) {
     debug('hideColumn', colors, columnIndex);
     if (!this.isHidden(columnIndex)) {
-      this.hidden_columns[columnIndex] = { color : this.getColumnColor(columnIndex-1) };
+      this.hidden_columns[columnIndex]={ color : this.getColumnColor(columnIndex-1) };
     }
     colors.push('#CCCCCC');
   }
   addSourceColumnTo(columns, columnIndex) {
     debug('addSourceColumnTo', columns, columnIndex);
-    let sourceColumn = this.buildColumnFromSourceData(columnIndex);
+    let sourceColumn=this.buildColumnFromSourceData(columnIndex);
     columns.push(sourceColumn);
   }
   isHidden(columnIndex) {
@@ -234,11 +234,11 @@ export default class Chart extends React.Component {
     debug('hidden_columns',this.hidden_columns);
     let previousColor;
     if (this.isHidden(columnIndex)) {
-      previousColor = this.hidden_columns[columnIndex].color;
+      previousColor=this.hidden_columns[columnIndex].color;
       delete this.hidden_columns[columnIndex];
     }
     else {
-      previousColor = this.getColumnColor(columnIndex-1)
+      previousColor=this.getColumnColor(columnIndex-1)
     }
     if (columnIndex !== 0) {
 			colors.push(previousColor);
@@ -247,11 +247,11 @@ export default class Chart extends React.Component {
 
   togglePoints(column) {
     debug('togglePoints', column);
-    let view = new google.visualization.DataView(this.wrapper.getDataTable());
-    let columnCount = view.getNumberOfColumns();
-    let colors = [];
-    let columns = [];
-    for (var i = 0; i < columnCount; i++) {
+    let view=new google.visualization.DataView(this.wrapper.getDataTable());
+    let columnCount=view.getNumberOfColumns();
+    let colors=[];
+    let columns=[];
+    for (var i=0; i < columnCount; i++) {
       // If user clicked on legend
       if (i === 0) {
         this.addSourceColumnTo.bind(this)(columns, i);
@@ -278,7 +278,7 @@ export default class Chart extends React.Component {
       }
     }
     view.setColumns(columns);
-    this.props.options.colors = colors;
+    this.props.options.colors=colors;
     this.chart.draw(view, this.props.options);
   }
   render() {
@@ -288,7 +288,7 @@ export default class Chart extends React.Component {
   }
 };
 
-Chart.defaultProps = {
+Chart.defaultProps={
   chartType : 'LineChart',
   rows: [],
   columns: [],
@@ -309,5 +309,6 @@ Chart.defaultProps = {
   data: null,
   onSelect: null,
   legend_toggle: false,
-  loadCharts:true
+  loadCharts:true,
+  loader: <div>Rendering Chart</div>
 }

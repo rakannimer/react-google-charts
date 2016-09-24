@@ -6,7 +6,7 @@ import Constants from 'react-google-charts/src/constants/SAMPLE_DATA';
 class ChartsExample extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
+    this.state={
       charts : Constants
     };
   }
