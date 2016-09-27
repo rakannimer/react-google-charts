@@ -22,6 +22,14 @@
     "react-dom": ">= 0.13.x"
   },
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "debug": "^2.2.0",
+    "eslint": "^3.6.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0",
     "github-changes": "^1.0.4",
     "jsdoc": "^3.4.0",
     "nwb": "0.8.x",

@@ -1,7 +1,3 @@
-import React from 'react'
+import Chart from './components/Chart';
 
-//import googleChartLoader from './components/GoogleChartLoader';
-import Chart from './components/Chart'
-//import SAMPLE_DATA from './constants/SAMPLE_DATA';
-
-export default {Chart: Chart};
+export default { Chart };

@@ -1,134 +1,142 @@
-import React from 'react'
-import Promise from 'bluebird';
+/* eslint react/forbid-prop-types: "off" */
+import React from 'react';
+import Debug from 'debug';
 
-const debug=require('debug')('react-google-charts:Chart');
 import DEFAULT_COLORS from '../constants/DEFAULT_CHART_COLORS';
-import googleChartLoader from './GoogleChartLoader'
+import googleChartLoader from './GoogleChartLoader';
 
-let uniqueID=0;
+const debug = new Debug('react-google-charts:Chart');
 
-const generateUniqueID=() => {
-  uniqueID++;
-  return "reactgooglegraph-" + uniqueID;
-}
+let uniqueID = 0;
 
-const googleErrorHandler=(id, message) => {
-  console.error("Google Charts encountered an error : ")
-  console.error(`Error ID : ${id}`);
-  console.error(`Error MESSAGE : ${message}`);
-}
+const generateUniqueID = () => {
+  uniqueID += 1;
+  return `reactgooglegraph-${uniqueID}`;
+};
 
 export default class Chart extends React.Component {
-  constructor(props) {
 
+  constructor(props) {
     debug('constructor', props);
     super(props);
-    this.state= {graphID: props.graph_id || generateUniqueID()};
-    this.chart= null;
-    this.wrapper= null;
-    this.hidden_columns= {};
-    this.dataTable= [];
+    this.state = { graphID: props.graph_id || generateUniqueID() };
+    this.chart = null;
+    this.wrapper = null;
+    this.hidden_columns = {};
+    this.dataTable = [];
   }
-  componentDidMount(){
+  componentDidMount() {
     debug('componentDidMount');
     if (this.props.loadCharts) {
-      googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then((asd)=>{
-        this.drawChart()
+      googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(() => {
+        this.drawChart();
       });
-    }
-    else {
+    } else {
       this.drawChart();
     }
-
   }
-  componentWillUnmount() {
-    try {
-      google.visualization.events.removeAllListeners(this.wrapper);
-    }
-    catch(err) {
-      console.error("Error removing events, error : ", err);
-    }
 
-  }
-  componentDidUpdate(){
+  componentDidUpdate() {
     debug('componentDidUpdate');
     if (!this.props.loadCharts) {
       this.drawChart();
-    }
-    else if (googleChartLoader.isLoading){
-      googleChartLoader.initPromise.then(()=>{
+    } else if (googleChartLoader.isLoading) {
+      googleChartLoader.initPromise.then(() => {
         this.drawChart.bind(this)();
-      })
-    }
-    else if (googleChartLoader.isLoaded) {
+      });
+    } else if (googleChartLoader.isLoaded) {
       this.drawChart.bind(this)();
     }
   }
+  componentWillUnmount() {
+    try {
+      window.google.visualization.events.removeAllListeners(this.wrapper);
+    } catch (err) {
+      console.error('Error removing events, error : ', err);
+    }
+  }
+
+  onSelectToggle() {
+    debug('onSelectToggle');
+    const selection = this.chart.getSelection();
+    if (selection.length > 0) {
+      if (selection[0].row == null) {
+        const column = selection[0].column;
+        this.togglePoints.bind(this)(column);
+      }
+    }
+  }
+
+  getColumnColor(columnIndex) {
+    if (this.props.options.colors) {
+      if (this.props.options.colors[columnIndex]) {
+        return this.props.options.colors[columnIndex];
+      }
+    } else if (columnIndex in DEFAULT_COLORS) {
+      return DEFAULT_COLORS[columnIndex];
+    }
+    return DEFAULT_COLORS[0];
+  }
+
   buildDataTableFromProps() {
     debug('buildDataTableFromProps', this.props);
-    if (this.props.data === null && this.props.rows.length === 0){
+    if (this.props.data === null && this.props.rows.length === 0) {
       throw new Error("Can't build DataTable from rows and columns: rows array in props is empty");
-    }
-    else if (this.props.data === null && this.props.columns.length === 0) {
+    } else if (this.props.data === null && this.props.columns.length === 0) {
       throw new Error("Can't build DataTable from rows and columns: columns array in props is empty");
     }
     if (this.props.data !== null) {
       try {
-          this.wrapper.setDataTable(this.props.data);
-          let dataTable=this.wrapper.getDataTable();
-          return dataTable;
-      }
-      catch(err) {
-        console.log('Failed to set DataTable from data props ! ', err);
+        this.wrapper.setDataTable(this.props.data);
+        const dataTable = this.wrapper.getDataTable();
+        return dataTable;
+      } catch (err) {
+        console.error('Failed to set DataTable from data props ! ', err);
         throw new Error('Failed to set DataTable from data props ! ', err);
       }
     }
 
-    let dataTable=new google.visualization.DataTable();
-    this.props.columns.forEach((column)=>{
+    const dataTable = new window.google.visualization.DataTable();
+    this.props.columns.forEach((column) => {
       dataTable.addColumn(column);
     });
     dataTable.addRows(this.props.rows);
     return dataTable;
   }
   updateDataTable() {
-    debug("updateDataTable");
-    google.visualization.errors.removeAll(document.getElementById(this.wrapper.getContainerId()));
+    debug('updateDataTable');
+    window.google.visualization.errors.removeAll(
+      document.getElementById(this.wrapper.getContainerId())
+    );
     this.dataTable.removeRows(0, this.dataTable.getNumberOfRows());
     this.dataTable.removeColumns(0, this.dataTable.getNumberOfColumns());
-    this.dataTable= this.buildDataTableFromProps.bind(this)();
+    this.dataTable = this.buildDataTableFromProps.bind(this)();
     return this.dataTable;
   }
-  //DEPRECATED AND NOT USED
-  getDataTableFromProps() {
-    debug("getDataTableFromProps");
-    return this.props.data !== null ? this.props.data : this.buildDataTableFromProps.bind(this)();
-  }
+
   drawChart() {
-    debug("drawChart", this);
+    debug('drawChart', this);
     if (!this.wrapper) {
-      let chartConfig= {
+      const chartConfig = {
         chartType: this.props.chartType,
         options: this.props.options,
-        containerId: this.state.graphID
+        containerId: this.state.graphID,
       };
-      this.wrapper= new google.visualization.ChartWrapper(chartConfig);
-      this.dataTable= this.buildDataTableFromProps.bind(this)();
-      this.wrapper.setDataTable(this.dataTable)
+      this.wrapper = new window.google.visualization.ChartWrapper(chartConfig);
+      this.dataTable = this.buildDataTableFromProps.bind(this)();
+      this.wrapper.setDataTable(this.dataTable);
 
 
-      google.visualization.events.addOneTimeListener(this.wrapper, 'ready', ()=>{
-        this.chart= this.wrapper.getChart();
+      window.google.visualization.events.addOneTimeListener(this.wrapper, 'ready', () => {
+        this.chart = this.wrapper.getChart();
         this.listenToChartEvents.bind(this)();
         this.addChartActions.bind(this)();
       });
-    }
-    else {
+    } else {
       this.updateDataTable.bind(this)();
       this.wrapper.setDataTable(this.dataTable);
-      this.wrapper.setChartType(this.props.chartType)
-      this.wrapper.setOptions(this.props.options)
-
+      this.wrapper.setChartType(this.props.chartType);
+      this.wrapper.setOptions(this.props.options);
     }
     this.wrapper.draw();
   }
@@ -138,63 +146,44 @@ export default class Chart extends React.Component {
     if (this.props.chartActions === null) {
       return;
     }
-    this.chart.setAction({
-      id: this.props.chartActions.id,
-      text: this.props.chartActions.text,
-      action: this.props.chartActions.action.bind(this, this.chart)
-    })
-
+    this.props.chartActions.forEach((chartAction) => {
+      this.chart.setAction({
+        id: chartAction.id,
+        text: chartAction.text,
+        action: chartAction.action.bind(this, this.chart),
+      });
+    });
   }
+
   listenToChartEvents() {
     debug('listenToChartEvents', this.props.legend_toggle, this.props.chartEvents);
     if (this.props.legend_toggle) {
-      google.visualization.events.addListener(this.wrapper, 'select', this.onSelectToggle.bind(this));
+      window.google.visualization.events.addListener(
+        this.wrapper,
+        'select',
+        this.onSelectToggle.bind(this)
+      );
     }
-    this.props.chartEvents.forEach((chartEvent)=>{
+    this.props.chartEvents.forEach((chartEvent) => {
       if (chartEvent.eventName === 'ready') {
         chartEvent.callback(this);
-      }
-      else {
-        ((chartEvent)=>{
-            google.visualization.events.addListener(this.chart, chartEvent.eventName, (e)=>{
-              chartEvent.callback(this, e);
-            });
+      } else {
+        ((event) => {
+          window.google.visualization.events.addListener(this.chart, event.eventName, (e) => {
+            event.callback(this, e);
+          });
         })(chartEvent);
       }
-      });
+    });
   }
-  onSelectToggle() {
-    debug('onSelectToggle');
-    let selection= this.chart.getSelection();
-    if (selection.length > 0) {
-      if (selection[0].row == null) {
-        let column= selection[0].column;
-        this.togglePoints.bind(this)(column);
-      }
-    }
-  }
-  getColumnColor(columnIndex) {
-    if (this.props.options.colors) {
-      if (this.props.options.colors[columnIndex]) {
-        return this.props.options.colors[columnIndex];
-      }
-    }
-    else {
-      if (typeof DEFAULT_COLORS[columnIndex] !== undefined) {
-        return DEFAULT_COLORS[columnIndex];
-      }
-      else {
-        return DEFAULT_COLORS[0];
-      }
-    }
-  }
+
 
   buildColumnFromSourceData(columnIndex) {
     debug('buildColumnFromSourceData', columnIndex);
     return {
       label: this.dataTable.getColumnLabel(columnIndex),
       type: this.dataTable.getColumnType(columnIndex),
-      sourceColumn: columnIndex
+      sourceColumn: columnIndex,
     };
   }
 
@@ -203,112 +192,139 @@ export default class Chart extends React.Component {
     return {
       label: this.dataTable.getColumnLabel(columnIndex),
       type: this.dataTable.getColumnType(columnIndex),
-      calc: function () {
-        return null;
-      }
+      calc: () => null,
     };
   }
   addEmptyColumnTo(columns, columnIndex) {
     debug('addEmptyColumnTo', columns, columnIndex);
-    let emptyColumn= this.buildEmptyColumnFromSourceData(columnIndex);
+    const emptyColumn = this.buildEmptyColumnFromSourceData(columnIndex);
     columns.push(emptyColumn);
   }
 
   hideColumn(colors, columnIndex) {
     debug('hideColumn', colors, columnIndex);
     if (!this.isHidden(columnIndex)) {
-      this.hidden_columns[columnIndex]={ color : this.getColumnColor(columnIndex-1) };
+      this.hidden_columns[columnIndex] = { color: this.getColumnColor(columnIndex - 1) };
     }
     colors.push('#CCCCCC');
   }
   addSourceColumnTo(columns, columnIndex) {
     debug('addSourceColumnTo', columns, columnIndex);
-    let sourceColumn=this.buildColumnFromSourceData(columnIndex);
+    const sourceColumn = this.buildColumnFromSourceData(columnIndex);
     columns.push(sourceColumn);
   }
+
   isHidden(columnIndex) {
-    return this.hidden_columns[columnIndex] !== undefined
+    return this.hidden_columns[columnIndex] !== undefined;
   }
   restoreColorTo(colors, columnIndex) {
     debug('restoreColorTo', colors, columnIndex);
-    debug('hidden_columns',this.hidden_columns);
+    debug('hidden_columns', this.hidden_columns);
     let previousColor;
     if (this.isHidden(columnIndex)) {
-      previousColor=this.hidden_columns[columnIndex].color;
+      previousColor = this.hidden_columns[columnIndex].color;
       delete this.hidden_columns[columnIndex];
-    }
-    else {
-      previousColor=this.getColumnColor(columnIndex-1)
+    } else {
+      previousColor = this.getColumnColor(columnIndex - 1);
     }
     if (columnIndex !== 0) {
-			colors.push(previousColor);
-		}
+      colors.push(previousColor);
+    }
   }
 
   togglePoints(column) {
     debug('togglePoints', column);
-    let view=new google.visualization.DataView(this.wrapper.getDataTable());
-    let columnCount=view.getNumberOfColumns();
-    let colors=[];
-    let columns=[];
-    for (var i=0; i < columnCount; i++) {
+    const view = new window.google.visualization.DataView(this.wrapper.getDataTable());
+    const columnCount = view.getNumberOfColumns();
+    let colors = []; // eslint-disable-line prefer-const
+    let columns = []; // eslint-disable-line prefer-const
+    for (let i = 0; i < columnCount; i += 1) {
       // If user clicked on legend
       if (i === 0) {
         this.addSourceColumnTo.bind(this)(columns, i);
-      }
-      else if (i === column ) {
+      } else if (i === column) {
         if (this.isHidden(i)) {
           this.addSourceColumnTo.bind(this)(columns, i);
           this.restoreColorTo.bind(this)(colors, i);
-        }
-        else {
-          this.addEmptyColumnTo.bind(this)(columns,i);
+        } else {
+          this.addEmptyColumnTo.bind(this)(columns, i);
           this.hideColumn.bind(this)(colors, i);
         }
-      }
-      else {
-        if (this.isHidden(i)) {
-          this.addEmptyColumnTo.bind(this)(columns,i);
-          this.hideColumn.bind(this)(colors, i);
-        }
-        else {
-          this.addSourceColumnTo.bind(this)(columns, i);
-          this.restoreColorTo.bind(this)(colors, i);
-        }
+      } else if (this.isHidden(i)) {
+        this.addEmptyColumnTo.bind(this)(columns, i);
+        this.hideColumn.bind(this)(colors, i);
+      } else {
+        this.addSourceColumnTo.bind(this)(columns, i);
+        this.restoreColorTo.bind(this)(colors, i);
       }
     }
     view.setColumns(columns);
-    this.props.options.colors=colors;
+    this.props.options.colors = colors;
     this.chart.draw(view, this.props.options);
   }
+
   render() {
     debug('render', this.props, this.state);
-    let divStyle= {height: this.props.height || this.props.options.height, width: this.props.width || this.props.options.width};
-    return <div id={this.state.graphID} style={divStyle}> {this.props.loader ? this.props.loader : 'Rendering Chart...'} </div>
+    const divStyle = {
+      height: this.props.height || this.props.options.height,
+      width: this.props.width || this.props.options.width,
+    };
+    return (
+      <div id={this.state.graphID} style={divStyle}>
+        {this.props.loader ? this.props.loader : 'Rendering Chart...'}
+      </div>
+    );
   }
+}
+
+Chart.propTypes = {
+  graph_id: React.PropTypes.string,
+  chartType: React.PropTypes.string,
+  rows: React.PropTypes.arrayOf(React.PropTypes.array),
+  columns: React.PropTypes.arrayOf(React.PropTypes.object),
+  data: React.PropTypes.arrayOf(React.PropTypes.array),
+  options: React.PropTypes.any,
+  width: React.PropTypes.string,
+  height: React.PropTypes.string,
+  chartEvents: React.PropTypes.arrayOf(React.PropTypes.shape({
+    // https://github.com/yannickcr/eslint-plugin-react/issues/819
+    eventName: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    callback: React.PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+  })),
+  chartActions: React.PropTypes.arrayOf(React.PropTypes.shape({
+    id: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    text: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    action: React.PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+  })),
+  loadCharts: React.PropTypes.bool,
+  loader: React.PropTypes.node,
+  legend_toggle: React.PropTypes.bool,
+  chartPackages: React.PropTypes.arrayOf(React.PropTypes.string),
+  chartVersion: React.PropTypes.string,
 };
 
-Chart.defaultProps={
-  chartType : 'LineChart',
+Chart.defaultProps = {
+  chartType: 'LineChart',
   rows: [],
   columns: [],
   options: {
     chart: {
       title: 'Chart Title',
-      subtitle: 'Subtitle'
+      subtitle: 'Subtitle',
     },
-    hAxis: {title: 'X Label'},
-    vAxis: {title: 'Y Label'},
+    hAxis: { title: 'X Label' },
+    vAxis: { title: 'Y Label' },
     width: '400px',
-    height: '300px'
+    height: '300px',
   },
   width: '400px',
   height: '300px',
-  chartEvents : [],
-  chartActions : null,
+  chartEvents: [],
+  chartActions: null,
   data: null,
-  onSelect: null,
   legend_toggle: false,
-  loadCharts:true,
-  loader: <div>Rendering Chart</div>
-}
+  loadCharts: true,
+  loader: <div>Rendering Chart</div>,
+  chartPackages: ['corechart'],
+  chartVersion: 'current',
+};
