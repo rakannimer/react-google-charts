@@ -1,5 +1,17 @@
 ## Change Log
 
+### upcoming (2016/09/28 14:03 +00:00)
+- [beb6308](https://github.com/RakanNimer/react-google-charts/commit/beb630854e4e136f313e4b4c2236a3a5df9099dd) Fixed typo in package.json after merge (@RakanNimer)
+- [0f1a652](https://github.com/RakanNimer/react-google-charts/commit/0f1a652b5c563a53405a9958f92acd8737f215d3) Merged tests with master (@RakanNimer)
+- [896f911](https://github.com/RakanNimer/react-google-charts/commit/896f911a90be61a36b5172ca5a8ed98145eec53e) Added component docs and doc generator (@RakanNimer)
+- [7d4f36b](https://github.com/RakanNimer/react-google-charts/commit/7d4f36b69618f7d4a8143189f14b3a20a39897eb) Added linting and jest tests (#74) (@RakanNimer)
+- [46a8280](https://github.com/RakanNimer/react-google-charts/commit/46a8280c5b81dd518be57f1ebf253fdcf63f42e5) Added circle ci integration (@RakanNimer)
+- [5b295d2](https://github.com/RakanNimer/react-google-charts/commit/5b295d2fb12ab7c869ef1fb16a0cafa7b20832df) Add linting in test. (@RakanNimer)
+- [64c8336](https://github.com/RakanNimer/react-google-charts/commit/64c833640bd64475e894221914451d1ed731ff06) More linting (@RakanNimer)
+- [a81602a](https://github.com/RakanNimer/react-google-charts/commit/a81602af076cf2123d66d7d7c8304dc5be323b25) airbnb style lint (@RakanNimer)
+- [ff28b5d](https://github.com/RakanNimer/react-google-charts/commit/ff28b5d9f1cf87af0632963137ea13b9071d95cd) Minor clarification (@RakanNimer)
+- [53cd63b](https://github.com/RakanNimer/react-google-charts/commit/53cd63b2b8bf85b7b89a36a8b537417753ee765f) Updated to 1.2.1 (@RakanNimer)
+
 ### v1.2.1 (2016/09/24 10:14 +00:00)
 - [6b462af](https://github.com/RakanNimer/react-google-charts/commit/6b462af854f9ea504e02512206a5c5f2823624ee) Bumped to 1.2.1. (@RakanNimer)
 - [7c6ae84](https://github.com/RakanNimer/react-google-charts/commit/7c6ae84c8be9548e8c6f22aa8025564005596a32) Added npmignore (@RakanNimer)
