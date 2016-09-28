@@ -8,7 +8,7 @@
     "build": "nwb build",
     "clean": "nwb clean",
     "start": "nwb serve",
-    "test": "nwb test",
+    "test": "./node_modules/.bin/eslint src/*",
     "test:watch": "nwb test --server",
     "gen:changelog": "github-changes -o RakanNimer -r react-google-charts"
   },
