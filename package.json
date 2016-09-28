@@ -8,13 +8,17 @@
     "build": "nwb build",
     "clean": "nwb clean",
     "start": "nwb serve",
-    "test": "./node_modules/.bin/eslint src/*",
-    "test:watch": "nwb test --server",
+    "lint": "./node_modules/.bin/eslint src/*",
+    "test-node-env": "./node_modules/.bin/jest --env node __tests__/Chart.test.js  --verbose",
+    "test-jsdom-env": "./node_modules/.bin/jest --env jsdom --verbose",
+    "test": "npm run lint && npm run test-node-env && npm run test-jsdom-env",
     "gen:changelog": "github-changes -o RakanNimer -r react-google-charts"
   },
   "dependencies": {
     "bluebird": "^3.3.4",
     "debug": "^2.2.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
     "scriptjs": "^2.5.8"
   },
   "peerDependencies": {
@@ -23,7 +27,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
-    "debug": "^2.2.0",
+    "babel-jest": "^15.0.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "dotenv": "^2.0.0",
     "eslint": "^3.6.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-babel": "^3.3.0",
@@ -31,11 +38,12 @@
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
     "github-changes": "^1.0.4",
+    "jest": "^15.1.1",
     "jsdoc": "^3.4.0",
+    "jsdom": "^9.5.0",
     "nwb": "0.8.x",
-    "react": "15.0.x",
-    "react-dom": "15.0.x",
-    "react-router": "^2.4.1"
+    "react-router": "^2.4.1",
+    "react-test-renderer": "^15.3.2"
   },
   "gh-pages-deploy": {
     "staticpath": "demo/dist/"
@@ -43,9 +51,25 @@
   "bugs": {
     "url": "https://github.com/rakannimer/react-google-charts/issues"
   },
+  "jest": {
+    "moduleFileExtensions": [
+      "jsx",
+      "js",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/FileStub.js",
+      "^.+\\.css$": "<rootDir>/config/jest/CSSStub.js"
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/(build|docs|node_modules)/"
+    ],
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
+  },
   "author": "Rakan Nimer",
   "homepage": "https://rakannimer.github.io/react-google-charts/",
-  "license": "UNLICENSE",
+  "license": "MIT",
   "repository": "https://github.com/RakanNimer/react-google-charts",
   "keywords": [
     "react",
