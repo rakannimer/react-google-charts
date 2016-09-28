@@ -31,11 +31,14 @@
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
     "github-changes": "^1.0.4",
+    "gulp": "^3.9.1",
+    "gulp-react-docs": "^0.1.2",
     "jsdoc": "^3.4.0",
     "nwb": "0.8.x",
     "react": "15.0.x",
     "react-dom": "15.0.x",
-    "react-router": "^2.4.1"
+    "react-router": "^2.4.1",
+    "yargs": "^5.0.0"
   },
   "gh-pages-deploy": {
     "staticpath": "demo/dist/"
