@@ -5,6 +5,8 @@ import Debug from 'debug';
 import DEFAULT_COLORS from '../constants/DEFAULT_CHART_COLORS';
 import googleChartLoader from './GoogleChartLoader';
 
+const a = 1
+
 const debug = new Debug('react-google-charts:Chart');
 
 let uniqueID = 0;
