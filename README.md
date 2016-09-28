@@ -1,5 +1,7 @@
 # react-google-charts
 
+[![CircleCI](https://circleci.com/gh/RakanNimer/react-google-charts.svg?style=shield)](https://circleci.com/gh/RakanNimer/react-google-charts)
+
 [![NPM](https://nodei.co/npm/react-google-charts.png?downloads=true&downloadRank=true)](https://npmjs.org/package/react-google-charts)
 
 

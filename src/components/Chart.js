@@ -14,6 +14,7 @@ const generateUniqueID = () => {
   return `reactgooglegraph-${uniqueID}`;
 };
 
+
 export default class Chart extends React.Component {
 
   constructor(props) {
@@ -27,6 +28,9 @@ export default class Chart extends React.Component {
   }
   componentDidMount() {
     debug('componentDidMount');
+    if (typeof window === 'undefined') {
+      return;
+    }
     if (this.props.loadCharts) {
       googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(() => {
         this.drawChart();
