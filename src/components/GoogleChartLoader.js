@@ -6,7 +6,7 @@ import Promise from 'bluebird';
 import Debug from 'debug';
 
 const debug = new Debug('react-google-charts:GoogleChartLoader');
-const script = typeof window !== 'undefined' ? require('scriptjs') : null;
+const script = typeof window !== 'undefined' ? require('scriptjs') : (link, callback) => callback();
 
 const googleChartLoader = {
   isLoaded: false,
@@ -19,19 +19,15 @@ const googleChartLoader = {
     }
     this.isLoading = true;
     this.initPromise = new Promise((resolve) => {
-      if (typeof window !== 'undefined') {
-        script('https://www.gstatic.com/charts/loader.js', () => {
-          window.google.charts.load(version || 'current', { packages: packages || ['corechart'] });
-          window.google.charts.setOnLoadCallback(() => {
-            debug('Chart Loaded');
-            this.isLoaded = true;
-            this.isLoading = false;
-            resolve();
-          });
+      script('https://www.gstatic.com/charts/loader.js', () => {
+        window.google.charts.load(version || 'current', { packages: packages || ['corechart'] });
+        window.google.charts.setOnLoadCallback(() => {
+          debug('Chart Loaded');
+          this.isLoaded = true;
+          this.isLoading = false;
+          resolve();
         });
-      } else {
-        resolve();
-      }
+      });
     });
     return this.initPromise;
   },
