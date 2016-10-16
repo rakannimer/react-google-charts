@@ -105,6 +105,12 @@ export default class Chart extends React.Component {
       dataTable.addColumn(column);
     });
     dataTable.addRows(this.props.rows);
+    if (this.props.numberFormat) {
+      const formatter = new window.google.visualization.NumberFormat(
+        this.props.numberFormat.options
+      );
+      formatter.format(dataTable, this.props.numberFormat.column);
+    }
     return dataTable;
   }
   updateDataTable() {
