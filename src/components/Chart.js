@@ -84,6 +84,17 @@ export default class Chart extends React.Component {
 
   buildDataTableFromProps() {
     debug('buildDataTableFromProps', this.props);
+
+    if (this.props.diffdata) {
+      const diffdata = this.props.diffdata;
+      const oldData = window.google.visualization.arrayToDataTable(diffdata.old);
+      const newData = window.google.visualization.arrayToDataTable(diffdata.new);
+        // must take computeDiff from prototypes since not available with charts early in process
+      const computeDiff = window.google.visualization[this.props.chartType].prototype.computeDiff;
+      const chartDiff = computeDiff(oldData, newData);
+      return chartDiff;
+    }
+
     if (this.props.data === null && this.props.rows.length === 0) {
       throw new Error("Can't build DataTable from rows and columns: rows array in props is empty");
     } else if (this.props.data === null && this.props.columns.length === 0) {
@@ -333,6 +344,10 @@ Chart.propTypes = {
       suffix: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     }),
   }),
+  diffdata: React.PropTypes.shape({
+    on: React.PropTypes.array, // eslint-disable-line react/no-unused-prop-types
+    off: React.PropTypes.array, // eslint-disable-line react/no-unused-prop-types
+  }),
 };
 
 Chart.defaultProps = {
@@ -360,4 +375,5 @@ Chart.defaultProps = {
   chartPackages: ['corechart'],
   chartVersion: 'current',
   numberFormat: null,
+  diffdata: null,
 };
