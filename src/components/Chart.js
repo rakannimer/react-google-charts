@@ -145,8 +145,17 @@ export default class Chart extends React.Component {
     } else {
       this.updateDataTable.bind(this)();
       this.wrapper.setDataTable(this.dataTable);
-      this.wrapper.setChartType(this.props.chartType);
+       // this.wrapper.setChartType(this.props.chartType)
       this.wrapper.setOptions(this.props.options);
+      if (this.wrapper.getChartType() !== this.props.chartType) {
+        window.google.visualization.events.removeAllListeners(this.wrapper);
+        this.wrapper.setChartType(this.props.chartType);
+        const self = this;
+        window.google.visualization.events.addOneTimeListener(this.wrapper, 'ready', () => {
+          self.chart = self.wrapper.getChart();
+          self.listenToChartEvents.call(self);
+        });
+      }
     }
     this.wrapper.draw();
   }
