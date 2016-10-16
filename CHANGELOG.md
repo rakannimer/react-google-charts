@@ -1,6 +1,11 @@
 ## Change Log
 
-### upcoming (2016/09/28 14:03 +00:00)
+### v1.3.0 (2016/10/16 07:16 +00:00)
+- [98ff669](https://github.com/RakanNimer/react-google-charts/commit/98ff669f87355cdb9e6b40c70baeaf60bd742c98) Added diffchart support. #76 @HenrikBechmann (@RakanNimer)
+- [a30b70e](https://github.com/RakanNimer/react-google-charts/commit/a30b70e80e1c727b71c9741d3aa8788eafe79463) Only change chart type if it has changed and re-listen to chart events. @HenrikBechmann #49 (@RakanNimer)
+- [3bab031](https://github.com/RakanNimer/react-google-charts/commit/3bab0310a806b0c041f6077b37cc0293f70a6fe2) Added NumberFormat default and validation props. #72 (@RakanNimer)
+- [af619c0](https://github.com/RakanNimer/react-google-charts/commit/af619c0441ac202d78a6e29a258907554f2fce79) Added NumberFormat support. Fixes #72. (@RakanNimer)
+- [19f16d7](https://github.com/RakanNimer/react-google-charts/commit/19f16d7d9b1c8e9b64f71b2825ed84740d2e209a) Updating changelog (@RakanNimer)
 - [beb6308](https://github.com/RakanNimer/react-google-charts/commit/beb630854e4e136f313e4b4c2236a3a5df9099dd) Fixed typo in package.json after merge (@RakanNimer)
 - [0f1a652](https://github.com/RakanNimer/react-google-charts/commit/0f1a652b5c563a53405a9958f92acd8737f215d3) Merged tests with master (@RakanNimer)
 - [896f911](https://github.com/RakanNimer/react-google-charts/commit/896f911a90be61a36b5172ca5a8ed98145eec53e) Added component docs and doc generator (@RakanNimer)
