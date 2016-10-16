@@ -311,6 +311,19 @@ Chart.propTypes = {
   legend_toggle: React.PropTypes.bool,
   chartPackages: React.PropTypes.arrayOf(React.PropTypes.string),
   chartVersion: React.PropTypes.string,
+  numberFormat: React.PropTypes.shape({
+    column: React.PropTypes.number, // eslint-disable-line react/no-unused-prop-types
+    options: React.PropTypes.shape({
+      decimalSymbol: React.PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
+      fractionDigits: React.PropTypes.number, // eslint-disable-line react/no-unused-prop-types
+      groupingSymbol: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      negativeColor: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      negativeParens: React.PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+      pattern: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      prefix: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      suffix: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    }),
+  }),
 };
 
 Chart.defaultProps = {
@@ -337,4 +350,5 @@ Chart.defaultProps = {
   loader: <div>Rendering Chart</div>,
   chartPackages: ['corechart'],
   chartVersion: 'current',
+  numberFormat: null,
 };
