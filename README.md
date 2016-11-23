@@ -161,7 +161,7 @@ class ExampleChart extends React.Component {
           hAxis: {title: 'Age', minValue: 0, maxValue: 15},
           vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
           legend: 'none'
-      }
+      },
       rows: [
          	[ 8,      12],
          	[ 4,      5.5],
