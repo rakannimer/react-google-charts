@@ -10,6 +10,9 @@ module.exports = {
     jsNext: true,
     umd: true
   },
+  babel: {
+    presets: ["es2015","react"]
+  },
   webpack: {
     aliases: {
       'react-google-charts': path.resolve('./')
