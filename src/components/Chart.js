@@ -54,7 +54,11 @@ export default class Chart extends React.Component {
   }
   componentWillUnmount() {
     try {
-      window.google.visualization.events.removeAllListeners(this.wrapper);
+      if (this.props.loadCharts) {
+        googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(() => {
+          window.google.visualization.events.removeAllListeners(this.wrapper);
+        });
+      }
     } catch (err) {
       console.error('Error removing events, error : ', err);
     }
