@@ -35,6 +35,8 @@ export default class Chart extends React.Component {
       googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(() => {
         this.drawChart();
       });
+      window.addEventListener('resize', this.onResize);
+      this.onResize = this.debounce(this.onResize, 200); 
     } else {
       this.drawChart();
     }
@@ -55,11 +57,26 @@ export default class Chart extends React.Component {
   componentWillUnmount() {
     try {
       window.google.visualization.events.removeAllListeners(this.wrapper);
+      window.removeEventListener('resize', this.onResize);
     } catch (err) {
       console.error('Error removing events, error : ', err);
     }
   }
-
+  
+  debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+      const context = this;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
+  
+  onResize() {
+    console.log('Chart::onResize');
+    this.drawChart();
+  }
+      
   onSelectToggle() {
     debug('onSelectToggle');
     const selection = this.chart.getSelection();
