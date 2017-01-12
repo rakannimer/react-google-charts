@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = {
   type: 'react-component',
   build: {
@@ -7,5 +9,13 @@ module.exports = {
     global: 'ReactGoogleCharts',
     jsNext: true,
     umd: true
+  },
+  babel: {
+    presets: ["es2015","react"]
+  },
+  webpack: {
+    aliases: {
+      'react-google-charts': path.resolve('./')
+    }
   }
 }
