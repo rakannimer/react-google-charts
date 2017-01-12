@@ -54,7 +54,9 @@ export default class Chart extends React.Component {
   }
   componentWillUnmount() {
     try {
-      window.google.visualization.events.removeAllListeners(this.wrapper);
+      if (window.google && window.google.visualization) {
+        window.google.visualization.events.removeAllListeners(this.wrapper);
+      }
     } catch (err) {
       console.error('Error removing events, error : ', err);
     }
