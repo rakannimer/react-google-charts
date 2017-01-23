@@ -10,7 +10,7 @@
     "start": "nwb serve",
     "lint": "./node_modules/.bin/eslint src/*",
     "test-node-env": "./node_modules/.bin/jest --env node __tests__/Chart.test.js  --verbose",
-    "test-jsdom-env": "./node_modules/.bin/jest --env jsdom --verbose",
+    "test-jsdom-env": "./node_modules/.bin/jest --env jsdom __tests__/Chart.test.js --verbose",
     "test": "npm run lint && npm run test-node-env && npm run test-jsdom-env",
     "gen:changelog": "github-changes -o RakanNimer -r react-google-charts"
   },
