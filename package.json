@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
-    "babel-jest": "^15.0.0",
+    "babel-jest": "^18.0.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "dotenv": "^2.0.0",
