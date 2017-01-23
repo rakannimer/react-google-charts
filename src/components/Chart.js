@@ -25,6 +25,19 @@ export default class Chart extends React.Component {
     this.wrapper = null;
     this.hidden_columns = {};
     this.dataTable = [];
+    
+    this.debounce = this.debounce.bind(this);
+    this.onResize = this.onResize.bind(this);
+    this.drawChart = this.drawChart.bind(this);
+    this.togglePoints = this.togglePoints.bind(this);
+    this.buildDataTableFromProps = this.buildDataTableFromProps.bind(this);
+    this.listenToChartEvents = this.listenToChartEvents.bind(this);
+    this.addChartActions = this.addChartActions.bind(this);
+    this.updateDataTable = this.updateDataTable.bind(this);
+    this.onSelectToggle = this.onSelectToggle.bind(this);
+    this.addSourceColumnTo = this.addSourceColumnTo.bind(this);
+    this.restoreColorTo = this.restoreColorTo.bind(this);
+    this.hideColumn = this.hideColumn.bind(this);
   }
   componentDidMount() {
     debug('componentDidMount');
@@ -35,6 +48,8 @@ export default class Chart extends React.Component {
       googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(() => {
         this.drawChart();
       });
+      window.addEventListener('resize', this.onResize);
+      this.onResize = this.debounce(this.onResize, 200); 
     } else {
       this.drawChart();
     }
@@ -46,29 +61,46 @@ export default class Chart extends React.Component {
       this.drawChart();
     } else if (googleChartLoader.isLoading) {
       googleChartLoader.initPromise.then(() => {
-        this.drawChart.bind(this)();
+        this.drawChart();
       });
     } else if (googleChartLoader.isLoaded) {
-      this.drawChart.bind(this)();
+      this.drawChart();
     }
   }
   componentWillUnmount() {
     try {
-      if (window.google && window.google.visualization) {
-        window.google.visualization.events.removeAllListeners(this.wrapper);
+      if(window) {
+        if (window.google && window.google.visualization) {
+          window.google.visualization.events.removeAllListeners(this.wrapper);
+        }
+        window.removeEventListener('resize', this.onResize);
       }
     } catch (err) {
       console.error('Error removing events, error : ', err);
     }
   }
-
+  
+  debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+      const context = this;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
+  
+  onResize() {
+    console.log('Chart::onResize');
+    this.drawChart();
+  }
+      
   onSelectToggle() {
     debug('onSelectToggle');
     const selection = this.chart.getSelection();
     if (selection.length > 0) {
       if (selection[0].row == null) {
         const column = selection[0].column;
-        this.togglePoints.bind(this)(column);
+        this.togglePoints(column);
       }
     }
   }
@@ -133,7 +165,7 @@ export default class Chart extends React.Component {
     );
     this.dataTable.removeRows(0, this.dataTable.getNumberOfRows());
     this.dataTable.removeColumns(0, this.dataTable.getNumberOfColumns());
-    this.dataTable = this.buildDataTableFromProps.bind(this)();
+    this.dataTable = this.buildDataTableFromProps();
     return this.dataTable;
   }
 
@@ -146,17 +178,17 @@ export default class Chart extends React.Component {
         containerId: this.state.graphID,
       };
       this.wrapper = new window.google.visualization.ChartWrapper(chartConfig);
-      this.dataTable = this.buildDataTableFromProps.bind(this)();
+      this.dataTable = this.buildDataTableFromProps();
       this.wrapper.setDataTable(this.dataTable);
 
 
       window.google.visualization.events.addOneTimeListener(this.wrapper, 'ready', () => {
         this.chart = this.wrapper.getChart();
-        this.listenToChartEvents.bind(this)();
-        this.addChartActions.bind(this)();
+        this.listenToChartEvents();
+        this.addChartActions();
       });
     } else {
-      this.updateDataTable.bind(this)();
+      this.updateDataTable();
       this.wrapper.setDataTable(this.dataTable);
        // this.wrapper.setChartType(this.props.chartType)
       this.wrapper.setOptions(this.props.options);
@@ -193,7 +225,7 @@ export default class Chart extends React.Component {
       window.google.visualization.events.addListener(
         this.wrapper,
         'select',
-        this.onSelectToggle.bind(this)
+        this.onSelectToggle
       );
     }
     this.props.chartEvents.forEach((chartEvent) => {
@@ -273,21 +305,21 @@ export default class Chart extends React.Component {
     for (let i = 0; i < columnCount; i += 1) {
       // If user clicked on legend
       if (i === 0) {
-        this.addSourceColumnTo.bind(this)(columns, i);
+        this.addSourceColumnTo(columns, i);
       } else if (i === column) {
         if (this.isHidden(i)) {
-          this.addSourceColumnTo.bind(this)(columns, i);
-          this.restoreColorTo.bind(this)(colors, i);
+          this.addSourceColumnTo(columns, i);
+          this.restoreColorTo(colors, i);
         } else {
-          this.addEmptyColumnTo.bind(this)(columns, i);
-          this.hideColumn.bind(this)(colors, i);
+          this.addEmptyColumnTo(columns, i);
+          this.hideColumn(colors, i);
         }
       } else if (this.isHidden(i)) {
-        this.addEmptyColumnTo.bind(this)(columns, i);
-        this.hideColumn.bind(this)(colors, i);
+        this.addEmptyColumnTo(columns, i);
+        this.hideColumn(colors, i);
       } else {
-        this.addSourceColumnTo.bind(this)(columns, i);
-        this.restoreColorTo.bind(this)(colors, i);
+        this.addSourceColumnTo(columns, i);
+        this.restoreColorTo(colors, i);
       }
     }
     view.setColumns(columns);
