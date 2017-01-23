@@ -120,7 +120,7 @@ export default class Chart extends React.Component {
       return chartDiff;
     }
 
-    if (this.props.data === null && this.props.rows.length === 0) {
+    if (this.props.data === null && this.props.rows.length === 0 && !this.props.allowEmptyRows) {
       throw new Error("Can't build DataTable from rows and columns: rows array in props is empty");
     } else if (this.props.data === null && this.props.columns.length === 0) {
       throw new Error("Can't build DataTable from rows and columns: columns array in props is empty");
@@ -362,6 +362,7 @@ Chart.propTypes = {
   loadCharts: React.PropTypes.bool,
   loader: React.PropTypes.node,
   legend_toggle: React.PropTypes.bool,
+  allowEmptyRows: React.PropTypes.bool,
   chartPackages: React.PropTypes.arrayOf(React.PropTypes.string),
   chartVersion: React.PropTypes.string,
   numberFormat: React.PropTypes.shape({
@@ -403,6 +404,7 @@ Chart.defaultProps = {
   chartActions: null,
   data: null,
   legend_toggle: false,
+  allowEmptyRows: false,
   loadCharts: true,
   loader: <div>Rendering Chart</div>,
   chartPackages: ['corechart'],
