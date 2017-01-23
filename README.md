@@ -11,8 +11,23 @@ A React JS wrapper to make it easy and fun to work with Google Charts.
 ## Installation
 
 ```
-npm install react-google-charts
+yarn add react-google-charts
 ```
+
+or 
+
+```
+npm i -s react-google-charts
+```
+or from unpkg.com using html script tag : 
+
+```html
+ <script src="https://unpkg.com/react-google-charts@1.4.0/umd/react-google-charts.min.js" />
+```
+
+and you can then use it using ReactGoogleCharts.default.Chart 
+
+[JSFiddle example](https://jsfiddle.net/f8zpr8uc/)
 
 
 ## Quick Start
