@@ -25,7 +25,7 @@ export default class Chart extends React.Component {
     this.wrapper = null;
     this.hidden_columns = {};
     this.dataTable = [];
-    
+
     this.debounce = this.debounce.bind(this);
     this.onResize = this.onResize.bind(this);
     this.drawChart = this.drawChart.bind(this);
@@ -49,7 +49,7 @@ export default class Chart extends React.Component {
         this.drawChart();
       });
       window.addEventListener('resize', this.onResize);
-      this.onResize = this.debounce(this.onResize, 200); 
+      this.onResize = this.debounce(this.onResize, 200);
     } else {
       this.drawChart();
     }
@@ -69,7 +69,7 @@ export default class Chart extends React.Component {
   }
   componentWillUnmount() {
     try {
-      if(window) {
+      if (window) {
         if (window.google && window.google.visualization) {
           window.google.visualization.events.removeAllListeners(this.wrapper);
         }
@@ -79,21 +79,12 @@ export default class Chart extends React.Component {
       console.error('Error removing events, error : ', err);
     }
   }
-  
-  debounce(func, wait) {
-    let timeout;
-    return function(...args) {
-      const context = this;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(context, args), wait);
-    };
-  }
-  
+
   onResize() {
     console.log('Chart::onResize');
     this.drawChart();
   }
-      
+
   onSelectToggle() {
     debug('onSelectToggle');
     const selection = this.chart.getSelection();
@@ -295,7 +286,15 @@ export default class Chart extends React.Component {
       colors.push(previousColor);
     }
   }
-
+  // eslint-disable-next-line class-methods-use-this
+  debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      const context = this;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
   togglePoints(column) {
     debug('togglePoints', column);
     const view = new window.google.visualization.DataView(this.wrapper.getDataTable());
