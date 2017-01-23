@@ -69,10 +69,12 @@ export default class Chart extends React.Component {
   }
   componentWillUnmount() {
     try {
-      if (window.google && window.google.visualization) {
-        window.google.visualization.events.removeAllListeners(this.wrapper);
+      if(window) {
+        if (window.google && window.google.visualization) {
+          window.google.visualization.events.removeAllListeners(this.wrapper);
+        }
+        window.removeEventListener('resize', this.onResize);
       }
-      window.removeEventListener('resize', this.onResize);
     } catch (err) {
       console.error('Error removing events, error : ', err);
     }
