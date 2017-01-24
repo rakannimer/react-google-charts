@@ -76,12 +76,12 @@ export default class Chart extends React.Component {
         window.removeEventListener('resize', this.onResize);
       }
     } catch (err) {
-      console.error('Error removing events, error : ', err);
+      return;
     }
   }
 
   onResize() {
-    console.log('Chart::onResize');
+    debug('Chart::onResize');
     this.drawChart();
   }
 
@@ -131,7 +131,7 @@ export default class Chart extends React.Component {
         const dataTable = this.wrapper.getDataTable();
         return dataTable;
       } catch (err) {
-        console.error('Failed to set DataTable from data props ! ', err);
+        // console.error('Failed to set DataTable from data props ! ', err);
         throw new Error('Failed to set DataTable from data props ! ', err);
       }
     }
