@@ -4230,7 +4230,7 @@ react-dev-utils@^0.4.2:
     sockjs-client "1.0.3"
     strip-ansi "3.0.1"
 
-react-dom@^15.4.2:
+react-dom@^15.3.2, react-dom@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.2.tgz#015363f05b0a1fd52ae9efdd3a0060d90695208f"
   dependencies:
@@ -4238,12 +4238,14 @@ react-dom@^15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-google-charts@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-1.2.1.tgz#421b90eb4d0034e982c66aca051c12acec09d7a6"
+react-google-charts@1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-1.4.2.tgz#e290e3b9eb2111c44c8e209fb8b7e4a314a1992e"
   dependencies:
     bluebird "^3.3.4"
     debug "^2.2.0"
+    react "^15.3.2"
+    react-dom "^15.3.2"
     scriptjs "^2.5.8"
 
 react-scripts@0.8.5:
@@ -4295,7 +4297,7 @@ react-scripts@0.8.5:
   optionalDependencies:
     fsevents "1.0.14"
 
-react@^15.4.2:
+react@^15.3.2, react@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
   dependencies:
