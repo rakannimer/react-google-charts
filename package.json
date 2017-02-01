@@ -26,27 +26,27 @@
     "react-dom": ">= 0.13.x"
   },
   "devDependencies": {
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^7.1.1",
     "babel-jest": "^18.0.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
-    "dotenv": "^2.0.0",
+    "dotenv": "^4.0.0",
     "eslint": "^3.6.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-babel": "^3.3.0",
-    "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-babel": "^4.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.3.0",
     "github-changes": "^1.0.4",
     "gulp-react-docs": "^0.1.2",
-    "jest": "^15.1.1",
+    "jest": "^18.1.0",
     "jsdoc": "^3.4.0",
     "jsdom": "^9.5.0",
-    "nwb": "^0.14.3",
+    "nwb": "^0.15.4",
     "object-assign": "^4.1.0",
-    "react-router": "^2.4.1",
+    "react-router": "^3.0.2",
     "react-test-renderer": "^15.3.2",
-    "yargs": "^5.0.0"
+    "yargs": "^6.6.0"
   },
   "gh-pages-deploy": {
     "staticpath": "demo/dist/"
