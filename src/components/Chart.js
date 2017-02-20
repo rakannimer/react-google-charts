@@ -48,8 +48,8 @@ export default class Chart extends React.Component {
       googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(() => {
         this.drawChart();
       });
-      window.addEventListener('resize', this.onResize);
       this.onResize = this.debounce(this.onResize, 200);
+      window.addEventListener('resize', this.onResize);      
     } else {
       this.drawChart();
     }
