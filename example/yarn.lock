@@ -977,7 +977,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^3.3.4, bluebird@^3.4.6:
+bluebird@^3.4.6:
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.4.7.tgz#f72d760be09b7f76d08ed8fae98b289a8d05fab3"
 
@@ -3211,6 +3211,10 @@ loader-utils@0.2.x, loader-utils@^0.2.11, loader-utils@^0.2.16, loader-utils@^0.
     json5 "^0.5.0"
     object-assign "^4.0.1"
 
+loadjs@^3.3.1:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/loadjs/-/loadjs-3.4.0.tgz#1b41b446cf7462b06ab74eba31bb4ae17ec680f8"
+
 lodash._arraycopy@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._arraycopy/-/lodash._arraycopy-3.0.0.tgz#76e7b7c1f1fb92547374878a562ed06a3e50f6e1"
@@ -4238,15 +4242,14 @@ react-dom@^15.3.2, react-dom@^15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-google-charts@1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-1.4.2.tgz#e290e3b9eb2111c44c8e209fb8b7e4a314a1992e"
+react-google-charts@1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-1.5.2.tgz#03ae91d0c7144535b780b74956e9202dc09781c0"
   dependencies:
-    bluebird "^3.3.4"
     debug "^2.2.0"
+    loadjs "^3.3.1"
     react "^15.3.2"
     react-dom "^15.3.2"
-    scriptjs "^2.5.8"
 
 react-scripts@0.8.5:
   version "0.8.5"
@@ -4590,10 +4593,6 @@ sane@~1.4.1:
 sax@^1.1.4, sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
-
-scriptjs@^2.5.8:
-  version "2.5.8"
-  resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.8.tgz#d0c43955c2e6bad33b6e4edf7b53b8965aa7ca5f"
 
 "semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.3.0, semver@~5.3.0:
   version "5.3.0"
