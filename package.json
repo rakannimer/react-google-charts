@@ -1,6 +1,6 @@
 {
   "name": "react-google-charts",
-  "version": "1.4.2",
+  "version": "1.5.2",
   "type": "react-component",
   "description": "react-google-charts React component",
   "main": "lib/index.js",
@@ -45,6 +45,7 @@
     "jsdom": "^9.5.0",
     "nwb": "^0.15.6",
     "object-assign": "^4.1.0",
+    "pre-commit": "^1.2.2",
     "react-router": "^2.4.1",
     "react-test-renderer": "^15.3.2",
     "yargs": "^5.0.0"
