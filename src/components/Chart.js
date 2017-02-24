@@ -147,6 +147,16 @@ export default class Chart extends React.Component {
       );
       formatter.format(dataTable, this.props.numberFormat.column);
     }
+
+    if (this.props.dateFormat) {
+      const dateFormat = new window.google.visualization.DateFormat(
+        this.props.dateFormat.options
+      );
+      this.props.dateFormat.columns.forEach((columnIdx) => {
+        dateFormat.format(dataTable, columnIdx);
+      });
+    }
+
     return dataTable;
   }
   updateDataTable() {
@@ -378,6 +388,14 @@ Chart.propTypes = {
       suffix: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     }),
   }),
+  dateFormat: React.PropTypes.shape({
+    columns: React.PropTypes.arrayOf(React.PropTypes.number), // eslint-disable-line react/no-unused-prop-types
+    options: React.PropTypes.shape({
+      formatType: React.PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
+      pattern: React.PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
+      timeZone: React.PropTypes.number,  // eslint-disable-line react/no-unused-prop-types
+    }),
+  }),
   diffdata: React.PropTypes.shape({
     on: React.PropTypes.array, // eslint-disable-line react/no-unused-prop-types
     off: React.PropTypes.array, // eslint-disable-line react/no-unused-prop-types
@@ -410,5 +428,6 @@ Chart.defaultProps = {
   chartPackages: ['corechart'],
   chartVersion: 'current',
   numberFormat: null,
+  dateFormat: null,
   diffdata: null,
 };
