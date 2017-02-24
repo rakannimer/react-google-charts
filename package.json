@@ -19,7 +19,7 @@
     "debug": "^2.2.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "scriptjs": "^2.5.8"
+    "loadjs":"^3.3.1"
   },
   "peerDependencies": {
     "react": ">= 0.13.x",
