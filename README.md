@@ -33,28 +33,28 @@ and you can then use it using ReactGoogleCharts.default.Chart
 ## Quick Start
 
 ```javascript
-import React from 'react'
-import {render} from 'react-dom'
-import {Chart} from 'react-google-charts'
+import React from 'react';
+import { render } from 'react-dom';
+import { Chart } from 'react-google-charts';
 
-export default class App extends React.Component{
+export default class App extends React.Component {
   render() {
     return (
-    <div className={"my-pretty-chart-container"}>
-      <Chart
-        chartType="ScatterChart" 
-        data={[['Age', 'Weight'], [8, 12], [4, 5.5]]}
-        options={{}}
-        graph_id="ScatterChart"
-        width="100%"
-        height="400px"
-        legend_toggle
-       />
-    </div>
-    )
+      <div className={'my-pretty-chart-container'}>
+        <Chart
+          chartType="ScatterChart"
+          data={[['Age', 'Weight'], [8, 12], [4, 5.5]]}
+          options={{}}
+          graph_id="ScatterChart"
+          width="100%"
+          height="400px"
+          legend_toggle
+        />
+      </div>
+    );
   }
 }
-render(<App/>, document.querySelector('#app'));
+render(<App />, document.querySelector('#app'));
 ```
 
 ## Quick Walkthrough
@@ -62,28 +62,28 @@ render(<App/>, document.querySelector('#app'));
 ### Initialize from data array :
 
 ```javascript
-import {Chart} from 'react-google-charts';
-import React from 'react'
+import { Chart } from 'react-google-charts';
+import React from 'react';
 
 class ExampleChart extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      options:{
-         	title: 'Age vs. Weight comparison',
-          hAxis: {title: 'Age', minValue: 0, maxValue: 15},
-          vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
-          legend: 'none'
+    this.state = {
+      options: {
+        title: 'Age vs. Weight comparison',
+        hAxis: { title: 'Age', minValue: 0, maxValue: 15 },
+        vAxis: { title: 'Weight', minValue: 0, maxValue: 15 },
+        legend: 'none',
       },
-      data:[
-         	['Age', 'Weight'],
-         	[ 8,      12],
-         	[ 4,      5.5],
-         	[ 11,     14],
-         	[ 4,      5],
-         	[ 3,      3.5],
-         	[ 6.5,    7]
-      ]
+      data: [
+        ['Age', 'Weight'],
+        [8, 12],
+        [4, 5.5],
+        [11, 14],
+        [4, 5],
+        [3, 3.5],
+        [6.5, 7],
+      ],
     };
   }
   render() {
@@ -96,55 +96,64 @@ class ExampleChart extends React.Component {
         width="100%"
         height="400px"
         legend_toggle
-       />
+      />
     );
   }
-};
+}
 export default ExampleChart;
 ```
 
 ### Initialize using rows and columns :
 
 ```javascript
-import {Chart} from 'react-google-charts';
-import React from 'react'
+import { Chart } from 'react-google-charts';
+import React from 'react';
 
 class ExampleChart extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       options: {
-         	title: 'Age vs. Weight comparison',
-          hAxis: {title: 'Age', minValue: 0, maxValue: 15},
-          vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
-          legend: 'none'
+        title: 'Age vs. Weight comparison',
+        hAxis: { title: 'Age', minValue: 0, maxValue: 15 },
+        vAxis: { title: 'Weight', minValue: 0, maxValue: 15 },
+        legend: 'none',
       },
       rows: [
-         	[ 8,      12],
-         	[ 4,      5.5],
-         	[ 11,     14],
-         	[ 4,      5],
-         	[ 3,      3.5],
-         	[ 6.5,    7]
+        [8, 12],
+        [4, 5.5],
+        [11, 14],
+        [4, 5],
+        [3, 3.5],
+        [6.5, 7],
       ],
       columns: [
-      	{
-      		'type': 'number',
-      		'label' : 'Age'
-      	},
-      	{
-      		'type' : 'number',
-      		'label' : 'Weight'
-      	}
-      ]
-    }
+        {
+          type: 'number',
+          label: 'Age',
+        },
+        {
+          type: 'number',
+          label: 'Weight',
+        },
+      ],
+    };
   }
   render() {
-      return (
-        <Chart chartType="ScatterChart" rows={this.state.rows} columns={this.state.columns} options={this.state.options} graph_id="ScatterChart"  width={"100%"} height={"400px"}  legend_toggle={true} />
-      );
+    return (
+      <Chart
+        chartType="ScatterChart"
+        rows={this.state.rows}
+        columns={this.state.columns}
+        options={this.state.options}
+        graph_id="ScatterChart"
+        width={'100%'}
+        height={'400px'}
+        legend_toggle
+      />
+    );
   }
-};
+}
 export default ExampleChart;
 
 ```
@@ -156,46 +165,46 @@ The callback has the component as an argument.
 
 ```javascript
 import React from 'react';
-import {Chart} from 'react-google-charts';
+import { Chart } from 'react-google-charts';
 
 class ExampleChart extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.chartEvents=[
+    this.chartEvents = [
       {
-        eventName : 'select',
-        callback  : function(Chart) {
+        eventName: 'select',
+        callback(Chart) {
             // Returns Chart so you can access props and  the ChartWrapper object from chart.wrapper
-            console.log("Selected ",Chart.chart.getSelection());
-        }
-      }
+          console.log('Selected ', Chart.chart.getSelection());
+        },
+      },
     ];
-    this.state={
+    this.state = {
       options: {
-         	title: 'Age vs. Weight comparison',
-          hAxis: {title: 'Age', minValue: 0, maxValue: 15},
-          vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
-          legend: 'none'
+        title: 'Age vs. Weight comparison',
+        hAxis: { title: 'Age', minValue: 0, maxValue: 15 },
+        vAxis: { title: 'Weight', minValue: 0, maxValue: 15 },
+        legend: 'none',
       },
       rows: [
-         	[ 8,      12],
-         	[ 4,      5.5],
-         	[ 11,     14],
-         	[ 4,      5],
-         	[ 3,      3.5],
-         	[ 6.5,    7]
+        [8, 12],
+        [4, 5.5],
+        [11, 14],
+        [4, 5],
+        [3, 3.5],
+        [6.5, 7],
       ],
       columns: [
-      	{
-      		'type': 'number',
-      		'label' : 'Age'
-      	},
-      	{
-      		'type' : 'number',
-      		'label' : 'Weight'
-      	}
-      ]
-    }
+        {
+          type: 'number',
+          label: 'Age',
+        },
+        {
+          type: 'number',
+          label: 'Weight',
+        },
+      ],
+    };
   }
   render() {
     return (
@@ -208,10 +217,10 @@ class ExampleChart extends React.Component {
         width="100%"
         height="400px"
         chartEvents={this.chartEvents}
-       />
+      />
     );
   }
-};
+}
 export default ExampleChart;
 ```
 
