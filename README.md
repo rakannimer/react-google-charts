@@ -233,22 +233,11 @@ Supports isomorphic configurations out of the box thanks to [@voogryk](https://g
 ### Run the example app
 
 ```bash
-  git clone https://www.github.com/rakannimer/react-google-charts
-  cd react-google-charts/example
-  npm link ../
-  npm install
-  npm start
-```
-
-### Run the demo app
-
-Run the demo directory that contains the code powering : http://rakannimer.github.io/react-google-charts/
-
-```bash
-  git clone https://www.github.com/rakannimer/react-google-charts
-  cd react-google-charts
-  npm install
-  npm start
+git clone https://www.github.com/rakannimer/react-google-charts
+cd react-google-charts/example
+npm link ../
+npm install
+npm start
 ```
 
 ## FAQ
