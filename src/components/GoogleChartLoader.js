@@ -2,7 +2,6 @@
 
 // Based on http://blog.arkency.com/2014/09/react-dot-js-and-google-charts/
 
-import Promise from 'bluebird';
 import Debug from 'debug';
 
 const debug = new Debug('react-google-charts:GoogleChartLoader');
