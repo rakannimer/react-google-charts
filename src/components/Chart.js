@@ -49,7 +49,7 @@ export default class Chart extends React.Component {
         this.drawChart();
       });
       this.onResize = this.debounce(this.onResize, 200);
-      window.addEventListener('resize', this.onResize);      
+      window.addEventListener('resize', this.onResize);
     } else {
       this.drawChart();
     }
@@ -389,7 +389,8 @@ Chart.propTypes = {
     }),
   }),
   dateFormat: React.PropTypes.shape({
-    columns: React.PropTypes.arrayOf(React.PropTypes.number), // eslint-disable-line react/no-unused-prop-types
+    // eslint-disable-next-line react/no-unused-prop-types
+    columns: React.PropTypes.arrayOf(React.PropTypes.number),
     options: React.PropTypes.shape({
       formatType: React.PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
       pattern: React.PropTypes.string,  // eslint-disable-line react/no-unused-prop-types

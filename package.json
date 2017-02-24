@@ -1,11 +1,13 @@
 {
   "name": "react-google-charts",
   "version": "1.4.2",
+  "type": "react-component",
   "description": "react-google-charts React component",
   "main": "lib/index.js",
+  "module": "es/index.js",
   "scripts": {
     "deploy": "gh-pages-deploy",
-    "build": "nwb build",
+    "build": "mv .babelrc .babelrc.backup && nwb build && mv .babelrc.backup .babelrc",
     "clean": "nwb clean",
     "start": "nwb serve",
     "lint": "./node_modules/.bin/eslint src/*",
@@ -16,9 +18,9 @@
   },
   "dependencies": {
     "debug": "^2.2.0",
+    "loadjs": "^3.3.1",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "loadjs":"^3.3.1"
+    "react-dom": "^15.3.2"
   },
   "peerDependencies": {
     "react": ">= 0.13.x",
@@ -38,10 +40,10 @@
     "eslint-plugin-react": "^6.3.0",
     "github-changes": "^1.0.4",
     "gulp-react-docs": "^0.1.2",
-    "jest": "^15.1.1",
+    "jest": "^19.0.2",
     "jsdoc": "^3.4.0",
     "jsdom": "^9.5.0",
-    "nwb": "^0.14.3",
+    "nwb": "^0.15.6",
     "object-assign": "^4.1.0",
     "react-router": "^2.4.1",
     "react-test-renderer": "^15.3.2",

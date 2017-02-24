@@ -1,12 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Snapshot test should match snapshot 1`] = `
 <div
   id="reactgooglegraph-1"
   style={
     Object {
       "height": "300px",
-      "width": "400px"
+      "width": "400px",
     }
-  }>
+  }
+>
   <div>
     Rendering Chart
   </div>
@@ -19,9 +22,10 @@ exports[`Snapshot test should match snapshot 2`] = `
   style={
     Object {
       "height": "400px",
-      "width": "100%"
+      "width": "100%",
     }
-  }>
+  }
+>
   <div>
     Rendering Chart
   </div>
