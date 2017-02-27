@@ -1,10 +1,9 @@
 {
   "name": "react-google-charts",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "type": "react-component",
   "description": "react-google-charts React component",
   "main": "lib/index.js",
-  "module": "es/index.js",
   "scripts": {
     "deploy": "gh-pages-deploy",
     "build": "mv .babelrc .babelrc.backup && nwb build && mv .babelrc.backup .babelrc",
