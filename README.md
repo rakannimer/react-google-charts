@@ -234,7 +234,7 @@ Supports isomorphic configurations out of the box thanks to [@voogryk](https://g
 
 ```bash
 git clone https://www.github.com/rakannimer/react-google-charts
-cd react-google-charts/example
+cd react-google-charts/demo
 npm link ../
 npm install
 npm start
