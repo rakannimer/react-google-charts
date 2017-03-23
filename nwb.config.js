@@ -1,11 +1,12 @@
 module.exports = {
   type: 'react-component',
-  build: {
-    externals: {
-      'react': 'React'
-    },
-    global: 'ReactGoogleCharts',
-    jsNext: true,
-    umd: true
+  npm: {
+    esModules: true,
+    umd: {
+      global: 'ReactGoogleCharts',
+      externals: {
+        react: 'React'
+      }
+    }
   }
 }
