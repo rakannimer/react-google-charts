@@ -13,7 +13,6 @@ const googleChartLoader = {
   initPromise: {},
   init: function init(packages, version) {
     debug('init', packages, version);
-    console.warn({ script });
     if (this.isLoading || this.isLoaded) {
       return this.initPromise;
     }
