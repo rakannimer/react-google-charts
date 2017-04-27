@@ -1,5 +1,6 @@
 /* eslint react/forbid-prop-types: "off" */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import DEFAULT_COLORS from '../constants/DEFAULT_CHART_COLORS';
@@ -351,55 +352,55 @@ export default class Chart extends React.Component {
 }
 
 Chart.propTypes = {
-  graph_id: React.PropTypes.string,
-  chartType: React.PropTypes.string,
-  rows: React.PropTypes.arrayOf(React.PropTypes.array),
-  columns: React.PropTypes.arrayOf(React.PropTypes.object),
-  data: React.PropTypes.arrayOf(React.PropTypes.array),
-  options: React.PropTypes.any,
-  width: React.PropTypes.string,
-  height: React.PropTypes.string,
-  chartEvents: React.PropTypes.arrayOf(React.PropTypes.shape({
+  graph_id: PropTypes.string,
+  chartType: PropTypes.string,
+  rows: PropTypes.arrayOf(PropTypes.array),
+  columns: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.array),
+  options: PropTypes.any,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  chartEvents: PropTypes.arrayOf(PropTypes.shape({
     // https://github.com/yannickcr/eslint-plugin-react/issues/819
-    eventName: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-    callback: React.PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+    eventName: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    callback: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
   })),
-  chartActions: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-    text: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-    action: React.PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+  chartActions: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    text: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    action: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
   })),
-  loadCharts: React.PropTypes.bool,
-  loader: React.PropTypes.node,
-  legend_toggle: React.PropTypes.bool,
-  allowEmptyRows: React.PropTypes.bool,
-  chartPackages: React.PropTypes.arrayOf(React.PropTypes.string),
-  chartVersion: React.PropTypes.string,
-  numberFormat: React.PropTypes.shape({
-    column: React.PropTypes.number, // eslint-disable-line react/no-unused-prop-types
-    options: React.PropTypes.shape({
-      decimalSymbol: React.PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
-      fractionDigits: React.PropTypes.number, // eslint-disable-line react/no-unused-prop-types
-      groupingSymbol: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-      negativeColor: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-      negativeParens: React.PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-      pattern: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-      prefix: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-      suffix: React.PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  loadCharts: PropTypes.bool,
+  loader: PropTypes.node,
+  legend_toggle: PropTypes.bool,
+  allowEmptyRows: PropTypes.bool,
+  chartPackages: PropTypes.arrayOf(PropTypes.string),
+  chartVersion: PropTypes.string,
+  numberFormat: PropTypes.shape({
+    column: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
+    options: PropTypes.shape({
+      decimalSymbol: PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
+      fractionDigits: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
+      groupingSymbol: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      negativeColor: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      negativeParens: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+      pattern: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      prefix: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      suffix: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     }),
   }),
-  dateFormat: React.PropTypes.shape({
+  dateFormat: PropTypes.shape({
     // eslint-disable-next-line react/no-unused-prop-types
-    columns: React.PropTypes.arrayOf(React.PropTypes.number),
-    options: React.PropTypes.shape({
-      formatType: React.PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
-      pattern: React.PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
-      timeZone: React.PropTypes.number,  // eslint-disable-line react/no-unused-prop-types
+    columns: PropTypes.arrayOf(PropTypes.number),
+    options: PropTypes.shape({
+      formatType: PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
+      pattern: PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
+      timeZone: PropTypes.number,  // eslint-disable-line react/no-unused-prop-types
     }),
   }),
-  diffdata: React.PropTypes.shape({
-    on: React.PropTypes.array, // eslint-disable-line react/no-unused-prop-types
-    off: React.PropTypes.array, // eslint-disable-line react/no-unused-prop-types
+  diffdata: PropTypes.shape({
+    on: PropTypes.array, // eslint-disable-line react/no-unused-prop-types
+    off: PropTypes.array, // eslint-disable-line react/no-unused-prop-types
   }),
 };
 
