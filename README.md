@@ -22,7 +22,7 @@ npm i -s react-google-charts
 or from unpkg.com using html script tag : 
 
 ```html
- <script src="https://unpkg.com/react-google-charts@1.4.0/umd/react-google-charts.min.js" />
+ <script src="https://unpkg.com/react-google-charts@latest/umd/react-google-charts.min.js" />
 ```
 
 and you can then use it using ReactGoogleCharts.default.Chart 
