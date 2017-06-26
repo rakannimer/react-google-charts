@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class StateEditor extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class StateEditor extends React.Component {
 }
 
 StateEditor.propTypes = {
-  inputValue: React.PropTypes.string,
-  chartIndex: React.PropTypes.number,
-  onSubmit: React.PropTypes.func,
+  inputValue: PropTypes.string,
+  chartIndex: PropTypes.number,
+  onSubmit: PropTypes.func,
 };
