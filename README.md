@@ -1,3 +1,33 @@
+# README
+This version is a modification of the original version of Chart.js.
+
+When using the role option of the column, the message "All series on a given axis must be of the same data type" occurs.
+I fixed this and solved the problem by adding the role part to the ```buildColumnFromSourceData (...)``` and ```buildEmptyColumnFromSourceData (...)``` functions in the Chart.js file.
+
+```
+...
+  buildColumnFromSourceData(columnIndex) {
+    debug('buildColumnFromSourceData', columnIndex);
+    return {
+      label: this.dataTable.getColumnLabel(columnIndex),
+      type: this.dataTable.getColumnType(columnIndex),
+      sourceColumn: columnIndex,
+      role: this.dataTable.getColumnRole(columnIndex) // addedBy minam.cho(devbada) cause of 'All series on a given axis must be of the same data type': July 10, 2017
+    };
+  }
+
+  buildEmptyColumnFromSourceData(columnIndex) {
+    debug('buildEmptyColumnFromSourceData', columnIndex);
+    return {
+      label: this.dataTable.getColumnLabel(columnIndex),
+      type: this.dataTable.getColumnType(columnIndex),
+      calc: () => null,
+      role: this.dataTable.getColumnRole(columnIndex) // addedBy minam.cho(devbada) cause of 'All series on a given axis must be of the same data type': July 10, 2017
+    };
+  }
+  
+```
+
 # react-google-charts
 
 [![CircleCI](https://circleci.com/gh/RakanNimer/react-google-charts.svg?style=shield)](https://circleci.com/gh/RakanNimer/react-google-charts)
