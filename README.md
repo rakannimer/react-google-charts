@@ -41,13 +41,13 @@ A React JS wrapper to make it easy and fun to work with Google Charts.
 ## Installation
 
 ```
-yarn add react-google-charts
+yarn add https://github.com/devbada/react-google-charts.git
 ```
 
 or 
 
 ```
-npm i -s react-google-charts
+npm i -s https://github.com/devbada/react-google-charts.git
 ```
 or from unpkg.com using html script tag : 
 
