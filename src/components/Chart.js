@@ -69,6 +69,7 @@ export default class Chart extends React.Component {
     }
   }
   componentWillUnmount() {
+    this.isUnmounted = true;
     try {
       if (window) {
         if (window.google && window.google.visualization) {
@@ -173,6 +174,11 @@ export default class Chart extends React.Component {
 
   drawChart() {
     debug('drawChart', this);
+
+    if (this.isUnmounted) {
+      return;
+    }
+
     if (!this.wrapper) {
       const chartConfig = {
         chartType: this.props.chartType,
