@@ -165,8 +165,6 @@ export default class Chart extends React.Component {
     window.google.visualization.errors.removeAll(
       document.getElementById(this.wrapper.getContainerId())
     );
-    this.dataTable.removeRows(0, this.dataTable.getNumberOfRows());
-    this.dataTable.removeColumns(0, this.dataTable.getNumberOfColumns());
     this.dataTable = this.buildDataTableFromProps();
     return this.dataTable;
   }
