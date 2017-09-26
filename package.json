@@ -19,8 +19,8 @@
     "debug": "^2.2.0",
     "loadjs": "^3.3.1",
     "prop-types": "^15.5.8",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react": "^15.3.2 || ^16",
+    "react-dom": "^15.3.2 || ^16"
   },
   "peerDependencies": {
     "react": ">= 0.13.x",
