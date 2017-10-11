@@ -46,9 +46,10 @@ export default class Chart extends React.Component {
       return;
     }
     if (this.props.loadCharts) {
-      googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(() => {
-        this.drawChart();
-      });
+      googleChartLoader.init(this.props.chartPackages, this.props.chartVersion,
+          this.props.mapsApiKey).then(() => {
+            this.drawChart();
+          });
       this.onResize = this.debounce(this.onResize, 200);
       window.addEventListener('resize', this.onResize);
     } else {
@@ -250,7 +251,9 @@ export default class Chart extends React.Component {
       label: this.dataTable.getColumnLabel(columnIndex),
       type: this.dataTable.getColumnType(columnIndex),
       sourceColumn: columnIndex,
-      role: this.dataTable.getColumnRole(columnIndex) // addedBy minam.cho(devbada) cause of 'All series on a given axis must be of the same data type': July 10, 2017
+      // addedBy minam.cho(devbada) cause of 'All series on a given
+      // axis must be of the same data type': July 10, 2017
+      role: this.dataTable.getColumnRole(columnIndex),
     };
   }
 
@@ -260,7 +263,9 @@ export default class Chart extends React.Component {
       label: this.dataTable.getColumnLabel(columnIndex),
       type: this.dataTable.getColumnType(columnIndex),
       calc: () => null,
-      role: this.dataTable.getColumnRole(columnIndex) // addedBy minam.cho(devbada) cause of 'All series on a given axis must be of the same data type': July 10, 2017
+      // addedBy minam.cho(devbada) cause of 'All series on a given
+      // axis must be of the same data type': July 10, 2017
+      role: this.dataTable.getColumnRole(columnIndex),
     };
   }
   addEmptyColumnTo(columns, columnIndex) {
@@ -378,6 +383,7 @@ Chart.propTypes = {
   allowEmptyRows: PropTypes.bool,
   chartPackages: PropTypes.arrayOf(PropTypes.string),
   chartVersion: PropTypes.string,
+  mapsApiKey: PropTypes.string,
   numberFormat: PropTypes.shape({
     column: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
     options: PropTypes.shape({
