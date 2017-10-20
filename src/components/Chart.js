@@ -46,7 +46,7 @@ export default class Chart extends React.Component {
       return;
     }
     if (this.props.loadCharts) {
-      googleChartLoader.init(this.props.chartPackages, this.props.chartVersion).then(() => {
+      googleChartLoader.init(this.props.chartPackages, this.props.chartVersion, this.props.chartLanguage).then(() => {
         this.drawChart();
       });
       this.onResize = this.debounce(this.onResize, 200);
@@ -378,6 +378,7 @@ Chart.propTypes = {
   allowEmptyRows: PropTypes.bool,
   chartPackages: PropTypes.arrayOf(PropTypes.string),
   chartVersion: PropTypes.string,
+  chartLanguage: PropTypes.string,
   numberFormat: PropTypes.shape({
     column: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
     options: PropTypes.shape({
@@ -431,6 +432,7 @@ Chart.defaultProps = {
   loader: <div>Rendering Chart</div>,
   chartPackages: ['corechart'],
   chartVersion: 'current',
+  chartLanguage: 'en',
   numberFormat: null,
   dateFormat: null,
   diffdata: null,
