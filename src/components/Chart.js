@@ -165,8 +165,11 @@ export default class Chart extends React.Component {
       });
     }
     
-    this.props.formatters.forEach((formatter) => {
-      const { type, column, options } = formatter;
+    this.props.formatters.forEach(({ 
+      type, 
+      column, 
+      options 
+    }) => {
       switch (type) {
         case 'NumberFormat':
           this.applyNumberFormat(column, options);
@@ -176,7 +179,7 @@ export default class Chart extends React.Component {
           console.log('Unkown formatter type: ' + type);
           break;
       }
-    }
+    });
 
     return dataTable;
   }
