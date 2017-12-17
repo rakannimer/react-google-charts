@@ -142,24 +142,48 @@ export default class Chart extends React.Component {
       dataTable.addColumn(column);
     });
     dataTable.addRows(this.props.rows);
+    
+    const applyNumberFormat = (column, options) => {
+      const formatter = new window.google.visualization.NumberFormat(options);
+      formatter.format(dataTable, column);
+    }
+    
+    const applyDateFormat = (column, options) => {
+      const formatter = new window.google.visualization.DateFormat(options);
+      formatter.format(dataTable, column);
+    }
+    
     if (this.props.numberFormat) {
-      const formatter = new window.google.visualization.NumberFormat(
-        this.props.numberFormat.options
-      );
-      formatter.format(dataTable, this.props.numberFormat.column);
+      const { column, options } = this.props.numberFormat;
+      this.applyNumberFormat(column, options);
     }
 
     if (this.props.dateFormat) {
-      const dateFormat = new window.google.visualization.DateFormat(
-        this.props.dateFormat.options
-      );
-      this.props.dateFormat.columns.forEach((columnIdx) => {
-        dateFormat.format(dataTable, columnIdx);
+      const { columns, options } = this.props.dateFormat;
+      columns.forEach((col) => {
+        this.applyDateFormat(col, options)
       });
     }
+    
+    this.props.formatters.forEach(({ 
+      type, 
+      column, 
+      options 
+    }) => {
+      switch (type) {
+        case 'NumberFormat':
+          this.applyNumberFormat(column, options);
+        case 'DateFormat':
+          this.applyDateFormat(column, options);
+        default:
+          console.log('Unkown formatter type: ' + type);
+          break;
+      }
+    });
 
     return dataTable;
   }
+
   updateDataTable() {
     debug('updateDataTable');
     window.google.visualization.errors.removeAll(
@@ -439,5 +463,6 @@ Chart.defaultProps = {
   chartVersion: 'current',
   numberFormat: null,
   dateFormat: null,
+  formatters: [],
   diffdata: null,
 };
