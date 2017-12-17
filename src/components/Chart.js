@@ -250,7 +250,10 @@ export default class Chart extends React.Component {
       label: this.dataTable.getColumnLabel(columnIndex),
       type: this.dataTable.getColumnType(columnIndex),
       sourceColumn: columnIndex,
-      role: this.dataTable.getColumnRole(columnIndex) // addedBy minam.cho(devbada) cause of 'All series on a given axis must be of the same data type': July 10, 2017
+      role: this.dataTable.getColumnRole(columnIndex),
+        // above addedBy minam.cho(devbada)
+        // cause of 'All series on a given axis must be of the same data type'
+        // July 10, 2017
     };
   }
 
@@ -260,7 +263,10 @@ export default class Chart extends React.Component {
       label: this.dataTable.getColumnLabel(columnIndex),
       type: this.dataTable.getColumnType(columnIndex),
       calc: () => null,
-      role: this.dataTable.getColumnRole(columnIndex) // addedBy minam.cho(devbada) cause of 'All series on a given axis must be of the same data type': July 10, 2017
+      role: this.dataTable.getColumnRole(columnIndex),
+        // above addedBy minam.cho(devbada)
+        // cause of 'All series on a given axis must be of the same data type'
+        // July 10, 2017
     };
   }
   addEmptyColumnTo(columns, columnIndex) {
