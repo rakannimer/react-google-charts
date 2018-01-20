@@ -224,7 +224,7 @@ class ExampleChart extends React.Component {
 export default ExampleChart;
 ```
 
-##Isomorphic support
+## Isomorphic support
 
 Supports isomorphic configurations out of the box thanks to [@voogryk](https://github.com/voogryk)
 
