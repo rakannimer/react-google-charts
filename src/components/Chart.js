@@ -15,9 +15,7 @@ const generateUniqueID = () => {
   return `reactgooglegraph-${uniqueID}`;
 };
 
-
 export default class Chart extends React.Component {
-
   constructor(props) {
     debug('constructor', props);
     super(props);
@@ -46,9 +44,15 @@ export default class Chart extends React.Component {
       return;
     }
     if (this.props.loadCharts) {
-      googleChartLoader.init(this.props.chartPackages, this.props.chartVersion, this.props.chartLanguage).then(() => {
-        this.drawChart();
-      });
+      googleChartLoader
+        .init(
+          this.props.chartPackages,
+          this.props.chartVersion,
+          this.props.chartLanguage
+        )
+        .then(() => {
+          this.drawChart();
+        });
       this.onResize = this.debounce(this.onResize, 200);
       window.addEventListener('resize', this.onResize);
     } else {
@@ -113,18 +117,31 @@ export default class Chart extends React.Component {
 
     if (this.props.diffdata) {
       const diffdata = this.props.diffdata;
-      const oldData = window.google.visualization.arrayToDataTable(diffdata.old);
-      const newData = window.google.visualization.arrayToDataTable(diffdata.new);
-        // must take computeDiff from prototypes since not available with charts early in process
-      const computeDiff = window.google.visualization[this.props.chartType].prototype.computeDiff;
+      const oldData = window.google.visualization.arrayToDataTable(
+        diffdata.old
+      );
+      const newData = window.google.visualization.arrayToDataTable(
+        diffdata.new
+      );
+      // must take computeDiff from prototypes since not available with charts early in process
+      const computeDiff =
+        window.google.visualization[this.props.chartType].prototype.computeDiff;
       const chartDiff = computeDiff(oldData, newData);
       return chartDiff;
     }
 
-    if (this.props.data === null && this.props.rows.length === 0 && !this.props.allowEmptyRows) {
-      throw new Error("Can't build DataTable from rows and columns: rows array in props is empty");
+    if (
+      this.props.data === null &&
+      this.props.rows.length === 0 &&
+      !this.props.allowEmptyRows
+    ) {
+      throw new Error(
+        "Can't build DataTable from rows and columns: rows array in props is empty"
+      );
     } else if (this.props.data === null && this.props.columns.length === 0) {
-      throw new Error("Can't build DataTable from rows and columns: columns array in props is empty");
+      throw new Error(
+        "Can't build DataTable from rows and columns: columns array in props is empty"
+      );
     }
     if (this.props.data !== null) {
       try {
@@ -142,17 +159,17 @@ export default class Chart extends React.Component {
       dataTable.addColumn(column);
     });
     dataTable.addRows(this.props.rows);
-    
+
     const applyNumberFormat = (column, options) => {
       const formatter = new window.google.visualization.NumberFormat(options);
       formatter.format(dataTable, column);
-    }
-    
+    };
+
     const applyDateFormat = (column, options) => {
       const formatter = new window.google.visualization.DateFormat(options);
       formatter.format(dataTable, column);
-    }
-    
+    };
+
     if (this.props.numberFormat) {
       const { column, options } = this.props.numberFormat;
       this.applyNumberFormat(column, options);
@@ -161,15 +178,11 @@ export default class Chart extends React.Component {
     if (this.props.dateFormat) {
       const { columns, options } = this.props.dateFormat;
       columns.forEach((col) => {
-        this.applyDateFormat(col, options)
+        this.applyDateFormat(col, options);
       });
     }
-    
-    this.props.formatters.forEach(({ 
-      type, 
-      column, 
-      options 
-    }) => {
+
+    this.props.formatters.forEach(({ type, column, options }) => {
       switch (type) {
         case 'NumberFormat':
           this.applyNumberFormat(column, options);
@@ -207,25 +220,32 @@ export default class Chart extends React.Component {
       this.dataTable = this.buildDataTableFromProps();
       this.wrapper.setDataTable(this.dataTable);
 
-
-      window.google.visualization.events.addOneTimeListener(this.wrapper, 'ready', () => {
-        this.chart = this.wrapper.getChart();
-        this.listenToChartEvents();
-        this.addChartActions();
-      });
+      window.google.visualization.events.addOneTimeListener(
+        this.wrapper,
+        'ready',
+        () => {
+          this.chart = this.wrapper.getChart();
+          this.listenToChartEvents();
+          this.addChartActions();
+        }
+      );
     } else {
       this.updateDataTable();
       this.wrapper.setDataTable(this.dataTable);
-       // this.wrapper.setChartType(this.props.chartType)
+      // this.wrapper.setChartType(this.props.chartType)
       this.wrapper.setOptions(this.props.options);
       if (this.wrapper.getChartType() !== this.props.chartType) {
         window.google.visualization.events.removeAllListeners(this.wrapper);
         this.wrapper.setChartType(this.props.chartType);
         const self = this;
-        window.google.visualization.events.addOneTimeListener(this.wrapper, 'ready', () => {
-          self.chart = self.wrapper.getChart();
-          self.listenToChartEvents.call(self);
-        });
+        window.google.visualization.events.addOneTimeListener(
+          this.wrapper,
+          'ready',
+          () => {
+            self.chart = self.wrapper.getChart();
+            self.listenToChartEvents.call(self);
+          }
+        );
       }
     }
     this.wrapper.draw();
@@ -246,7 +266,11 @@ export default class Chart extends React.Component {
   }
 
   listenToChartEvents() {
-    debug('listenToChartEvents', this.props.legend_toggle, this.props.chartEvents);
+    debug(
+      'listenToChartEvents',
+      this.props.legend_toggle,
+      this.props.chartEvents
+    );
     if (this.props.legend_toggle) {
       window.google.visualization.events.addListener(
         this.wrapper,
@@ -259,14 +283,17 @@ export default class Chart extends React.Component {
         chartEvent.callback(this);
       } else {
         ((event) => {
-          window.google.visualization.events.addListener(this.chart, event.eventName, (e) => {
-            event.callback(this, e);
-          });
+          window.google.visualization.events.addListener(
+            this.chart,
+            event.eventName,
+            (e) => {
+              event.callback(this, e);
+            }
+          );
         })(chartEvent);
       }
     });
   }
-
 
   buildColumnFromSourceData(columnIndex) {
     debug('buildColumnFromSourceData', columnIndex);
@@ -275,9 +302,9 @@ export default class Chart extends React.Component {
       type: this.dataTable.getColumnType(columnIndex),
       sourceColumn: columnIndex,
       role: this.dataTable.getColumnRole(columnIndex),
-        // above addedBy minam.cho(devbada)
-        // cause of 'All series on a given axis must be of the same data type'
-        // July 10, 2017
+      // above addedBy minam.cho(devbada)
+      // cause of 'All series on a given axis must be of the same data type'
+      // July 10, 2017
     };
   }
 
@@ -288,9 +315,9 @@ export default class Chart extends React.Component {
       type: this.dataTable.getColumnType(columnIndex),
       calc: () => null,
       role: this.dataTable.getColumnRole(columnIndex),
-        // above addedBy minam.cho(devbada)
-        // cause of 'All series on a given axis must be of the same data type'
-        // July 10, 2017
+      // above addedBy minam.cho(devbada)
+      // cause of 'All series on a given axis must be of the same data type'
+      // July 10, 2017
     };
   }
   addEmptyColumnTo(columns, columnIndex) {
@@ -302,7 +329,9 @@ export default class Chart extends React.Component {
   hideColumn(colors, columnIndex) {
     debug('hideColumn', colors, columnIndex);
     if (!this.isHidden(columnIndex)) {
-      this.hidden_columns[columnIndex] = { color: this.getColumnColor(columnIndex - 1) };
+      this.hidden_columns[columnIndex] = {
+        color: this.getColumnColor(columnIndex - 1),
+      };
     }
     colors.push('#CCCCCC');
   }
@@ -340,7 +369,9 @@ export default class Chart extends React.Component {
   }
   togglePoints(column) {
     debug('togglePoints', column);
-    const view = new window.google.visualization.DataView(this.wrapper.getDataTable());
+    const view = new window.google.visualization.DataView(
+      this.wrapper.getDataTable()
+    );
     const columnCount = view.getNumberOfColumns();
     let colors = []; // eslint-disable-line prefer-const
     let columns = []; // eslint-disable-line prefer-const
@@ -392,16 +423,20 @@ Chart.propTypes = {
   options: PropTypes.any,
   width: PropTypes.string,
   height: PropTypes.string,
-  chartEvents: PropTypes.arrayOf(PropTypes.shape({
-    // https://github.com/yannickcr/eslint-plugin-react/issues/819
-    eventName: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-    callback: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
-  })),
-  chartActions: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-    text: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-    action: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
-  })),
+  chartEvents: PropTypes.arrayOf(
+    PropTypes.shape({
+      // https://github.com/yannickcr/eslint-plugin-react/issues/819
+      eventName: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      callback: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+    })
+  ),
+  chartActions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      text: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      action: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+    })
+  ),
   loadCharts: PropTypes.bool,
   loader: PropTypes.node,
   legend_toggle: PropTypes.bool,
@@ -412,7 +447,7 @@ Chart.propTypes = {
   numberFormat: PropTypes.shape({
     column: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
     options: PropTypes.shape({
-      decimalSymbol: PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
+      decimalSymbol: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
       fractionDigits: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
       groupingSymbol: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
       negativeColor: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
@@ -426,9 +461,9 @@ Chart.propTypes = {
     // eslint-disable-next-line react/no-unused-prop-types
     columns: PropTypes.arrayOf(PropTypes.number),
     options: PropTypes.shape({
-      formatType: PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
-      pattern: PropTypes.string,  // eslint-disable-line react/no-unused-prop-types
-      timeZone: PropTypes.number,  // eslint-disable-line react/no-unused-prop-types
+      formatType: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      pattern: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      timeZone: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
     }),
   }),
   diffdata: PropTypes.shape({

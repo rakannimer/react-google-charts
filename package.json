@@ -1,17 +1,20 @@
 {
   "name": "react-google-charts",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "type": "react-component",
   "description": "react-google-charts React component",
   "main": "lib/index.js",
   "scripts": {
     "deploy": "gh-pages-deploy",
-    "build": "mv .babelrc .babelrc.backup && nwb build && mv .babelrc.backup .babelrc",
+    "build":
+      "mv .babelrc .babelrc.backup && nwb build && mv .babelrc.backup .babelrc",
     "clean": "nwb clean",
     "start": "nwb serve",
     "lint": "./node_modules/.bin/eslint src/*",
-    "test-node-env": "./node_modules/.bin/jest --env node __tests__/Chart.test.js  --verbose",
-    "test-jsdom-env": "./node_modules/.bin/jest --env jsdom __tests__/Chart.test.js --verbose",
+    "test-node-env":
+      "./node_modules/.bin/jest --env node __tests__/Chart.test.js  --verbose",
+    "test-jsdom-env":
+      "./node_modules/.bin/jest --env jsdom __tests__/Chart.test.js --verbose",
     "test": "npm run lint && npm run test-node-env && npm run test-jsdom-env",
     "gen:changelog": "github-changes -o RakanNimer -r react-google-charts"
   },
@@ -57,18 +60,13 @@
     "url": "https://github.com/rakannimer/react-google-charts/issues"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "jsx",
-      "js",
-      "json"
-    ],
+    "moduleFileExtensions": ["jsx", "js", "json"],
     "moduleNameMapper": {
-      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/FileStub.js",
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/config/jest/FileStub.js",
       "^.+\\.css$": "<rootDir>/config/jest/CSSStub.js"
     },
-    "testPathIgnorePatterns": [
-      "<rootDir>/(build|docs|node_modules)/"
-    ],
+    "testPathIgnorePatterns": ["<rootDir>/(build|docs|node_modules)/"],
     "testEnvironment": "node",
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
   },
@@ -76,9 +74,5 @@
   "homepage": "https://rakannimer.github.io/react-google-charts/",
   "license": "MIT",
   "repository": "https://github.com/RakanNimer/react-google-charts",
-  "keywords": [
-    "react",
-    "google",
-    "charts"
-  ]
+  "keywords": ["react", "google", "charts"]
 }
