@@ -113,6 +113,16 @@ export default class Chart extends React.Component {
     return DEFAULT_COLORS[0];
   }
 
+  applyNumberFormat(column, options) {
+    const formatter = new window.google.visualization.NumberFormat(options);
+    formatter.format(dataTable, column);
+  }
+  
+  applyDateFormat(column, options){
+    const formatter = new window.google.visualization.DateFormat(options);
+    formatter.format(dataTable, column);
+  }
+  
   buildDataTableFromProps() {
     debug('buildDataTableFromProps', this.props);
 
@@ -161,16 +171,11 @@ export default class Chart extends React.Component {
     });
     dataTable.addRows(this.props.rows);
 
-    const applyNumberFormat = (column, options) => {
-      const formatter = new window.google.visualization.NumberFormat(options);
-      formatter.format(dataTable, column);
-    };
-
-    const applyDateFormat = (column, options) => {
-      const formatter = new window.google.visualization.DateFormat(options);
-      formatter.format(dataTable, column);
-    };
-
+   if (this.props.onBuildTable && typeof this.props.onBuildTable === 'function') {
+      this.props.onBuildTable.call(this, dataTable);
+    }
+    
+    
     if (this.props.numberFormat) {
       const { column, options } = this.props.numberFormat;
       this.applyNumberFormat(column, options);
@@ -429,6 +434,7 @@ Chart.propTypes = {
   options: PropTypes.any,
   width: PropTypes.string,
   height: PropTypes.string,
+  onBuildTable: PropTypes.func,
   chartEvents: PropTypes.arrayOf(
     PropTypes.shape({
       // https://github.com/yannickcr/eslint-plugin-react/issues/819
