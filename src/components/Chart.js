@@ -192,8 +192,10 @@ export default class Chart extends React.Component {
       switch (type) {
         case 'NumberFormat':
           this.applyNumberFormat(column, options);
+          break;
         case 'DateFormat':
           this.applyDateFormat(column, options);
+          break;
         default:
           console.log('Unkown formatter type: ' + type);
           break;
