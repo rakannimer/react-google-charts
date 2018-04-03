@@ -113,12 +113,12 @@ export default class Chart extends React.Component {
     return DEFAULT_COLORS[0];
   }
 
-  applyNumberFormat(column, options) {
+  applyNumberFormat(dataTable,column, options) {
     const formatter = new window.google.visualization.NumberFormat(options);
     formatter.format(dataTable, column);
   }
   
-  applyDateFormat(column, options){
+  applyDateFormat(dataTable,column, options){
     const formatter = new window.google.visualization.DateFormat(options);
     formatter.format(dataTable, column);
   }
@@ -178,23 +178,23 @@ export default class Chart extends React.Component {
     
     if (this.props.numberFormat) {
       const { column, options } = this.props.numberFormat;
-      this.applyNumberFormat(column, options);
+      this.applyNumberFormat(dataTable,column, options);
     }
 
     if (this.props.dateFormat) {
       const { columns, options } = this.props.dateFormat;
       columns.forEach((col) => {
-        this.applyDateFormat(col, options);
+        this.applyDateFormat(dataTable,col, options);
       });
     }
 
     this.props.formatters.forEach(({ type, column, options }) => {
       switch (type) {
         case 'NumberFormat':
-          this.applyNumberFormat(column, options);
+          this.applyNumberFormat(dataTable,column, options);
           break;
         case 'DateFormat':
-          this.applyDateFormat(column, options);
+          this.applyDateFormat(dataTable,column, options);
           break;
         default:
           console.log('Unkown formatter type: ' + type);
