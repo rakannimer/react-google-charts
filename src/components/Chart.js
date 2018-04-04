@@ -161,6 +161,10 @@ export default class Chart extends React.Component {
     });
     dataTable.addRows(this.props.rows);
 
+    if (this.props.onBuildTable && typeof this.props.onBuildTable === 'function') {
+      this.props.onBuildTable.call(this, dataTable);
+    }
+
     const applyNumberFormat = (column, options) => {
       const formatter = new window.google.visualization.NumberFormat(options);
       formatter.format(dataTable, column);
@@ -173,22 +177,24 @@ export default class Chart extends React.Component {
 
     if (this.props.numberFormat) {
       const { column, options } = this.props.numberFormat;
-      this.applyNumberFormat(column, options);
+      applyNumberFormat(column, options);
     }
 
     if (this.props.dateFormat) {
       const { columns, options } = this.props.dateFormat;
       columns.forEach((col) => {
-        this.applyDateFormat(col, options);
+        applyDateFormat(col, options);
       });
     }
 
     this.props.formatters.forEach(({ type, column, options }) => {
       switch (type) {
         case 'NumberFormat':
-          this.applyNumberFormat(column, options);
+          applyNumberFormat(column, options);
+          break;
         case 'DateFormat':
-          this.applyDateFormat(column, options);
+          applyDateFormat(column, options);
+          break;
         default:
           console.log('Unkown formatter type: ' + type);
           break;
@@ -429,6 +435,7 @@ Chart.propTypes = {
   options: PropTypes.any,
   width: PropTypes.string,
   height: PropTypes.string,
+  onBuildTable: PropTypes.func,
   chartEvents: PropTypes.arrayOf(
     PropTypes.shape({
       // https://github.com/yannickcr/eslint-plugin-react/issues/819
