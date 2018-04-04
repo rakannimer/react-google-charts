@@ -92,6 +92,9 @@ export default class Chart extends React.Component {
   }
 
   onSelectToggle() {
+    if (!this.props.legend_toggle) {
+      return;
+    }
     debug('onSelectToggle');
     const selection = this.chart.getSelection();
     if (selection.length > 0) {
@@ -277,13 +280,13 @@ export default class Chart extends React.Component {
       this.props.legend_toggle,
       this.props.chartEvents
     );
-    if (this.props.legend_toggle) {
-      window.google.visualization.events.addListener(
-        this.wrapper,
-        'select',
-        this.onSelectToggle
-      );
-    }
+    
+    window.google.visualization.events.addListener(
+      this.wrapper,
+      'select',
+      this.onSelectToggle
+    );
+    
     this.props.chartEvents.forEach((chartEvent) => {
       if (chartEvent.eventName === 'ready') {
         chartEvent.callback(this);
