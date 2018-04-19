@@ -1,7 +1,11 @@
 language: node_js
 node_js:
   - 6.9.1
+cache:
+  yarn: true
+  directories:
+    - node_modules
 install:
-  - npm install
+  - yarn install
 script:
-  - npm test
+  - yarn test

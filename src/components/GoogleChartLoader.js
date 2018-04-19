@@ -18,15 +18,17 @@ const googleChartLoader = {
     }
     this.isLoading = true;
     this.initPromise = new Promise((resolve) => {
-      script('https://www.gstatic.com/charts/loader.js', { success: () => {
-        window.google.charts.load(version || 'current', { packages: packages || ['corechart'], language: language || 'en', mapsApiKey: mapsApiKey || null });
-        window.google.charts.setOnLoadCallback(() => {
-          debug('Chart Loaded');
-          this.isLoaded = true;
-          this.isLoading = false;
-          resolve();
-        });
-      } });
+      script('https://www.gstatic.com/charts/loader.js', {
+        success: () => {
+          window.google.charts.load(version || 'current', { packages: packages || ['corechart'], language: language || 'en', mapsApiKey: mapsApiKey || '' });
+          window.google.charts.setOnLoadCallback(() => {
+            debug('Chart Loaded');
+            this.isLoaded = true;
+            this.isLoading = false;
+            resolve();
+          });
+        },
+      });
     });
     return this.initPromise;
   },

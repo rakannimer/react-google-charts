@@ -10,3 +10,4 @@ npm-debug.log
 npm-debug.log*
 /dist
 /out
+*.log
