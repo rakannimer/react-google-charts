@@ -48,7 +48,8 @@ export default class Chart extends React.Component {
         .init(
           this.props.chartPackages,
           this.props.chartVersion,
-          this.props.chartLanguage
+          this.props.chartLanguage,
+          this.props.mapsApiKey
         )
         .then(() => {
           this.drawChart();
@@ -449,6 +450,7 @@ Chart.propTypes = {
   allowEmptyRows: PropTypes.bool,
   chartPackages: PropTypes.arrayOf(PropTypes.string),
   chartVersion: PropTypes.string,
+  mapsApiKey: PropTypes.string,
   chartLanguage: PropTypes.string,
   numberFormat: PropTypes.shape({
     column: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
