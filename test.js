@@ -16,5 +16,4 @@ if (!process.env.CI) {
   argv.push('--watch');
 }
 
-
 jest.run(argv);
