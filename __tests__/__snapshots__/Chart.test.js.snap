@@ -5,8 +5,8 @@ exports[`Snapshot test should match snapshot 1`] = `
   id="reactgooglegraph-1"
   style={
     Object {
-      "height": "300px",
-      "width": "400px",
+      "height": "100%",
+      "width": "100%",
     }
   }
 >

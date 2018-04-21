@@ -491,6 +491,8 @@ Chart.defaultProps = {
     width: '100%',
     height: '100%',
   },
+  width: '',
+  height: '',
   chartEvents: [],
   chartActions: null,
   data: null,
