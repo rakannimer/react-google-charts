@@ -1,6 +1,6 @@
 {
   "name": "react-google-charts-apikey",
-  "version": "1.5.9",
+  "version": "1.5.10",
   "type": "react-component",
   "description": "react-google-charts React component",
   "main": "lib/index.js",

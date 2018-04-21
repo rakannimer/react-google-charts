@@ -409,8 +409,8 @@ export default class Chart extends React.Component {
   render() {
     debug('render', this.props, this.state);
     const divStyle = {
-      height: this.props.options.height || this.props.height,
-      width: this.props.options.width || this.props.width,
+      height: this.props.height || this.props.options.height,
+      width: this.props.width || this.props.options.width,
     };
     return (
       <div id={this.state.graphID} style={divStyle}>
@@ -491,8 +491,8 @@ Chart.defaultProps = {
     width: '100%',
     height: '100%',
   },
-  width: '',
-  height: '',
+  width: '400px',
+  height: '300px',
   chartEvents: [],
   chartActions: null,
   data: null,
