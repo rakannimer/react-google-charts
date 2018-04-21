@@ -12,7 +12,8 @@ let uniqueID = 0;
 
 const generateUniqueID = () => {
   uniqueID += 1;
-  return `reactgooglegraph-${uniqueID}`;
+  const id = uniqueID;
+  return `reactgooglegraph-${id}`;
 };
 
 export default class Chart extends React.Component {
@@ -408,8 +409,8 @@ export default class Chart extends React.Component {
   render() {
     debug('render', this.props, this.state);
     const divStyle = {
-      height: this.props.height || this.props.options.height,
-      width: this.props.width || this.props.options.width,
+      height: this.props.options.height || this.props.height,
+      width: this.props.options.width || this.props.width,
     };
     return (
       <div id={this.state.graphID} style={divStyle}>
@@ -490,8 +491,6 @@ Chart.defaultProps = {
     width: '100%',
     height: '100%',
   },
-  width: '400px',
-  height: '300px',
   chartEvents: [],
   chartActions: null,
   data: null,
