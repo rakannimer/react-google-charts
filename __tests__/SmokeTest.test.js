@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Chart from '../src/components/Chart';
+import Chart from '../src/index';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
