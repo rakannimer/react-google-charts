@@ -12,7 +12,7 @@
     "test-node-env": "jest --env node __tests__/Chart.test.js  --verbose",
     "test-jsdom-env": "jest --env jsdom __tests__/Chart.test.js --verbose",
     "gen:changelog": "github-changes -o Lotti -r react-google-charts-apikey",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "dependencies": {
     "debug": "^3.1.0",
