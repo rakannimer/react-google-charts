@@ -203,8 +203,6 @@ export default class Chart extends React.Component {
     window.google.visualization.errors.removeAll(
       document.getElementById(this.wrapper.getContainerId())
     );
-    this.dataTable.removeRows(0, this.dataTable.getNumberOfRows());
-    this.dataTable.removeColumns(0, this.dataTable.getNumberOfColumns());
     this.dataTable = this.buildDataTableFromProps();
     return this.dataTable;
   }
@@ -425,7 +423,10 @@ Chart.propTypes = {
   chartType: PropTypes.string,
   rows: PropTypes.arrayOf(PropTypes.array),
   columns: PropTypes.arrayOf(PropTypes.object),
-  data: PropTypes.arrayOf(PropTypes.array),
+  data: PropTypes.shape({
+    cols: PropTypes.array,
+    rows: PropTypes.array
+  }),
   options: PropTypes.any,
   width: PropTypes.string,
   height: PropTypes.string,
