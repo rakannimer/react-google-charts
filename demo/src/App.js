@@ -1,8 +1,8 @@
 import React from 'react';
-import Chart from '../../src/components/Chart';
+import { Chart } from 'react-google-charts-apikey';
 
 const App = () => (
-  <div className={'my-pretty-chart-container'}>
+  <div className="my-pretty-chart-container">
     <Chart
       chartType="ScatterChart"
       data={[['Age', 'Weight'], [8, 12], [4, 5.5], [1, 2]]}

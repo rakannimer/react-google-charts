@@ -21,7 +21,7 @@ export default class StateEditor extends React.Component {
   }
   render() {
     return (
-      <div className={'PropsEditor'}>
+      <div className="PropsEditor">
         <h2> Props </h2>
         <textarea style={{ width: '500px', height: '200px' }} value={this.state.inputValue} onChange={this.handleChange} />
         <div>
@@ -35,7 +35,7 @@ export default class StateEditor extends React.Component {
 }
 
 StateEditor.propTypes = {
-  inputValue: PropTypes.string,
-  chartIndex: PropTypes.number,
-  onSubmit: PropTypes.func,
+  inputValue: PropTypes.string.isRequired,
+  chartIndex: PropTypes.number.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
