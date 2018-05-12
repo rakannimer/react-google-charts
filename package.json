@@ -31,9 +31,6 @@
   "homepage": "https://rakannimer.github.io/react-google-charts/",
   "license": "MIT",
   "repository": "https://github.com/RakanNimer/react-google-charts",
-  "keywords": [
-    "react",
-    "google",
-    "charts"
-  ]
+  "keywords": ["react", "google", "charts"],
+  "files": ["build/"]
 }
