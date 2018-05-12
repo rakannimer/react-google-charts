@@ -23,11 +23,13 @@ export default class StateEditor extends React.Component {
     return (
       <div className={'PropsEditor'}>
         <h2> Props </h2>
-        <textarea style={{ width: '500px', height: '200px' }} value={this.state.inputValue} onChange={this.handleChange} />
+        <textarea
+          style={{ width: '500px', height: '200px' }}
+          value={this.state.inputValue}
+          onChange={this.handleChange}
+        />
         <div>
-          <button onClick={this.onSubmit}>
-            Update
-          </button>
+          <button onClick={this.onSubmit}>Update</button>
         </div>
       </div>
     );
