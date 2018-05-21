@@ -82,6 +82,7 @@ class GoogleChartLoader {
           }
         });
       });
+      this.isLoading = true
       return this.loadScript;
     };
   }
