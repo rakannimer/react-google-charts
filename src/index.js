@@ -55,7 +55,7 @@ class GoogleChartLoader {
     this.destroy = () => {
       this.isLoading = false;
       this.isLoaded = false;
-      this.loadScript === null;
+      this.loadScript = null;
     };
     this.init = (packages, version, language, mapsApiKey) => {
       if ((this.isLoading || this.isLoaded) && this.loadScript !== null) {
