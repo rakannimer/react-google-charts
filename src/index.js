@@ -393,7 +393,8 @@ class Chart extends Component {
         .init(
           this.props.chartPackages,
           this.props.chartVersion,
-          this.props.chartLanguage
+          this.props.chartLanguage,
+          this.props.mapsApiKey
         )
         .then(() => {
           this.drawChart();
