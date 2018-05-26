@@ -82,7 +82,7 @@ class GoogleChartLoader {
           }
         });
       });
-      this.isLoading = true
+      this.isLoading = true;
       return this.loadScript;
     };
   }
@@ -397,9 +397,9 @@ class Chart extends Component {
         )
         .then(() => {
           this.drawChart();
+          this.onResize = this.debounce(this.onResize, 200);
+          window.addEventListener("resize", this.onResize);
         });
-      this.onResize = this.debounce(this.onResize, 200);
-      window.addEventListener("resize", this.onResize);
     } else {
       this.drawChart();
     }
