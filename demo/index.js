@@ -1,17 +1,28 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Chart } from "../build/index";
+import { Chart } from "../src/index";
 
 ReactDOM.render(
-  <Chart
-    chartType="ScatterChart"
-    data={[["Age", "Weight"], [8, 12], [4, 5.5], [1, 2]]}
-    options={{}}
-    graph_id="ScatterChart"
-    width="100%"
-    height="400px"
-    legend_toggle
-  />,
+  <div>
+    <Chart
+      chartType="ScatterChart"
+      data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
+      options={{}}
+      graph_id="ScatterChart1"
+      width="100%"
+      height="400px"
+      legend_toggle
+    />
+    <Chart
+      chartType="ScatterChart"
+      data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
+      options={{}}
+      graph_id="ScatterChart2"
+      width="100%"
+      height="400px"
+      legend_toggle
+    />
+  </div>,
   document.getElementById("app")
 );

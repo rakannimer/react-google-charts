@@ -61,6 +61,7 @@ class GoogleChartLoader {
       if ((this.isLoading || this.isLoaded) && this.loadScript !== null) {
         return this.loadScript;
       }
+      this.isLoading = true;
       const script =
         typeof window !== "undefined"
           ? require("loadjs")
