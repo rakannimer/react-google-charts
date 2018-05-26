@@ -107,6 +107,9 @@ class Chart extends Component {
     };
     this.onSelectToggle = () => {
       if (this.chart === null) return;
+      if (!this.props.legend_toggle) {
+        return;
+      }
       const selection = this.chart.getSelection();
       if (selection.length > 0) {
         if (selection[0].row == null) {
