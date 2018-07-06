@@ -1,48 +1,48 @@
-import { Component, createElement } from 'react';
+import { Component, createElement } from "react";
 
 const DEFAULT_CHART_COLORS = [
-  '#3366CC',
-  '#DC3912',
-  '#FF9900',
-  '#109618',
-  '#990099',
-  '#3B3EAC',
-  '#0099C6',
-  '#DD4477',
-  '#66AA00',
-  '#B82E2E',
-  '#316395',
-  '#994499',
-  '#22AA99',
-  '#AAAA11',
-  '#6633CC',
-  '#E67300',
-  '#8B0707',
-  '#329262',
-  '#5574A6',
-  '#3B3EAC',
+  "#3366CC",
+  "#DC3912",
+  "#FF9900",
+  "#109618",
+  "#990099",
+  "#3B3EAC",
+  "#0099C6",
+  "#DD4477",
+  "#66AA00",
+  "#B82E2E",
+  "#316395",
+  "#994499",
+  "#22AA99",
+  "#AAAA11",
+  "#6633CC",
+  "#E67300",
+  "#8B0707",
+  "#329262",
+  "#5574A6",
+  "#3B3EAC"
 ];
 
 var DEFAULT_COLORS = /*#__PURE__*/ Object.freeze({
   DEFAULT_CHART_COLORS: DEFAULT_CHART_COLORS,
-  default: DEFAULT_CHART_COLORS,
+  default: DEFAULT_CHART_COLORS
 });
 
 const getGoogle = (windowAsArg = window) => {
-  if (typeof windowAsArg === 'undefined') {
+  if (typeof windowAsArg === "undefined") {
     return {};
   }
-  if (typeof windowAsArg.google === 'undefined') {
-    throw new Error('google not in window object. Error in get-google-charts.');
+  if (typeof windowAsArg.google === "undefined") {
+    throw new Error("google not in window object. Error in get-google-charts.");
   }
   return windowAsArg.google;
 };
 const getGoogleCharts = (windowAsArg = window) => {
-  if (typeof windowAsArg === 'undefined') {
+  if (typeof windowAsArg === "undefined") {
     return {};
   }
-  if (typeof windowAsArg.google === 'undefined') {
-    throw new Error('google not in window object. Error in get-google-charts.');
+  if (typeof windowAsArg.google === "undefined") {
+    throw new Error("google not in window object. Error in get-google-charts.");
   }
   return windowAsArg.google.charts;
 };
@@ -62,22 +62,25 @@ class GoogleChartLoader {
         return this.loadScript;
       }
       this.isLoading = true;
-      const script = typeof window !== 'undefined' ? require('loadjs') : (link, { success: callback }) => callback();
+      const script =
+        typeof window !== "undefined"
+          ? require("loadjs")
+          : (link, { success: callback }) => callback();
       this.loadScript = new Promise(resolve => {
-        script('https://www.gstatic.com/charts/loader.js', {
+        script("https://www.gstatic.com/charts/loader.js", {
           success: () => {
             const google_charts = getGoogleCharts(window);
-            google_charts.load(version || 'current', {
-              packages: packages || ['corechart'],
-              language: language || 'en',
-              mapsApiKey,
+            google_charts.load(version || "current", {
+              packages: packages || ["corechart"],
+              language: language || "en",
+              mapsApiKey
             });
             google_charts.setOnLoadCallback(() => {
               this.isLoaded = true;
               this.isLoading = false;
               resolve();
             });
-          },
+          }
         });
       });
       this.isLoading = true;
@@ -128,7 +131,9 @@ class Chart extends Component {
     };
     this.applyNumberFormat = (column, options) => {
       const googlefromWindow = getGoogle(window);
-      const formatter = new googlefromWindow.visualization.NumberFormat(options);
+      const formatter = new googlefromWindow.visualization.NumberFormat(
+        options
+      );
       formatter.format(this.dataTable, column);
     };
     this.applyDateFormat = (column, options) => {
@@ -141,9 +146,14 @@ class Chart extends Component {
       const googlefromWindow = getGoogle(window);
       if (this.props.diffdata && this.props.chartType !== null) {
         const diffdata = this.props.diffdata;
-        const oldData = googlefromWindow.visualization.arrayToDataTable(diffdata.old);
-        const newData = googlefromWindow.visualization.arrayToDataTable(diffdata.new);
-        const computeDiff = googlefromWindow.visualization[chartType].prototype.computeDiff;
+        const oldData = googlefromWindow.visualization.arrayToDataTable(
+          diffdata.old
+        );
+        const newData = googlefromWindow.visualization.arrayToDataTable(
+          diffdata.new
+        );
+        const computeDiff =
+          googlefromWindow.visualization[chartType].prototype.computeDiff;
         const chartDiff = computeDiff(oldData, newData);
         return chartDiff;
       }
@@ -152,9 +162,16 @@ class Chart extends Component {
         (this.props.rows && this.props.rows.length === 0) &&
         !this.props.allowEmptyRows === false
       ) {
-        throw new Error("Can't build DataTable from rows and columns: rows array in props is empty");
-      } else if (this.props.data === null && (this.props.columns && this.props.columns.length === 0)) {
-        throw new Error("Can't build DataTable from rows and columns: columns array in props is empty");
+        throw new Error(
+          "Can't build DataTable from rows and columns: rows array in props is empty"
+        );
+      } else if (
+        this.props.data === null &&
+        (this.props.columns && this.props.columns.length === 0)
+      ) {
+        throw new Error(
+          "Can't build DataTable from rows and columns: columns array in props is empty"
+        );
       }
       if (this.props.data !== null) {
         try {
@@ -162,7 +179,7 @@ class Chart extends Component {
           const dataTable = this.wrapper.getDataTable();
           return dataTable;
         } catch (err) {
-          throw new Error('Failed to set DataTable from data props ! ', err);
+          throw new Error("Failed to set DataTable from data props ! ", err);
         }
       }
       const dataTable = new window.google.visualization.DataTable();
@@ -182,10 +199,10 @@ class Chart extends Component {
       }
       this.props.formatters.forEach(({ type, column, options }) => {
         switch (type) {
-          case 'NumberFormat':
+          case "NumberFormat":
             this.applyNumberFormat(column, options);
             break;
-          case 'DateFormat':
+          case "DateFormat":
             this.applyDateFormat(column, options);
             break;
           default:
@@ -196,7 +213,9 @@ class Chart extends Component {
       return dataTable;
     };
     this.updateDataTable = () => {
-      window.google.visualization.errors.removeAll(document.getElementById(this.wrapper.getContainerId()));
+      window.google.visualization.errors.removeAll(
+        document.getElementById(this.wrapper.getContainerId())
+      );
       this.dataTable.removeRows(0, this.dataTable.getNumberOfRows());
       this.dataTable.removeColumns(0, this.dataTable.getNumberOfColumns());
       this.dataTable = this.buildDataTableFromProps();
@@ -210,16 +229,22 @@ class Chart extends Component {
         const chartConfig = {
           chartType: this.props.chartType,
           options: this.props.options,
-          containerId: this.state.graphID,
+          containerId: this.state.graphID
         };
-        this.wrapper = new window.google.visualization.ChartWrapper(chartConfig);
+        this.wrapper = new window.google.visualization.ChartWrapper(
+          chartConfig
+        );
         this.dataTable = this.buildDataTableFromProps();
         this.wrapper.setDataTable(this.dataTable);
-        window.google.visualization.events.addOneTimeListener(this.wrapper, 'ready', () => {
-          this.chart = this.wrapper.getChart();
-          this.listenToChartEvents();
-          this.addChartActions();
-        });
+        window.google.visualization.events.addOneTimeListener(
+          this.wrapper,
+          "ready",
+          () => {
+            this.chart = this.wrapper.getChart();
+            this.listenToChartEvents();
+            this.addChartActions();
+          }
+        );
       } else {
         this.updateDataTable();
         this.wrapper.setDataTable(this.dataTable);
@@ -228,10 +253,14 @@ class Chart extends Component {
           window.google.visualization.events.removeAllListeners(this.wrapper);
           this.wrapper.setChartType(this.props.chartType);
           const self = this;
-          window.google.visualization.events.addOneTimeListener(this.wrapper, 'ready', () => {
-            self.chart = self.wrapper.getChart();
-            self.listenToChartEvents.call(self);
-          });
+          window.google.visualization.events.addOneTimeListener(
+            this.wrapper,
+            "ready",
+            () => {
+              self.chart = self.wrapper.getChart();
+              self.listenToChartEvents.call(self);
+            }
+          );
         }
       }
       this.wrapper.draw();
@@ -244,22 +273,30 @@ class Chart extends Component {
         this.chart.setAction({
           id: chartAction.id,
           text: chartAction.text,
-          action: chartAction.action.bind(this, this.chart),
+          action: chartAction.action.bind(this, this.chart)
         });
       });
     };
     this.listenToChartEvents = () => {
       if (this.props.legend_toggle) {
-        window.google.visualization.events.addListener(this.wrapper, 'select', this.onSelectToggle);
+        window.google.visualization.events.addListener(
+          this.wrapper,
+          "select",
+          this.onSelectToggle
+        );
       }
       this.props.chartEvents.forEach(chartEvent => {
-        if (chartEvent.eventName === 'ready') {
+        if (chartEvent.eventName === "ready") {
           chartEvent.callback(this);
         } else {
           (event => {
-            window.google.visualization.events.addListener(this.chart, event.eventName, e => {
-              event.callback(this, e);
-            });
+            window.google.visualization.events.addListener(
+              this.chart,
+              event.eventName,
+              e => {
+                event.callback(this, e);
+              }
+            );
           })(chartEvent);
         }
       });
@@ -269,7 +306,7 @@ class Chart extends Component {
         label: this.dataTable.getColumnLabel(columnIndex),
         type: this.dataTable.getColumnType(columnIndex),
         sourceColumn: columnIndex,
-        role: this.dataTable.getColumnRole(columnIndex),
+        role: this.dataTable.getColumnRole(columnIndex)
       };
     };
     this.buildEmptyColumnFromSourceData = columnIndex => {
@@ -277,7 +314,7 @@ class Chart extends Component {
         label: this.dataTable.getColumnLabel(columnIndex),
         type: this.dataTable.getColumnType(columnIndex),
         calc: () => null,
-        role: this.dataTable.getColumnRole(columnIndex),
+        role: this.dataTable.getColumnRole(columnIndex)
       };
     };
     this.addEmptyColumnTo = (columns, columnIndex) => {
@@ -287,10 +324,10 @@ class Chart extends Component {
     this.hideColumn = (colors, columnIndex) => {
       if (!this.isHidden(columnIndex)) {
         this.hidden_columns[columnIndex] = {
-          color: this.getColumnColor(columnIndex - 1),
+          color: this.getColumnColor(columnIndex - 1)
         };
       }
-      colors.push('#CCCCCC');
+      colors.push("#CCCCCC");
     };
     this.addSourceColumnTo = (columns, columnIndex) => {
       const sourceColumn = this.buildColumnFromSourceData(columnIndex);
@@ -320,7 +357,9 @@ class Chart extends Component {
       };
     };
     this.togglePoints = column => {
-      const view = new window.google.visualization.DataView(this.wrapper.getDataTable());
+      const view = new window.google.visualization.DataView(
+        this.wrapper.getDataTable()
+      );
       const columnCount = view.getNumberOfColumns();
       let colors = [];
       let columns = [];
@@ -350,16 +389,21 @@ class Chart extends Component {
     this.state = { graphID: props.graph_id || generateUniqueID() };
   }
   componentDidMount() {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
     if (this.props.loadCharts) {
       googleChartLoader
-        .init(this.props.chartPackages, this.props.chartVersion, this.props.chartLanguage, this.props.mapsApiKey)
+        .init(
+          this.props.chartPackages,
+          this.props.chartVersion,
+          this.props.chartLanguage,
+          this.props.mapsApiKey
+        )
         .then(() => {
           this.drawChart();
           this.onResize = this.debounce(this.onResize, 200);
-          window.addEventListener('resize', this.onResize);
+          window.addEventListener("resize", this.onResize);
         });
     } else {
       this.drawChart();
@@ -385,7 +429,7 @@ class Chart extends Component {
         if (window.google && window.google.visualization) {
           window.google.visualization.events.removeAllListeners(this.wrapper);
         }
-        window.removeEventListener('resize', this.onResize);
+        window.removeEventListener("resize", this.onResize);
       }
     } catch (err) {
       return;
@@ -394,45 +438,45 @@ class Chart extends Component {
   render() {
     const divStyle = {
       height: this.props.height || this.props.options.height,
-      width: this.props.width || this.props.options.width,
+      width: this.props.width || this.props.options.width
     };
     return createElement(
-      'div',
+      "div",
       { id: this.state.graphID, style: divStyle },
-      this.props.loader ? this.props.loader : 'Rendering Chart...'
+      this.props.loader ? this.props.loader : "Rendering Chart..."
     );
   }
 }
 Chart.defaultProps = {
-  chartType: 'LineChart',
+  chartType: "LineChart",
   rows: [],
   columns: [],
   options: {
     chart: {
-      title: 'Chart Title',
-      subtitle: 'Subtitle',
+      title: "Chart Title",
+      subtitle: "Subtitle"
     },
-    hAxis: { title: 'X Label' },
-    vAxis: { title: 'Y Label' },
-    width: '100%',
-    height: '100%',
+    hAxis: { title: "X Label" },
+    vAxis: { title: "Y Label" },
+    width: "100%",
+    height: "100%"
   },
-  width: '400px',
-  height: '300px',
+  width: "400px",
+  height: "300px",
   chartEvents: [],
   chartActions: null,
   data: null,
   legend_toggle: false,
   allowEmptyRows: false,
   loadCharts: true,
-  loader: createElement('div', null, 'Rendering Chart'),
-  chartPackages: ['corechart'],
-  chartVersion: 'current',
-  chartLanguage: 'en',
+  loader: createElement("div", null, "Rendering Chart"),
+  chartPackages: ["corechart"],
+  chartVersion: "current",
+  chartLanguage: "en",
   numberFormat: null,
   dateFormat: null,
   formatters: [],
-  diffdata: null,
+  diffdata: null
 };
 
 var index = { Chart };
