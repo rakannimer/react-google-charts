@@ -6,6 +6,7 @@
   "main": "build/index.js",
   "scripts": {
     "start": "parcel demo/index.html",
+    "start-interactive": "parcel demo/index-interactive.html",
     "build": "microbundle"
   },
   "dependencies": {
