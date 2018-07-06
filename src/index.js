@@ -66,22 +66,31 @@ class GoogleChartLoader {
         typeof window !== "undefined"
           ? require("loadjs")
           : (link, { success: callback }) => callback();
-      this.loadScript = new Promise(resolve => {
-        script("https://www.gstatic.com/charts/loader.js", {
-          success: () => {
-            const google_charts = getGoogleCharts(window);
-            google_charts.load(version || "current", {
-              packages: packages || ["corechart"],
-              language: language || "en",
-              mapsApiKey
-            });
-            google_charts.setOnLoadCallback(() => {
-              this.isLoaded = true;
-              this.isLoading = false;
-              resolve();
-            });
-          }
+        const loadGCharts = (gchart) =>{
+          gchart.load(version || "current", {
+          packages: packages || ["corechart"],
+          language: language || "en",
+          mapsApiKey
         });
+      }    
+      this.loadScript = new Promise(resolve => {
+        if(window.google && typeof window.google.charts !== 'undefined'){
+          const google_charts = getGoogleCharts(window);
+          loadGCharts(google_charts);
+          resolve();
+        }else{
+          script("https://www.gstatic.com/charts/loader.js", {
+            success: () => {
+              const google_charts = getGoogleCharts(window);
+              loadGCharts(google_charts);
+              google_charts.setOnLoadCallback(() => {
+                this.isLoaded = true;
+                this.isLoading = false;
+                resolve();
+              });
+            }
+          });
+        }
       });
       this.isLoading = true;
       return this.loadScript;
