@@ -10,7 +10,8 @@
     "build": "microbundle"
   },
   "dependencies": {
-    "loadjs": "^3.3.1"
+    "loadjs": "^3.3.1",
+    "react-load-script": "^0.0.6"
   },
   "peerDependencies": {
     "react": ">=15.0.0",
@@ -23,7 +24,8 @@
     "object-assign": "^4.1.0",
     "parcel-bundler": "^1.8.1",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "typescript": "^2.9.2"
   },
   "gh-pages-deploy": {
     "staticpath": "demo/dist/"
@@ -32,6 +34,12 @@
   "homepage": "https://rakannimer.github.io/react-google-charts/",
   "license": "MIT",
   "repository": "https://github.com/RakanNimer/react-google-charts",
-  "keywords": ["react", "google", "charts"],
-  "files": ["build/"]
+  "keywords": [
+    "react",
+    "google",
+    "charts"
+  ],
+  "files": [
+    "build/"
+  ]
 }
