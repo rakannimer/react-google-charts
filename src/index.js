@@ -491,4 +491,4 @@ Chart.defaultProps = {
 var index = { Chart };
 
 export default index;
-export { Chart };
+export { Chart, googleChartLoader };
