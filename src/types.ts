@@ -107,6 +107,7 @@ export interface ChartWrapperOptions {
     hAxis: { title: string; minValue: number; maxValue: number };
     vAxis: { title: string; minValue: number; maxValue: number };
     legend: string;
+    colors: string[];
   }>;
   dataTable?: GoogleDataTable;
   dataSourceUrl?: string;
@@ -152,7 +153,7 @@ export type GoogleChartWrapper = {
   setQuery: (query_string: string) => void; // Sets a query string, if this chart queries a data source. You must also set the data source URL if specifying this value.
   setRefreshInterval: (interval: number) => void; // Sets the refresh interval for this chart, if it queries a data source. You must also set a data source URL if specifying this value. Zero indicates no refresh.
   setOption: (key: string, value: any) => void; // 	Sets a single chart option value, where key is the option name and value is the value. To unset an option, pass in null for the value. Note that key may be a qualified name, such as 'vAxis.title'.
-  setOptions: (options_obj: ChartWrapperProps["options"]) => void; //
+  setOptions: (options_obj: Partial<ChartWrapperOptions["options"]>) => void; //
 };
 
 export type GoogleVizEventName = "ready" | "error" | "select";

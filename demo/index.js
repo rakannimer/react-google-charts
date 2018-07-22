@@ -7,7 +7,7 @@ class InteractiveChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rows: [[8, 12], [4, 5.5], [11, 14], [4, 5], [3, 3.5], [6.5, 7]],
+      rows: [[4, 5.5, 1], [8, 12, 2], [11, 14, 3]],
       columns: [
         {
           type: "number",
@@ -15,7 +15,12 @@ class InteractiveChart extends React.Component {
         },
         {
           type: "number",
-          label: "Weight"
+          label: "Weight",
+          color: "green"
+        },
+        {
+          type: "number",
+          label: "test"
         }
       ]
     };
@@ -37,17 +42,18 @@ class InteractiveChart extends React.Component {
       <div>
         <Chart
           chartType="LineChart"
-          rows={this.state.rows}
-          columns={this.state.columns}
-          // data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
-          options={{}}
+          // rows={this.state.rows}
+          // columns={this.state.columns}
+          data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
+          options={{ colors: ["pink"] }}
           // graphID="ScatterChart1"
           width="100%"
           height="400px"
+          legendToggle
         />
         <Chart
           chartType="ScatterChart"
-          data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
+          data={[["Age", "Weight", "Test"], [8, 12, 1], [4, 5.5, 2]]}
           options={{}}
           // graphID="ScatterChart1"
           width="100%"

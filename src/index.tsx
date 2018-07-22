@@ -6,12 +6,11 @@ import {
   GoogleChartWrapperChartType,
   ChartWrapperOptions,
   GoogleChartWrapper,
-  GoogleDataTableRow,
-  GoogleDataTableColumn,
   GoogleVizEventName,
   GoogleChartAction,
   GoogleDataTable
 } from "./types";
+import { DEFAULT_CHART_COLORS } from "./constants";
 export type WindowWithMaybeGoogle = Window & { google?: any };
 
 let uniqueID = 0;
@@ -28,8 +27,8 @@ export type ReactGoogleChartProps = {
   options: Partial<ChartWrapperOptions["options"]>;
   loader: JSX.Element;
   data: any[];
-  rows: GoogleDataTableRow[];
-  columns: GoogleDataTableColumn[];
+  // rows: GoogleDataTableRow[];
+  // columns: GoogleDataTableColumn[];
   chartActions: GoogleChartAction[];
   events: {
     eventName: GoogleVizEventName;
@@ -45,9 +44,9 @@ export type ReactGoogleChartState = {
 
 export const chartDefaultProps = {
   graphID: null,
-  options: {},
-  rows: null,
-  columns: null,
+  options: {
+    colors: null as null | string[]
+  },
   data: null,
   events: null,
   legendToggle: false
@@ -85,50 +84,63 @@ class Chart extends React.Component<
 
   private draw = () => {
     if (this.chartWrapper === null || this.state.google === null) return;
-    const canBuildUsingRowsAndColumns =
-      this.props.rows !== null && this.props.columns !== null;
-    const canBuildUsingData = this.props.data !== null;
-    if (canBuildUsingData) {
-      let dataTable = this.state.google.visualization.arrayToDataTable(
-        this.props.data
-      );
-      for (let i = 0; i < dataTable.getNumberOfColumns(); i += 1) {
-        // const column = dataTable.getCol.columns[i];
-        const columnID = this.getColumnID(dataTable, i);
-
-        if (this.state.hiddenColumns.includes(columnID)) {
-          console.log({ columnID });
-          console.log("hidden");
-          dataTable.removeColumn(i);
-          dataTable.addColumn({
-            label: columnID,
-            id: columnID,
-            type: "number"
-          });
-        } else {
-          // console.log("not hidden");
-        }
-        // dataTable.addColumn(column);
+    let dataTable = this.state.google.visualization.arrayToDataTable(
+      this.props.data
+    );
+    const columnCount = dataTable.getNumberOfColumns();
+    for (let i = 0; i < columnCount; i += 1) {
+      const columnID = this.getColumnID(dataTable, i);
+      if (this.state.hiddenColumns.includes(columnID)) {
+        const previousColumnLabel = dataTable.getColumnLabel(i);
+        const previousColumnID = dataTable.getColumnId(i);
+        const previousColumnType = dataTable.getColumnType(i);
+        dataTable.removeColumn(i);
+        dataTable.addColumn({
+          label: previousColumnLabel,
+          id: previousColumnID,
+          type: previousColumnType
+        });
+      } else {
       }
-
-      this.chartWrapper.setDataTable(dataTable);
-    } else if (canBuildUsingRowsAndColumns) {
-      let dataTable = this.state.google.visualization.arrayToDataTable([]);
-      for (let column of this.props.columns) {
-        dataTable.addColumn(column);
-      }
-      for (let row of this.props.rows) {
-        dataTable.addRow(row);
-      }
-
-      this.chartWrapper.setDataTable(dataTable);
     }
     this.chartWrapper.setOptions(this.props.options);
+    this.chartWrapper.setDataTable(dataTable);
     this.chartWrapper.draw();
+    if (this.props.legendToggle === true) {
+      this.handleLegendToggle();
+    }
   };
-  // private initialize = () => {
+  private handleLegendToggle = () => {
+    if (this.chartWrapper === null || this.state.google === null) return;
+    const dataTable = this.chartWrapper.getDataTable();
+    if (dataTable === null) return;
 
-  // }
+    const columnCount = dataTable.getNumberOfColumns();
+    const hasAHiddenColumn = this.state.hiddenColumns.length > 0;
+    if (hasAHiddenColumn) {
+      let colors: string[] = new Array(columnCount - 1);
+      for (let i = 1; i < columnCount; i++) {
+        const columID = this.getColumnID(dataTable, i);
+        if (this.state.hiddenColumns.includes(columID)) {
+          colors[i - 1] = "gray";
+        } else {
+          if (
+            "colors" in this.props.options &&
+            this.props.options.colors !== null
+          ) {
+            colors[i - 1] = this.props.options.colors[i - 1];
+          } else {
+            colors[i - 1] = DEFAULT_CHART_COLORS[i - 1];
+          }
+        }
+      }
+      this.chartWrapper.setOptions({
+        ...this.props.options,
+        colors
+      });
+      this.chartWrapper.draw();
+    }
+  };
   componentDidMount() {
     this.setState({ loadingStatus: "loading" });
   }
@@ -210,10 +222,6 @@ class Chart extends React.Component<
               }
             );
           }
-
-          // this.chartWrapper.setDataTable(dataTable);
-          // this.chartWrapper.draw();
-          console.log(`Hide column ${columnIndex} = ${columnID}`);
         }
       );
     }
@@ -237,15 +245,7 @@ class Chart extends React.Component<
       );
       this.draw();
       this.listenToChartEvents();
-
       return;
-    }
-    if (
-      prevProps.rows !== this.props.rows ||
-      prevProps.columns !== this.props.columns ||
-      prevProps.data !== this.props.data
-    ) {
-      this.draw();
     }
     if (this.props.events !== prevProps.events) {
       this.listenToChartEvents();
