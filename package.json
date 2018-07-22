@@ -7,7 +7,7 @@
   "module": "dist/index.esm.js",
   "umd": "dist/index.umd.js",
   "scripts": {
-    "start": "parcel demo/index.html",
+    "start": "parcel demo/index.html -d demo-build/",
     "build": "rollup -c"
   },
   "dependencies": {
@@ -42,6 +42,6 @@
     "charts"
   ],
   "files": [
-    "build/"
+    "dist/"
   ]
 }
