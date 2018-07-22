@@ -401,3 +401,5 @@ export type GoogleChartOptions = {
 * </GoogleChartsTypes>
 *
 */
+
+export type WindowWithMaybeGoogle = Window & { google?: any };
