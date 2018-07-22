@@ -1,4 +1,4 @@
-# react-google-charts
+# React Google Charts
 
 [![CircleCI](https://circleci.com/gh/rakannimer/react-google-charts.svg?style=shield)](https://circleci.com/gh/RakanNimer/react-google-charts)
 
@@ -8,17 +8,11 @@ A thin, typed, React wrapper over Google Charts Visualization and Charts API.
 
 ## Installation
 
-With your favorite package manager (yarn, pnp m, npm) :
+With your favorite package manager (yarn, pnpm or npm) :
 
 ```
 yarn add react-google-charts
 # or
-npm i -s react-google-charts
-```
-
-or
-
-```
 npm i -s react-google-charts
 ```
 
@@ -35,8 +29,7 @@ export default class App extends React.Component {
       <div className={"my-pretty-chart-container"}>
         <Chart
           chartType="ScatterChart"
-          data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
-          options={{}}
+          data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
           width="100%"
           height="400px"
           legendToggle
@@ -83,10 +76,10 @@ class ExampleChart extends React.Component {
         chartType="ScatterChart"
         data={this.state.data}
         options={this.state.options}
-        graph_id="ScatterChart"
+        graphID="ScatterChart"
         width="100%"
         height="400px"
-        legend_toggle
+        legendToggle
       />
     );
   }
@@ -97,21 +90,15 @@ export default ExampleChart;
 ### Initialize using rows and columns :
 
 ```javascript
+import * as React from "react";
 import { Chart } from "react-google-charts";
-import React from "react";
 
-class ExampleChart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: {
-        title: "Age vs. Weight comparison",
-        hAxis: { title: "Age", minValue: 0, maxValue: 15 },
-        vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
-        legend: "none"
-      },
-      rows: [[8, 12], [4, 5.5], [11, 14], [4, 5], [3, 3.5], [6.5, 7]],
-      columns: [
+const ExampleChart = () => {
+  return (
+    <Chart
+      chartType="ScatterChart"
+      rows={[[8, 12], [4, 5.5], [11, 14], [4, 5], [3, 3.5], [6.5, 7]]}
+      columns={[
         {
           type: "number",
           label: "Age"
@@ -120,24 +107,20 @@ class ExampleChart extends React.Component {
           type: "number",
           label: "Weight"
         }
-      ]
-    };
-  }
-  render() {
-    return (
-      <Chart
-        chartType="ScatterChart"
-        rows={this.state.rows}
-        columns={this.state.columns}
-        options={this.state.options}
-        graph_id="ScatterChart"
-        width={"100%"}
-        height={"400px"}
-        legend_toggle
-      />
-    );
-  }
-}
+      ]}
+      options={{
+        title: "Age vs. Weight comparison",
+        hAxis: { title: "Age", minValue: 0, maxValue: 15 },
+        vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
+        legend: "none"
+      }}
+      graphID="ScatterChart"
+      width={"100%"}
+      height={"400px"}
+      legendToggle
+    />
+  );
+};
 export default ExampleChart;
 ```
 
@@ -189,7 +172,7 @@ class ExampleChart extends React.Component {
         rows={this.state.rows}
         columns={this.state.columns}
         options={this.state.options}
-        graph_id="ScatterChart"
+        graphID="ScatterChart"
         width="100%"
         height="400px"
         chartEvents={this.chartEvents}
@@ -200,30 +183,16 @@ class ExampleChart extends React.Component {
 export default ExampleChart;
 ```
 
-## Isomorphic support
-
-Supports isomorphic configurations out of the box thanks to [@voogryk](https://github.com/voogryk)
-
 ## Examples
 
 ### Run the example app
 
 ```bash
 git clone https://www.github.com/rakannimer/react-google-charts
-cd react-google-charts/demo
-npm link ../
-npm install
+cd react-google-charts
+npm i
 npm start
 ```
-
-## FAQ
-
-### Timeline/table chart is not rendering.
-
-Chart loader is a singleton that only loads chartPackages once, and by default it loads the `corechart` packages.
-If you need to use packages like `timeline` or `table`, add chartPackages prop with value ['corechart', 'timeline'] to your charts.
-
-## [Changelog](./CHANGELOG.md)
 
 ## Contributing
 
