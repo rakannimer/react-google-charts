@@ -265,6 +265,9 @@ class Chart extends React.Component<
     if (this.props.chartActions !== prevProps.chartActions) {
       this.setChartActions(this.props.chartActions, prevProps.chartActions);
     }
+    if (this.props.data !== prevProps.data) {
+      this.draw();
+    }
   }
   private handleGoogleChartsLoaderScriptLoaded = (
     windowGoogleCharts: GoogleViz
