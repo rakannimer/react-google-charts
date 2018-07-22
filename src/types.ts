@@ -115,6 +115,12 @@ export interface ChartWrapperOptions {
   view: any[] | {};
 }
 
+export type GoogleChartAction = {
+  id: string;
+  text: string;
+  action: (chartWrapper: GoogleChartWrapper) => void;
+};
+
 export type GoogleChartWrapper = {
   new (chartWrapperOptions: Partial<ChartWrapperOptions>): GoogleChartWrapper;
   draw: (chartArgs?: ChartWrapperProps) => any;
@@ -125,7 +131,10 @@ export type GoogleChartWrapper = {
   getChartType: () => GoogleChartWrapperChartType;
   getChartName: () => string;
   getChart: () => {
+    removeAction: (actionID: string) => void;
     getSelection: () => { row?: any; column?: any }[];
+    setAction: (ChartAction: GoogleChartAction) => void;
+    clearChart: () => void; // Clears the chart, and releases all of its allocated resources.
   }; // ref to chart
   getContainerId: () => string;
   getQuery: () => string;
@@ -152,7 +161,7 @@ export type GoogleVizEvents = {
   addListener: (
     chartWrapper: GoogleChartWrapper,
     name: GoogleVizEventName,
-    onEvent: (eventArgs: {}) => any
+    onEvent: (chartWrapper: GoogleChartWrapper) => any
   ) => any;
   removeAllListeners: (chartWrapper: GoogleChartWrapper) => any;
 };
