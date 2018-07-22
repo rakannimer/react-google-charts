@@ -11,6 +11,8 @@ import {
   GoogleDataTable
 } from "./types";
 import { DEFAULT_CHART_COLORS } from "./constants";
+
+const GRAY_COLOR = "#CCCCCC";
 export type WindowWithMaybeGoogle = Window & { google?: any };
 
 let uniqueID = 0;
@@ -27,8 +29,6 @@ export type ReactGoogleChartProps = {
   options: Partial<ChartWrapperOptions["options"]>;
   loader: JSX.Element;
   data: any[];
-  // rows: GoogleDataTableRow[];
-  // columns: GoogleDataTableColumn[];
   chartActions: GoogleChartAction[];
   events: {
     eventName: GoogleVizEventName;
@@ -107,39 +107,38 @@ class Chart extends React.Component<
     this.chartWrapper.setDataTable(dataTable);
     this.chartWrapper.draw();
     if (this.props.legendToggle === true) {
-      this.handleLegendToggle();
+      this.grayOutHiddenColumns();
     }
   };
-  private handleLegendToggle = () => {
+  private grayOutHiddenColumns = () => {
     if (this.chartWrapper === null || this.state.google === null) return;
     const dataTable = this.chartWrapper.getDataTable();
     if (dataTable === null) return;
 
     const columnCount = dataTable.getNumberOfColumns();
     const hasAHiddenColumn = this.state.hiddenColumns.length > 0;
-    if (hasAHiddenColumn) {
-      let colors: string[] = new Array(columnCount - 1);
-      for (let i = 1; i < columnCount; i++) {
-        const columID = this.getColumnID(dataTable, i);
-        if (this.state.hiddenColumns.includes(columID)) {
-          colors[i - 1] = "gray";
+    if (hasAHiddenColumn === false) return;
+
+    const colors = Array.from({ length: columnCount - 1 }).map(
+      (dontcare, i) => {
+        const columnID = this.getColumnID(dataTable, i + 1);
+        if (this.state.hiddenColumns.includes(columnID)) {
+          return GRAY_COLOR;
+        } else if (
+          "colors" in this.props.options &&
+          this.props.options.colors !== null
+        ) {
+          return this.props.options.colors[i];
         } else {
-          if (
-            "colors" in this.props.options &&
-            this.props.options.colors !== null
-          ) {
-            colors[i - 1] = this.props.options.colors[i - 1];
-          } else {
-            colors[i - 1] = DEFAULT_CHART_COLORS[i - 1];
-          }
+          return DEFAULT_CHART_COLORS[i];
         }
       }
-      this.chartWrapper.setOptions({
-        ...this.props.options,
-        colors
-      });
-      this.chartWrapper.draw();
-    }
+    );
+    this.chartWrapper.setOptions({
+      ...this.props.options,
+      colors
+    });
+    this.chartWrapper.draw();
   };
   componentDidMount() {
     this.setState({ loadingStatus: "loading" });
@@ -187,44 +186,57 @@ class Chart extends React.Component<
       }
     }
     if (this.props.legendToggle === true) {
-      this.state.google.visualization.events.addListener(
-        this.chartWrapper,
-        "select",
-        () => {
-          if (this.chartWrapper === null) return;
-          const chart = this.chartWrapper.getChart();
-          const selection = chart.getSelection();
-          const dataTable = this.chartWrapper.getDataTable();
-          if (selection.length === 0) {
-            return;
-          }
-          // We want to listen to when a whole row is selected. This is the case only when row === null
-          if (selection[0].row !== null) {
-            return;
-          }
-          if (dataTable === null) {
-            return;
-          }
-          const columnIndex = selection[0].column;
-          const columnID = this.getColumnID(dataTable, columnIndex);
-          if (this.state.hiddenColumns.includes(columnID)) {
-            this.setState(
-              state => ({ ...state, hiddenColumns: [] }),
-              () => {
-                this.draw();
-              }
-            );
-          } else {
-            this.setState(
-              state => ({ ...state, hiddenColumns: [columnID] }),
-              () => {
-                this.draw();
-              }
-            );
-          }
-        }
-      );
+      this.listenToLegendToggle();
     }
+  };
+  private listenToLegendToggle = () => {
+    if (this.state.google === null || this.chartWrapper === null) {
+      return;
+    }
+    this.state.google.visualization.events.addListener(
+      this.chartWrapper,
+      "select",
+      () => {
+        if (this.chartWrapper === null) return;
+        const chart = this.chartWrapper.getChart();
+        const selection = chart.getSelection();
+        const dataTable = this.chartWrapper.getDataTable();
+        if (
+          selection.length === 0 ||
+          // We want to listen to when a whole row is selected. This is the case only when row === null
+          selection[0].row !== null ||
+          dataTable === null
+        ) {
+          return;
+        }
+
+        const columnIndex = selection[0].column;
+        const columnID = this.getColumnID(dataTable, columnIndex);
+        if (this.state.hiddenColumns.includes(columnID)) {
+          this.setState(
+            state => ({
+              ...state,
+              hiddenColumns: [
+                ...state.hiddenColumns.filter(colID => colID !== columnID)
+              ]
+            }),
+            () => {
+              this.draw();
+            }
+          );
+        } else {
+          this.setState(
+            state => ({
+              ...state,
+              hiddenColumns: [...state.hiddenColumns, columnID]
+            }),
+            () => {
+              this.draw();
+            }
+          );
+        }
+      }
+    );
   };
   componentDidUpdate(
     prevProps: ReactGoogleChartProps,
