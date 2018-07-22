@@ -28,13 +28,15 @@ export class ReactGoogleChartsLoader extends React.Component<
   render() {
     const { onError, onLoad } = this.props;
     if (this.loadScript === true) {
-      <Script
-        url="https://www.gstatic.com/charts/loader.js"
-        onError={() => {
-          onError();
-        }}
-        onLoad={onLoad}
-      />;
+      return (
+        <Script
+          url="https://www.gstatic.com/charts/loader.js"
+          onError={() => {
+            onError();
+          }}
+          onLoad={onLoad}
+        />
+      );
     } else {
       return null;
     }

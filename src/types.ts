@@ -99,7 +99,7 @@ export type GoogleChartWrapperChartType =
 export interface ChartWrapperOptions {
   chartType: string;
   containerId: string;
-  options?: Partial<{
+  options: Partial<{
     width: number;
     height: number;
     is3D: boolean;
@@ -208,14 +208,16 @@ export enum GoogleDataTableColumnRoleType {
   domain = "domain"
 }
 
-export type GoogleDataTableColumn = {
-  type: GoogleDataTableColumnType;
-  label?: string; //  A label for the column.
-  role?: GoogleDataTableColumnRoleType;
-  pattern?: string;
-  p?: {};
-  id?: string;
-};
+export type GoogleDataTableColumn =
+  | {
+      type: GoogleDataTableColumnType;
+      label?: string; //  A label for the column.
+      role?: GoogleDataTableColumnRoleType;
+      pattern?: string;
+      p?: {};
+      id?: string;
+    }
+  | string;
 
 // Ref : https://developers.google.com/chart/interactive/docs/reference#dataparam
 

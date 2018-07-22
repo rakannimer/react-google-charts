@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Chart } from "../src/index";
 
-class InteractiveChart extends React.Component {
+class InteractiveChart extends React.Component<{}, { data: any[][] }> {
   constructor(props) {
     super(props);
     this.state = {

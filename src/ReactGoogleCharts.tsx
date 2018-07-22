@@ -23,25 +23,30 @@ const generateUniqueID = () => {
   return `reactgooglegraph-${uniqueID}`;
 };
 
+export type ReactGoogleChartEvent = {
+  eventName: GoogleVizEventName;
+  callback: (chartWrapper: GoogleChartWrapper) => void;
+};
+
 export type ReactGoogleChartProps = {
   height: string | number;
   width: string | number;
-  graphID: string;
+  graphID?: string;
   chartType: GoogleChartWrapperChartType;
-  options: Partial<ChartWrapperOptions["options"]>;
-  loader: JSX.Element;
-  data: any[];
-  rows: GoogleDataTableRow[];
-  columns: GoogleDataTableColumn[];
-  chartActions: GoogleChartAction[];
-  events: {
-    eventName: GoogleVizEventName;
-    callback: (chartWrapper: GoogleChartWrapper) => void;
-  }[];
-  chartVersion: GoogleChartVersion;
-  chartPackages: GoogleChartPackages[];
-  chartLanguage: string;
-  mapsApiKey: string;
+  options?: Partial<ChartWrapperOptions["options"]>;
+  loader?: JSX.Element;
+  data?: any[];
+  rows?: GoogleDataTableRow[];
+  columns?: GoogleDataTableColumn[];
+  chartActions?: GoogleChartAction[];
+  events?: ReactGoogleChartEvent[];
+  chartVersion?: GoogleChartVersion;
+  chartPackages?: GoogleChartPackages[];
+  chartLanguage?: string;
+  mapsApiKey?: string;
+  graph_id?: string;
+  legendToggle?: boolean;
+  legend_toggle?: boolean;
 };
 
 export type ReactGoogleChartState = {
@@ -52,22 +57,26 @@ export type ReactGoogleChartState = {
 
 export const chartDefaultProps = {
   // <DEPRECATED_PROPS>
-  graph_id: null,
+  graph_id: null as null | string,
   legend_toggle: false,
   // </DEPRECATED_PROPS>
   graphID: null,
   options: {
     colors: null as null | string[]
-  },
+  } as ChartWrapperOptions["options"],
   data: null,
-  rows: null,
-  columns: null,
-  events: null,
-  legendToggle: false
+  rows: null as null | GoogleDataTableRow[],
+  columns: null as null | GoogleDataTableColumn[],
+  events: null as null | ReactGoogleChartEvent[],
+  legendToggle: false,
+  chartActions: null as null | GoogleChartAction[]
 };
 
+export type ReactGoogleChartPropsWithDefaults = typeof chartDefaultProps &
+  ReactGoogleChartProps;
+
 export class Chart extends React.Component<
-  ReactGoogleChartProps & typeof chartDefaultProps,
+  ReactGoogleChartProps,
   ReactGoogleChartState
 > {
   state: ReactGoogleChartState = {
@@ -80,33 +89,37 @@ export class Chart extends React.Component<
   static defaultProps = chartDefaultProps;
 
   private getGraphID = () => {
-    if (this.props.graphID === null && this.props.graph_id === null) {
+    const { graphID, graph_id } = this
+      .props as ReactGoogleChartPropsWithDefaults;
+    let instanceGraphID: string;
+    if (graphID === null && graph_id === null) {
       if (this.graphID === null) {
-        this.graphID = generateUniqueID();
+        instanceGraphID = generateUniqueID();
+      } else {
+        instanceGraphID = this.graphID;
       }
-      return this.graphID;
-    } else if (this.props.graphID !== null && this.props.graph_id === null) {
-      this.graphID = this.props.graphID;
-    } else if (this.props.graph_id !== null && this.props.graphID === null) {
-      this.graphID = this.props.graph_id;
+    } else if (graphID !== null && graph_id === null) {
+      instanceGraphID = graphID;
+    } else if (graph_id !== null && graphID === null) {
+      instanceGraphID = graph_id;
     } else {
-      this.graphID = this.props.graphID;
+      instanceGraphID = graphID;
     }
+    this.graphID = instanceGraphID;
     return this.graphID as string;
   };
 
   private draw = () => {
     if (this.chartWrapper === null || this.state.google === null) return;
-
+    const { data, columns, rows, options, legend_toggle, legendToggle } = this
+      .props as ReactGoogleChartPropsWithDefaults;
     let dataTable: GoogleDataTable;
-    if (this.props.data !== null) {
-      dataTable = this.state.google.visualization.arrayToDataTable(
-        this.props.data
-      );
-    } else if (this.props.rows !== null && this.props.columns !== null) {
+    if (data !== null) {
+      dataTable = this.state.google.visualization.arrayToDataTable(data);
+    } else if (rows !== null && columns !== null) {
       dataTable = this.state.google.visualization.arrayToDataTable([
-        this.props.columns,
-        ...this.props.rows
+        columns,
+        ...rows
       ]);
     } else {
       dataTable = this.state.google.visualization.arrayToDataTable([]);
@@ -127,10 +140,10 @@ export class Chart extends React.Component<
         });
       }
     }
-    this.chartWrapper.setOptions(this.props.options);
+    this.chartWrapper.setOptions(options);
     this.chartWrapper.setDataTable(dataTable);
     this.chartWrapper.draw();
-    if (this.props.legendToggle === true) {
+    if (legendToggle === true || legend_toggle === true) {
       this.grayOutHiddenColumns();
     }
   };
@@ -143,16 +156,18 @@ export class Chart extends React.Component<
     const hasAHiddenColumn = this.state.hiddenColumns.length > 0;
     if (hasAHiddenColumn === false) return;
 
+    const { options } = this.props as ReactGoogleChartPropsWithDefaults;
+
     const colors = Array.from({ length: columnCount - 1 }).map(
       (dontcare, i) => {
         const columnID = this.getColumnID(dataTable, i + 1);
         if (this.state.hiddenColumns.includes(columnID)) {
           return GRAY_COLOR;
         } else if (
-          "colors" in this.props.options &&
-          this.props.options.colors !== null
+          typeof options.colors !== "undefined" &&
+          options.colors !== null
         ) {
-          return this.props.options.colors[i];
+          return options.colors[i];
         } else {
           return DEFAULT_CHART_COLORS[i];
         }
@@ -168,9 +183,10 @@ export class Chart extends React.Component<
     this.setState({ loadingStatus: "loading" });
   }
   componentDidUpdate(
-    prevProps: ReactGoogleChartProps,
+    prevProps: ReactGoogleChartPropsWithDefaults,
     prevState: ReactGoogleChartState
   ) {
+    const props = this.props as ReactGoogleChartPropsWithDefaults;
     if (
       prevState.loadingStatus !== "ready" &&
       this.state.loadingStatus === "ready" &&
@@ -188,13 +204,16 @@ export class Chart extends React.Component<
       this.listenToChartEvents();
       return;
     }
-    if (this.props.events !== prevProps.events) {
+    if (props.events !== prevProps.events) {
       this.listenToChartEvents();
     }
-    if (this.props.chartActions !== prevProps.chartActions) {
-      this.setChartActions(this.props.chartActions, prevProps.chartActions);
+    if (props.chartActions !== null || prevProps.chartActions !== null) {
+      if (props.chartActions !== prevProps.chartActions) {
+        this.setChartActions(props.chartActions, prevProps.chartActions);
+      }
     }
-    if (this.props.data !== prevProps.data) {
+
+    if (props.data !== prevProps.data) {
       this.draw();
     }
   }
@@ -237,8 +256,10 @@ export class Chart extends React.Component<
     this.state.google.visualization.events.removeAllListeners(
       this.chartWrapper
     );
-    if (this.props.events !== null) {
-      for (let event of this.props.events) {
+    const { events, legend_toggle, legendToggle } = this
+      .props as ReactGoogleChartPropsWithDefaults;
+    if (events !== null) {
+      for (let event of events) {
         const { eventName, callback } = event;
         this.state.google.visualization.events.addListener(
           this.chartWrapper,
@@ -247,7 +268,7 @@ export class Chart extends React.Component<
         );
       }
     }
-    if (this.props.legendToggle === true || this.props.legend_toggle === true) {
+    if (legendToggle === true || legend_toggle === true) {
       this.listenToLegendToggle();
     }
   };
