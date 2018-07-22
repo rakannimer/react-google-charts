@@ -67,6 +67,9 @@ class InteractiveChart extends React.Component<{}, { data: any[][] }> {
           width="100%"
           height="400px"
           legendToggle
+          getChartWrapper={chartWrapper => {
+            console.log(chartWrapper.getChart());
+          }}
         />
         <Chart
           chartType="ScatterChart"
