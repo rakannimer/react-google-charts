@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Chart } from "react-google-charts";
+import { Chart } from "../src/index";
 
 class InteractiveChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rows: [[8, 12], [4, 5.5]],
+      rows: [[8, 12], [4, 5.5], [11, 14], [4, 5], [3, 3.5], [6.5, 7]],
       columns: [
         {
           type: "number",
@@ -23,14 +23,14 @@ class InteractiveChart extends React.Component {
 
   componentDidMount() {
     let i = 0;
-    setTimeout(() => {
-      i++;
-      this.setState(state => {
-        return Object.assign({}, state, {
-          rows: [...state.rows, [i, 10 * Math.random()]]
-        });
-      });
-    }, 1000);
+    // setTimeout(() => {
+    //   i++;
+    //   this.setState(state => {
+    //     return Object.assign({}, state, {
+    //       rows: [...state.rows, [i, 10 * Math.random()]]
+    //     });
+    //   });
+    // }, 1000);
   }
   render() {
     return (
@@ -45,16 +45,16 @@ class InteractiveChart extends React.Component {
           width="100%"
           height="400px"
         />
-        {/* <Chart
-  chartType="ScatterChart"
-  data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
-  options={{}}
-  // graphID="ScatterChart1"
-  width="100%"
-  height="400px"
-  legend_toggle
-/> */
-        /* <Chart
+        <Chart
+          chartType="ScatterChart"
+          data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
+          options={{}}
+          // graphID="ScatterChart1"
+          width="100%"
+          height="400px"
+          legendToggle
+        />
+        {/* /* <Chart
   chartType="ScatterChart"
   data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
   options={{}}

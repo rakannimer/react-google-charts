@@ -44,12 +44,24 @@ class App extends React.Component {
           >
             <Chart
               chartType="LineChart"
-              data={this.data()}
+              rows={[[8, 12], [4, 5.5]]}
+              columns={[
+                {
+                  type: "number",
+                  label: "Age",
+                  id: "Age"
+                },
+                {
+                  type: "number",
+                  label: "Weight",
+                  id: "Weight"
+                }
+              ]}
               options={{}}
               graphID="LineChart"
               width="33%"
               height="400px"
-              legend_toggle
+              legendToggle
             />
             <Chart
               chartType="ScatterChart"
@@ -58,7 +70,7 @@ class App extends React.Component {
               graphID="ScatterChart"
               width="33%"
               height="400px"
-              legend_toggle
+              legendToggle
             />
             <Chart
               chartType="ColumnChart"
@@ -67,7 +79,7 @@ class App extends React.Component {
               graphID="ColumnChart"
               width="33%"
               height="400px"
-              legend_toggle
+              legendToggle
             />
             <Chart
               chartType="BarChart"
@@ -76,7 +88,7 @@ class App extends React.Component {
               graphID="BarChart"
               width="33%"
               height="400px"
-              legend_toggle
+              legendToggle
             />
             <Chart
               chartType="AreaChart"
@@ -85,7 +97,7 @@ class App extends React.Component {
               graphID="AreaChart"
               width="33%"
               height="400px"
-              legend_toggle
+              legendToggle
             />
             <Chart
               chartType="Table"
@@ -94,7 +106,7 @@ class App extends React.Component {
               graphID="Table"
               width="33%"
               height="400px"
-              legend_toggle
+              legendToggle
             />
           </div>
         )}
