@@ -20,6 +20,8 @@
     "react-dom": ">=15.0.0"
   },
   "devDependencies": {
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
     "jsdoc": "^3.4.0",
     "jsdom": "^9.5.0",
     "object-assign": "^4.1.0",
