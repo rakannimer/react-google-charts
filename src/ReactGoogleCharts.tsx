@@ -47,6 +47,7 @@ export type ReactGoogleChartProps = {
   graph_id?: string;
   legendToggle?: boolean;
   legend_toggle?: boolean;
+  getChartWrapper?: (chartWrapper: GoogleChartWrapper) => void;
 };
 
 export type ReactGoogleChartState = {
@@ -69,7 +70,8 @@ export const chartDefaultProps = {
   columns: null as null | GoogleDataTableColumn[],
   events: null as null | ReactGoogleChartEvent[],
   legendToggle: false,
-  chartActions: null as null | GoogleChartAction[]
+  chartActions: null as null | GoogleChartAction[],
+  getChartWrapper: (chartWrapper: GoogleChartWrapper) => {}
 };
 
 export type ReactGoogleChartPropsWithDefaults = typeof chartDefaultProps &
@@ -202,6 +204,7 @@ export class Chart extends React.Component<
       );
       this.draw();
       this.listenToChartEvents();
+      props.getChartWrapper(this.chartWrapper);
       return;
     }
     if (props.events !== prevProps.events) {
