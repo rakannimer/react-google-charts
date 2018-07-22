@@ -1,0 +1,15 @@
+{
+  "include": ["./src/"],
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": ["es2018", "dom"],
+    "outDir": "./build/",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "removeComments": true
+  }
+}
