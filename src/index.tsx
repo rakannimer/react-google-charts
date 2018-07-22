@@ -1,8 +1,7 @@
 import React from "react";
 //@ts-ignore
-import Script from "react-load-script";
+import * as Script from "react-load-script";
 
-import { DEFAULT_CHART_COLORS as DEFAULT_COLORS } from "./constants";
 import {
   GoogleViz,
   GoogleChartWrapperChartType,
@@ -13,8 +12,6 @@ import {
   GoogleVizEventName,
   GoogleChartAction
 } from "./types";
-import { hasDOM } from "./utils";
-const { Component, createElement, Fragment } = React;
 export type WindowWithMaybeGoogle = Window & { google?: any };
 
 let uniqueID = 0;
@@ -31,15 +28,13 @@ export type ReactGoogleChartProps = {
   options: Partial<ChartWrapperOptions["options"]>;
   loader: JSX.Element;
   data: any[];
-  rows: GoogleDataTableRow[] | null;
-  columns?: GoogleDataTableColumn[];
+  rows: GoogleDataTableRow[];
+  columns: GoogleDataTableColumn[];
   chartActions: GoogleChartAction[];
-  events?:
-    | {
-        eventName: GoogleVizEventName;
-        callback: (chartWrapper: GoogleChartWrapper) => void;
-      }[]
-    | null;
+  events: {
+    eventName: GoogleVizEventName;
+    callback: (chartWrapper: GoogleChartWrapper) => void;
+  }[];
 };
 
 export type ReactGoogleChartState = {
@@ -47,8 +42,18 @@ export type ReactGoogleChartState = {
   google: null | GoogleViz;
 };
 
+export const chartDefaultProps = {
+  graphID: generateUniqueID(),
+  options: {},
+  rows: null,
+  columns: null,
+  data: null,
+  events: null,
+  legendToggle: false
+};
+
 class Chart extends React.Component<
-  ReactGoogleChartProps,
+  ReactGoogleChartProps & typeof chartDefaultProps,
   ReactGoogleChartState
 > {
   state: ReactGoogleChartState = {
@@ -56,30 +61,25 @@ class Chart extends React.Component<
     google: null
   };
 
-  chart: GoogleChartWrapper | null = null;
+  chartWrapper: GoogleChartWrapper | null = null;
   hidden_columns = {};
 
   componentWillUnmount() {
-    if (this.chart === null || this.state.google === null) {
+    if (this.chartWrapper === null || this.state.google === null) {
       return;
     }
-    this.state.google.visualization.events.removeAllListeners(this.chart);
+    this.state.google.visualization.events.removeAllListeners(
+      this.chartWrapper
+    );
   }
-  static defaultProps = {
-    graphID: generateUniqueID(),
-    options: {},
-    rows: null,
-    columns: null,
-    data: null,
-    events: null
-  };
+  static defaultProps = chartDefaultProps;
   private draw = () => {
-    if (this.chart === null || this.state.google === null) return;
+    if (this.chartWrapper === null || this.state.google === null) return;
     const canBuildUsingRowsAndColumns =
       this.props.rows !== null && this.props.columns !== null;
     const canBuildUsingData = this.props.data !== null;
     if (canBuildUsingData) {
-      this.chart.setDataTable(this.props.data);
+      this.chartWrapper.setDataTable(this.props.data);
     } else if (canBuildUsingRowsAndColumns) {
       let dataTable = this.state.google.visualization.arrayToDataTable([]);
       for (let column of this.props.columns) {
@@ -89,10 +89,10 @@ class Chart extends React.Component<
         dataTable.addRow(row);
       }
 
-      this.chart.setDataTable(dataTable);
+      this.chartWrapper.setDataTable(dataTable);
     }
-    this.chart.setOptions(this.props.options);
-    this.chart.draw();
+    this.chartWrapper.setOptions(this.props.options);
+    this.chartWrapper.draw();
   };
   // private initialize = () => {
 
@@ -105,8 +105,8 @@ class Chart extends React.Component<
     currentActions: GoogleChartAction[],
     previousActions: GoogleChartAction[]
   ) => {
-    if (this.chart === null) return;
-    const chart = this.chart.getChart();
+    if (this.chartWrapper === null) return;
+    const chart = this.chartWrapper.getChart();
     for (let chartAction of previousActions) {
       chart.removeAction(chartAction.id);
     }
@@ -114,34 +114,30 @@ class Chart extends React.Component<
       chart.setAction({
         id: chartAction.id,
         text: chartAction.text,
-        action: () => chartAction.action(this.chart as GoogleChartWrapper)
+        action: () =>
+          chartAction.action(this.chartWrapper as GoogleChartWrapper)
       });
     }
   };
 
   listenToChartEvents = () => {
-    if (this.state.google === null || !this.chart) {
+    if (this.state.google === null || !this.chartWrapper) {
       return;
     }
-    if (this.props.legendToggle) {
-      console.log("Listening to select");
-      this.state.google.visualization.events.addListener(
-        this.chart,
-        "select",
-        this.handleLegendToggle
-      );
+    if (this.props.events === null) {
+      return;
     }
-    if (!this.props.events) return;
-    this.state.google.visualization.events.removeAllListeners(this.chart);
+    this.state.google.visualization.events.removeAllListeners(
+      this.chartWrapper
+    );
     for (let event of this.props.events) {
       const { eventName, callback } = event;
       this.state.google.visualization.events.addListener(
-        this.chart,
+        this.chartWrapper,
         eventName,
         callback
       );
     }
-    // console.log(this.props.legendToggle);
   };
   componentDidUpdate(
     prevProps: ReactGoogleChartProps,
@@ -157,7 +153,7 @@ class Chart extends React.Component<
         options: this.props.options,
         containerId: this.props.graphID
       };
-      this.chart = new this.state.google.visualization.ChartWrapper(
+      this.chartWrapper = new this.state.google.visualization.ChartWrapper(
         chartConfig
       );
       this.draw();
@@ -179,19 +175,18 @@ class Chart extends React.Component<
       this.setChartActions(this.props.chartActions, prevProps.chartActions);
     }
   }
-  private handleLegendToggle = () => {
-    if (this.chart === null) return;
-    if (!this.props.legendToggle) {
-      return;
-    }
-    const selection = this.chart.getSelection();
-    if (selection.length > 0) {
-      if (selection[0].row == null) {
-        const column = selection[0].column;
-        this.togglePoints(column);
-      }
-    }
-  };
+  // private handleLegendToggle = () => {
+  //   if (this.chartWrapper === null) return;
+  //   if (!this.props.legendToggle) {
+  //     return;
+  //   }
+  //   const selection = this.chartWrapper.getChart().getSelection();
+  //   if (selection.length > 0) {
+  //     if (selection[0].row == null) {
+  //       const column = selection[0].column;
+  //     }
+  //   }
+  // };
   private handleGoogleChartsLoaderScriptLoaded = (
     windowGoogleCharts: GoogleViz
   ) => {
@@ -221,7 +216,7 @@ class Chart extends React.Component<
     };
     return (
       <div id={this.props.graphID} style={divStyle}>
-        <Fragment>
+        <React.Fragment>
           <Script
             url="https://www.gstatic.com/charts/loader.js"
             onError={this.handleGoogleChartsLoaderScriptErrored}
@@ -237,45 +232,15 @@ class Chart extends React.Component<
             }}
           />
           {this.props.loader ? this.props.loader : "Rendering Chart..."}
-        </Fragment>
+        </React.Fragment>
       </div>
     );
   }
 }
-// Chart.defaultProps = {
-//   chartType: "LineChart",
-//   rows: [],
-//   columns: [],
-//   options: {
-//     chart: {
-//       title: "Chart Title",
-//       subtitle: "Subtitle"
-//     },
-//     hAxis: { title: "X Label" },
-//     vAxis: { title: "Y Label" },
-//     width: "100%",
-//     height: "100%"
-//   },
-//   width: "400px",
-//   height: "300px",
-//   chartEvents: [],
-//   chartActions: null,
-//   data: null,
-//   legend_toggle: false,
-//   allowEmptyRows: false,
-//   loadCharts: true,
-//   loader: createElement("div", null, "Rendering Chart"),
-//   chartPackages: ["corechart"],
-//   chartVersion: "current",
-//   chartLanguage: "en",
-//   numberFormat: null,
-//   dateFormat: null,
-//   formatters: [],
-//   diffdata: null
-// };
-
-var index = { Chart };
-// export const C = (props:Partial<ReactGoogleChartProps>) => { return <Chart {...props}/>}
-// const chart = Chart as React.ComponentType<Partial<ReactGoogleChartProps>>;
-export default index;
 export { Chart };
+export default Chart;
+// var index = { Chart };
+// // export const C = (props:Partial<ReactGoogleChartProps>) => { return <Chart {...props}/>}
+// // const chart = Chart as React.ComponentType<Partial<ReactGoogleChartProps>>;
+// export default index;
+// export { Chart };
