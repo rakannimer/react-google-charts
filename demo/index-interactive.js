@@ -1,7 +1,7 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-import { Chart, googleChartLoader } from '../src/index';
+import { Chart } from "../src/index";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +11,15 @@ class App extends React.Component {
   }
 
   data() {
-    return [['Age', 'Avg. Weight'], [70, 183], [55, 192], [40, 175], [20, 150], [8, 12], [4, 5.5]];
+    return [
+      ["Age", "Avg. Weight"],
+      [70, 183],
+      [55, 192],
+      [40, 175],
+      [20, 150],
+      [8, 12],
+      [4, 5.5]
+    ];
   }
 
   toggleCharts() {
@@ -19,25 +27,26 @@ class App extends React.Component {
   }
 
   render() {
-    googleChartLoader
-      .init({
-        chartPackages: Chart.defaultProps.chartPackages,
-        chartVersion: Chart.defaultProps.chartVersion,
-        chartLanguage: Chart.defaultProps.chartLanguage,
-      })
-      .then(() => {});
     return (
       <div>
         <div>
           <button onClick={this.toggleCharts}>Toggle Charts</button>
         </div>
         {this.state.renderCharts && (
-          <div style={{ margin: 'auto', padding: '0px 5%', display: 'flex', flex: 'auto', flexFlow: 'row wrap' }}>
+          <div
+            style={{
+              margin: "auto",
+              padding: "0px 5%",
+              display: "flex",
+              flex: "auto",
+              flexFlow: "row wrap"
+            }}
+          >
             <Chart
               chartType="LineChart"
               data={this.data()}
               options={{}}
-              graph_id="LineChart"
+              graphID="LineChart"
               width="33%"
               height="400px"
               legend_toggle
@@ -45,8 +54,8 @@ class App extends React.Component {
             <Chart
               chartType="ScatterChart"
               data={this.data()}
-              options={{ colors: ['salmon'] }}
-              graph_id="ScatterChart"
+              options={{ colors: ["salmon"] }}
+              graphID="ScatterChart"
               width="33%"
               height="400px"
               legend_toggle
@@ -54,8 +63,8 @@ class App extends React.Component {
             <Chart
               chartType="ColumnChart"
               data={this.data()}
-              options={{ colors: ['limegreen'] }}
-              graph_id="ColumnChart"
+              options={{ colors: ["limegreen"] }}
+              graphID="ColumnChart"
               width="33%"
               height="400px"
               legend_toggle
@@ -63,8 +72,8 @@ class App extends React.Component {
             <Chart
               chartType="BarChart"
               data={this.data()}
-              options={{ colors: ['orange'] }}
-              graph_id="BarChart"
+              options={{ colors: ["orange"] }}
+              graphID="BarChart"
               width="33%"
               height="400px"
               legend_toggle
@@ -72,8 +81,8 @@ class App extends React.Component {
             <Chart
               chartType="AreaChart"
               data={this.data()}
-              options={{ colors: ['violet'] }}
-              graph_id="AreaChart"
+              options={{ colors: ["violet"] }}
+              graphID="AreaChart"
               width="33%"
               height="400px"
               legend_toggle
@@ -81,8 +90,8 @@ class App extends React.Component {
             <Chart
               chartType="Table"
               data={this.data()}
-              options={{ showRowNumber: false, width: '100%', height: '100%' }}
-              graph_id="Table"
+              options={{ showRowNumber: false, width: "100%", height: "100%" }}
+              graphID="Table"
               width="33%"
               height="400px"
               legend_toggle
@@ -94,4 +103,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById("app"));

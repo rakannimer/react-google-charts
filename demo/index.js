@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Chart } from "../src/index.tsx";
+import { Chart } from "react-google-charts";
 
 class InteractiveChart extends React.Component {
   constructor(props) {
@@ -24,7 +24,6 @@ class InteractiveChart extends React.Component {
   componentDidMount() {
     let i = 0;
     setTimeout(() => {
-      // setInterval(() => {
       i++;
       this.setState(state => {
         return Object.assign({}, state, {
@@ -36,15 +35,6 @@ class InteractiveChart extends React.Component {
   render() {
     return (
       <div>
-        {/* <Chart
-  chartType="ScatterChart"
-  data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
-  options={{}}
-  // graphID="ScatterChart1"
-  width="100%"
-  height="400px"
-  legend_toggle
-/> */}
         <Chart
           chartType="LineChart"
           rows={this.state.rows}
@@ -54,9 +44,17 @@ class InteractiveChart extends React.Component {
           // graphID="ScatterChart1"
           width="100%"
           height="400px"
-          legendToggle={true}
         />
         {/* <Chart
+  chartType="ScatterChart"
+  data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
+  options={{}}
+  // graphID="ScatterChart1"
+  width="100%"
+  height="400px"
+  legend_toggle
+/> */
+        /* <Chart
   chartType="ScatterChart"
   data={[["Age", "Weight"], [8, 12], [4, 5.5]]}
   options={{}}

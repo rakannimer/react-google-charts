@@ -1,7 +1,6 @@
 import React from "react";
 //@ts-ignore
-import * as Script from "react-load-script";
-
+import Script from "react-load-script";
 import {
   GoogleViz,
   GoogleChartWrapperChartType,
@@ -62,8 +61,7 @@ class Chart extends React.Component<
   };
 
   chartWrapper: GoogleChartWrapper | null = null;
-  hidden_columns = {};
-
+  static defaultProps = chartDefaultProps;
   componentWillUnmount() {
     if (this.chartWrapper === null || this.state.google === null) {
       return;
@@ -72,7 +70,7 @@ class Chart extends React.Component<
       this.chartWrapper
     );
   }
-  static defaultProps = chartDefaultProps;
+
   private draw = () => {
     if (this.chartWrapper === null || this.state.google === null) return;
     const canBuildUsingRowsAndColumns =
@@ -175,18 +173,6 @@ class Chart extends React.Component<
       this.setChartActions(this.props.chartActions, prevProps.chartActions);
     }
   }
-  // private handleLegendToggle = () => {
-  //   if (this.chartWrapper === null) return;
-  //   if (!this.props.legendToggle) {
-  //     return;
-  //   }
-  //   const selection = this.chartWrapper.getChart().getSelection();
-  //   if (selection.length > 0) {
-  //     if (selection[0].row == null) {
-  //       const column = selection[0].column;
-  //     }
-  //   }
-  // };
   private handleGoogleChartsLoaderScriptLoaded = (
     windowGoogleCharts: GoogleViz
   ) => {
@@ -231,7 +217,8 @@ class Chart extends React.Component<
               }
             }}
           />
-          {this.props.loader ? this.props.loader : "Rendering Chart..."}
+          {this.state.loadingStatus === "loading" &&
+            (this.props.loader ? this.props.loader : "Rendering Chart...")}
         </React.Fragment>
       </div>
     );
@@ -239,8 +226,3 @@ class Chart extends React.Component<
 }
 export { Chart };
 export default Chart;
-// var index = { Chart };
-// // export const C = (props:Partial<ReactGoogleChartProps>) => { return <Chart {...props}/>}
-// // const chart = Chart as React.ComponentType<Partial<ReactGoogleChartProps>>;
-// export default index;
-// export { Chart };

@@ -1,14 +1,16 @@
 {
   "name": "react-google-charts",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.0-alpha.3",
   "type": "react-component",
   "description": "react-google-charts React component",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "umd": "dist/index.umd.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "umd": "dist/index.js",
+  "types": "dist/index.ts",
   "scripts": {
-    "start": "parcel demo/index.html -d demo-build/",
-    "build": "rollup -c"
+    "start": "parcel demo/index-interactive.html -d demo-build/",
+    "build": "parcel build src/index.tsx",
+    "test": "tsc"
   },
   "dependencies": {
     "react-load-script": "^0.0.6"
@@ -20,13 +22,11 @@
   "devDependencies": {
     "jsdoc": "^3.4.0",
     "jsdom": "^9.5.0",
-    "microbundle": "^0.4.4",
     "object-assign": "^4.1.0",
     "parcel-bundler": "^1.8.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "rollup": "^0.63.4",
-    "rollup-plugin-typescript2": "^0.16.1",
+    "react-google-charts": "^2.0.0-alpha.2",
     "typescript": "^2.9.2"
   },
   "gh-pages-deploy": {
