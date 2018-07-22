@@ -8,7 +8,9 @@ import {
   GoogleChartWrapper,
   GoogleVizEventName,
   GoogleChartAction,
-  GoogleDataTable
+  GoogleDataTable,
+  GoogleDataTableRow,
+  GoogleDataTableColumn
 } from "./types";
 import { DEFAULT_CHART_COLORS } from "./constants";
 
@@ -29,6 +31,8 @@ export type ReactGoogleChartProps = {
   options: Partial<ChartWrapperOptions["options"]>;
   loader: JSX.Element;
   data: any[];
+  rows: GoogleDataTableRow[];
+  columns: GoogleDataTableColumn[];
   chartActions: GoogleChartAction[];
   events: {
     eventName: GoogleVizEventName;
@@ -43,11 +47,17 @@ export type ReactGoogleChartState = {
 };
 
 export const chartDefaultProps = {
+  // <DEPRECATED_PROPS>
+  graph_id: null,
+  legend_toggle: false,
+  // </DEPRECATED_PROPS>
   graphID: null,
   options: {
     colors: null as null | string[]
   },
   data: null,
+  rows: null,
+  columns: null,
   events: null,
   legendToggle: false
 };
@@ -64,29 +74,40 @@ class Chart extends React.Component<
   graphID: null | string = null;
   chartWrapper: GoogleChartWrapper | null = null;
   static defaultProps = chartDefaultProps;
+
   private getGraphID = () => {
-    if (this.props.graphID === null) {
+    if (this.props.graphID === null && this.props.graph_id === null) {
       if (this.graphID === null) {
         this.graphID = generateUniqueID();
       }
       return this.graphID;
+    } else if (this.props.graphID !== null && this.props.graph_id === null) {
+      this.graphID = this.props.graphID;
+    } else if (this.props.graph_id !== null && this.props.graphID === null) {
+      this.graphID = this.props.graph_id;
+    } else {
+      this.graphID = this.props.graphID;
     }
-    return this.props.graphID;
+    return this.graphID as string;
   };
-  componentWillUnmount() {
-    if (this.chartWrapper === null || this.state.google === null) {
-      return;
-    }
-    this.state.google.visualization.events.removeAllListeners(
-      this.chartWrapper
-    );
-  }
 
   private draw = () => {
     if (this.chartWrapper === null || this.state.google === null) return;
-    let dataTable = this.state.google.visualization.arrayToDataTable(
-      this.props.data
-    );
+
+    let dataTable: GoogleDataTable;
+    if (this.props.data !== null) {
+      dataTable = this.state.google.visualization.arrayToDataTable(
+        this.props.data
+      );
+    } else if (this.props.rows !== null && this.props.columns !== null) {
+      dataTable = this.state.google.visualization.arrayToDataTable([
+        this.props.columns,
+        ...this.props.rows
+      ]);
+    } else {
+      dataTable = this.state.google.visualization.arrayToDataTable([]);
+    }
+
     const columnCount = dataTable.getNumberOfColumns();
     for (let i = 0; i < columnCount; i += 1) {
       const columnID = this.getColumnID(dataTable, i);
@@ -100,7 +121,6 @@ class Chart extends React.Component<
           id: previousColumnID,
           type: previousColumnType
         });
-      } else {
       }
     }
     this.chartWrapper.setOptions(this.props.options);
@@ -143,8 +163,46 @@ class Chart extends React.Component<
   componentDidMount() {
     this.setState({ loadingStatus: "loading" });
   }
-
-  setChartActions = (
+  componentDidUpdate(
+    prevProps: ReactGoogleChartProps,
+    prevState: ReactGoogleChartState
+  ) {
+    if (
+      prevState.loadingStatus !== "ready" &&
+      this.state.loadingStatus === "ready" &&
+      this.state.google !== null
+    ) {
+      const chartConfig = {
+        chartType: this.props.chartType,
+        options: this.props.options,
+        containerId: this.getGraphID()
+      };
+      this.chartWrapper = new this.state.google.visualization.ChartWrapper(
+        chartConfig
+      );
+      this.draw();
+      this.listenToChartEvents();
+      return;
+    }
+    if (this.props.events !== prevProps.events) {
+      this.listenToChartEvents();
+    }
+    if (this.props.chartActions !== prevProps.chartActions) {
+      this.setChartActions(this.props.chartActions, prevProps.chartActions);
+    }
+    if (this.props.data !== prevProps.data) {
+      this.draw();
+    }
+  }
+  componentWillUnmount() {
+    if (this.chartWrapper === null || this.state.google === null) {
+      return;
+    }
+    this.state.google.visualization.events.removeAllListeners(
+      this.chartWrapper
+    );
+  }
+  private setChartActions = (
     currentActions: GoogleChartAction[],
     previousActions: GoogleChartAction[]
   ) => {
@@ -162,13 +220,13 @@ class Chart extends React.Component<
       });
     }
   };
-  getColumnID = (dataTable: GoogleDataTable, columnIndex: number) => {
+  private getColumnID = (dataTable: GoogleDataTable, columnIndex: number) => {
     return (
       dataTable.getColumnId(columnIndex) ||
       dataTable.getColumnLabel(columnIndex)
     );
   };
-  listenToChartEvents = () => {
+  private listenToChartEvents = () => {
     if (this.state.google === null || this.chartWrapper === null) {
       return;
     }
@@ -185,7 +243,7 @@ class Chart extends React.Component<
         );
       }
     }
-    if (this.props.legendToggle === true) {
+    if (this.props.legendToggle === true || this.props.legend_toggle === true) {
       this.listenToLegendToggle();
     }
   };
@@ -238,37 +296,7 @@ class Chart extends React.Component<
       }
     );
   };
-  componentDidUpdate(
-    prevProps: ReactGoogleChartProps,
-    prevState: ReactGoogleChartState
-  ) {
-    if (
-      prevState.loadingStatus !== "ready" &&
-      this.state.loadingStatus === "ready" &&
-      this.state.google !== null
-    ) {
-      const chartConfig = {
-        chartType: this.props.chartType,
-        options: this.props.options,
-        containerId: this.getGraphID()
-      };
-      this.chartWrapper = new this.state.google.visualization.ChartWrapper(
-        chartConfig
-      );
-      this.draw();
-      this.listenToChartEvents();
-      return;
-    }
-    if (this.props.events !== prevProps.events) {
-      this.listenToChartEvents();
-    }
-    if (this.props.chartActions !== prevProps.chartActions) {
-      this.setChartActions(this.props.chartActions, prevProps.chartActions);
-    }
-    if (this.props.data !== prevProps.data) {
-      this.draw();
-    }
-  }
+
   private handleGoogleChartsLoaderScriptLoaded = (
     windowGoogleCharts: GoogleViz
   ) => {
