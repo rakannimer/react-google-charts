@@ -4,7 +4,7 @@
 
 [![NPM](https://nodei.co/npm/react-google-charts.png?downloads=true&downloadRank=true)](https://npmjs.org/package/react-google-charts)
 
-A thin, typed, React wrapper over Google Charts Visualization and Charts API.
+A thin, typed, React wrapper for [Google Charts](https://developers.google.com/chart/interactive/docs/reference).
 
 - [React Google Charts](#react-google-charts)
   - [Installation](#installation)
@@ -79,43 +79,38 @@ render(<App />, document.querySelector("#app"));
 ```javascript
 import { Chart } from "react-google-charts";
 import React from "react";
+import { render } from "react-dom";
 
-class ExampleChart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: {
-        title: "Age vs. Weight comparison",
-        hAxis: { title: "Age", minValue: 0, maxValue: 15 },
-        vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
-        legend: "none"
-      },
-      data: [
-        ["Age", "Weight"],
-        [8, 12],
-        [4, 5.5],
-        [11, 14],
-        [4, 5],
-        [3, 3.5],
-        [6.5, 7]
-      ]
-    };
-  }
-  render() {
-    return (
-      <Chart
-        chartType="ScatterChart"
-        data={this.state.data}
-        options={this.state.options}
-        graphID="ScatterChart"
-        width="100%"
-        height="400px"
-        legendToggle
-      />
-    );
-  }
-}
-export default ExampleChart;
+const options = {
+  title: "Age vs. Weight comparison",
+  hAxis: { title: "Age", minValue: 0, maxValue: 15 },
+  vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
+  legend: "none"
+};
+const data = [
+  ["Age", "Weight"],
+  [8, 12],
+  [4, 5.5],
+  [11, 14],
+  [4, 5],
+  [3, 3.5],
+  [6.5, 7]
+];
+
+const ExampleChart = () => {
+  return (
+    <Chart
+      chartType="ScatterChart"
+      data={data}
+      options={options}
+      width="80%"
+      height="400px"
+      legendToggle
+    />
+  );
+};
+
+render(<ExampleChart />, document.getElementByID("app"));
 ```
 
 ### Initialize using rows and columns :
@@ -167,53 +162,44 @@ The callback has the component as an argument.
 import React from "react";
 import { Chart } from "react-google-charts";
 
-class ExampleChart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.chartEvents = [
-      {
-        eventName: "select",
-        callback(Chart) {
-          // Returns Chart so you can access props and  the ChartWrapper object from chart.wrapper
-          console.log("Selected ", Chart.chart.getSelection());
-        }
-      }
-    ];
-    this.state = {
-      options: {
-        title: "Age vs. Weight comparison",
-        hAxis: { title: "Age", minValue: 0, maxValue: 15 },
-        vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
-        legend: "none"
-      },
-      rows: [[8, 12], [4, 5.5], [11, 14], [4, 5], [3, 3.5], [6.5, 7]],
-      columns: [
-        {
-          type: "number",
-          label: "Age"
-        },
-        {
-          type: "number",
-          label: "Weight"
-        }
-      ]
-    };
+const chartEvents = [
+  {
+    eventName: "select",
+    callback(chartWrapper) {
+      console.log("Selected ", chartWrapper.getChart().getSelection());
+    }
   }
-  render() {
-    return (
-      <Chart
-        chartType="ScatterChart"
-        rows={this.state.rows}
-        columns={this.state.columns}
-        options={this.state.options}
-        graphID="ScatterChart"
-        width="100%"
-        height="400px"
-        chartEvents={this.chartEvents}
-      />
-    );
-  }
-}
+];
+const data = [
+  ["age", "weight"],
+  [8, 12],
+  [4, 5.5],
+  [11, 14],
+  [4, 5],
+  [3, 3.5],
+  [6.5, 7]
+];
+
+const options = {
+  title: "Age vs. Weight comparison",
+  hAxis: { title: "Age", minValue: 0, maxValue: 15 },
+  vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
+  legend: "none"
+};
+const ExampleChart = () => {
+  return (
+    <Chart
+      chartType="ScatterChart"
+      data={data}
+      options={options}
+      graphID="ScatterChart"
+      width="100%"
+      height="400px"
+      chartEvents={chartEvents}
+    />
+  );
+};
+
 export default ExampleChart;
 ```
 
