@@ -142,6 +142,7 @@ export class Chart extends React.Component<
         });
       }
     }
+    this.chartWrapper.getChart() && this.chartWrapper.getChart().clearChart();
     this.chartWrapper.setOptions(options);
     this.chartWrapper.setDataTable(dataTable);
     this.chartWrapper.draw();
@@ -353,6 +354,7 @@ export class Chart extends React.Component<
   private handleGoogleChartsLoaderScriptErrored = () => {
     this.setState(state => ({ ...state, loadingStatus: "errored" }));
   };
+
   render() {
     const divStyle = {
       height:
