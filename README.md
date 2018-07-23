@@ -83,8 +83,8 @@ import { render } from "react-dom";
 
 const options = {
   title: "Age vs. Weight comparison",
-  hAxis: { title: "Age", minValue: 0, maxValue: 15 },
-  vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
+  hAxis: { title: "Age", viewWindow: { min: 0, max: 15 } },
+  vAxis: { title: "Weight", viewWindow: { min: 0, max: 15 } },
   legend: "none"
 };
 const data = [
@@ -182,8 +182,8 @@ const data = [
 
 const options = {
   title: "Age vs. Weight comparison",
-  hAxis: { title: "Age", minValue: 0, maxValue: 15 },
-  vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
+  hAxis: { title: "Age", viewWindow: { min: 0, max: 15 } },
+  vAxis: { title: "Weight", viewWindow: { min: 0, max: 15 } },
   legend: "none"
 };
 const ExampleChart = () => {
