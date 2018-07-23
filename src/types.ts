@@ -81,7 +81,7 @@ export type GoogleChartWrapperChartType =
   | "DiffChart"
   | "DonutChart"
   | "GanttChart"
-  | "GaugeChart"
+  | "Gauge"
   | "GeoChart"
   | "Histogram"
   | "LineChart"
@@ -92,6 +92,7 @@ export type GoogleChartWrapperChartType =
   | "ScatterChart"
   | "SteppedAreaChart"
   | "TableChart"
+  | "Timeline"
   | "TreeMap"
   | "WaterfallChart"
   | "WordTree";
