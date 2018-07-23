@@ -219,6 +219,9 @@ export class Chart extends React.Component<
     if (props.data !== prevProps.data) {
       this.draw();
     }
+    if (props.rows !== prevProps.rows || props.columns !== prevProps.columns) {
+      this.draw();
+    }
   }
   componentWillUnmount() {
     if (this.chartWrapper === null || this.state.google === null) {
