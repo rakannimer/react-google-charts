@@ -33,6 +33,7 @@ export interface ChartWrapperProps {
     height?: number;
     is3D?: boolean;
     title?: string;
+    backgroundColor: string;
   };
   dataTable?: {};
   dataSourceUrl?: string;
@@ -104,6 +105,7 @@ export interface ChartWrapperOptions {
     height: number;
     is3D: boolean;
     title: string;
+    backgroundColor: string;
     hAxis: { title: string; minValue: number; maxValue: number };
     vAxis: { title: string; minValue: number; maxValue: number };
     legend: string;
@@ -353,6 +355,8 @@ export type GoogleChartOptions = {
   width?: number;
   height?: number;
   is3D?: boolean;
+  backgroundColor: string;
+
   title?: string;
   hAxis?: {
     minValue?: number;
