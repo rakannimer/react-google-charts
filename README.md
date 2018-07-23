@@ -188,6 +188,11 @@ export default ExampleChart;
 
 ## Examples
 
+### Area Chart
+
+- [Code](./sandboxes/area-chart/)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/area-chart)
+
 ### Run the example app
 
 ```bash
