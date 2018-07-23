@@ -182,8 +182,13 @@ export class Chart extends React.Component<
     });
     this.chartWrapper.draw();
   };
+  onResize = () => {
+    if (this.chartWrapper === null) return;
+    this.chartWrapper.draw();
+  };
   componentDidMount() {
     this.setState({ loadingStatus: "loading" });
+    window.addEventListener("resize", this.onResize);
   }
   componentDidUpdate(
     prevProps: ReactGoogleChartPropsWithDefaults,
@@ -228,6 +233,7 @@ export class Chart extends React.Component<
     if (this.chartWrapper === null || this.state.google === null) {
       return;
     }
+    window.removeEventListener("resize", this.onResize);
     this.state.google.visualization.events.removeAllListeners(
       this.chartWrapper
     );

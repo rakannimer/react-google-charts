@@ -1,6 +1,6 @@
 {
   "name": "react-google-charts",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "type": "react-component",
   "description": "react-google-charts React component",
   "main": "dist/index.js",
@@ -11,7 +11,8 @@
     "precommit": "lint-staged && npm run test",
     "start": "parcel demo/index.html -d demo-build/",
     "build": "tsc && parcel build src/index.tsx && cp build/*.d.ts dist/",
-    "test": "tsc"
+    "test": "tsc",
+    "prepublish": "npm run build"
   },
   "lint-staged": {
     "*.{ts,tsx,json,js}": [
