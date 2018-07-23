@@ -106,8 +106,20 @@ export interface ChartWrapperOptions {
     is3D: boolean;
     title: string;
     backgroundColor: string;
-    hAxis: { title: string; minValue: number; maxValue: number };
-    vAxis: { title: string; minValue: number; maxValue: number };
+    hAxis?: {
+      minValue?: number;
+      maxValue?: number;
+      ticks?: number[];
+      title?: string;
+      viewWindow?: { max?: number; min?: number };
+    };
+    vAxis?: {
+      minValue?: number;
+      maxValue?: number;
+      ticks?: number[];
+      title?: string;
+      viewWindow?: { max?: number; min?: number };
+    };
     legend: string;
     colors: string[];
   }>;
@@ -360,13 +372,17 @@ export type GoogleChartOptions = {
   title?: string;
   hAxis?: {
     minValue?: number;
+    maxValue?: number;
     ticks?: number[];
     title?: string;
+    viewWindow?: { max?: number; min?: number };
   };
   vAxis?: {
     minValue?: number;
+    maxValue?: number;
     ticks?: number[];
     title?: string;
+    viewWindow?: { max?: number; min?: number };
   };
   bubble?: {};
   pieHole?: number;
