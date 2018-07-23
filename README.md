@@ -134,16 +134,18 @@ const ExampleChart = () => {
           label: "Weight"
         }
       ]}
-      options={{
-        title: "Age vs. Weight comparison",
-        hAxis: {
-          title: "Age",
-          viewWindow: { min: 0, max: 15 }
-        },
-        vAxis: { title: "Weight", viewWindow: { min: 0, max: 15 } },
-        legend: "none"
-      }}
-      graphID="ScatterChart"
+      options={
+        // Chart options
+        {
+          title: "Age vs. Weight comparison",
+          hAxis: {
+            title: "Age",
+            viewWindow: { min: 0, max: 15 }
+          },
+          vAxis: { title: "Weight", viewWindow: { min: 0, max: 15 } },
+          legend: "none"
+        }
+      }
       width={"100%"}
       height={"400px"}
       legendToggle
