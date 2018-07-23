@@ -6,6 +6,37 @@
 
 A thin, typed, React wrapper over Google Charts Visualization and Charts API.
 
+- [React Google Charts](#react-google-charts)
+  - [Installation](#installation)
+  - [Quick Start](#quick-start)
+  - [Quick Walkthrough](#quick-walkthrough)
+    - [Initialize from data array :](#initialize-from-data-array)
+    - [Initialize using rows and columns :](#initialize-using-rows-and-columns)
+    - [Listen to chart events](#listen-to-chart-events)
+  - [Examples](#examples)
+    - [Area Chart](#area-chart)
+    - [Bar Chart](#bar-chart)
+    - [Bubble Chart](#bubble-chart)
+    - [Calendar Chart](#calendar-chart)
+    - [Candlestick Chart](#candlestick-chart)
+    - [Column Chart](#column-chart)
+    - [Donut Chart](#donut-chart)
+    - [Gantt Chart](#gantt-chart)
+    - [Gauge Chart](#gauge-chart)
+    - [Geo Chart](#geo-chart)
+    - [Histogram Chart](#histogram-chart)
+    - [Line Chart](#line-chart)
+    - [Sankey Chart](#sankey-chart)
+    - [Scatter Chart](#scatter-chart)
+    - [Stepped Area Chart](#stepped-area-chart)
+    - [Table Chart](#table-chart)
+    - [Timeline Chart](#timeline-chart)
+    - [Treemap Chart](#treemap-chart)
+    - [Waterfall Chart](#waterfall-chart)
+    - [Wordtree Chart](#wordtree-chart)
+    - [Run the example app](#run-the-example-app)
+  - [Contributing](#contributing)
+
 ## Installation
 
 With your favorite package manager (yarn, pnpm or npm) :
@@ -190,8 +221,103 @@ export default ExampleChart;
 
 ### Area Chart
 
-- [Code](./sandboxes/area-chart/)
+- [Code](./sandboxes/area-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/area-chart)
+
+### Bar Chart
+
+- [Code](./sandboxes/bar-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart)
+
+### Bubble Chart
+
+- [Code](./sandboxes/bubble-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart)
+
+### Calendar Chart
+
+- [Code](./sandboxes/calendar/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/calendar)
+
+### Candlestick Chart
+
+- [Code](./sandboxes/candlestick/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick)
+
+### Column Chart
+
+- [Code](./sandboxes/column-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/column-chart)
+
+### Donut Chart
+
+- [Code](./sandboxes/donut-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/donut-chart)
+
+### Gantt Chart
+
+- [Code](./sandboxes/gantt-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gantt-chart)
+
+### Gauge Chart
+
+- [Code](./sandboxes/gauge/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gauge)
+
+### Geo Chart
+
+- [Code](./sandboxes/geo-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/geo-chart)
+
+### Histogram Chart
+
+- [Code](./sandboxes/geo-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/geo-chart)
+
+### Line Chart
+
+- [Code](./sandboxes/linechart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/linechart)
+
+### Sankey Chart
+
+- [Code](./sandboxes/sankey/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/sankey)
+
+### Scatter Chart
+
+- [Code](./sandboxes/scatter-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/scatter-chart)
+
+### Stepped Area Chart
+
+- [Code](./sandboxes/stepped-area-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/stepped-area-chart)
+
+### Table Chart
+
+- [Code](./sandboxes/table/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/table)
+
+### Timeline Chart
+
+- [Code](./sandboxes/timeline/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/timeline)
+
+### Treemap Chart
+
+- [Code](./sandboxes/treemap/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/treemap)
+
+### Waterfall Chart
+
+- [Code](./sandboxes/waterfall/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/waterfall)
+
+### Wordtree Chart
+
+- [Code](./sandboxes/wordtree/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/wordtree)
 
 ### Run the example app
 
