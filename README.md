@@ -110,8 +110,11 @@ const ExampleChart = () => {
       ]}
       options={{
         title: "Age vs. Weight comparison",
-        hAxis: { title: "Age", minValue: 0, maxValue: 15 },
-        vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
+        hAxis: {
+          title: "Age",
+          viewWindow: { min: 0, max: 15 }
+        },
+        vAxis: { title: "Weight", viewWindow: { min: 0, max: 15 } },
         legend: "none"
       }}
       graphID="ScatterChart"
