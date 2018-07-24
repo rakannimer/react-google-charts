@@ -13,7 +13,8 @@ const data = [
 const options = {
   title: "Company Performance",
   curveType: "function",
-  legend: { position: "bottom" }
+  legend: { position: "bottom" },
+  pageSize: 1
 };
 class App extends React.Component {
   render() {
