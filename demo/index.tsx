@@ -34,6 +34,16 @@ class App extends React.Component {
   }
 }
 
+const gaugeOptions = {
+  width: 400,
+  height: 120,
+  redFrom: 90,
+  redTo: 100,
+  yellowFrom: 75,
+  yellowTo: 90,
+  minorTicks: 5
+};
+
 class InteractiveChart extends React.Component<{}, { data: any[][] }> {
   constructor(props) {
     super(props);
@@ -79,6 +89,21 @@ class InteractiveChart extends React.Component<{}, { data: any[][] }> {
   render() {
     return (
       <div>
+        <Chart
+          chartType="Gauge"
+          width="100%"
+          height="400px"
+          data={[
+            [
+              { type: "string", label: "Label" },
+              { type: "number", label: "Value" }
+            ],
+            ["Memory", 80],
+            ["CPU", 55],
+            ["Network", 20]
+          ]}
+          options={gaugeOptions}
+        />
         <App />
         <Chart
           chartType="LineChart"
