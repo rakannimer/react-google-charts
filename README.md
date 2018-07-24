@@ -26,6 +26,7 @@ A thin, typed, React wrapper for [Google Charts](https://developers.google.com/c
     - [Geo Chart](#geo-chart)
     - [Histogram Chart](#histogram-chart)
     - [Line Chart](#line-chart)
+    - [Pie Chart](#pie-chart)
     - [Sankey Chart](#sankey-chart)
     - [Scatter Chart](#scatter-chart)
     - [Stepped Area Chart](#stepped-area-chart)
@@ -266,6 +267,11 @@ export default ExampleChart;
 
 - [Code](./sandboxes/linechart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/linechart)
+
+### Pie Chart
+
+- [Code](./sandboxes/pie-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/pie-chart)
 
 ### Sankey Chart
 
