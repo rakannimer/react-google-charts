@@ -48,6 +48,8 @@ export type ReactGoogleChartProps = {
   legendToggle?: boolean;
   legend_toggle?: boolean;
   getChartWrapper?: (chartWrapper: GoogleChartWrapper) => void;
+  className?: string;
+  style?: React.CSSProperties;
 };
 
 export type ReactGoogleChartState = {
@@ -71,7 +73,9 @@ export const chartDefaultProps = {
   events: null as null | ReactGoogleChartEvent[],
   legendToggle: false,
   chartActions: null as null | GoogleChartAction[],
-  getChartWrapper: (chartWrapper: GoogleChartWrapper) => {}
+  getChartWrapper: (chartWrapper: GoogleChartWrapper) => {},
+  className: "",
+  style: {}
 };
 
 export type ReactGoogleChartPropsWithDefaults = typeof chartDefaultProps &
@@ -370,10 +374,15 @@ export class Chart extends React.Component<
       height:
         this.props.height || (this.props.options && this.props.options.height),
       width:
-        this.props.width || (this.props.options && this.props.options.width)
+        this.props.width || (this.props.options && this.props.options.width),
+      ...this.props.style
     };
     return (
-      <div id={this.getGraphID()} style={divStyle}>
+      <div
+        id={this.getGraphID()}
+        style={divStyle}
+        className={this.props.className}
+      >
         <React.Fragment>
           <ReactGoogleChartsLoader
             onError={this.handleGoogleChartsLoaderScriptErrored}
