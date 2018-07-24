@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Chart } from "../src/index";
+import { Chart } from "../src";
 
 // Reference : https://developers.google.com/chart/interactive/docs/gallery/timeline
 const columns = [
@@ -106,8 +106,20 @@ class InteractiveChart extends React.Component<{}, { data: any[][] }> {
         />
         <App />
         <Chart
-          chartType="LineChart"
-          data={this.state.data}
+          chartType="BarChart"
+          data={{
+            cols: [
+              { id: "task", label: "Task", type: "string" },
+              { id: "hours", label: "Hours per Day", type: "number" }
+            ],
+            rows: [
+              { c: [{ v: "Work" }, { v: 11 }] },
+              { c: [{ v: "Eat" }, { v: 2 }] },
+              { c: [{ v: "Commute" }, { v: 2 }] },
+              { c: [{ v: "Watch TV" }, { v: 2 }] },
+              { c: [{ v: "Sleep" }, { v: 7, f: "7.000" }] }
+            ]
+          }}
           options={{ colors: ["green"] }}
           width="100%"
           height="400px"

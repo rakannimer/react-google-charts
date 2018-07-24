@@ -8,6 +8,7 @@ export type GoogleViz = {
   charts: GoogleChartLoader;
   visualization: {
     ChartWrapper: GoogleChartWrapper;
+    DataTable: GoogleDataTable;
     events: GoogleVizEvents;
     arrayToDataTable: GoogleArrayToDataTable;
   };
@@ -279,6 +280,8 @@ export type GoogleDataTableSortColumns =
     }[];
 
 export type GoogleDataTable = {
+  // https://developers.google.com/chart/interactive/docs/reference#dataparam
+  new (dataParam: any): GoogleDataTable;
   addColumn: (column: GoogleDataTableColumn) => number;
   addRow: (row?: GoogleDataTableRow) => number;
   addRows: (rows?: GoogleDataTableRow[] | number[] | any[]) => number;

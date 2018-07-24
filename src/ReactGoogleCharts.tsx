@@ -35,7 +35,7 @@ export type ReactGoogleChartProps = {
   chartType: GoogleChartWrapperChartType;
   options?: Partial<ChartWrapperOptions["options"]>;
   loader?: JSX.Element;
-  data?: any[];
+  data?: any[] | {};
   rows?: GoogleDataTableRow[];
   columns?: GoogleDataTableColumn[];
   chartActions?: GoogleChartAction[];
@@ -121,7 +121,11 @@ export class Chart extends React.Component<
       .props as ReactGoogleChartPropsWithDefaults;
     let dataTable: GoogleDataTable;
     if (data !== null) {
-      dataTable = this.state.google.visualization.arrayToDataTable(data);
+      if (Array.isArray(data)) {
+        dataTable = this.state.google.visualization.arrayToDataTable(data);
+      } else {
+        dataTable = new this.state.google.visualization.DataTable(data);
+      }
     } else if (rows !== null && columns !== null) {
       dataTable = this.state.google.visualization.arrayToDataTable([
         columns,
