@@ -25,7 +25,11 @@ const generateUniqueID = () => {
 
 export type ReactGoogleChartEvent = {
   eventName: GoogleVizEventName;
-  callback: (chartWrapper: GoogleChartWrapper) => void;
+  callback: (
+    chartWrapper: GoogleChartWrapper,
+    google: GoogleViz,
+    eventArgs: any
+  ) => void;
 };
 
 export type ReactGoogleChartProps = {
@@ -39,7 +43,7 @@ export type ReactGoogleChartProps = {
   rows?: GoogleDataTableRow[];
   columns?: GoogleDataTableColumn[];
   chartActions?: GoogleChartAction[];
-  events?: ReactGoogleChartEvent[];
+  chartEvents?: ReactGoogleChartEvent[];
   chartVersion?: GoogleChartVersion;
   chartPackages?: GoogleChartPackages[];
   chartLanguage?: string;
@@ -73,7 +77,7 @@ export const chartDefaultProps = {
   data: null,
   rows: null as null | GoogleDataTableRow[],
   columns: null as null | GoogleDataTableColumn[],
-  events: null as null | ReactGoogleChartEvent[],
+  chartEvents: null as null | ReactGoogleChartEvent[],
   legendToggle: false,
   chartActions: null as null | GoogleChartAction[],
   getChartWrapper: (chartWrapper: GoogleChartWrapper, google: GoogleViz) => {},
@@ -227,7 +231,7 @@ export class Chart extends React.Component<
       props.getChartWrapper(this.chartWrapper, this.state.google);
       return;
     }
-    if (props.events !== prevProps.events) {
+    if (props.chartEvents !== prevProps.chartEvents) {
       this.listenToChartEvents();
     }
     if (props.chartActions !== null || prevProps.chartActions !== null) {
@@ -284,15 +288,19 @@ export class Chart extends React.Component<
     this.state.google.visualization.events.removeAllListeners(
       this.chartWrapper
     );
-    const { events, legend_toggle, legendToggle } = this
+    const { chartEvents, legend_toggle, legendToggle } = this
       .props as ReactGoogleChartPropsWithDefaults;
-    if (events !== null) {
-      for (let event of events) {
+    if (chartEvents !== null) {
+      for (let event of chartEvents) {
         const { eventName, callback } = event;
         this.state.google.visualization.events.addListener(
           this.chartWrapper,
           eventName,
-          callback
+          (...args: any[]) => {
+            if (this.chartWrapper !== null && this.state.google !== null) {
+              callback(this.chartWrapper, this.state.google, args);
+            }
+          }
         );
       }
     }
