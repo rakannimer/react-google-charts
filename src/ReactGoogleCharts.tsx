@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {
   GoogleViz,
   GoogleChartWrapperChartType,
@@ -47,7 +47,10 @@ export type ReactGoogleChartProps = {
   graph_id?: string;
   legendToggle?: boolean;
   legend_toggle?: boolean;
-  getChartWrapper?: (chartWrapper: GoogleChartWrapper) => void;
+  getChartWrapper?: (
+    chartWrapper: GoogleChartWrapper,
+    google: GoogleViz
+  ) => void;
   className?: string;
   style?: React.CSSProperties;
 };
@@ -73,7 +76,7 @@ export const chartDefaultProps = {
   events: null as null | ReactGoogleChartEvent[],
   legendToggle: false,
   chartActions: null as null | GoogleChartAction[],
-  getChartWrapper: (chartWrapper: GoogleChartWrapper) => {},
+  getChartWrapper: (chartWrapper: GoogleChartWrapper, google: GoogleViz) => {},
   className: "",
   style: {}
 };
@@ -221,7 +224,7 @@ export class Chart extends React.Component<
       );
       this.draw();
       this.listenToChartEvents();
-      props.getChartWrapper(this.chartWrapper);
+      props.getChartWrapper(this.chartWrapper, this.state.google);
       return;
     }
     if (props.events !== prevProps.events) {
