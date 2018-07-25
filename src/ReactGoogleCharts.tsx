@@ -10,7 +10,8 @@ import {
   GoogleDataTableRow,
   GoogleDataTableColumn,
   GoogleChartVersion,
-  GoogleChartPackages
+  GoogleChartPackages,
+  GoogleDataTableCell
 } from "./types";
 import { DEFAULT_CHART_COLORS } from "./constants";
 import { ReactGoogleChartsLoader } from "./ReactGoogleChartsLoader";
@@ -75,7 +76,7 @@ export const chartDefaultProps = {
     colors: null as null | string[]
   } as ChartWrapperOptions["options"],
   data: null,
-  rows: null as null | GoogleDataTableRow[],
+  rows: null as null | GoogleDataTableCell[][],
   columns: null as null | GoogleDataTableColumn[],
   chartEvents: null as null | ReactGoogleChartEvent[],
   legendToggle: false,
