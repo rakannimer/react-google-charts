@@ -51,7 +51,7 @@ npm i -s react-google-charts
 ## Quick Start
 
 ```javascript
-import React from "react";
+import * as React from "react";
 import { render } from "react-dom";
 import { Chart } from "react-google-charts";
 
@@ -79,7 +79,7 @@ render(<App />, document.querySelector("#app"));
 
 ```javascript
 import { Chart } from "react-google-charts";
-import React from "react";
+import * as React from "react";
 import { render } from "react-dom";
 
 const options = {
@@ -162,7 +162,7 @@ Set the chart-specific events you want to listen to and the corresponding callba
 The callback has the component as an argument.
 
 ```javascript
-import React from "react";
+import * as React from "react";
 import { Chart } from "react-google-charts";
 
 const chartEvents = [
