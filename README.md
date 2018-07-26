@@ -271,8 +271,8 @@ export default ExampleChart;
 
 ### Org Chart
 
-- [Code](./sandboxes/orgchart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/orgchart)
+- [Code](./sandboxes/org-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/org-chart)
 
 ### Pie Chart
 
