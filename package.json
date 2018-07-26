@@ -1,6 +1,6 @@
 {
   "name": "react-google-charts",
-  "version": "2.0.19",
+  "version": "2.0.20",
   "type": "react-component",
   "description": "react-google-charts React component",
   "main": "dist/index.js",

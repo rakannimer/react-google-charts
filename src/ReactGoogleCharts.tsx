@@ -159,8 +159,8 @@ export class Chart extends React.Component<
       }
     }
     const chart = this.chartWrapper.getChart();
-    if (chart !== null && "clearChart" in chart) {
-      chart.clearChart();
+    if (this.chartWrapper.getChartType() === "Timeline") {
+      this.chartWrapper.getChart() && this.chartWrapper.getChart().clearChart();
     }
 
     this.chartWrapper.setOptions(options);
@@ -257,7 +257,9 @@ export class Chart extends React.Component<
     this.state.google.visualization.events.removeAllListeners(
       this.chartWrapper
     );
-    this.chartWrapper.getChart() && this.chartWrapper.getChart().clearChart();
+    if (this.chartWrapper.getChartType() === "Timeline") {
+      this.chartWrapper.getChart() && this.chartWrapper.getChart().clearChart();
+    }
   }
   private setChartActions = (
     currentActions: GoogleChartAction[],
