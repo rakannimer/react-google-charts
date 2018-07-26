@@ -158,8 +158,9 @@ export class Chart extends React.Component<
         });
       }
     }
-    if (this.chartWrapper.getChartType() === "Timeline") {
-      this.chartWrapper.getChart() && this.chartWrapper.getChart().clearChart();
+    const chart = this.chartWrapper.getChart();
+    if (chart !== null && "clearChart" in chart) {
+      chart.clearChart();
     }
 
     this.chartWrapper.setOptions(options);
