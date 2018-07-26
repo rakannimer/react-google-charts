@@ -110,6 +110,7 @@ export interface ChartWrapperOptions {
       ticks?: number[];
       title?: string;
       viewWindow?: { max?: number; min?: number };
+      [otherOptionKey: string]: any;
     };
     vAxis?: {
       minValue?: number;
@@ -117,8 +118,9 @@ export interface ChartWrapperOptions {
       ticks?: number[];
       title?: string;
       viewWindow?: { max?: number; min?: number };
+      [otherOptionKey: string]: any;
     };
-    legend: string;
+    legend: any;
     colors: string[];
     [otherOptionKey: string]: any;
   }>;
@@ -127,6 +129,7 @@ export interface ChartWrapperOptions {
   query?: string;
   refreshInterval?: number;
   view: any[] | {};
+  [otherOptionKey: string]: any;
 }
 
 export type GoogleChartAction = {
@@ -376,14 +379,16 @@ export type GoogleChartOptions = {
     maxValue?: number;
     ticks?: number[];
     title?: string;
-    viewWindow?: { max?: number; min?: number };
+    viewWindow?: { max?: number; min?: number; [otherOptionKey: string]: any };
+    [otherOptionKey: string]: any;
   };
   vAxis?: {
     minValue?: number;
     maxValue?: number;
     ticks?: number[];
     title?: string;
-    viewWindow?: { max?: number; min?: number };
+    viewWindow?: { max?: number; min?: number; [otherOptionKey: string]: any };
+    [otherOptionKey: string]: any;
   };
   bubble?: {};
   pieHole?: number;
@@ -397,6 +402,7 @@ export type GoogleChartOptions = {
     | {
         position?: string;
         maxLines?: number;
+        [otherOptionKey: string]: any;
       };
   curveType?: string;
   showTooltip?: boolean;
@@ -413,10 +419,12 @@ export type GoogleChartOptions = {
   candlestick?: {
     fallingColor?: { strokeWidth?: number; fill?: string }; // red
     risingColor?: { strokeWidth?: number; fill?: string }; // green
+    [otherOptionKey: string]: any;
   };
   wordtree?: {
     format?: string;
     word?: string;
+    [otherOptionKey: string]: any;
   };
   [otherOptionKey: string]: any;
 };
