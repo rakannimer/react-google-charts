@@ -1,8 +1,4 @@
-// windowGoogleCharts.load(version || "current", {
-//   packages: packages || ["corechart"],
-//   language: language || "en",
-//   mapsApiKey
-// });
+// Complete Google Charts Type Definition : https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/google.visualization/index.d.ts
 
 export type GoogleViz = {
   charts: GoogleChartLoader;
@@ -124,6 +120,7 @@ export interface ChartWrapperOptions {
     };
     legend: string;
     colors: string[];
+    [otherOptionKey: string]: any;
   }>;
   dataTable?: GoogleDataTable;
   dataSourceUrl?: string;
@@ -421,6 +418,7 @@ export type GoogleChartOptions = {
     format?: string;
     word?: string;
   };
+  [otherOptionKey: string]: any;
 };
 
 /* 
