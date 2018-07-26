@@ -118,7 +118,12 @@ export interface ChartWrapperOptions {
       title?: string;
       viewWindow?: { max?: number; min?: number };
     };
-    legend: string;
+    legend?:
+      | string
+      | {
+          position?: string;
+          maxLines?: number;
+        };
     colors: string[];
     [otherOptionKey: string]: any;
   }>;
