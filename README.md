@@ -1,8 +1,10 @@
 # React Google Charts
 
-[![CircleCI](https://circleci.com/gh/rakannimer/react-google-charts.svg?style=shield)](https://circleci.com/gh/RakanNimer/react-google-charts)
-
-[![NPM](https://nodei.co/npm/react-google-charts.png?downloads=true&downloadRank=true)](https://npmjs.org/package/react-google-charts)
+[![CircleCI][circleci-badge]][circleci-href]
+[![NPM][npm-dm-badge]][npm-href]
+[![NPM][npm-version-badge]][npm-href]
+[![NPM][npm-license-badge]][npm-href]
+[![BundlePhobia][bundlephobia-badge]][bundlephobia-href]
 
 A thin, typed, React wrapper for [Google Charts](https://developers.google.com/chart/interactive/docs/reference).
 
@@ -10,8 +12,8 @@ A thin, typed, React wrapper for [Google Charts](https://developers.google.com/c
   - [Installation](#installation)
   - [Quick Start](#quick-start)
   - [Quick Walkthrough](#quick-walkthrough)
-    - [Initialize from data array :](#initialize-from-data-array)
-    - [Initialize using rows and columns :](#initialize-using-rows-and-columns)
+    - [Initialize from data array](#initialize-from-data-array)
+    - [Initialize using rows and columns](#initialize-using-rows-and-columns)
     - [Listen to chart events](#listen-to-chart-events)
   - [Examples](#examples)
     - [Area Chart](#area-chart)
@@ -76,7 +78,7 @@ render(<App />, document.querySelector("#app"));
 
 ## Quick Walkthrough
 
-### Initialize from data array :
+### Initialize from data array
 
 ```javascript
 import { Chart } from "react-google-charts";
@@ -115,7 +117,7 @@ const ExampleChart = () => {
 render(<ExampleChart />, document.getElementByID("app"));
 ```
 
-### Initialize using rows and columns :
+### Initialize using rows and columns
 
 ```javascript
 import * as React from "react";
@@ -261,8 +263,8 @@ export default ExampleChart;
 
 ### Histogram Chart
 
-- [Code](./sandboxes/geo-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/geo-chart)
+- [Code](./sandboxes/histogram/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/histogram)
 
 ### Line Chart
 
@@ -331,3 +333,12 @@ npm start
 ## Contributing
 
 Contributions are very welcome. Check out [CONTRIBUTING.md](CONTRIBUTING.md)
+
+[circleci-href]: https://circleci.com/gh/rakannimer/react-google-charts
+[circleci-badge]: https://img.shields.io/circleci/project/github/rakannimer/react-google-charts.svg
+[npm-href]: https://www.npmjs.com/package/react-google-charts
+[npm-dm-badge]: https://img.shields.io/npm/dm/react-google-charts.svg
+[npm-version-badge]: https://badgen.net/npm/v/react-google-charts
+[npm-license-badge]: https://img.shields.io/github/license/rakannimer/react-google-charts.svg
+[bundlephobia-badge]: https://img.shields.io/bundlephobia/minzip/react-google-charts.svg
+[bundlephobia-href]: https://bundlephobia.com/result?p=react-google-charts
