@@ -28,6 +28,8 @@ A thin, typed, React wrapper for [Google Charts](https://developers.google.com/c
     - [Geo Chart](#geo-chart)
     - [Histogram Chart](#histogram-chart)
     - [Line Chart](#line-chart)
+    - [Material Bar Chart](#material-bar-chart)
+    - [Material Line Chart](#material-line-chart)
     - [Org Chart](#org-chart)
     - [Pie Chart](#pie-chart)
     - [Sankey Chart](#sankey-chart)
@@ -270,6 +272,16 @@ export default ExampleChart;
 
 - [Code](./sandboxes/linechart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/linechart)
+
+### Material Bar Chart
+
+- [Code](./sandboxes/material-bar-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-bar-chart)
+
+### Material Line Chart
+
+- [Code](./sandboxes/material-line-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-line-chart)
 
 ### Org Chart
 
