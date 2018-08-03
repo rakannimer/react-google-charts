@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Chart } from "../src";
-
 // Reference : https://developers.google.com/chart/interactive/docs/gallery/timeline
 const columns = [
   { type: "string", id: "President" },
@@ -14,6 +13,27 @@ const rows = [
   ["Adams", new Date(1797, 2, 4), new Date(1801, 2, 4)],
   ["Jefferson", new Date(1801, 2, 4), new Date(1809, 2, 4)]
 ];
+
+const companyOne = [["x", "y"], [1, 1000], [2, 1170], [3, 660], [4, 1030]];
+
+const companyTwo = [
+  ["x", "y"],
+  [1.1, 1100],
+  [2.1, 1000],
+  [2.8, 960],
+  [4.4, 1300]
+];
+const DiffChart = () => {
+  return (
+    <Chart
+      chartType="ScatterChart"
+      diffdata={{ old: companyOne, new: companyTwo }}
+      width="100%"
+      height="400px"
+    />
+  );
+};
+
 class App extends React.Component {
   componentDidMount() {
     setInterval(() => {
@@ -23,6 +43,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <DiffChart />
         <Chart
           chartType="Timeline"
           data={[columns, ...rows]}
@@ -138,7 +159,7 @@ class InteractiveChart extends React.Component<{}, { data: any[][] }> {
           height="400px"
           legendToggle
           getChartWrapper={chartWrapper => {
-            console.log(chartWrapper.getChart());
+            console.log("chart ", chartWrapper.getChart());
           }}
         />
         <Chart

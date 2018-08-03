@@ -7,6 +7,7 @@ export type GoogleViz = {
     DataTable: GoogleDataTable;
     events: GoogleVizEvents;
     arrayToDataTable: GoogleArrayToDataTable;
+    [otherKeys: string]: any;
   };
 };
 

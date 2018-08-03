@@ -38,6 +38,10 @@ export type ReactGoogleChartProps = {
   width: string | number;
   graphID?: string;
   chartType: GoogleChartWrapperChartType;
+  diffdata?: {
+    old: any;
+    new: any;
+  };
   options?: Partial<ChartWrapperOptions["options"]>;
   loader?: JSX.Element;
   data?: any[] | {};
@@ -78,6 +82,7 @@ export const chartDefaultProps = {
   data: null,
   rows: null as null | GoogleDataTableCell[][],
   columns: null as null | GoogleDataTableColumn[],
+  diffdata: null as null | { old: any; new: any },
   chartEvents: null as null | ReactGoogleChartEvent[],
   legendToggle: false,
   chartActions: null as null | GoogleChartAction[],
@@ -125,9 +130,30 @@ export class Chart extends React.Component<
 
   private draw = () => {
     if (this.chartWrapper === null || this.state.google === null) return;
-    const { data, columns, rows, options, legend_toggle, legendToggle } = this
-      .props as ReactGoogleChartPropsWithDefaults;
+
+    const {
+      data,
+      diffdata,
+      columns,
+      rows,
+      options,
+      legend_toggle,
+      legendToggle,
+      chartType
+    } = this.props as ReactGoogleChartPropsWithDefaults;
     let dataTable: GoogleDataTable;
+    let chartDiff = null;
+    if (diffdata !== null) {
+      const oldData = this.state.google.visualization.arrayToDataTable(
+        diffdata.old
+      );
+      const newData = this.state.google.visualization.arrayToDataTable(
+        diffdata.new
+      );
+      chartDiff = this.state.google.visualization[
+        chartType
+      ].prototype.computeDiff(oldData, newData);
+    }
     if (data !== null) {
       if (Array.isArray(data)) {
         dataTable = this.state.google.visualization.arrayToDataTable(data);
@@ -166,6 +192,11 @@ export class Chart extends React.Component<
     this.chartWrapper.setOptions(options);
     this.chartWrapper.setDataTable(dataTable);
     this.chartWrapper.draw();
+
+    if (chartDiff !== null) {
+      this.chartWrapper.setDataTable(chartDiff);
+      this.chartWrapper.draw();
+    }
     if (legendToggle === true || legend_toggle === true) {
       this.grayOutHiddenColumns();
     }
