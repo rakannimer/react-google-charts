@@ -22,6 +22,7 @@ A thin, typed, React wrapper for [Google Charts](https://developers.google.com/c
     - [Calendar Chart](#calendar-chart)
     - [Candlestick Chart](#candlestick-chart)
     - [Column Chart](#column-chart)
+    - [Diff Chart](#diff-chart)
     - [Donut Chart](#donut-chart)
     - [Gantt Chart](#gantt-chart)
     - [Gauge Chart](#gauge-chart)
@@ -242,6 +243,11 @@ export default ExampleChart;
 
 - [Code](./sandboxes/column-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/column-chart)
+
+### Diff Chart
+
+- [Code](./sandboxes/diff-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/diff-chart)
 
 ### Donut Chart
 

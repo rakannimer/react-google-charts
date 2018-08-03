@@ -4,6 +4,6 @@
   "dependencies": {
     "react": "^16",
     "react-dom": "^16",
-    "react-google-charts": ">2.0.0"
+    "react-google-charts": ">2.0.20"
   }
 }
