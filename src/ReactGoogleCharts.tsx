@@ -433,23 +433,21 @@ export class Chart extends React.Component<
         style={divStyle}
         className={this.props.className}
       >
-        <React.Fragment>
-          <ReactGoogleChartsLoader
-            onError={this.handleGoogleChartsLoaderScriptErrored}
-            onLoad={() => {
-              const windowWithGoogle = window as Window & {
-                google?: GoogleViz;
-              };
-              if (windowWithGoogle.google) {
-                this.handleGoogleChartsLoaderScriptLoaded(
-                  windowWithGoogle.google as GoogleViz
-                );
-              }
-            }}
-          />
-          {this.state.loadingStatus === "loading" &&
-            (this.props.loader ? this.props.loader : "Rendering Chart...")}
-        </React.Fragment>
+        <ReactGoogleChartsLoader
+          onError={this.handleGoogleChartsLoaderScriptErrored}
+          onLoad={() => {
+            const windowWithGoogle = window as Window & {
+              google?: GoogleViz;
+            };
+            if (windowWithGoogle.google) {
+              this.handleGoogleChartsLoaderScriptLoaded(
+                windowWithGoogle.google as GoogleViz
+              );
+            }
+          }}
+        />
+        {this.state.loadingStatus === "loading" &&
+          (this.props.loader ? this.props.loader : "Rendering Chart...")}
       </div>
     );
   }
