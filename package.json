@@ -1,6 +1,6 @@
 {
   "name": "react-google-charts",
-  "version": "2.0.22",
+  "version": "2.0.23",
   "type": "react-component",
   "description": "react-google-charts React component",
   "main": "dist/index.js",
@@ -12,7 +12,9 @@
     "start": "parcel demo/index.html -d demo-build/",
     "build": "tsc && parcel build src/index.tsx && cp build/*.d.ts dist/",
     "test": "tsc",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build"
   },
   "lint-staged": {
     "*.{ts,tsx,json,js}": [
@@ -29,12 +31,12 @@
   "devDependencies": {
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
+    "docz": "0.8",
     "husky": "^1.0.0-rc.13",
     "jsdoc": "^3.4.0",
     "jsdom": "^9.5.0",
     "lint-staged": "^7.2.0",
     "object-assign": "^4.1.0",
-    "parcel-bundler": "^1.8.1",
     "prettier": "^1.13.7",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

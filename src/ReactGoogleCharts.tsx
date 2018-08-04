@@ -34,15 +34,15 @@ export type ReactGoogleChartEvent = {
 };
 
 export type ReactGoogleChartProps = {
-  height: string | number;
-  width: string | number;
+  height?: string | number;
+  width?: string | number;
   graphID?: string;
   chartType: GoogleChartWrapperChartType;
   diffdata?: {
     old: any;
     new: any;
   };
-  options?: Partial<ChartWrapperOptions["options"]>;
+  options?: ChartWrapperOptions["options"];
   loader?: JSX.Element;
   data?: any[] | {};
   rows?: GoogleDataTableRow[];
@@ -62,6 +62,17 @@ export type ReactGoogleChartProps = {
   ) => void;
   className?: string;
   style?: React.CSSProperties;
+  formatters?: {
+    column: number;
+    type:
+      | "ArrowFormat"
+      | "BarFormat"
+      | "ColorFormat"
+      | "DateFormat"
+      | "NumberFormat"
+      | "PatternFormat";
+    options?: {};
+  }[];
 };
 
 export type ReactGoogleChartState = {
@@ -88,7 +99,8 @@ export const chartDefaultProps = {
   chartActions: null as null | GoogleChartAction[],
   getChartWrapper: (chartWrapper: GoogleChartWrapper, google: GoogleViz) => {},
   className: "",
-  style: {}
+  style: {},
+  formatters: null
 };
 
 export type ReactGoogleChartPropsWithDefaults = typeof chartDefaultProps &
@@ -139,7 +151,8 @@ export class Chart extends React.Component<
       options,
       legend_toggle,
       legendToggle,
-      chartType
+      chartType,
+      formatters
     } = this.props as ReactGoogleChartPropsWithDefaults;
     let dataTable: GoogleDataTable;
     let chartDiff = null;
@@ -186,7 +199,7 @@ export class Chart extends React.Component<
     }
     const chart = this.chartWrapper.getChart();
     if (this.chartWrapper.getChartType() === "Timeline") {
-      this.chartWrapper.getChart() && this.chartWrapper.getChart().clearChart();
+      chart && chart.clearChart();
     }
 
     this.chartWrapper.setOptions(options);
@@ -197,10 +210,71 @@ export class Chart extends React.Component<
       this.chartWrapper.setDataTable(chartDiff);
       this.chartWrapper.draw();
     }
+    if (formatters !== null) {
+      this.applyFormatters(dataTable, formatters);
+      this.chartWrapper.setDataTable(dataTable);
+      this.chartWrapper.draw();
+    }
     if (legendToggle === true || legend_toggle === true) {
       this.grayOutHiddenColumns();
     }
   };
+
+  private applyFormatters = (dataTable: GoogleDataTable, formatters: any[]) => {
+    if (this.state.google === null) return;
+    for (let formatter of formatters) {
+      switch (formatter.type) {
+        case "ArrowFormat": {
+          const vizFormatter = new this.state.google.visualization.ArrowFormat(
+            formatter.options
+          );
+          vizFormatter.format(dataTable, formatter.column);
+          break;
+        }
+        case "BarFormat": {
+          const vizFormatter = new this.state.google.visualization.BarFormat(
+            formatter.options
+          );
+          vizFormatter.format(dataTable, formatter.column);
+          break;
+        }
+        case "ColorFormat": {
+          const vizFormatter = new this.state.google.visualization.ColorFormat(
+            formatter.options
+          );
+          const { ranges } = formatter;
+          for (let range of ranges) {
+            vizFormatter.addRange(...range);
+          }
+          vizFormatter.format(dataTable, formatter.column);
+          break;
+        }
+        case "DateFormat": {
+          const vizFormatter = new this.state.google.visualization.DateFormat(
+            formatter.options
+          );
+          vizFormatter.format(dataTable, formatter.column);
+          break;
+        }
+        case "NumberFormat": {
+          const vizFormatter = new this.state.google.visualization.NumberFormat(
+            formatter.options
+          );
+          vizFormatter.format(dataTable, formatter.column);
+          break;
+        }
+        case "PatternFormat": {
+          console.log(formatter);
+          const vizFormatter = new this.state.google.visualization.PatternFormat(
+            formatter.options
+          );
+          vizFormatter.format(dataTable, formatter.column);
+          break;
+        }
+      }
+    }
+  };
+
   private grayOutHiddenColumns = () => {
     if (this.chartWrapper === null || this.state.google === null) return;
     const dataTable = this.chartWrapper.getDataTable();
@@ -452,3 +526,5 @@ export class Chart extends React.Component<
     );
   }
 }
+
+export default Chart;
