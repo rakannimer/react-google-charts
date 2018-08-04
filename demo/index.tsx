@@ -14,19 +14,25 @@ const rows = [
   ["Jefferson", new Date(1801, 2, 4), new Date(1809, 2, 4)]
 ];
 
-const companyOne = [["x", "y"], [1, 1000], [2, 1170], [3, 660], [4, 1030]];
+const companyOne = [
+  ["Name", "Popularity"],
+  ["Cesar", 250],
+  ["Rachel", 4200],
+  ["Patrick", 2900],
+  ["Eric", 8200]
+];
 
 const companyTwo = [
-  ["x", "y"],
-  [1.1, 1100],
-  [2.1, 1000],
-  [2.8, 960],
-  [4.4, 1300]
+  ["Name", "Popularity"],
+  ["Cesar", 370],
+  ["Rachel", 600],
+  ["Patrick", 700],
+  ["Eric", 1500]
 ];
 const DiffChart = () => {
   return (
     <Chart
-      chartType="ScatterChart"
+      chartType="ColumnChart"
       diffdata={{ old: companyOne, new: companyTwo }}
       width="100%"
       height="400px"
