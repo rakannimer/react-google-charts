@@ -17,7 +17,7 @@
     "docz:build": "docz build"
   },
   "lint-staged": {
-    "*.{ts,tsx,json,js}": [
+    "*.{ts,tsx}": [
       "prettier --write"
     ]
   },
