@@ -31,7 +31,8 @@
   "devDependencies": {
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
-    "docz": "0.8",
+    "docz": "^0.9.5",
+    "docz-theme-default": "^0.9.5",
     "husky": "^1.0.0-rc.13",
     "jsdoc": "^3.4.0",
     "jsdom": "^9.5.0",
