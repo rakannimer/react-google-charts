@@ -5,7 +5,8 @@ module.exports = {
   dest: "docs",
   hashRouter: true,
   propsParser: false,
-  indexHtml: "src/docs/index.html"
+  indexHtml: "src/docs/index.html",
+  base: "/react-google-charts/"
   // themeConfig: {
   //   logo: {
   //     src: "/assets/logo.svg"
