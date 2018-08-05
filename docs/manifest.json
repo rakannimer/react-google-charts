@@ -4,8 +4,10 @@
   "src-docs-area-chart.js": "/static/js/src-docs-area-chart.755933ee.js",
   "src-docs-bar-chart.js": "/static/js/src-docs-bar-chart.509af531.js",
   "src-docs-bubble-chart.js": "/static/js/src-docs-bubble-chart.26c04cbe.js",
-  "src-docs-calendar-chart.js": "/static/js/src-docs-calendar-chart.6ad75e86.js",
-  "src-docs-candle-stick-chart.js": "/static/js/src-docs-candle-stick-chart.6d6f4758.js",
+  "src-docs-calendar-chart.js":
+    "/static/js/src-docs-calendar-chart.6ad75e86.js",
+  "src-docs-candle-stick-chart.js":
+    "/static/js/src-docs-candle-stick-chart.6d6f4758.js",
   "src-docs-column-chart.js": "/static/js/src-docs-column-chart.9eeee8b1.js",
   "src-docs-combo-chart.js": "/static/js/src-docs-combo-chart.2db1e0d0.js",
   "src-docs-diff-chart.js": "/static/js/src-docs-diff-chart.06032c1d.js",
@@ -18,9 +20,11 @@
   "src-docs-line-chart.js": "/static/js/src-docs-line-chart.b0fef69f.js",
   "src-docs-org-chart.js": "/static/js/src-docs-org-chart.5aefa59a.js",
   "src-docs-pie-chart.js": "/static/js/src-docs-pie-chart.6a7277ad.js",
-  "src-docs-sankey-diagram.js": "/static/js/src-docs-sankey-diagram.eedd5dae.js",
+  "src-docs-sankey-diagram.js":
+    "/static/js/src-docs-sankey-diagram.eedd5dae.js",
   "src-docs-scatter-chart.js": "/static/js/src-docs-scatter-chart.f796061e.js",
-  "src-docs-stepped-area-chart.js": "/static/js/src-docs-stepped-area-chart.bc34854b.js",
+  "src-docs-stepped-area-chart.js":
+    "/static/js/src-docs-stepped-area-chart.bc34854b.js",
   "src-docs-table-chart.js": "/static/js/src-docs-table-chart.c5ea444c.js",
   "src-docs-timeline.js": "/static/js/src-docs-timeline.816a5928.js",
   "src-docs-tree-map.js": "/static/js/src-docs-tree-map.3c9edb8a.js",
