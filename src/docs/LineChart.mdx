@@ -1,0 +1,151 @@
+---
+route: /line-chart
+name: Line Chart
+---
+
+import { Playground, PropsTable } from 'docz'
+import Component from 'react-component-component'
+import Chart from '../index'
+
+
+## Basic line chart with default styling
+
+<Playground>
+  <Chart 
+    width={"600px"}
+    height={"400px"}
+    chartType="LineChart"
+    loader={<div>Loading Chart</div>}
+    data={[
+      ['x', 'dogs'],
+      [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
+        [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35]
+    ]}
+    options={{
+      hAxis: {
+        title: 'Time'
+      },
+      vAxis: {
+        title: 'Popularity'
+      }
+    }}
+  />
+</Playground>
+
+
+
+## Multiple line types
+
+<Playground>
+  <Chart 
+    width={"600px"}
+    height={"400px"}
+    chartType="LineChart"
+    loader={<div>Loading Chart</div>}
+    data={[
+      ['x', 'dogs', 'cats'],
+      [0, 0, 0],    [1, 10, 5],   [2, 23, 15],  [3, 17, 9],   [4, 18, 10],  [5, 9, 5],
+      [6, 11, 3],   [7, 27, 19]
+    ]}
+    options={{
+      hAxis: {
+        title: 'Time'
+      },
+      vAxis: {
+        title: 'Popularity'
+      },
+      series: {
+        1: {curveType: 'function'}
+      }
+    }}
+  />
+</Playground>
+
+## Material Design LineChart
+
+<Playground>
+  <Chart 
+    width={"600px"}
+    height={"400px"}
+    chartType="Line"
+    loader={<div>Loading Chart</div>}
+    data={[
+      ['Day', 'Guardians of the Galaxy', 'The Avengers', 'Transformers: Age of Extinction'],
+      [1,  37.8, 80.8, 41.8],
+      [2,  30.9, 69.5, 32.4],
+      [3,  25.4,   57, 25.7],
+      [4,  11.7, 18.8, 10.5],
+      [5,  11.9, 17.6, 10.4],
+      [6,   8.8, 13.6,  7.7],
+      [7,   7.6, 12.3,  9.6],
+      [8,  12.3, 29.2, 10.6],
+      [9,  16.9, 42.9, 14.8],
+      [10, 12.8, 30.9, 11.6],
+      [11,  5.3,  7.9,  4.7],
+      [12,  6.6,  8.4,  5.2],
+      [13,  4.8,  6.3,  3.6],
+      [14,  4.2,  6.2,  3.4]
+    ]}
+    options={{
+      
+      chart: {
+        title: 'Box Office Earnings in First Two Weeks of Opening',
+        subtitle: 'in millions of dollars (USD)'
+      },
+    }}
+  />
+</Playground>
+
+
+## Material Design Dual Y Charts
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"500"}
+    chartType="Line"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [{type: 'date',label:'Day'}, "Average temperature", "Average hours of daylight"],
+      [new Date(2014, 0),  -.5,  5.7],
+      [new Date(2014, 1),   .4,  8.7],
+      [new Date(2014, 2),   .5,   12],
+      [new Date(2014, 3),  2.9, 15.3],
+      [new Date(2014, 4),  6.3, 18.6],
+      [new Date(2014, 5),    9, 20.9],
+      [new Date(2014, 6), 10.6, 19.8],
+      [new Date(2014, 7), 10.3, 16.6],
+      [new Date(2014, 8),  7.4, 13.3],
+      [new Date(2014, 9),  4.4,  9.9],
+      [new Date(2014, 10), 1.1,  6.6],
+      [new Date(2014, 11), -.2,  4.5]
+    ]}
+    options={{
+      chart: {
+        title: 'Average Temperatures and Daylight in Iceland Throughout the Year'
+      },
+      width: 900,
+      height: 500,
+      series: {
+        // Gives each series an axis name that matches the Y-axis below.
+        0: {axis: 'Temps'},
+        1: {axis: 'Daylight'}
+      },
+      axes: {
+        // Adds labels to each axis; they don't have to match the axis names.
+        y: {
+          Temps: {label: 'Temps (Celsius)'},
+          Daylight: {label: 'Daylight'}
+        }
+      }
+    }}
+  />
+</Playground>
+
+## Data Format
+
+[Complete Data Format Reference](https://developers.google.com/chart/interactive/docs/gallery/linechart#data-format)
+
+## Reference 
+
+[Original Google Charts Docs](https://developers.google.com/chart/interactive/docs/gallery/linechart)

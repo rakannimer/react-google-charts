@@ -7743,6 +7743,10 @@ react-breakpoints@^3.0.0:
     hoist-non-react-statics "2.5.0"
     lodash.debounce "4.0.8"
 
+react-component-component@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/react-component-component/-/react-component-component-1.2.1.tgz#ca40e6c1eabaa7ea5c1a14fc7417c701260f7edf"
+
 react-dev-utils@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-5.0.1.tgz#1f396e161fe44b595db1b186a40067289bf06613"

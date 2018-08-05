@@ -1,0 +1,511 @@
+---
+route: /gantt-chart
+name: Gantt Chart
+---
+
+import { Playground, PropsTable } from 'docz'
+import Component from 'react-component-component'
+import Chart from '../index'
+
+
+## Simple Example
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"400px"}
+    chartType="Gantt"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: "string", label: "Task ID" },
+        { type: "string", label: "Task Name" },
+        { type: "date", label: "Start Date" },
+        { type: "date", label: "End Date" },
+        { type: "number", label: "Duration" },
+        { type: "number", label: "Percent Complete" },
+        { type: "string", label: "Dependencies" }
+      ],
+      [
+        "Research",
+        "Find sources",
+        new Date(2015, 0, 1),
+        new Date(2015, 0, 5),
+        null,
+        100,
+        null
+      ],
+      [
+        "Write",
+        "Write paper",
+        null,
+        new Date(2015, 0, 9),
+        3* 24 * 60 * 60 * 1000,
+        25,
+        "Research,Outline"
+      ],
+      [
+        "Cite",
+        "Create bibliography",
+        null,
+        new Date(2015, 0, 7),
+        1* 24 * 60 * 60 * 1000,
+        20,
+        "Research"
+      ],
+      [
+        "Complete",
+        "Hand in paper",
+        null,
+        new Date(2015, 0, 10),
+        1* 24 * 60 * 60 * 1000,
+        0,
+        "Cite,Write"
+      ],
+      [
+        "Outline",
+        "Outline paper",
+        null,
+        new Date(2015, 0, 6),
+        1* 24 * 60 * 60 * 1000,
+        100,
+        "Research"
+      ]
+    ]}
+    
+  />
+</Playground>
+
+## No Dependencies
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"400px"}
+    chartType="Gantt"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: "string", label: "Task ID" },
+        { type: "string", label: "Task Name" },
+        { type: "string", label: "Resource" },
+        { type: "date", label: "Start Date" },
+        { type: "date", label: "End Date" },
+        { type: "number", label: "Duration" },
+        { type: "number", label: "Percent Complete" },
+        { type: "string", label: "Dependencies" }
+      ],
+       ['2014Spring', 'Spring 2014', 'spring',
+         new Date(2014, 2, 22), new Date(2014, 5, 20), null, 100, null],
+        ['2014Summer', 'Summer 2014', 'summer',
+         new Date(2014, 5, 21), new Date(2014, 8, 20), null, 100, null],
+        ['2014Autumn', 'Autumn 2014', 'autumn',
+         new Date(2014, 8, 21), new Date(2014, 11, 20), null, 100, null],
+        ['2014Winter', 'Winter 2014', 'winter',
+         new Date(2014, 11, 21), new Date(2015, 2, 21), null, 100, null],
+        ['2015Spring', 'Spring 2015', 'spring',
+         new Date(2015, 2, 22), new Date(2015, 5, 20), null, 50, null],
+        ['2015Summer', 'Summer 2015', 'summer',
+         new Date(2015, 5, 21), new Date(2015, 8, 20), null, 0, null],
+        ['2015Autumn', 'Autumn 2015', 'autumn',
+         new Date(2015, 8, 21), new Date(2015, 11, 20), null, 0, null],
+        ['2015Winter', 'Winter 2015', 'winter',
+         new Date(2015, 11, 21), new Date(2016, 2, 21), null, 0, null],
+        ['Football', 'Football Season', 'sports',
+         new Date(2014, 8, 4), new Date(2015, 1, 1), null, 100, null],
+        ['Baseball', 'Baseball Season', 'sports',
+         new Date(2015, 2, 31), new Date(2015, 9, 20), null, 14, null],
+        ['Basketball', 'Basketball Season', 'sports',
+         new Date(2014, 9, 28), new Date(2015, 5, 20), null, 86, null],
+        ['Hockey', 'Hockey Season', 'sports',
+         new Date(2014, 9, 8), new Date(2015, 5, 21), null, 89, null]
+    ]}
+    options={{
+      height: 400,
+      gantt: {
+        trackHeight: 30
+      }
+    }}
+    
+  />
+</Playground>
+
+
+## Grouping Resources
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"400px"}
+    chartType="Gantt"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: "string", label: "Task ID" },
+        { type: "string", label: "Task Name" },
+        { type: "string", label: "Resource" },
+
+        { type: "date", label: "Start Date" },
+        { type: "date", label: "End Date" },
+        { type: "number", label: "Duration" },
+        { type: "number", label: "Percent Complete" },
+        { type: "string", label: "Dependencies" }
+      ],
+      [
+        "Research",
+        "Find sources",
+        null,
+        new Date(2015, 0, 1),
+        new Date(2015, 0, 5),
+        null,
+        100,
+        null
+      ],
+      [
+        "Write",
+        "Write paper",
+        "write",
+        null,
+        new Date(2015, 0, 9),
+        3* 24 * 60 * 60 * 1000,
+        25,
+        "Research,Outline"
+      ],
+      [
+        "Cite",
+        "Create bibliography",
+        "write",
+        null,
+        new Date(2015, 0, 7),
+        1* 24 * 60 * 60 * 1000,
+        20,
+        "Research"
+      ],
+      [
+        "Complete",
+        "Hand in paper",
+        "complete",
+        null,
+        new Date(2015, 0, 10),
+        1* 24 * 60 * 60 * 1000,
+        0,
+        "Cite,Write"
+      ],
+      [
+        "Outline",
+        "Outline paper",
+        "write",
+        null,
+        new Date(2015, 0, 6),
+        1* 24 * 60 * 60 * 1000,
+        100,
+        "Research"
+      ]
+    ]}
+    
+  />
+</Playground>
+
+## Computed Start End From Duration
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"400px"}
+    chartType="Gantt"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: "string", label: "Task ID" },
+        { type: "string", label: "Task Name" },
+        { type: "string", label: "Resource" },
+
+        { type: "date", label: "Start Date" },
+        { type: "date", label: "End Date" },
+        { type: "number", label: "Duration" },
+        { type: "number", label: "Percent Complete" },
+        { type: "string", label: "Dependencies" }
+      ],
+      ['toTrain', 'Walk to train stop', 'walk', null, null, 5*60*1000, 100, null],
+      ['music', 'Listen to music', 'music', null, null, 70*60*1000, 100, null],
+      ['wait', 'Wait for train', 'wait', null, null, 10*60*1000, 100, 'toTrain'],
+      ['train', 'Train ride', 'train', null, null, 45*60*1000, 75, 'wait'],
+      ['toWork', 'Walk to work', 'walk', null, null, 10*60*1000, 0, 'train'],
+      ['work', 'Sit down at desk', null, null, null, 2*60*1000, 0, 'toWork'],
+    ]}
+    options={{
+      height: 275,
+      gantt: {
+        defaultStartDateMillis: new Date(2015, 3, 28)
+      }
+    }}
+  />
+</Playground>
+
+
+
+## Critical Path
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"275"}
+    chartType="Gantt"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: "string", label: "Task ID" },
+        { type: "string", label: "Task Name" },
+        { type: "string", label: "Resource" },
+
+        { type: "date", label: "Start Date" },
+        { type: "date", label: "End Date" },
+        { type: "number", label: "Duration" },
+        { type: "number", label: "Percent Complete" },
+        { type: "string", label: "Dependencies" }
+      ],
+      [
+        "Research",
+        "Find sources",
+        null,
+        new Date(2015, 0, 1),
+        new Date(2015, 0, 5),
+        null,
+        100,
+        null
+      ],
+      [
+        "Write",
+        "Write paper",
+        "write",
+        null,
+        new Date(2015, 0, 9),
+        3* 24 * 60 * 60 * 1000,
+        25,
+        "Research,Outline"
+      ],
+      [
+        "Cite",
+        "Create bibliography",
+        "write",
+        null,
+        new Date(2015, 0, 7),
+        1* 24 * 60 * 60 * 1000,
+        20,
+        "Research"
+      ],
+      [
+        "Complete",
+        "Hand in paper",
+        "complete",
+        null,
+        new Date(2015, 0, 10),
+        1* 24 * 60 * 60 * 1000,
+        0,
+        "Cite,Write"
+      ],
+      [
+        "Outline",
+        "Outline paper",
+        "write",
+        null,
+        new Date(2015, 0, 6),
+        1* 24 * 60 * 60 * 1000,
+        100,
+        "Research"
+      ]
+    ]}
+    options={{
+      gantt: {
+        criticalPathEnabled: true,
+        criticalPathStyle: {
+          stroke: '#e64a19',
+          strokeWidth: 5
+        }
+      }
+    }}
+  />
+</Playground>
+
+
+## Styling Arrows
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"400px"}
+    chartType="Gantt"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: "string", label: "Task ID" },
+        { type: "string", label: "Task Name" },
+        { type: "string", label: "Resource" },
+
+        { type: "date", label: "Start Date" },
+        { type: "date", label: "End Date" },
+        { type: "number", label: "Duration" },
+        { type: "number", label: "Percent Complete" },
+        { type: "string", label: "Dependencies" }
+      ],
+      [
+        "Research",
+        "Find sources",
+        null,
+        new Date(2015, 0, 1),
+        new Date(2015, 0, 5),
+        null,
+        100,
+        null
+      ],
+      [
+        "Write",
+        "Write paper",
+        "write",
+        null,
+        new Date(2015, 0, 9),
+        3* 24 * 60 * 60 * 1000,
+        25,
+        "Research,Outline"
+      ],
+      [
+        "Cite",
+        "Create bibliography",
+        "write",
+        null,
+        new Date(2015, 0, 7),
+        1* 24 * 60 * 60 * 1000,
+        20,
+        "Research"
+      ],
+      [
+        "Complete",
+        "Hand in paper",
+        "complete",
+        null,
+        new Date(2015, 0, 10),
+        1* 24 * 60 * 60 * 1000,
+        0,
+        "Cite,Write"
+      ],
+      [
+        "Outline",
+        "Outline paper",
+        "write",
+        null,
+        new Date(2015, 0, 6),
+        1* 24 * 60 * 60 * 1000,
+        100,
+        "Research"
+      ]
+    ]}
+    options={{
+      gantt:{
+        criticalPathEnabled: false, // Critical path arrows will be the same as other arrows.
+        arrow: {
+          angle: 100,
+          width: 5,
+          color: 'green',
+          radius: 0
+        }
+      }
+    }}
+    
+  />
+</Playground>
+
+
+## Styling Tracks
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"400px"}
+    chartType="Gantt"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: "string", label: "Task ID" },
+        { type: "string", label: "Task Name" },
+        { type: "string", label: "Resource" },
+
+        { type: "date", label: "Start Date" },
+        { type: "date", label: "End Date" },
+        { type: "number", label: "Duration" },
+        { type: "number", label: "Percent Complete" },
+        { type: "string", label: "Dependencies" }
+      ],
+      [
+        "Research",
+        "Find sources",
+        null,
+        new Date(2015, 0, 1),
+        new Date(2015, 0, 5),
+        null,
+        100,
+        null
+      ],
+      [
+        "Write",
+        "Write paper",
+        "write",
+        null,
+        new Date(2015, 0, 9),
+        3* 24 * 60 * 60 * 1000,
+        25,
+        "Research,Outline"
+      ],
+      [
+        "Cite",
+        "Create bibliography",
+        "write",
+        null,
+        new Date(2015, 0, 7),
+        1* 24 * 60 * 60 * 1000,
+        20,
+        "Research"
+      ],
+      [
+        "Complete",
+        "Hand in paper",
+        "complete",
+        null,
+        new Date(2015, 0, 10),
+        1* 24 * 60 * 60 * 1000,
+        0,
+        "Cite,Write"
+      ],
+      [
+        "Outline",
+        "Outline paper",
+        "write",
+        null,
+        new Date(2015, 0, 6),
+        1* 24 * 60 * 60 * 1000,
+        100,
+        "Research"
+      ]
+    ]}
+    options={{
+      gantt:{
+        criticalPathEnabled: false,
+        innerGridHorizLine: {
+          stroke: '#ffe0b2',
+          strokeWidth: 2
+        },
+        innerGridTrack: {fill: '#fff3e0'},
+        innerGridDarkTrack: {fill: '#ffcc80'}
+      }
+    }}
+    
+  />
+</Playground>
+
+
+# Data Format
+
+[Complete Data Format Reference](https://developers.google.com/chart/interactive/docs/gallery/ganttchart#data-format)
+
+# Reference 
+
+[Original Google Charts Docs](https://developers.google.com/chart/interactive/docs/gallery/ganttchart)

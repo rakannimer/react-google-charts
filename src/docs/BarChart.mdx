@@ -1,0 +1,207 @@
+---
+route: /bar-chart
+name: Bar Chart
+---
+
+
+import { Playground, PropsTable } from 'docz'
+import Chart from '../index'
+
+# Usage
+
+## Basic bar chart with multiple series
+
+<Playground>
+  <Chart 
+    width={"500px"}
+    height={"300px"}
+    chartType="BarChart"
+    loader={<div>Loading Chart</div>}
+    data={[
+      ['City', '2010 Population', '2000 Population'],
+      ['New York City, NY', 8175000, 8008000],
+      ['Los Angeles, CA', 3792000, 3694000],
+      ['Chicago, IL', 2695000, 2896000],
+      ['Houston, TX', 2099000, 1953000],
+      ['Philadelphia, PA', 1526000, 1517000]
+    ]}
+    options={{
+      title: 'Population of Largest U.S. Cities',
+      chartArea: {width: '50%'},
+      hAxis: {
+        title: 'Total Population',
+        minValue: 0
+      },
+      vAxis: {
+        title: 'City'
+      }
+    }}
+  />
+</Playground>
+
+
+## Material Design
+
+<Playground>
+  <Chart 
+    width={"500px"}
+    height={"300px"}
+    chartType="Bar"
+    loader={<div>Loading Chart</div>}
+    data={[
+      ['Year', 'Sales', 'Expenses', 'Profit'],
+      ['2014', 1000, 400, 200],
+      ['2015', 1170, 460, 250],
+      ['2016', 660, 1120, 300],
+      ['2017', 1030, 540, 350]
+    ]}
+    options={{
+      // Material design options
+      chart: {
+        title: 'Company Performance',
+        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+      }
+    }}
+  />
+</Playground>
+
+
+
+
+## Stacked bar chart with multiple series
+
+<Playground>
+  <Chart 
+    width={"500px"}
+    height={"300px"}
+    chartType="BarChart"
+    loader={<div>Loading Chart</div>}
+    data={[
+      ['City', '2010 Population', '2000 Population'],
+      ['New York City, NY', 8175000, 8008000],
+      ['Los Angeles, CA', 3792000, 3694000],
+      ['Chicago, IL', 2695000, 2896000],
+      ['Houston, TX', 2099000, 1953000],
+      ['Philadelphia, PA', 1526000, 1517000]
+    ]}
+    options={{
+      title: 'Population of Largest U.S. Cities',
+      chartArea: {width: '50%'},
+      isStacked: true,
+      hAxis: {
+        title: 'Total Population',
+        minValue: 0,
+      },
+      vAxis: {
+        title: 'City'
+      }
+    }}
+  />
+</Playground>
+
+## Customizable Bar Colors
+
+
+<Playground>
+  <Chart 
+    width={"500px"}
+    height={"300px"}
+    chartType="BarChart"
+    loader={<div>Loading Chart</div>}
+    data={[
+      ['City', '2010 Population', '2000 Population'],
+      ['New York City, NY', 8175000, 8008000],
+      ['Los Angeles, CA', 3792000, 3694000],
+      ['Chicago, IL', 2695000, 2896000],
+      ['Houston, TX', 2099000, 1953000],
+      ['Philadelphia, PA', 1526000, 1517000]
+    ]}
+    options={{
+      title: 'Population of Largest U.S. Cities',
+      chartArea: {width: '50%'},
+      colors: ['#b0120a', '#ffab91'],
+      hAxis: {
+        title: 'Total Population',
+        minValue: 0
+      },
+      vAxis: {
+        title: 'City'
+      }
+    }}
+  />
+</Playground>
+
+## Right Y axis.
+
+<Playground>
+  <Chart 
+    width={"500px"}
+    height={"300px"}
+    // Note here we use Bar instead of BarChart to load the material design version
+    chartType="Bar"
+    loader={<div>Loading Chart</div>}
+    data={[
+      ['City', '2010 Population', '2000 Population'],
+      ['New York City, NY', 8175000, 8008000],
+      ['Los Angeles, CA', 3792000, 3694000],
+      ['Chicago, IL', 2695000, 2896000],
+      ['Houston, TX', 2099000, 1953000],
+      ['Philadelphia, PA', 1526000, 1517000]
+    ]}
+    options={{
+      // Material chart options
+      chart: {
+          title: 'Population of Largest U.S. Cities',
+          subtitle: 'Based on most recent and previous census data'
+        },
+      hAxis: {
+        title: 'Total Population',
+        minValue: 0,
+      },
+      vAxis: {
+        title: 'City'
+      },
+      bars: 'horizontal',
+      axes: {
+        y: {
+          0: {side: 'right'}
+        }
+      }
+    }}
+  />
+</Playground>
+
+
+## Labeling Bars.
+
+<Playground>
+  <Chart 
+    width={"500px"}
+    height={"300px"}
+    chartType="BarChart"
+    loader={<div>Loading Chart</div>}
+    data={[
+      ['Element', 'Density', { role: 'style' }, { sourceColumn:0, role: 'annotation', type: "string", calc: "stringify" } ],
+      ['Copper', 8.94, '#b87333', null],
+      ['Silver', 10.49, 'silver', null],
+      ['Gold', 19.30, 'gold', null],
+      ['Platinum', 21.45, 'color: #e5e4e2' , null]
+    ]}
+    options={{
+      title: "Density of Precious Metals, in g/cm^3",
+      width: 600,
+      height: 400,
+      bar: {groupWidth: "95%"},
+      legend: { position: "none" }
+    }}
+  />
+</Playground>
+
+
+# Data Format
+
+[Complete Data Format Reference](https://developers.google.com/chart/interactive/docs/gallery/barchart#data-format)
+
+# Reference 
+
+[Original Google Charts BarCharts Docs](https://developers.google.com/chart/interactive/docs/gallery/barchart)

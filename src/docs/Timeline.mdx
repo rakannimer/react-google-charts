@@ -1,0 +1,333 @@
+---
+route: /timeline-chart
+name: Timelines
+---
+
+
+import { Playground, PropsTable } from 'docz'
+import Chart from '../index'
+
+# Usage
+
+## Simple Example 
+
+<Playground>
+  <Chart 
+    width={"500px"}
+    height={"300px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'President' }, 
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
+      [ 'Adams',      new Date(1797, 2, 4),  new Date(1801, 2, 4) ],
+      [ 'Jefferson',  new Date(1801, 2, 4),  new Date(1809, 2, 4) ]
+    ]}
+    options={{
+      showRowNumber:true
+    }}
+  />
+</Playground>
+
+## Labeling the bars
+
+<Playground>
+  <Chart 
+    width={"500px"}
+    height={"300px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'Term' }, 
+        { type: 'string', id: 'Name' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ '1', 'George Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
+      [ '2', 'John Adams',        new Date(1797, 2, 4),  new Date(1801, 2, 4) ],
+      [ '3', 'Thomas Jefferson',  new Date(1801, 2, 4),  new Date(1809, 2, 4) ]
+    ]}
+    options={{
+    }}
+  />
+</Playground>
+
+
+## An Advanced Example
+
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"200px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'Position' }, 
+        { type: 'string', id: 'Name' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'President', 'George Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
+      [ 'President', 'John Adams', new Date(1797, 2, 4), new Date(1801, 2, 4) ],
+      [ 'President', 'Thomas Jefferson', new Date(1801, 2, 4), new Date(1809, 2, 4) ],
+      [ 'Vice President', 'John Adams', new Date(1789, 3, 21), new Date(1797, 2, 4)],
+      [ 'Vice President', 'Thomas Jefferson', new Date(1797, 2, 4), new Date(1801, 2, 4)],
+      [ 'Vice President', 'Aaron Burr', new Date(1801, 2, 4), new Date(1805, 2, 4)],
+      [ 'Vice President', 'George Clinton', new Date(1805, 2, 4), new Date(1812, 3, 20)],
+      [ 'Secretary of State', 'John Jay', new Date(1789, 8, 25), new Date(1790, 2, 22)],
+      [ 'Secretary of State', 'Thomas Jefferson', new Date(1790, 2, 22), new Date(1793, 11, 31)],
+      [ 'Secretary of State', 'Edmund Randolph', new Date(1794, 0, 2), new Date(1795, 7, 20)],
+      [ 'Secretary of State', 'Timothy Pickering', new Date(1795, 7, 20), new Date(1800, 4, 12)],
+      [ 'Secretary of State', 'Charles Lee', new Date(1800, 4, 13), new Date(1800, 5, 5)],
+      [ 'Secretary of State', 'John Marshall', new Date(1800, 5, 13), new Date(1801, 2, 4)],
+      [ 'Secretary of State', 'Levi Lincoln', new Date(1801, 2, 5), new Date(1801, 4, 1)],
+      [ 'Secretary of State', 'James Madison', new Date(1801, 4, 2), new Date(1809, 2, 3)]
+    ]}
+    options={{
+    }}
+  />
+</Playground>
+
+## Putting bars on one row
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"200px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'Position' }, 
+        { type: 'string', id: 'Name' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'President', 'George Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
+      [ 'President', 'John Adams', new Date(1797, 2, 4), new Date(1801, 2, 4) ],
+      [ 'President', 'Thomas Jefferson', new Date(1801, 2, 4), new Date(1809, 2, 4) ]
+    ]}
+    options={{
+      timeline: {
+        groupByRowLabel: false 
+      }
+    }}
+  />
+</Playground>
+
+## Controlling The Colors
+
+
+### Color By Row Label
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"200px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'Room' }, 
+        { type: 'string', id: 'Name' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'Magnolia Room', 'Beginning JavaScript',       new Date(0,0,0,12,0,0),  new Date(0,0,0,13,30,0) ],
+      [ 'Magnolia Room', 'Intermediate JavaScript',    new Date(0,0,0,14,0,0),  new Date(0,0,0,15,30,0) ],
+      [ 'Magnolia Room', 'Advanced JavaScript',        new Date(0,0,0,16,0,0),  new Date(0,0,0,17,30,0) ],
+      [ 'Willow Room',   'Beginning Google Charts',    new Date(0,0,0,12,30,0), new Date(0,0,0,14,0,0) ],
+      [ 'Willow Room',   'Intermediate Google Charts', new Date(0,0,0,14,30,0), new Date(0,0,0,16,0,0) ],
+      [ 'Willow Room',   'Advanced Google Charts',     new Date(0,0,0,16,30,0), new Date(0,0,0,18,0,0) ]
+    ]}
+    options={{
+      timeline: {
+        colorByRowLabel: true
+      }
+    }}
+  />
+</Playground>
+
+### Same Colors for all bars
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"200px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'Room' }, 
+        { type: 'string', id: 'Name' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'Magnolia Room', 'Beginning JavaScript',       new Date(0,0,0,12,0,0),  new Date(0,0,0,13,30,0) ],
+      [ 'Magnolia Room', 'Intermediate JavaScript',    new Date(0,0,0,14,0,0),  new Date(0,0,0,15,30,0) ],
+      [ 'Magnolia Room', 'Advanced JavaScript',        new Date(0,0,0,16,0,0),  new Date(0,0,0,17,30,0) ],
+      [ 'Willow Room',   'Beginning Google Charts',    new Date(0,0,0,12,30,0), new Date(0,0,0,14,0,0) ],
+      [ 'Willow Room',   'Intermediate Google Charts', new Date(0,0,0,14,30,0), new Date(0,0,0,16,0,0) ],
+      [ 'Willow Room',   'Advanced Google Charts',     new Date(0,0,0,16,30,0), new Date(0,0,0,18,0,0) ]
+    ]}
+    options={{
+      timeline: {
+        singleColor: '#8d8'
+      }
+    }}
+  />
+</Playground>
+
+
+### Setting Background Color
+
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"200px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'Room' }, 
+        { type: 'string', id: 'Name' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'Magnolia Room', 'Beginning JavaScript',       new Date(0,0,0,12,0,0),  new Date(0,0,0,13,30,0) ],
+      [ 'Magnolia Room', 'Intermediate JavaScript',    new Date(0,0,0,14,0,0),  new Date(0,0,0,15,30,0) ],
+      [ 'Magnolia Room', 'Advanced JavaScript',        new Date(0,0,0,16,0,0),  new Date(0,0,0,17,30,0) ],
+      [ 'Willow Room',   'Beginning Google Charts',    new Date(0,0,0,12,30,0), new Date(0,0,0,14,0,0) ],
+      [ 'Willow Room',   'Intermediate Google Charts', new Date(0,0,0,14,30,0), new Date(0,0,0,16,0,0) ],
+      [ 'Willow Room',   'Advanced Google Charts',     new Date(0,0,0,16,30,0), new Date(0,0,0,18,0,0) ]
+    ]}
+    options={{
+      timeline: { colorByRowLabel: true },
+      backgroundColor: '#ffd'
+    }}
+  />
+</Playground>
+
+
+### Setting Individual Bar Colors
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"200px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'Room' }, 
+        { type: 'string', id: 'Name' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'Magnolia Room', 'Beginning JavaScript',       new Date(0,0,0,12,0,0),  new Date(0,0,0,13,30,0) ],
+      [ 'Magnolia Room', 'Intermediate JavaScript',    new Date(0,0,0,14,0,0),  new Date(0,0,0,15,30,0) ],
+      [ 'Magnolia Room', 'Advanced JavaScript',        new Date(0,0,0,16,0,0),  new Date(0,0,0,17,30,0) ],
+      [ 'Willow Room',   'Beginning Google Charts',    new Date(0,0,0,12,30,0), new Date(0,0,0,14,0,0) ],
+      [ 'Willow Room',   'Intermediate Google Charts', new Date(0,0,0,14,30,0), new Date(0,0,0,16,0,0) ],
+      [ 'Willow Room',   'Advanced Google Charts',     new Date(0,0,0,16,30,0), new Date(0,0,0,18,0,0) ]
+    ]}
+    options={{
+      colors: ['#cbb69d', '#603913', '#c69c6e'],
+    }}
+  />
+</Playground>
+
+### Changing the fonts
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"200px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'Role' }, 
+        { type: 'string', id: 'Name' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'Washington', 'George Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
+      [ 'Adams', 'John Adams', new Date(1797, 2, 4), new Date(1801, 2, 4) ],
+      [ 'Jefferson', 'Thomas Jefferson', new Date(1801, 2, 4), new Date(1809, 2, 4) ]
+    ]}
+    options={{
+      colors: ['#cbb69d', '#603913', '#c69c6e'],
+      timeline: { rowLabelStyle: {fontName: 'Helvetica', fontSize: 24, color: '#603913' },
+                     barLabelStyle: { fontName: 'Garamond', fontSize: 14 } }
+    }}
+  />
+</Playground>
+
+
+## Overlapping GridLines
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"200px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'Room' }, 
+        { type: 'string', id: 'Name' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'Magnolia Room', 'Google Charts', new Date(0,0,0,14,0,0), new Date(0,0,0,15,0,0)],
+      [ 'Magnolia Room', 'App Engine',    new Date(0,0,0,15,0,0), new Date(0,0,0,16,0,0)]
+    ]}
+    options={{
+      timeline: { showRowLabels: false },
+      avoidOverlappingGridLines: false
+    }}
+  />
+</Playground>
+
+## Customizing Tooltips
+
+<Playground>
+  <Chart 
+    width={"100%"}
+    height={"200px"}
+    chartType="Timeline"
+    loader={<div>Loading Chart</div>}
+    data={[
+      [
+        { type: 'string', id: 'President' }, 
+        { type: 'string', id: 'dummy bar label' },
+        { type: 'string', role: 'tooltip' },
+        { type: 'date', id: 'Start' },
+        { type: 'date', id: 'End' }
+      ],
+      [ 'Washington', null, 'George', new Date(1789, 3, 29), new Date(1797, 2, 3) ],
+      [ 'Adams', null, 'John', new Date(1797, 2, 3),  new Date(1801, 2, 3) ],
+      [ 'Jefferson', null, 'Thomas', new Date(1801, 2, 3),  new Date(1809, 2, 3) ]
+    ]}
+    options={{
+      allowHtml:true
+    }}
+  />
+</Playground>
+
+
+## Data Format
+
+[Complete Data Format Reference](https://developers.google.com/chart/interactive/docs/gallery/timeline#data-format)
+
+## Reference 
+
+[Original Google Charts Docs](https://developers.google.com/chart/interactive/docs/gallery/timeline)

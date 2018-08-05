@@ -1,0 +1,71 @@
+---
+route: /gauge-chart
+name: Gauge Chart
+---
+
+
+import { Playground, PropsTable } from 'docz'
+import Component from 'react-component-component'
+import Chart from '../index'
+
+# Usage
+
+## Simple Example 
+
+<Playground>
+  <Component initialState={{
+    memory: 80,
+    cpu:55,
+    network: 68,
+    intervalID:null
+  }}
+  didMount={(component)=> {
+    const intervalID = setInterval(() => {
+      component.setState({
+        memory: Math.random()* 100,
+        cpu: Math.random()* 100,
+        network: Math.random()* 100,
+        intervalID
+      })
+    }, 1000);
+  }}
+  willUnmount={(component) => {
+    if (component.state.intervalID !== null) {
+      clearInterval(component.state.intervalID);
+    }
+  }}
+  >
+  {
+    (comp) => {
+      return <Chart 
+      width={400}
+      height={120}
+      chartType="Gauge"
+      loader={<div>Loading Chart</div>}
+      data={[
+        ['Label', 'Value'],
+        ['Memory', comp.state.memory],
+        ['CPU', comp.state.cpu],
+        ['Network', comp.state.network]
+      ]}
+      options={{
+        redFrom: 90, redTo: 100,
+        yellowFrom:75, yellowTo: 90,
+        minorTicks: 5
+      }}
+    />
+    }
+  }
+    
+  </Component>
+</Playground>
+
+
+
+# Data Format
+
+[Complete Data Format Reference](https://developers.google.com/chart/interactive/docs/gallery/gauge#data-format)
+
+# Reference 
+
+[Original Google Charts Docs](https://developers.google.com/chart/interactive/docs/gallery/gauge)

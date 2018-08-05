@@ -27,9 +27,13 @@ const generateUniqueID = () => {
 export type ReactGoogleChartEvent = {
   eventName: GoogleVizEventName;
   callback: (
-    chartWrapper: GoogleChartWrapper,
-    google: GoogleViz,
-    eventArgs: any
+    eventCallbackArgs: {
+      chartWrapper: GoogleChartWrapper;
+      props: ReactGoogleChartPropsWithDefaults;
+      google: GoogleViz;
+      state: ReactGoogleChartState;
+      eventArgs: any;
+    }
   ) => void;
 };
 
@@ -264,7 +268,6 @@ export class Chart extends React.Component<
           break;
         }
         case "PatternFormat": {
-          console.log(formatter);
           const vizFormatter = new this.state.google.visualization.PatternFormat(
             formatter.options
           );
@@ -333,8 +336,8 @@ export class Chart extends React.Component<
       this.chartWrapper = new this.state.google.visualization.ChartWrapper(
         chartConfig
       );
-      this.draw();
       this.listenToChartEvents();
+      this.draw();
       props.getChartWrapper(this.chartWrapper, this.state.google);
       return;
     }
@@ -407,7 +410,13 @@ export class Chart extends React.Component<
           eventName,
           (...args: any[]) => {
             if (this.chartWrapper !== null && this.state.google !== null) {
-              callback(this.chartWrapper, this.state.google, args);
+              callback({
+                chartWrapper: this.chartWrapper,
+                props: this.props as ReactGoogleChartPropsWithDefaults,
+                google: this.state.google,
+                state: this.state,
+                eventArgs: args
+              });
             }
           }
         );
