@@ -12,6 +12,7 @@
     "start": "parcel demo/index.html -d demo-build/",
     "build": "tsc && parcel build src/index.tsx && cp build/*.d.ts dist/",
     "test": "tsc",
+    "test:e2e": "cypress run --record --key 992c387d-9654-42ea-aad7-bb51e16aec9b",
     "prepublish": "npm run build",
     "docz:dev": "docz dev",
     "docz:build": "docz build"
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
+    "cypress": "^3.0.3",
     "docz": "^0.9.5",
     "docz-theme-default": "^0.9.5",
     "husky": "^1.0.0-rc.13",
