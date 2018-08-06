@@ -1,16 +1,17 @@
 {
   "name": "react-google-charts",
-  "version": "2.0.24",
+  "version": "2.0.25",
   "type": "react-component",
   "description": "react-google-charts React component",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "umd": "dist/index.js",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
+  "jsnext:main": "dist/index.esm.js",
+  "umd": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "precommit": "lint-staged && npm run test",
     "start": "parcel demo/index.html -d demo-build/",
-    "build": "tsc && parcel build src/index.tsx && cp build/*.d.ts dist/",
+    "build": "rollup -c",
     "test": "tsc",
     "test:e2e": "cypress run --record --key 992c387d-9654-42ea-aad7-bb51e16aec9b",
     "prepublish": "npm run build",
@@ -45,8 +46,9 @@
     "react": "^16.3.2",
     "react-component-component": "^1.2.1",
     "react-dom": "^16.3.2",
-    "react-google-charts": "^2.0.0-alpha.2",
-    "typescript": "^2.9.2"
+    "rollup": "^0.63.5",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "typescript": "2.9"
   },
   "gh-pages-deploy": {
     "staticpath": "demo/dist/"

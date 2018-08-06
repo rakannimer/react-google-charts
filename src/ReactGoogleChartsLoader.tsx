@@ -1,6 +1,6 @@
 import * as React from "react";
 //@ts-ignore
-import Script from "react-load-script";
+import * as Script from "react-load-script";
 
 export type ReactGoogleChartsLoaderProps = {
   onError: Function;
