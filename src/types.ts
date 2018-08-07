@@ -89,7 +89,7 @@ export type GoogleChartWrapperChartType =
   | "Sankey"
   | "ScatterChart"
   | "SteppedAreaChart"
-  | "TableChart"
+  | "Table"
   | "Timeline"
   | "TreeMap"
   | "WaterfallChart"
