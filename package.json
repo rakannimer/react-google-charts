@@ -1,9 +1,9 @@
 {
   "name": "react-google-charts",
-  "version": "2.0.27",
+  "version": "2.0.28",
   "type": "react-component",
   "description": "react-google-charts React component",
-  "main": "dist/index.umd.js",
+  "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
   "umd": "dist/index.umd.js",

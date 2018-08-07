@@ -2,7 +2,7 @@
   "include": ["./src/"],
   "compilerOptions": {
     "jsx": "react",
-    "target": "es2015",
+    "target": "es5",
     "module": "ESNext",
     "moduleResolution": "node",
     "lib": ["es2018", "dom"],
