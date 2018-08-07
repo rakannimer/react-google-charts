@@ -78,7 +78,7 @@ export type GoogleChartWrapperChartType =
   | "ComboChart"
   | "DiffChart"
   | "DonutChart"
-  | "GanttChart"
+  | "Gantt"
   | "Gauge"
   | "GeoChart"
   | "Histogram"
