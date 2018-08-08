@@ -16,32 +16,35 @@ A thin, typed, React wrapper for [Google Charts](https://developers.google.com/c
     - [Initialize using rows and columns](#initialize-using-rows-and-columns)
     - [Listen to chart events](#listen-to-chart-events)
   - [Examples](#examples)
-    - [Area Chart](#area-chart)
-    - [Bar Chart](#bar-chart)
-    - [Bubble Chart](#bubble-chart)
-    - [Calendar Chart](#calendar-chart)
-    - [Candlestick Chart](#candlestick-chart)
-    - [Column Chart](#column-chart)
-    - [Diff Scatter Chart](#diff-scatter-chart)
-    - [Diff Column Chart](#diff-column-chart)
-    - [Donut Chart](#donut-chart)
-    - [Gantt Chart](#gantt-chart)
-    - [Gauge Chart](#gauge-chart)
-    - [Geo Chart](#geo-chart)
-    - [Histogram Chart](#histogram-chart)
-    - [Line Chart](#line-chart)
-    - [Material Bar Chart](#material-bar-chart)
-    - [Material Line Chart](#material-line-chart)
-    - [Org Chart](#org-chart)
-    - [Pie Chart](#pie-chart)
-    - [Sankey Chart](#sankey-chart)
-    - [Scatter Chart](#scatter-chart)
-    - [Stepped Area Chart](#stepped-area-chart)
-    - [Table Chart](#table-chart)
-    - [Timeline Chart](#timeline-chart)
-    - [Treemap Chart](#treemap-chart)
-    - [Waterfall Chart](#waterfall-chart)
-    - [Wordtree Chart](#wordtree-chart)
+    - [Load Data](#load-data)
+      - [Load Data From SpreadSheet](#load-data-from-spreadsheet)
+    - [Charts](#charts)
+      - [Area Chart](#area-chart)
+      - [Bar Chart](#bar-chart)
+      - [Bubble Chart](#bubble-chart)
+      - [Calendar Chart](#calendar-chart)
+      - [Candlestick Chart](#candlestick-chart)
+      - [Column Chart](#column-chart)
+      - [Diff Scatter Chart](#diff-scatter-chart)
+      - [Diff Column Chart](#diff-column-chart)
+      - [Donut Chart](#donut-chart)
+      - [Gantt Chart](#gantt-chart)
+      - [Gauge Chart](#gauge-chart)
+      - [Geo Chart](#geo-chart)
+      - [Histogram Chart](#histogram-chart)
+      - [Line Chart](#line-chart)
+      - [Material Bar Chart](#material-bar-chart)
+      - [Material Line Chart](#material-line-chart)
+      - [Org Chart](#org-chart)
+      - [Pie Chart](#pie-chart)
+      - [Sankey Chart](#sankey-chart)
+      - [Scatter Chart](#scatter-chart)
+      - [Stepped Area Chart](#stepped-area-chart)
+      - [Table Chart](#table-chart)
+      - [Timeline Chart](#timeline-chart)
+      - [Treemap Chart](#treemap-chart)
+      - [Waterfall Chart](#waterfall-chart)
+      - [Wordtree Chart](#wordtree-chart)
     - [Run the example app](#run-the-example-app)
   - [Contributing](#contributing)
 
@@ -215,132 +218,143 @@ export default ExampleChart;
 
 ## Examples
 
-### Area Chart
+### Load Data
 
-- [Code](./sandboxes/area-chart/index.js)
+#### Load Data From SpreadSheet
+
+- [Demo](https://rakannimer.github.io/react-google-charts/#/react-google-charts/data-sources/from-google-spreadsheet)
+
+### Charts
+
+#### Area Chart
+
+- [Demo](https://rakannimer.github.io/react-google-charts/#/react-google-charts/area-chart)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/area-chart)
+- [Raw Code](./sandboxes/area-chart/index.js)
 
-### Bar Chart
+#### Bar Chart
 
+- [Demo](https://rakannimer.github.io/react-google-charts/#/react-google-charts/bar-chart)
 - [Code](./sandboxes/bar-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart)
 
-### Bubble Chart
+#### Bubble Chart
 
-- [Code](./sandboxes/bubble-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart)
+- [Demo][barchart-demo]
+- [Code][barchart-example-code]
+- [Sandbox][barchart-example-sandbox]
 
-### Calendar Chart
+#### Calendar Chart
 
 - [Code](./sandboxes/calendar/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/calendar)
 
-### Candlestick Chart
+#### Candlestick Chart
 
 - [Code](./sandboxes/candlestick/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick)
 
-### Column Chart
+#### Column Chart
 
 - [Code](./sandboxes/column-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/column-chart)
 
-### Diff Scatter Chart
+#### Diff Scatter Chart
 
 - [Code](./sandboxes/diff-scatter-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/diff-scatter-chart)
 
-### Diff Column Chart
+#### Diff Column Chart
 
 - [Code](./sandboxes/diff-column-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/diff-column-chart)
 
-### Donut Chart
+#### Donut Chart
 
 - [Code](./sandboxes/donut-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/donut-chart)
 
-### Gantt Chart
+#### Gantt Chart
 
 - [Code](./sandboxes/gantt-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gantt-chart)
 
-### Gauge Chart
+#### Gauge Chart
 
 - [Code](./sandboxes/gauge/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gauge)
 
-### Geo Chart
+#### Geo Chart
 
 - [Code](./sandboxes/geo-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/geo-chart)
 
-### Histogram Chart
+#### Histogram Chart
 
 - [Code](./sandboxes/histogram/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/histogram)
 
-### Line Chart
+#### Line Chart
 
 - [Code](./sandboxes/linechart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/linechart)
 
-### Material Bar Chart
+#### Material Bar Chart
 
 - [Code](./sandboxes/material-bar-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-bar-chart)
 
-### Material Line Chart
+#### Material Line Chart
 
 - [Code](./sandboxes/material-line-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-line-chart)
 
-### Org Chart
+#### Org Chart
 
 - [Code](./sandboxes/org-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/org-chart)
 
-### Pie Chart
+#### Pie Chart
 
 - [Code](./sandboxes/pie-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/pie-chart)
 
-### Sankey Chart
+#### Sankey Chart
 
 - [Code](./sandboxes/sankey/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/sankey)
 
-### Scatter Chart
+#### Scatter Chart
 
 - [Code](./sandboxes/scatter-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/scatter-chart)
 
-### Stepped Area Chart
+#### Stepped Area Chart
 
 - [Code](./sandboxes/stepped-area-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/stepped-area-chart)
 
-### Table Chart
+#### Table Chart
 
 - [Code](./sandboxes/table/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/table)
 
-### Timeline Chart
+#### Timeline Chart
 
 - [Code](./sandboxes/timeline/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/timeline)
 
-### Treemap Chart
+#### Treemap Chart
 
 - [Code](./sandboxes/treemap/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/treemap)
 
-### Waterfall Chart
+#### Waterfall Chart
 
 - [Code](./sandboxes/waterfall/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/waterfall)
 
-### Wordtree Chart
+#### Wordtree Chart
 
 - [Code](./sandboxes/wordtree/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/wordtree)
@@ -366,3 +380,12 @@ Contributions are very welcome. Check out [CONTRIBUTING.md](CONTRIBUTING.md)
 [npm-license-badge]: https://img.shields.io/github/license/rakannimer/react-google-charts.svg
 [bundlephobia-badge]: https://img.shields.io/bundlephobia/minzip/react-google-charts.svg
 [bundlephobia-href]: https://bundlephobia.com/result?p=react-google-charts
+
+- [Demo](https://rakannimer.github.io/react-google-charts/#/react-google-charts/bar-chart)
+
+[barchart-demo]: https://rakannimer.github.io/react-google-charts/#/react-google-charts/bar-chart
+[barchart-example-code]: ./sandboxes/bar-chart/index.js
+[barchart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart
+[bubblechart-demo]: https://rakannimer.github.io/react-google-charts/#/react-google-charts/bubble-chart
+[bubblechart-example-code]: ./sandboxes/bubble-chart/index.js
+[bubblechart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart
