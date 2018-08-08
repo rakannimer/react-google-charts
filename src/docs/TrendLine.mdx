@@ -1,6 +1,7 @@
 ---
 route: /trendline-chart
 name: TrendLines
+menu: Charts
 ---
 
 
@@ -28,6 +29,7 @@ import Chart from '../index'
       legend: 'none',
       trendlines: { 0: {} }
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -53,6 +55,7 @@ import Chart from '../index'
         visibleInLegend: true,
       } }
     }}
+    rootProps={{'data-testid': '2'}}
   />
 </Playground>
 
@@ -77,6 +80,7 @@ import Chart from '../index'
         color: 'green'
       } }
     }}
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 
@@ -103,6 +107,7 @@ import Chart from '../index'
 
       } }
     }}
+    rootProps={{'data-testid': '4'}}
   />
 </Playground>
 
@@ -131,6 +136,7 @@ import Chart from '../index'
         opacity: 0.2,
       } }
     }}
+    rootProps={{'data-testid': '5'}}
   />
 </Playground>
 
