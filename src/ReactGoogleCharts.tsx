@@ -77,6 +77,14 @@ export type ReactGoogleChartProps = {
       | "PatternFormat";
     options?: {};
   }[];
+  spreadSheetUrl?: string;
+  spreadSheetQueryParameters?: {
+    headers: number;
+    gid?: number | string;
+    sheet?: string;
+    query?: string;
+  };
+  rootProps?: any;
 };
 
 export type ReactGoogleChartState = {
@@ -104,11 +112,51 @@ export const chartDefaultProps = {
   getChartWrapper: (chartWrapper: GoogleChartWrapper, google: GoogleViz) => {},
   className: "",
   style: {},
-  formatters: null
+  formatters: null,
+  spreadSheetUrl: null,
+  spreadSheetQueryParameters: {
+    headers: 1,
+    gid: 1
+  },
+  rootProps: {}
 };
 
 export type ReactGoogleChartPropsWithDefaults = typeof chartDefaultProps &
   ReactGoogleChartProps;
+
+export const loadDataTableFromSpreadSheet = async (
+  googleViz: GoogleViz,
+  spreadSheetUrl: string,
+  urlParams: {
+    headers?: number;
+    gid?: any;
+    sheet?: string;
+    query?: string;
+  } = {}
+) => {
+  return new Promise((resolve, reject) => {
+    const headers = `${
+      urlParams.headers ? `headers=${urlParams.headers}` : `headers=0`
+    }`;
+    const queryString = `${
+      urlParams.query ? `&tq=${encodeURIComponent(urlParams.query)}` : ``
+    }`;
+    const gid = `${urlParams.gid ? `&gid=${urlParams.gid}` : ""}`;
+    const sheet = `${urlParams.sheet ? `&sheet=${urlParams.sheet}` : ""}`;
+    const urlQueryString = `${headers}${gid}${sheet}${queryString}`;
+    const urlToSpreadSheet = `${spreadSheetUrl}/gviz/tq?${urlQueryString}`; //&tq=${queryString}`;
+    const query = new googleViz.visualization.Query(urlToSpreadSheet);
+    query.send((response: any) => {
+      if (response.isError()) {
+        reject(
+          `Error in query:  ${response.getMessage()} ${response.getDetailedMessage()}`
+        );
+      } else {
+        resolve(response.getDataTable());
+      }
+    });
+  });
+};
 
 export class Chart extends React.Component<
   ReactGoogleChartProps,
@@ -144,7 +192,7 @@ export class Chart extends React.Component<
     return this.graphID as string;
   };
 
-  private draw = () => {
+  private draw = async () => {
     if (this.chartWrapper === null || this.state.google === null) return;
 
     const {
@@ -156,7 +204,9 @@ export class Chart extends React.Component<
       legend_toggle,
       legendToggle,
       chartType,
-      formatters
+      formatters,
+      spreadSheetUrl,
+      spreadSheetQueryParameters
     } = this.props as ReactGoogleChartPropsWithDefaults;
     let dataTable: GoogleDataTable;
     let chartDiff = null;
@@ -182,6 +232,12 @@ export class Chart extends React.Component<
         columns,
         ...rows
       ]);
+    } else if (spreadSheetUrl !== null) {
+      dataTable = (await loadDataTableFromSpreadSheet(
+        this.state.google,
+        spreadSheetUrl,
+        spreadSheetQueryParameters
+      )) as GoogleDataTable;
     } else {
       dataTable = this.state.google.visualization.arrayToDataTable([]);
     }
@@ -515,6 +571,7 @@ export class Chart extends React.Component<
         id={this.getGraphID()}
         style={divStyle}
         className={this.props.className}
+        {...this.props.rootProps}
       >
         <ReactGoogleChartsLoader
           onError={this.handleGoogleChartsLoaderScriptErrored}
