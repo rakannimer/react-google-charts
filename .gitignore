@@ -6,3 +6,5 @@ node_modules
 .rpt2_cache
 .vscode
 .docz
+docs/react-google-charts/
+cypress/videos
