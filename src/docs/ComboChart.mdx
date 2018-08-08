@@ -1,6 +1,7 @@
 ---
 route: /combo-chart
 name: Combo Chart
+menu: Charts
 ---
 
 import { Playground, PropsTable } from 'docz'
@@ -29,6 +30,7 @@ import Chart from '../index'
       seriesType: 'bars',
       series: {5: {type: 'line'}}
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 

@@ -1,6 +1,7 @@
 ---
 route: /timeline-chart
 name: Timelines
+menu: Charts
 ---
 
 
@@ -30,6 +31,7 @@ import Chart from '../index'
     options={{
       showRowNumber:true
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -52,8 +54,7 @@ import Chart from '../index'
       [ '2', 'John Adams',        new Date(1797, 2, 4),  new Date(1801, 2, 4) ],
       [ '3', 'Thomas Jefferson',  new Date(1801, 2, 4),  new Date(1809, 2, 4) ]
     ]}
-    options={{
-    }}
+    rootProps={{'data-testid': '2'}}
   />
 </Playground>
 
@@ -90,8 +91,8 @@ import Chart from '../index'
       [ 'Secretary of State', 'Levi Lincoln', new Date(1801, 2, 5), new Date(1801, 4, 1)],
       [ 'Secretary of State', 'James Madison', new Date(1801, 4, 2), new Date(1809, 2, 3)]
     ]}
-    options={{
-    }}
+    
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 
@@ -119,6 +120,7 @@ import Chart from '../index'
         groupByRowLabel: false 
       }
     }}
+    rootProps={{'data-testid': '4'}}
   />
 </Playground>
 
@@ -151,6 +153,7 @@ import Chart from '../index'
         colorByRowLabel: true
       }
     }}
+    rootProps={{'data-testid': '5'}}
   />
 </Playground>
 
@@ -181,6 +184,7 @@ import Chart from '../index'
         singleColor: '#8d8'
       }
     }}
+    rootProps={{'data-testid': '6'}}
   />
 </Playground>
 
@@ -212,6 +216,7 @@ import Chart from '../index'
       timeline: { colorByRowLabel: true },
       backgroundColor: '#ffd'
     }}
+    rootProps={{'data-testid': '6'}}
   />
 </Playground>
 
@@ -241,6 +246,7 @@ import Chart from '../index'
     options={{
       colors: ['#cbb69d', '#603913', '#c69c6e'],
     }}
+    rootProps={{'data-testid': '7'}}
   />
 </Playground>
 
@@ -268,6 +274,7 @@ import Chart from '../index'
       timeline: { rowLabelStyle: {fontName: 'Helvetica', fontSize: 24, color: '#603913' },
                      barLabelStyle: { fontName: 'Garamond', fontSize: 14 } }
     }}
+    rootProps={{'data-testid': '8'}}
   />
 </Playground>
 
@@ -294,6 +301,7 @@ import Chart from '../index'
       timeline: { showRowLabels: false },
       avoidOverlappingGridLines: false
     }}
+    rootProps={{'data-testid': '9'}}
   />
 </Playground>
 
@@ -320,6 +328,7 @@ import Chart from '../index'
     options={{
       allowHtml:true
     }}
+    rootProps={{'data-testid': '10'}}
   />
 </Playground>
 

@@ -1,6 +1,7 @@
 ---
 route: /bubble-chart
 name: Bubble Chart
+menu: Charts
 ---
 
 
@@ -38,6 +39,8 @@ import Chart from '../index'
       vAxis: {title: 'Fertility Rate'},
       bubble: {textStyle: {fontSize: 11}}
     }}
+    rootProps={{'data-testid': '1'}}
+
   />
 </Playground>
 
@@ -64,6 +67,8 @@ import Chart from '../index'
     options={{
       colorAxis: {colors: ['yellow', 'red']}
     }}
+    rootProps={{'data-testid': '2'}}
+
   />
 </Playground>
 
@@ -104,6 +109,7 @@ import Chart from '../index'
         }
       }
     }}
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 

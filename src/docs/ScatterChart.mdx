@@ -1,6 +1,7 @@
 ---
 route: /scatter-chart
 name: Scatter Chart
+menu: Charts
 ---
 
 import { Playground, PropsTable } from 'docz'
@@ -31,6 +32,7 @@ import Chart from '../index'
       vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
       legend: 'none'
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -71,6 +73,7 @@ import Chart from '../index'
             easing: 'inAndOut',
           }
         }}
+        rootProps={{'data-testid': '2'}}
       />
     }}
     
@@ -115,6 +118,7 @@ import Chart from '../index'
       hAxis: {title: 'Hours Studied'},
       vAxis: {title: 'Grade'}
     }}
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 
@@ -159,6 +163,7 @@ import Chart from '../index'
         }
       }
     }}
+    rootProps={{'data-testid': '4'}}
     legendToggle
   />
 </Playground>
@@ -204,6 +209,7 @@ import Chart from '../index'
         }
       }
     }}
+    rootProps={{'data-testid': '5'}}
   />
 </Playground>
 

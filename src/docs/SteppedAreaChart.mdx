@@ -1,6 +1,7 @@
 ---
 route: /stepped-area-chart
 name: Stepped Area Chart
+menu: Charts
 ---
 
 
@@ -29,6 +30,7 @@ import Chart from '../index'
       vAxis: {title: 'Accumulated Rating'},
       isStacked: true
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -57,6 +59,7 @@ import Chart from '../index'
         ticks: [0, .3, .6, .9, 1]
       }
     }}
+    rootProps={{'data-testid': '2'}}
   />
 </Playground>
 

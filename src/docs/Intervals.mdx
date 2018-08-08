@@ -1,6 +1,7 @@
 ---
 route: /intervals-chart
 name: Intervals
+menu: Charts
 ---
 
 
@@ -44,6 +45,7 @@ import Chart from '../index'
       intervals: { 'style':'line' },
       legend: 'none'
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -89,6 +91,7 @@ import Chart from '../index'
         'i2': { 'style':'line', 'color':'#5F9654', 'lineWidth': 2 },
       },
     }}
+    rootProps={{'data-testid': '2'}}
   />
 </Playground>
 
@@ -127,6 +130,7 @@ import Chart from '../index'
       intervals: { style: 'bars' },
       legend: 'none',
     }}
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 
@@ -164,6 +168,7 @@ import Chart from '../index'
       intervals: { 'lineWidth':1, 'barWidth': 1, style: 'boxes' },
       legend: 'none',
     }}
+    rootProps={{'data-testid': '4'}}
   />
 </Playground>
 
@@ -203,6 +208,7 @@ import Chart from '../index'
       intervals: { style: 'sticks' },
       legend: 'none',
     }}
+    rootProps={{'data-testid': '5'}}
   />
 </Playground>
 
@@ -243,6 +249,7 @@ import Chart from '../index'
       intervals: { 'style':'points', pointSize: 4 },
       legend: 'none',
     }}
+    rootProps={{'data-testid': '6'}}
   />
 </Playground>
 
@@ -282,6 +289,7 @@ import Chart from '../index'
       intervals: { 'style':'area' },
       legend: 'none',
     }}
+    rootProps={{'data-testid': '7'}}
   />
 </Playground>
 
@@ -324,6 +332,7 @@ import Chart from '../index'
           'i2': { 'style':'area', 'curveType':'function', 'fillOpacity':0.3 }},
       legend: 'none'
     }}
+    rootProps={{'data-testid': '8'}}
   />
 </Playground>
 

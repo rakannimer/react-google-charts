@@ -1,6 +1,7 @@
 ---
 route: /candleStick-chart
 name: CandleStick Chart
+menu: Charts
 ---
 
 
@@ -29,6 +30,7 @@ import Chart from '../index'
     options={{
       legend:'none'
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -57,6 +59,8 @@ import Chart from '../index'
         risingColor: { strokeWidth: 0, fill: '#0f9d58' }   // green
       }
     }}
+    rootProps={{'data-testid': '2'}}
+
   />
 </Playground>
 

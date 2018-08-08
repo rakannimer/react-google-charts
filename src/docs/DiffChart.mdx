@@ -1,6 +1,7 @@
 ---
 route: /diff-chart
 name: Diff Chart
+menu: Charts
 ---
 
 import { Playground, PropsTable } from 'docz'
@@ -54,6 +55,7 @@ import Chart from '../index'
       vAxis: {viewWindow: {min: 0, max: 50}},
       theme: 'maximized',
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -82,6 +84,7 @@ import Chart from '../index'
     options={{
        pieSliceText: 'none'
     }}
+    rootProps={{'data-testid': '2'}}
   />
 </Playground>
 
@@ -113,6 +116,7 @@ import Chart from '../index'
     options={{
        legend: { position: 'top' }
     }}
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 
@@ -144,6 +148,7 @@ import Chart from '../index'
     options={{
        legend: { position: 'top' }
     }}
+    rootProps={{'data-testid': '4'}}
   />
 </Playground>
 

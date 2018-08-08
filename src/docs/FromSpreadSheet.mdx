@@ -1,0 +1,51 @@
+---
+route: /data-sources/from-google-spreadsheet
+name: From Google SpreadSheet
+menu: Data Sources
+---
+
+import { Playground, PropsTable } from 'docz'
+import Chart from '../index'
+
+# Usage
+
+  1. Copy url to your spreadsheet and pass it as `spreadSheetUrl` prop. 
+  2. Choose a chartType.
+
+
+## Simple Example 
+
+You can check the spreadsheet [here.](https://docs.google.com/spreadsheets/d/1jN0iw0usssnsG1_oi-NXtuKfsUsGme09GsFidbqxFYA/edit#gid=0)
+
+<Playground>
+  <Chart 
+    chartType="ScatterChart"
+    spreadSheetUrl="https://docs.google.com/spreadsheets/d/1jN0iw0usssnsG1_oi-NXtuKfsUsGme09GsFidbqxFYA/edit#gid=0"
+    rootProps={{'data-testid': '1'}}
+
+  />
+</Playground>
+
+## Query data from spreadsheet
+
+You can check the spreadsheet [here.](https://docs.google.com/spreadsheets/d/1XWJLkAwch5GXAt_7zOFDcg8Wm8Xv29_8PWuuW15qmAE)
+
+
+<Playground>
+  <Chart 
+    chartType="ColumnChart"
+    spreadSheetUrl="https://docs.google.com/spreadsheets/d/1XWJLkAwch5GXAt_7zOFDcg8Wm8Xv29_8PWuuW15qmAE"
+    spreadSheetQueryParameters={{
+      headers:1,
+      query:"SELECT A, H, O, Q, R, U LIMIT 5 OFFSET 8"
+    }}
+    rootProps={{'data-testid': '2'}}
+
+  />
+</Playground>
+
+
+
+
+# [Reference](https://developers.google.com/chart/interactive/docs/spreadsheets)
+

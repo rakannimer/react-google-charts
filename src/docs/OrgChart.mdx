@@ -1,6 +1,7 @@
 ---
 route: /org-chart
 name: Org Chart
+menu: Charts
 ---
 
 
@@ -31,6 +32,7 @@ import Chart from '../index'
     options={{
       allowHtml:true
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 

@@ -1,6 +1,7 @@
 ---
 route: /sankey-diagram
 name: Sankey Diagram
+menu: Charts
 ---
 
 import { Playground, PropsTable } from 'docz'
@@ -23,6 +24,8 @@ import Chart from '../index'
       [ 'B', 'Y', 9 ],
       [ 'B', 'Z', 4 ]
     ]}
+
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -83,6 +86,7 @@ import Chart from '../index'
       ['Morocco', 'India', 1],
       ['Morocco', 'Japan', 3]
     ]}
+    rootProps={{'data-testid': '2'}}
   />
 </Playground>
 
@@ -152,6 +156,7 @@ import Chart from '../index'
       ['Morocco', 'India', 1],
       ['Morocco', 'Japan', 3]
     ]}
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 

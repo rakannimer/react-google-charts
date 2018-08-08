@@ -1,6 +1,7 @@
 ---
 route: /treemap-chart
 name: TreeMap
+menu: Charts
 ---
 
 
@@ -55,6 +56,7 @@ import Chart from '../index'
       fontColor: 'black',
       showScale: true
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -135,6 +137,7 @@ import Chart from '../index'
         return '<div style="background:#fd9; padding:10px; border-style:solid"> row: '+row+' size: '+size+' val: '+value+'</div>'
       }
     }}
+    rootProps={{'data-testid': '2'}}
   />
 </Playground>
 
@@ -189,6 +192,7 @@ import Chart from '../index'
         return '<div style="background:#fd9; padding:10px; border-style:solid"> '+value+'</div>'
       }
     }}
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 

@@ -1,6 +1,7 @@
 ---
 route: /calendar-chart
 name: Calendar Chart
+menu: Charts
 ---
 
 
@@ -38,6 +39,7 @@ import Chart from '../index'
     options={{
       title: "Red Sox Attendance"
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -73,6 +75,8 @@ import Chart from '../index'
     options={{
       title: "Red Sox Attendance"
     }}
+    rootProps={{'data-testid': '2'}}
+
   />
 </Playground>
 

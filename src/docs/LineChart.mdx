@@ -1,6 +1,7 @@
 ---
 route: /line-chart
 name: Line Chart
+menu: Charts
 ---
 
 import { Playground, PropsTable } from 'docz'
@@ -29,6 +30,7 @@ import Chart from '../index'
         title: 'Popularity'
       }
     }}
+    rootProps={{'data-testid': '1'}}
   />
 </Playground>
 
@@ -58,6 +60,7 @@ import Chart from '../index'
         1: {curveType: 'function'}
       }
     }}
+    rootProps={{'data-testid': '2'}}
   />
 </Playground>
 
@@ -87,12 +90,12 @@ import Chart from '../index'
       [14,  4.2,  6.2,  3.4]
     ]}
     options={{
-      
       chart: {
         title: 'Box Office Earnings in First Two Weeks of Opening',
         subtitle: 'in millions of dollars (USD)'
       },
     }}
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 
@@ -139,6 +142,7 @@ import Chart from '../index'
         }
       }
     }}
+    rootProps={{'data-testid': '4'}}
   />
 </Playground>
 

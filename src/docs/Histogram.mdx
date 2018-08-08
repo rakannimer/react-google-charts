@@ -1,6 +1,7 @@
 ---
 route: /histogram-chart
 name: Histogram
+menu: Charts
 ---
 
 
@@ -51,6 +52,8 @@ import Chart from '../index'
       title: 'Lengths of dinosaurs, in meters',
       legend: { position: 'none' },
     }}
+    rootProps={{'data-testid': '1'}}
+
   />
 </Playground>
 
@@ -99,6 +102,7 @@ import Chart from '../index'
       legend: { position: 'none' },
       colors: ['green']
     }}
+    rootProps={{'data-testid': '2'}}
   />
 </Playground>
 
@@ -150,6 +154,7 @@ import Chart from '../index'
       histogram: { lastBucketPercentile: 5 },
       vAxis: { scaleType: 'mirrorLog' }
     }}
+    rootProps={{'data-testid': '3'}}
   />
 </Playground>
 
@@ -209,6 +214,7 @@ import Chart from '../index'
         maxValue: 30
       }
     }}
+    rootProps={{'data-testid': '4'}}
   />
 </Playground>
 
@@ -237,6 +243,7 @@ import Chart from '../index'
       colors: ['#5C3292', '#1A8763', '#871B47', '#999999'],
       interpolateNulls: false,
     }}
+    rootProps={{'data-testid': '5'}}
   />
 </Playground>
 
