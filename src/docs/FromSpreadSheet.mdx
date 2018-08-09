@@ -21,6 +21,18 @@ You can check the spreadsheet [here.](https://docs.google.com/spreadsheets/d/1jN
   <Chart 
     chartType="ScatterChart"
     spreadSheetUrl="https://docs.google.com/spreadsheets/d/1jN0iw0usssnsG1_oi-NXtuKfsUsGme09GsFidbqxFYA/edit#gid=0"
+    options={{
+      hAxis: {
+        format:'short'
+      },
+      vAxis: {
+        format:'decimal'
+        // format:'scientific'
+        // format:'long'
+        // format:'percent'
+      },
+      
+    }}
     rootProps={{'data-testid': '1'}}
 
   />
@@ -39,6 +51,15 @@ You can check the spreadsheet [here.](https://docs.google.com/spreadsheets/d/1XW
       headers:1,
       query:"SELECT A, H, O, Q, R, U LIMIT 5 OFFSET 8"
     }}
+    options={{
+      // hAxis: {
+        // format:'short'
+      // },
+       vAxis: {
+         format:'long'
+       },
+    }}
+
     rootProps={{'data-testid': '2'}}
 
   />

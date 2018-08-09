@@ -5,6 +5,115 @@ menu: Data Sources
 ---
 
 import { Playground, PropsTable } from 'docz'
+import Component from 'react-component-component';
 import Chart from '../index'
 
+# Fetch data from an API
 
+## Exchange Rates
+
+Let's use [exchangeratesapi.io](https://exchangeratesapi.io/) to get some exchange rates
+and render them in a chart.
+
+Note : We're using `react-component-component` to avoid having to use a React Class Component. It's not necessary for our use-case to do so.
+
+You can check the raw api response [here.](https://exchangeratesapi.io/api/latest?symbols=USD,GBP,CAD)
+
+<Playground>
+  <Component 
+    initialState={{dataLoadingStatus: "loading", chartData:[]}}
+    didMount={async (component) => {
+      const response = await fetch("https://exchangeratesapi.io/api/latest?symbols=USD,GBP,CAD");
+      const json = await response.json();
+      const rateCurrencyNames = Object.keys(json.rates);
+      const rateCurrencyValues = Object.values(json.rates);
+      const chartData = [["Currency Name", "Currency Rate"]]
+      for (let i = 0; i < rateCurrencyNames.length; i += 1) {
+        chartData.push([rateCurrencyNames[i], rateCurrencyValues[i]])
+      }
+      component.setState({
+        dataLoadingStatus: "ready",
+        chartData: chartData
+      })
+    }}
+  >
+    {
+      (component) => {
+        return component.state.dataLoadingStatus==="ready" ?
+          <Chart 
+            chartType="BarChart"
+            data={component.state.chartData}
+            options={{
+              chartArea: {
+                width:"50%"
+              },
+              title:"EUR Price"
+
+            }}
+          />
+          : <div>Fetching data from API</div>
+      }
+    }
+  </Component>
+</Playground>
+
+
+## Debt Incurred by the Lebanese state over time.
+
+Let's use the [worldbank.org API](https://data.worldbank.org/indicator) to get GDP growth in Lebanon.
+
+Note : We're using `react-component-component` to avoid having to use a React Class Component. It's not necessary for our use-case to do so.
+
+You can check the raw api response [here.](http://api.worldbank.org/v2/countries/lb/indicators/DT.DOD.DECT.CD?format=json)
+
+<Playground>
+  <Component 
+    initialState={{dataLoadingStatus: "loading", chartData:[]}}
+    didMount={async (component) => {
+      const COUNTRY_CODE = "lb"
+      const INDICATOR = "DT.DOD.DECT.CD"
+      const response = await fetch("http://api.worldbank.org/v2/countries/"+COUNTRY_CODE+"/indicators/"+INDICATOR+"?format=json");
+      const json = await response.json();
+      const [metadata,data] = json
+      {/* console.log(data,metadata) */}
+      const columns = [{type:"date", label:"Year"}, {type:"number", label:"Debt"}]
+      let rows = [];
+      const nonNullData = data.filter((row) => row.value !== null);
+      for (let row of nonNullData) {
+        const {date, value} = row;
+        rows.push([new Date(Date.parse(date)), value])
+      }
+      component.setState({
+        chartData:[
+          columns,
+          ...rows
+        ],
+        dataLoadingStatus: "ready"
+      })
+    }}
+  >
+    {
+      (component) => {
+        return component.state.dataLoadingStatus==="ready" ?
+          <Chart 
+            chartType="LineChart"
+            data={component.state.chartData}
+            options={{
+              hAxis: {
+                format: 'yyyy'
+              },
+              vAxis: {
+                format:'short'
+              },
+              title: 'Debt incurred over time.'
+            }}
+          />
+          : <div>Fetching data from API</div>
+      }
+    }
+  </Component>
+</Playground>
+
+
+
+## DataBank Reference
