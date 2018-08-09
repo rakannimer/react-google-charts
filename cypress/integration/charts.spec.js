@@ -95,21 +95,23 @@ context("React Google Charts", () => {
         .should("have.length.greaterThan", 1);
     });
 
+    it("From API", () => {
+      cy.visit(`${BASE_URL}/#/react-google-charts/data-sources/from-api`);
+      cy.get("[data-testid=1]", { timeout: 18000 })
+        .find("svg", { timeout: 18000 })
+        .should("have.length.greaterThan", 0);
+
+      cy.get("[data-testid=2]", { timeout: 18000 })
+        .find("svg", { timeout: 18000 })
+        .should("have.length.greaterThan", 0);
+    });
+
     it("From Spreadsheet", () => {
       cy.visit(
         `${BASE_URL}/#/react-google-charts/data-sources/from-google-spreadsheet`
       );
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
-
-      cy.visit(`${BASE_URL}/#/react-google-charts/gantt-chart`);
-      isGoogleChart("[data-testid=1]");
-      isGoogleChart("[data-testid=2]");
-      isGoogleChart("[data-testid=3]");
-      isGoogleChart("[data-testid=4]");
-      isGoogleChart("[data-testid=5]");
-      isGoogleChart("[data-testid=6]");
-      isGoogleChart("[data-testid=7]");
     });
 
     it("Gantt Chart", () => {

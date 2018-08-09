@@ -48,8 +48,9 @@ You can check the raw api response [here.](https://exchangeratesapi.io/api/lates
                 width:"50%"
               },
               title:"EUR Price"
-
             }}
+
+            rootProps={{ 'data-testid': '1' }}
           />
           : <div>Fetching data from API</div>
       }
@@ -107,6 +108,8 @@ You can check the raw api response [here.](http://api.worldbank.org/v2/countries
               },
               title: 'Debt incurred over time.'
             }}
+
+            rootProps={{ 'data-testid': '2' }}
           />
           : <div>Fetching data from API</div>
       }
