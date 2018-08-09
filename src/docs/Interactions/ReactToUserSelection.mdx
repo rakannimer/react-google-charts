@@ -1,0 +1,39 @@
+---
+route: /user-selection
+name: Selection 
+menu: Interactions
+---
+
+
+import { Playground, PropsTable } from 'docz'
+import Chart from '../../index'
+
+## Simple example
+
+
+<Playground>
+  <Chart 
+    chartType="ScatterChart"
+    data={[['x', 'dogs'], [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9]]}
+    chartEvents={[
+      {eventName: 'select', callback: ({chartWrapper}) => {
+        const chart = chartWrapper.getChart();
+        const selection = chart.getSelection();
+        if (selection.length === 1) {
+          const [selectedItem] = selection;
+          const dataTable = chartWrapper.getDataTable();
+          const {row, column} = selectedItem
+          alert("You selected : "+JSON.stringify(
+              {
+                row,
+                column,
+                value: dataTable.getValue(row, column)
+              }
+            ), null, 2
+          )
+        }
+        console.log(selection)
+      }}
+    ]}
+  />
+</Playground>
