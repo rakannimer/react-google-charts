@@ -100,9 +100,11 @@ context("React Google Charts", () => {
       cy.get("[data-testid=1]", { timeout: 18000 })
         .find("svg", { timeout: 18000 })
         .should("have.length.greaterThan", 0);
-
-      cy.get("[data-testid=2]", { timeout: 18000 })
-        .find("svg", { timeout: 18000 })
+      cy.visit(
+        `${BASE_URL}/#/react-google-charts/data-sources/from-api#debt-incurred-by-the-lebanese-state-over-time`
+      );
+      cy.get("[data-testid=2]", { timeout: 20000 })
+        .find("svg", { timeout: 20000 })
         .should("have.length.greaterThan", 0);
     });
 
