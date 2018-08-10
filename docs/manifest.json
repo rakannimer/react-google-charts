@@ -1,6 +1,6 @@
 {
-  "vendors.js": "/react-google-charts/static/js/vendors.14ea8ce7.js",
-  "app.js": "/react-google-charts/static/js/app.0612affd720b97146811.js",
+  "vendors.js": "/react-google-charts/static/js/vendors.b536301b.js",
+  "app.js": "/react-google-charts/static/js/app.355ba08979182a0c5f80.js",
   "src-docs-area-chart.js": "/react-google-charts/static/js/src-docs-area-chart.746bfe47.js",
   "src-docs-bar-chart.js": "/react-google-charts/static/js/src-docs-bar-chart.527c6df4.js",
   "src-docs-bubble-chart.js": "/react-google-charts/static/js/src-docs-bubble-chart.2b4301cf.js",
@@ -29,6 +29,7 @@
   "src-docs-trend-line.js": "/react-google-charts/static/js/src-docs-trend-line.4427a441.js",
   "src-docs-word-tree.js": "/react-google-charts/static/js/src-docs-word-tree.91297406.js",
   "src-docs-index.js": "/react-google-charts/static/js/src-docs-index.909ffa4e.js",
-  "src-docs-interactions-react-to-user-selection.js": "/react-google-charts/static/js/src-docs-interactions-react-to-user-selection.5a32140f.js",
+  "src-docs-animations-animations-in-charts.js": "/react-google-charts/static/js/src-docs-animations-animations-in-charts.df2bcae4.js",
+  "src-docs-interactions-react-to-user-selection.js": "/react-google-charts/static/js/src-docs-interactions-react-to-user-selection.e58222b2.js",
   "index.html": "/react-google-charts/index.html"
 }
