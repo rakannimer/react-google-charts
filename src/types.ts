@@ -1,4 +1,8 @@
 // Complete Google Charts Type Definition : https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/google.visualization/index.d.ts
+import { chartDefaultProps } from "./default-props";
+
+export type ReactGoogleChartPropsWithDefaults = typeof chartDefaultProps &
+  ReactGoogleChartProps;
 
 export type GoogleViz = {
   charts: GoogleChartLoader;
@@ -437,3 +441,87 @@ export type GoogleChartOptions = {
 */
 
 export type WindowWithMaybeGoogle = Window & { google?: any };
+
+export type ReactGoogleChartEvent = {
+  eventName: GoogleVizEventName;
+  callback: (
+    eventCallbackArgs: {
+      chartWrapper: GoogleChartWrapper;
+      props: ReactGoogleChartProps;
+      google: GoogleViz;
+      eventArgs: any;
+    }
+  ) => void;
+};
+
+export type ReactGoogleChartProps = {
+  height?: string | number;
+  width?: string | number;
+  graphID?: string;
+  chartType: GoogleChartWrapperChartType;
+  diffdata?: {
+    old: any;
+    new: any;
+  };
+  options?: ChartWrapperOptions["options"];
+  loader?: JSX.Element;
+  data?: any[] | {};
+  rows?: GoogleDataTableRow[];
+  columns?: GoogleDataTableColumn[];
+  chartActions?: GoogleChartAction[];
+  chartEvents?: ReactGoogleChartEvent[];
+  chartVersion?: GoogleChartVersion;
+  chartPackages?: GoogleChartPackages[];
+  chartLanguage?: string;
+  mapsApiKey?: string;
+  graph_id?: string;
+  legendToggle?: boolean;
+  legend_toggle?: boolean;
+  getChartWrapper?: (
+    chartWrapper: GoogleChartWrapper,
+    google: GoogleViz
+  ) => void;
+  className?: string;
+  style?: React.CSSProperties;
+  formatters?: {
+    column: number;
+    type:
+      | "ArrowFormat"
+      | "BarFormat"
+      | "ColorFormat"
+      | "DateFormat"
+      | "NumberFormat"
+      | "PatternFormat";
+    options?: {};
+  }[];
+  spreadSheetUrl?: string;
+  spreadSheetQueryParameters?: {
+    headers: number;
+    gid?: number | string;
+    sheet?: string;
+    query?: string;
+  };
+  rootProps?: any;
+};
+
+export type ReactGoogleChartState = {
+  loadingStatus: "loading" | "errored" | "ready";
+  google: null | GoogleViz;
+  // hiddenColumns: string[];
+};
+
+export type ReactGoogleChartContext = {
+  data: ReactGoogleChartProps["data"];
+  rows: ReactGoogleChartProps["rows"] | null;
+  columns: ReactGoogleChartProps["columns"] | null;
+  diffdata: ReactGoogleChartProps["diffdata"] | null;
+  options: ReactGoogleChartProps["options"] | null;
+  legend_toggle: ReactGoogleChartProps["legend_toggle"] | null;
+  legendToggle: ReactGoogleChartProps["legendToggle"] | null;
+  chartType: ReactGoogleChartProps["chartType"] | null;
+  formatters: ReactGoogleChartProps["formatters"] | null;
+  spreadSheetUrl: ReactGoogleChartProps["spreadSheetUrl"] | null;
+  spreadSheetQueryParameters:
+    | ReactGoogleChartProps["spreadSheetQueryParameters"]
+    | null;
+};
