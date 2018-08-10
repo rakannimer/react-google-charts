@@ -8,8 +8,61 @@ menu: Animations
 import { Playground, PropsTable } from 'docz'
 import Component from 'react-component-component'
 import Chart from '../../index'
+import {generateData} from './generate-data.js'
 
-## Animate on Startup
+## Animate by changing the data
+
+<Playground>
+  <Component 
+    initialState={{chartData: generateData()}}
+    didMount={(comp)=>{
+      setInterval(()=>{
+        comp.setState({chartData: generateData()})
+       },3000)
+    }}
+  >
+  {(component) => {
+    return <Chart 
+        width={"500px"}
+    height={"300px"}
+    chartType="ScatterChart"
+    loader={<div>Loading Chart</div>}
+    data={component.state.chartData}
+    options={{
+      chartArea: {
+        width: "85%",
+        height: "85%"
+      },
+      colors: ["#8e0152", "#276419"],
+      pointSize: 10,
+      animation: {
+        duration: 2000,
+        easing: "out",
+        startup: true
+      },
+      vAxis: {
+        viewWindow:{
+          max:-10,
+          min:100
+        }
+      },
+      hAxis: {
+        viewWindow:{
+          max:100,
+          min:-10
+        }
+      },
+      legend: {position: "none"},
+      enableInteractivity: false
+    }}
+    rootProps={{"data-testid": "1"}}
+  />
+  }}
+  </Component>
+</Playground>
+
+
+## Animate on startup
 
 <Playground>
   <Chart 
@@ -49,57 +102,4 @@ import Chart from '../../index'
   />
 </Playground>
 
-
-import {generateData} from './generate-data.js'
-
-## Animate with data change
-
-
-<Component 
-    initialState={{chartData: generateData()}}
-    didMount={(comp)=>{
-      setInterval(()=>{
-        comp.setState({chartData: generateData()})
-      },3000 )
-    }}
-  >
-  {(component) => {
-    return <Chart style={{width:500, height:300, background:'blue'}}
-        width={"500px"}
-    height={"300px"}
-    chartType="ScatterChart"
-    loader={<div>Loading Chart</div>}
-    data={component.state.chartData}
-    options={{
-      chartArea: {
-        width: '85%',
-        height: '85%'
-      },
-      colors: ['#8e0152', '#276419'],
-      pointSize: 10,
-      animation: {
-        duration: 2000,
-        easing: 'out',
-        startup: true
-      },
-      vAxis: {
-        viewWindow:{
-          max:-10,
-          min:100
-        }
-      },
-      hAxis: {
-        viewWindow:{
-          max:100,
-          min:-10
-        }
-      },
-      legend: {position: 'none'},
-      enableInteractivity: false
-    }}
-
-    rootProps={{'data-testid': '1'}}
-  />
-  }}
-  
-  </Component>
+## Reference

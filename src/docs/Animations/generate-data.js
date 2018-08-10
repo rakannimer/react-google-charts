@@ -1,6 +1,5 @@
 const rand = n => {
-  return n;
-  // return Math.random() * n;
+  return Math.random() * 8 * n;
 };
 export const generateData = () => {
   return [
