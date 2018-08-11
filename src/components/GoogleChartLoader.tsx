@@ -22,7 +22,7 @@ export class GoogleChartLoader extends React.Component<{
       onLoad
     } = this.props;
     windowGoogleCharts.charts.load(version || "current", {
-      packages: packages || ["corechart"],
+      packages: packages || ["corechart", "controls"],
       language: language || "en",
       mapsApiKey
     });
@@ -34,7 +34,6 @@ export class GoogleChartLoader extends React.Component<{
     return false;
   }
   render() {
-    console.log("Rendering loader");
     const { onError } = this.props;
     return (
       <Script

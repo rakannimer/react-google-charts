@@ -4,6 +4,7 @@ import {
   GoogleChartWrapper,
   GoogleDataTable,
   ReactGoogleChartProps,
+  GoogleChartDashboard,
   ReactGoogleChartPropsWithDefaults
 } from "../types";
 import { DEFAULT_CHART_COLORS } from "../constants";
@@ -19,6 +20,7 @@ export type ChartDrawArgs = {
 export type GoogleChartDataTableProps = {
   googleChartWrapper: GoogleChartWrapper;
   google: GoogleViz;
+  googleChartDashboard: GoogleChartDashboard | null;
 };
 
 export class GoogleChartDataTableInner extends React.Component<
@@ -190,6 +192,9 @@ export class GoogleChartDataTableInner extends React.Component<
     googleChartWrapper.setOptions(options);
     googleChartWrapper.setDataTable(dataTable);
     googleChartWrapper.draw();
+    if (this.props.googleChartDashboard !== null) {
+      this.props.googleChartDashboard.draw(dataTable);
+    }
 
     if (chartDiff !== null) {
       googleChartWrapper.setDataTable(chartDiff);
@@ -277,7 +282,7 @@ export class GoogleChartDataTable extends React.Component<
     return false;
   }
   render() {
-    const { google, googleChartWrapper } = this.props;
+    const { google, googleChartWrapper, googleChartDashboard } = this.props;
     return (
       <ContextConsumer
         render={props => {
@@ -286,6 +291,7 @@ export class GoogleChartDataTable extends React.Component<
               {...props}
               google={google}
               googleChartWrapper={googleChartWrapper}
+              googleChartDashboard={googleChartDashboard}
             />
           );
         }}
