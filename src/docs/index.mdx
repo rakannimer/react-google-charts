@@ -32,9 +32,9 @@ var Chart = require('react-google-charts').Chart;
 
 👍 Good to go.
 
-<div style={{display:'flex'}}>
+<div style={{display:'flex', maxWidth: 900}}>
 <Chart 
-  width={400}
+  width={300}
   height={300}
   chartType="ColumnChart"
   loader={<div>Loading Chart</div>}
@@ -60,7 +60,7 @@ var Chart = require('react-google-charts').Chart;
   legendToggle
 />
 <Chart 
-    width={"500px"}
+    width={300}
     height={"300px"}
     chartType="AreaChart"
     loader={<div>Loading Chart</div>}
@@ -82,7 +82,7 @@ var Chart = require('react-google-charts').Chart;
   />
 
   <Chart 
-    width={500}
+    width={300}
     height={300}
     chartType="Scatter"
     loader={<div>Loading Chart</div>}
@@ -113,7 +113,7 @@ var Chart = require('react-google-charts').Chart;
 </div>
 <div style={{display:'flex'}}>
 <Chart 
-  width={"500px"}
+  width={300}
   height={"300px"}
   chartType="BubbleChart"
   loader={<div>Loading Chart</div>}
@@ -140,7 +140,7 @@ var Chart = require('react-google-charts').Chart;
   }}
 />
 <Chart 
-  width={500}
+  width={300}
   height={300}
   chartType="LineChart"
   loader={<div>Loading Chart</div>}
@@ -171,7 +171,7 @@ var Chart = require('react-google-charts').Chart;
   />
 
   <Chart 
-    width={500}
+    width={300}
     height={300}
     chartType="Line"
     loader={<div>Loading Chart</div>}
