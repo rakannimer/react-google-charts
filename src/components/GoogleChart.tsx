@@ -88,8 +88,6 @@ export class GoogleChart extends React.Component<
       controls
     } = this.props;
 
-    const googleChartControlsMap = new Map();
-    // for (let i = 0; i < )
     const googleChartControls =
       controls === null
         ? null
@@ -129,6 +127,27 @@ export class GoogleChart extends React.Component<
         googleChartControls.map(({ control }) => control),
         googleChartWrapper
       );
+      for (let chartControl of googleChartControls) {
+        const { control, controlProp } = chartControl;
+        const { controlEvents = [] } = controlProp;
+        google.visualization.events.removeAllListeners(control);
+        for (let event of controlEvents) {
+          const { callback, eventName } = event;
+          google.visualization.events.addListener(
+            control,
+            eventName,
+            (...args: any[]) => {
+              callback({
+                chartWrapper: googleChartWrapper,
+                controlWrapper: control,
+                props: this.props as any,
+                google: google,
+                eventArgs: args
+              });
+            }
+          );
+        }
+      }
     }
     this.setState({
       googleChartControls: googleChartControls,

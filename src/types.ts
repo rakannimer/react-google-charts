@@ -154,6 +154,7 @@ export type GoogleChartControlProp = {
   controlWrapperParams?: {};
   controlID?: string;
   controlPosition?: "top" | "bottom";
+  controlEvents?: ReactGoogleChartEvent[];
 };
 
 export type GoogleChartWrapper = {
@@ -191,7 +192,13 @@ export type GoogleChartWrapper = {
   setOptions: (options_obj: Partial<ChartWrapperOptions["options"]>) => void; //
 };
 
-export type GoogleVizEventName = "ready" | "error" | "select";
+export type GoogleVizEventName =
+  | "ready"
+  | "error"
+  | "select"
+  | "animationfinish"
+  | "statechange"
+  | "animationstart";
 
 export type GoogleVizEvents = {
   addListener: (
@@ -461,6 +468,7 @@ export type ReactGoogleChartEvent = {
   callback: (
     eventCallbackArgs: {
       chartWrapper: GoogleChartWrapper;
+      controlWrapper?: GoogleChartControl;
       props: ReactGoogleChartProps;
       google: GoogleViz;
       eventArgs: any;
