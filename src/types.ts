@@ -143,6 +143,19 @@ export type GoogleChartAction = {
   action: (chartWrapper: GoogleChartWrapper) => void;
 };
 
+export type GoogleChartControlProp = {
+  controlType:
+    | "CategoryFilter"
+    | "ChartRangeFilter"
+    | "DateRangeFilter"
+    | "NumberRangeFilter"
+    | "StringFilter";
+  options: {};
+  controlWrapperParams?: {};
+  controlID?: string;
+  controlPosition?: "top" | "bottom";
+};
+
 export type GoogleChartWrapper = {
   new (chartWrapperOptions: Partial<ChartWrapperOptions>): GoogleChartWrapper;
   draw: (chartArgs?: ChartWrapperProps) => any;
@@ -201,7 +214,8 @@ export type GoogleChartPackages =
   | "table"
   | "timeline"
   | "treemap"
-  | "wordtree";
+  | "wordtree"
+  | "controls";
 
 export type GoogleChartVersion = "current" | "upcoming";
 
@@ -502,6 +516,32 @@ export type ReactGoogleChartProps = {
     query?: string;
   };
   rootProps?: any;
+  controls?: GoogleChartControlProp[];
+  render?: ReactGoogleChartDashboardRender;
+};
+
+export type GoogleChartDashboard = {
+  draw: (data: GoogleDataTable) => void;
+};
+
+export type ReactGoogleChartDashboardRender = (
+  {
+    renderControl,
+    renderChart
+  }: {
+    renderControl: (
+      filter: (
+        {
+          control,
+          controlProp
+        }: { control: GoogleChartControl; controlProp: GoogleChartControlProp }
+      ) => boolean
+    ) => any;
+    renderChart: () => any;
+  }
+) => any;
+export type GoogleChartControl = {
+  getContainerId: () => string;
 };
 
 export type ReactGoogleChartState = {

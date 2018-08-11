@@ -5,7 +5,9 @@ import {
   ReactGoogleChartEvent,
   GoogleChartAction,
   GoogleChartWrapper,
-  GoogleViz
+  GoogleViz,
+  GoogleChartControlProp,
+  ReactGoogleChartDashboardRender
 } from "./types";
 
 export const chartDefaultProps = {
@@ -33,5 +35,8 @@ export const chartDefaultProps = {
     headers: 1,
     gid: 1
   },
-  rootProps: {}
+  rootProps: {},
+  chartWrapperParams: {},
+  controls: null as GoogleChartControlProp[] | null,
+  render: null as ReactGoogleChartDashboardRender | null
 };
