@@ -38,6 +38,14 @@ import Chart from '../../index'
     chartPackages={["corechart", "controls"]}
     controls={[
       {
+        controlEvents: [
+          {
+            eventName: "statechange",
+            callback:({chartWrapper, controlWrapper}) => {
+              alert("State changed to "+JSON.stringify(controlWrapper.getState()))
+            }
+          }
+        ],
         controlType: "CategoryFilter",
         options: {
           filterColumnIndex: 1,
