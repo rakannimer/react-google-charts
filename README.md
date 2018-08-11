@@ -8,6 +8,8 @@
 
 A thin, typed, React wrapper for [Google Charts](https://developers.google.com/chart/interactive/docs/reference).
 
+Check out the docs and examples [here](https://react-google-charts.com/).
+
 - [React Google Charts](#react-google-charts)
   - [Installation](#installation)
   - [Quick Start](#quick-start)
@@ -52,10 +54,16 @@ A thin, typed, React wrapper for [Google Charts](https://developers.google.com/c
 
 With your favorite package manager (yarn, pnpm or npm) :
 
-```
+```sh
 yarn add react-google-charts
 # or
 npm i -s react-google-charts
+```
+
+Note : If you're react < 16.3 then use 2.x version:
+
+```sh
+yarn add react-google-charts@2
 ```
 
 ## Quick Start

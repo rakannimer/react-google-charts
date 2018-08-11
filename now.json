@@ -1,0 +1,12 @@
+{
+  "public": true,
+  "alias": "react-google-charts.com",
+  "static": {
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
