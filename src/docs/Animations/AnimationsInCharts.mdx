@@ -18,7 +18,7 @@ import {generateData} from './generate-data.js'
     didMount={(comp)=>{
       setInterval(()=>{
         comp.setState({chartData: generateData()})
-       },3000)
+       },900)
     }}
   >
   {(component) => {
@@ -36,7 +36,7 @@ import {generateData} from './generate-data.js'
       colors: ["#8e0152", "#276419"],
       pointSize: 10,
       animation: {
-        duration: 2000,
+        duration: 1000,
         easing: "out",
         startup: true
       },
