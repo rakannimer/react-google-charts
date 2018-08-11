@@ -8,4 +8,4 @@ node_modules
 .docz
 docs/react-google-charts/
 cypress/videos
-docs/
+./docs/
