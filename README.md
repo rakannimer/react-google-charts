@@ -60,7 +60,7 @@ yarn add react-google-charts
 npm i -s react-google-charts
 ```
 
-Note : If you're react < 16.3 then use 2.x version:
+Note : If you're using react < 16.3 then use 2.x version:
 
 ```sh
 yarn add react-google-charts@2
