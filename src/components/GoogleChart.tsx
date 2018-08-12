@@ -79,17 +79,6 @@ export class GoogleChart extends React.Component<Props, State> {
     return controlID;
   };
 
-  private getToolbarID = (id: null | undefined | string) => {
-    toolbarCounter += 1;
-    let toolbarID: string;
-    if (typeof id === "undefined" || id === null) {
-      toolbarID = `googlechart-toolbar-${toolbarCounter}`;
-    } else {
-      toolbarID = id;
-    }
-    return toolbarID;
-  };
-
   addControls = (
     googleChartWrapper: GoogleChartWrapper,
     googleChartDashboard: GoogleChartDashboard
@@ -189,6 +178,11 @@ export class GoogleChart extends React.Component<Props, State> {
     let googleChartEditor: null | GoogleChartEditor = null;
     if (getChartEditor !== null) {
       googleChartEditor = new google.visualization.ChartEditor();
+      getChartEditor({
+        chartEditor: googleChartEditor,
+        chartWrapper: googleChartWrapper,
+        google
+      });
     }
 
     this.setState({
@@ -210,8 +204,7 @@ export class GoogleChart extends React.Component<Props, State> {
       style,
       className,
       rootProps,
-      google,
-      chartEvents
+      google
     } = this.props;
 
     const divStyle = {

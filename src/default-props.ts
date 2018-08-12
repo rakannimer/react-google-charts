@@ -7,7 +7,8 @@ import {
   GoogleChartWrapper,
   GoogleViz,
   GoogleChartControlProp,
-  ReactGoogleChartDashboardRender
+  ReactGoogleChartDashboardRender,
+  GoogleChartEditor
 } from "./types";
 
 export const chartDefaultProps = {
@@ -27,7 +28,15 @@ export const chartDefaultProps = {
   legendToggle: false,
   chartActions: null as null | GoogleChartAction[],
   getChartWrapper: (chartWrapper: GoogleChartWrapper, google: GoogleViz) => {},
-  getChartEditor: null,
+  getChartEditor: null as
+    | null
+    | ((
+        args: {
+          chartEditor: GoogleChartEditor;
+          chartWrapper: GoogleChartWrapper;
+          google: GoogleViz;
+        }
+      ) => void),
   className: "",
   style: {},
   formatters: null,
