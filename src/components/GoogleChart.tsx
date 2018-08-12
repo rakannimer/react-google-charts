@@ -11,7 +11,7 @@ import { generateUniqueID } from "../generate-unique-id";
 import { GoogleChartDataTable } from "./GoogleChartDataTable";
 import { GoogleChartEvents } from "./GoogleChartEvents";
 
-export type GoogleChartProps = {
+export type Props = {
   google: GoogleViz;
   graphID?: string | null;
   graph_id?: string | null;
@@ -25,30 +25,26 @@ export type GoogleChartProps = {
   rootProps?: ReactGoogleChartPropsWithDefaults["rootProps"];
 } & ReactGoogleChartPropsWithDefaults;
 
-export type GoogleChartState = {
+export interface State {
   googleChartWrapper: GoogleChartWrapper | null;
   isReady: boolean;
   googleChartDashboard: GoogleChartDashboard | null;
   googleChartControls:
     | { control: GoogleChartControl; controlProp: GoogleChartControlProp }[]
     | null;
-};
+}
 
 let controlCounter = 0;
-export class GoogleChart extends React.Component<
-  GoogleChartProps,
-  GoogleChartState
-> {
+export class GoogleChart extends React.Component<Props, State> {
   state = {
-    googleChartWrapper: null as GoogleChartWrapper | null,
-    googleChartDashboard: null as GoogleChartDashboard | null,
-    googleChartControls: null as
-      | { control: GoogleChartControl; controlProp: GoogleChartControlProp }[]
-      | null,
+    googleChartWrapper: null,
+    googleChartDashboard: null,
+    googleChartControls: null,
     isReady: false
-  };
+  } as State;
   graphID: null | string = null;
   private dashboard_ref: React.RefObject<HTMLDivElement> = React.createRef();
+
   private getGraphID = () => {
     const { graphID, graph_id } = this.props;
     let instanceGraphID: string;
@@ -156,48 +152,9 @@ export class GoogleChart extends React.Component<
       isReady: true
     });
   }
-  shouldComponentUpdate(
-    nextProps: GoogleChartProps,
-    nextState: GoogleChartState
-  ) {
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
     return this.state.isReady !== nextState.isReady;
   }
-  renderTopControls = () => {
-    return this.state.isReady && this.state.googleChartControls !== null ? (
-      <React.Fragment>
-        {this.state.googleChartControls
-          .filter(({ controlProp }) => {
-            return controlProp.controlPosition !== "bottom";
-          })
-          .map(({ control, controlProp }) => {
-            return (
-              <div
-                key={control.getContainerId()}
-                id={control.getContainerId()}
-              />
-            );
-          })}
-      </React.Fragment>
-    ) : null;
-  };
-  renderBottomControls = () => {
-    return this.state.isReady && this.state.googleChartControls !== null ? (
-      <React.Fragment>
-        {this.state.googleChartControls
-          .filter(({ controlProp }) => {
-            return controlProp.controlPosition === "bottom";
-          })
-          .map(({ control, controlProp }) => {
-            return (
-              <div
-                key={control.getContainerId()}
-                id={control.getContainerId()}
-              />
-            );
-          })}
-      </React.Fragment>
-    ) : null;
-  };
   renderChart = () => {
     const {
       width,
@@ -271,7 +228,6 @@ export class GoogleChart extends React.Component<
       width: width || (options && options.width),
       ...style
     };
-    // const render = this.props.render !== null ? ({}) => null : () => null;
     if (this.props.render !== null) {
       return (
         <div ref={this.dashboard_ref}>
@@ -284,9 +240,13 @@ export class GoogleChart extends React.Component<
     } else {
       return (
         <div ref={this.dashboard_ref}>
-          {this.renderTopControls()}
+          {this.renderControl(({ controlProp }) => {
+            return controlProp.controlPosition !== "bottom";
+          })}
           {this.renderChart()}
-          {this.renderBottomControls()}
+          {this.renderControl(({ controlProp }) => {
+            return controlProp.controlPosition === "bottom";
+          })}
         </div>
       );
     }

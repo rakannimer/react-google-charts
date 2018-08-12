@@ -22,16 +22,16 @@ export type GoogleChartDataTableProps = {
   google: GoogleViz;
   googleChartDashboard: GoogleChartDashboard | null;
 };
-
+interface State {
+  hiddenColumns: string[];
+}
 export class GoogleChartDataTableInner extends React.Component<
   ReactGoogleChartPropsWithDefaults & GoogleChartDataTableProps,
-  {
-    hiddenColumns: string[];
-  }
+  State
 > {
   state = {
-    hiddenColumns: [] as string[]
-  };
+    hiddenColumns: []
+  } as State;
 
   private listenToLegendToggle = () => {
     const { google, googleChartWrapper } = this.props;

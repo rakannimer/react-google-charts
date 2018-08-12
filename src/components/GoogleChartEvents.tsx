@@ -12,12 +12,18 @@ export type ChartDrawArgs = {
   data: ReactGoogleChartProps["data"];
 };
 
-export type GoogleChartEventProps = {
+export interface Props {
   googleChartWrapper: GoogleChartWrapper;
   google: GoogleViz;
-};
+}
 
-export class GoogleChartEvents extends React.Component<GoogleChartEventProps> {
+export interface ListenToEventsArgs {
+  googleChartWrapper: GoogleChartWrapper;
+  google: GoogleViz;
+  chartEvents: ReactGoogleChartEvent[] | null;
+}
+
+export class GoogleChartEvents extends React.Component<Props> {
   shouldComponentUpdate() {
     return false;
   }
@@ -25,11 +31,7 @@ export class GoogleChartEvents extends React.Component<GoogleChartEventProps> {
     chartEvents,
     google,
     googleChartWrapper
-  }: {
-    googleChartWrapper: GoogleChartWrapper;
-    google: GoogleViz;
-    chartEvents: ReactGoogleChartEvent[] | null;
-  }) {
+  }: ListenToEventsArgs) {
     if (chartEvents === null) {
       return;
     }

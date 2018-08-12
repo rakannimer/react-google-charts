@@ -3,14 +3,16 @@ import * as React from "react";
 import { default as Script } from "react-load-script";
 import { GoogleViz, ReactGoogleChartProps } from "../types";
 
-export class GoogleChartLoader extends React.Component<{
+export interface Props {
   chartVersion: ReactGoogleChartProps["chartVersion"];
   chartPackages: ReactGoogleChartProps["chartPackages"];
   chartLanguage: ReactGoogleChartProps["chartLanguage"];
   mapsApiKey: ReactGoogleChartProps["mapsApiKey"];
   onLoad: (google: GoogleViz) => void;
   onError: () => void;
-}> {
+}
+
+export class GoogleChartLoader extends React.Component<Props> {
   private handleGoogleChartsLoaderScriptLoaded = (
     windowGoogleCharts: GoogleViz
   ) => {

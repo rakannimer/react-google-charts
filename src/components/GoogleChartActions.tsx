@@ -13,20 +13,18 @@ export type ChartDrawArgs = {
   data: ReactGoogleChartProps["data"];
 };
 
-export type GoogleChartActionProps = {
+export interface Props {
   googleChartWrapper: GoogleChartWrapper;
   google: GoogleViz;
   chartActions: ReactGoogleChartPropsWithDefaults["chartActions"];
-};
+}
 
-export class GoogleChartActionsInner extends React.Component<
-  GoogleChartActionProps
-> {
+export class GoogleChartActionsInner extends React.Component<Props> {
   componentDidMount() {
     const { chartActions } = this.props;
     this.setChartActions(chartActions, []);
   }
-  componentDidUpdate(prevProps: GoogleChartActionProps) {
+  componentDidUpdate(prevProps: Props) {
     const { chartActions } = this.props;
     this.setChartActions(chartActions, prevProps.chartActions);
   }
@@ -56,9 +54,7 @@ export class GoogleChartActionsInner extends React.Component<
   }
 }
 
-export class GoogleChartActions extends React.Component<
-  GoogleChartActionProps
-> {
+export class GoogleChartActions extends React.Component<Props> {
   render() {
     const { google, googleChartWrapper } = this.props;
     return (
