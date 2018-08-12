@@ -1,6 +1,6 @@
 {
   "name": "react-google-charts",
-  "version": "2.0.29",
+  "version": "3.0.0",
   "type": "react-component",
   "description": "react-google-charts React component",
   "main": "dist/index.cjs.js",
@@ -16,7 +16,8 @@
     "test:e2e": "npm run docz:build && kill-port 5000 && (serve -p 5000 -s --silent docs/ &) && cypress run --record --key 992c387d-9654-42ea-aad7-bb51e16aec9b && kill-port 5000",
     "prepublish": "npm run build",
     "docz:dev": "docz dev",
-    "docz:build": "docz build && mkdir docs/react-google-charts && cp -r docs/static docs/react-google-charts/static"
+    "docz:build": "docz build && mkdir docs/react-google-charts && cp -r docs/static docs/react-google-charts/static && mkdir docs/assets/ && cp -r assets/ docs/assets/",
+    "docz:deploy": "yarn docz:build && cp now.json docs/ && cd docs/ && now && now alias"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -27,8 +28,8 @@
     "react-load-script": "^0.0.6"
   },
   "peerDependencies": {
-    "react": ">=15.0.0",
-    "react-dom": ">=15.0.0"
+    "react": ">=16.3.0",
+    "react-dom": ">=16.3.0"
   },
   "devDependencies": {
     "@types/react": "^16.4.6",

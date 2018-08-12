@@ -17,7 +17,7 @@ const times = num => {
 context("React Google Charts", () => {
   describe("Charts", () => {
     it("Area Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/area-chart`);
+      cy.visit(`${BASE_URL}/area-chart`);
       times(3).forEach(i => {
         cy.get("body")
           .find(`[data-testid=${i + 1}]`)
@@ -26,7 +26,7 @@ context("React Google Charts", () => {
       });
     });
     it("Bar Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/bar-chart`);
+      cy.visit(`${BASE_URL}/bar-chart`);
       times(6).forEach(i => {
         cy.get("body")
           .find(`[data-testid=${i + 1}]`)
@@ -35,7 +35,7 @@ context("React Google Charts", () => {
       });
     });
     it("Bubble Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/bubble-chart`);
+      cy.visit(`${BASE_URL}/bubble-chart`);
       times(3).forEach(i => {
         cy.get("body")
           .find(`[data-testid=${i + 1}]`)
@@ -44,7 +44,7 @@ context("React Google Charts", () => {
       });
     });
     it("Calendar Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/calendar-chart`);
+      cy.visit(`${BASE_URL}/calendar-chart`);
       times(2).forEach(i => {
         cy.get("body")
           .find(`[data-testid=${i + 1}]`)
@@ -53,7 +53,7 @@ context("React Google Charts", () => {
       });
     });
     it("Candlestick Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/candlestick-chart`);
+      cy.visit(`${BASE_URL}/candlestick-chart`);
       times(2).forEach(i => {
         cy.get("body")
           .find(`[data-testid=${i + 1}]`)
@@ -62,7 +62,7 @@ context("React Google Charts", () => {
       });
     });
     it("Combo Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/combo-chart`);
+      cy.visit(`${BASE_URL}/combo-chart`);
       times(1).forEach(i => {
         cy.get("body")
           .find(`[data-testid=${i + 1}]`)
@@ -71,14 +71,14 @@ context("React Google Charts", () => {
       });
     });
     it("Diff Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/diff-chart`);
+      cy.visit(`${BASE_URL}/diff-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
       isGoogleChart("[data-testid=4]");
     });
     it("Formatters", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/formatters`);
+      cy.visit(`${BASE_URL}/formatters`);
       // isGoogleChart("#reactgooglegraph-1");
       cy.get("[data-testid=1]")
         .find(".google-visualization-formatters-arrow-dr")
@@ -96,12 +96,12 @@ context("React Google Charts", () => {
     });
 
     it("From API", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/data-sources/from-api`);
+      cy.visit(`${BASE_URL}/data-sources/from-api`);
       cy.get("[data-testid=1]", { timeout: 18000 })
         .find("svg", { timeout: 18000 })
         .should("have.length.greaterThan", 0);
       cy.visit(
-        `${BASE_URL}/#/react-google-charts/data-sources/from-api#debt-incurred-by-the-lebanese-state-over-time`
+        `${BASE_URL}/data-sources/from-api#debt-incurred-by-the-lebanese-state-over-time`
       );
       cy.get("[data-testid=2]", { timeout: 20000 })
         .find("svg", { timeout: 20000 })
@@ -109,15 +109,13 @@ context("React Google Charts", () => {
     });
 
     it("From Spreadsheet", () => {
-      cy.visit(
-        `${BASE_URL}/#/react-google-charts/data-sources/from-google-spreadsheet`
-      );
+      cy.visit(`${BASE_URL}/data-sources/from-google-spreadsheet`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
     });
 
     it("Gantt Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/gantt-chart`);
+      cy.visit(`${BASE_URL}/gantt-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
@@ -128,14 +126,14 @@ context("React Google Charts", () => {
     });
 
     it("Gauge Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/gauge-chart`);
+      cy.visit(`${BASE_URL}/gauge-chart`);
       cy.get("[data-testid=1]")
         .find("svg")
         .should("have.length", 3);
     });
 
     it("Geo Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/geo-chart`);
+      cy.visit(`${BASE_URL}/geo-chart`);
       times(4).forEach(i => {
         cy.get("body")
           .find(`[data-testid=${i + 1}]`)
@@ -144,7 +142,7 @@ context("React Google Charts", () => {
       });
     });
     it("Histogram Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/histogram-chart`);
+      cy.visit(`${BASE_URL}/histogram-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
@@ -152,7 +150,7 @@ context("React Google Charts", () => {
       isGoogleChart("[data-testid=5]");
     });
     it("Intervals Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/intervals-chart`);
+      cy.visit(`${BASE_URL}/intervals-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
@@ -163,20 +161,20 @@ context("React Google Charts", () => {
       isGoogleChart("[data-testid=8]");
     });
     it("Line Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/line-chart`);
+      cy.visit(`${BASE_URL}/line-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
       isGoogleChart("[data-testid=4]");
     });
     it("Org Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/org-chart`);
+      cy.visit(`${BASE_URL}/org-chart`);
       cy.get("[data-testid=1]")
         .find(".google-visualization-orgchart-table")
         .should("have.length", 1);
     });
     it("Pie Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/pie-chart`);
+      cy.visit(`${BASE_URL}/pie-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
@@ -186,13 +184,13 @@ context("React Google Charts", () => {
       isGoogleChart("[data-testid=7]");
     });
     it("Sankey Diagram", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/sankey-diagram`);
+      cy.visit(`${BASE_URL}/sankey-diagram`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
     });
     it("Scatter Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/scatter-chart`);
+      cy.visit(`${BASE_URL}/scatter-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
@@ -200,18 +198,18 @@ context("React Google Charts", () => {
       isGoogleChart("[data-testid=5]");
     });
     it("Stepped Area Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/stepped-area-chart`);
+      cy.visit(`${BASE_URL}/stepped-area-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
     });
     it("Table Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/table-chart`);
+      cy.visit(`${BASE_URL}/table-chart`);
       cy.get("[data-testid=1]")
         .find(".google-visualization-table")
         .should("have.length", 1);
     });
     it("Timelines", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/timeline-chart`);
+      cy.visit(`${BASE_URL}/timeline-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
@@ -221,13 +219,13 @@ context("React Google Charts", () => {
       isGoogleChart("[data-testid=7]");
     });
     it("TreeMap Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/treemap-chart`);
+      cy.visit(`${BASE_URL}/treemap-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
       isGoogleChart("[data-testid=3]");
     });
     it("WordTree Chart", () => {
-      cy.visit(`${BASE_URL}/#/react-google-charts/wordtree-chart`);
+      cy.visit(`${BASE_URL}/wordtree-chart`);
       isGoogleChart("[data-testid=1]");
       isGoogleChart("[data-testid=2]");
     });
