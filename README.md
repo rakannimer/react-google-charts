@@ -8,9 +8,10 @@
 
 A thin, typed, React wrapper for [Google Charts](https://developers.google.com/chart/interactive/docs/reference).
 
-Check out the docs and examples [here](https://react-google-charts.com/).
+## [Docs and examples](https://react-google-charts.com/).
 
 - [React Google Charts](#react-google-charts)
+  - [Docs and examples.](#docs-and-examples)
   - [Installation](#installation)
   - [Quick Start](#quick-start)
   - [Quick Walkthrough](#quick-walkthrough)
