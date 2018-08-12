@@ -85,6 +85,9 @@ export type ReactGoogleChartProps = {
     query?: string;
   };
   rootProps?: any;
+  // control props
+  controlType?: null;
+  controlOptions?: null;
 };
 
 export type ReactGoogleChartState = {
@@ -118,7 +121,10 @@ export const chartDefaultProps = {
     headers: 1,
     gid: 1
   },
-  rootProps: {}
+  rootProps: {},
+  // control props
+  controlType: null,
+  controlOptions: null
 };
 
 export type ReactGoogleChartPropsWithDefaults = typeof chartDefaultProps &
@@ -170,6 +176,11 @@ export class Chart extends React.Component<
   graphID: null | string = null;
   chartWrapper: GoogleChartWrapper | null = null;
   static defaultProps = chartDefaultProps;
+  static defaultProps = chartDefaultProps;
+  // dashboard and control references
+  Dashboard: null = null;
+  dashboardref: null = null;
+  controlWrapper: null = null;
 
   private getGraphID = () => {
     const { graphID, graph_id } = this
@@ -190,6 +201,11 @@ export class Chart extends React.Component<
     }
     this.graphID = instanceGraphID;
     return this.graphID as string;
+  };
+
+  private setdashboardref = element => {
+    // get reference of dashboard div, so dashboard object can be created
+    this.dashboardref = element;
   };
 
   private draw = async () => {
@@ -261,10 +277,26 @@ export class Chart extends React.Component<
     if (this.chartWrapper.getChartType() === "Timeline") {
       chart && chart.clearChart();
     }
-
-    this.chartWrapper.setOptions(options);
-    this.chartWrapper.setDataTable(dataTable);
-    this.chartWrapper.draw();
+    if (this.props.controlType === null || this.props.controlOptions === null) {
+      // no controls. draw chart normally.
+      this.chartWrapper.setOptions(options);
+      this.chartWrapper.setDataTable(dataTable);
+      this.chartWrapper.draw();
+    } else {
+      let cOptions = {
+        controlType: this.props.controlType,
+        containerId: `filter_div_${this.getGraphID()}`,
+        options: this.props.controlOptions
+      };
+      this.controlWrapper = new this.state.google.visualization.ControlWrapper(
+        cOptions
+      );
+      this.Dashboard = new this.state.google.visualization.Dashboard(
+        this.dashboardref
+      );
+      this.Dashboard.bind(this.controlWrapper, this.chartWrapper);
+      this.Dashboard.draw(dataTable);
+    }
 
     if (chartDiff !== null) {
       this.chartWrapper.setDataTable(chartDiff);
@@ -567,27 +599,30 @@ export class Chart extends React.Component<
       ...this.props.style
     };
     return (
-      <div
-        id={this.getGraphID()}
-        style={divStyle}
-        className={this.props.className}
-        {...this.props.rootProps}
-      >
-        <ReactGoogleChartsLoader
-          onError={this.handleGoogleChartsLoaderScriptErrored}
-          onLoad={() => {
-            const windowWithGoogle = window as Window & {
-              google?: GoogleViz;
-            };
-            if (windowWithGoogle.google) {
-              this.handleGoogleChartsLoaderScriptLoaded(
-                windowWithGoogle.google as GoogleViz
-              );
-            }
-          }}
-        />
-        {this.state.loadingStatus === "loading" &&
-          (this.props.loader ? this.props.loader : "Rendering Chart...")}
+      <div id={`dashboard_div_${this.getGraphID()}`} ref={this.setdashboardref}>
+        <div
+          id={this.getGraphID()}
+          style={divStyle}
+          className={this.props.className}
+          {...this.props.rootProps}
+        >
+          <ReactGoogleChartsLoader
+            onError={this.handleGoogleChartsLoaderScriptErrored}
+            onLoad={() => {
+              const windowWithGoogle = window as Window & {
+                google?: GoogleViz;
+              };
+              if (windowWithGoogle.google) {
+                this.handleGoogleChartsLoaderScriptLoaded(
+                  windowWithGoogle.google as GoogleViz
+                );
+              }
+            }}
+          />
+          {this.state.loadingStatus === "loading" &&
+            (this.props.loader ? this.props.loader : "Rendering Chart...")}
+        </div>
+        <div id={`filter_div_${this.getGraphID()}`} />
       </div>
     );
   }
