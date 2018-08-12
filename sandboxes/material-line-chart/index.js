@@ -11,9 +11,10 @@ const data = [
   ["2007", 1030, 540]
 ];
 const options = {
-  title: "Company Performance",
-  curveType: "function",
-  legend: { position: "bottom" }
+  chart: {
+    title: "Company Performance",
+    subtitle: "Sales & Expenses"
+  }
 };
 class App extends React.Component {
   render() {
