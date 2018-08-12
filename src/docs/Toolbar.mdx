@@ -1,0 +1,26 @@
+---
+route: /google-charts-toolbar
+name: Toolbar
+menu: Toolbar
+---
+
+import { Playground, PropsTable } from 'docz'
+import Chart from '../index'
+
+## Usage 
+
+<Playground>
+  <Chart 
+    chartType="ColumnChart"
+    spreadSheetUrl="https://docs.google.com/spreadsheets/d/1jN0iw0usssnsG1_oi-NXtuKfsUsGme09GsFidbqxFYA"
+    toolbarItems={[
+      {
+        type: 'csv',
+        datasource: 'https://spreadsheets.google.com/tq?key=1jN0iw0usssnsG1_oi-NXtuKfsUsGme09GsFidbqxFYA'
+      },
+    ]}
+    rootProps={{'data-testid': '1'}}
+  />
+</Playground>
+
+## [Reference](https://developers.google.com/chart/interactive/docs/gallery/toolbar)

@@ -4,6 +4,11 @@ import { chartDefaultProps } from "./default-props";
 export type ReactGoogleChartPropsWithDefaults = typeof chartDefaultProps &
   ReactGoogleChartProps;
 
+export type GoogleVizDrawToolbar = (
+  toolbarContainer: HTMLDivElement,
+  components: GoogleChartToolbarItem[]
+) => any;
+
 export type GoogleViz = {
   charts: GoogleChartLoader;
   visualization: {
@@ -11,6 +16,7 @@ export type GoogleViz = {
     DataTable: GoogleDataTable;
     events: GoogleVizEvents;
     arrayToDataTable: GoogleArrayToDataTable;
+    drawToolbar: GoogleVizDrawToolbar;
     [otherKeys: string]: any;
   };
 };
@@ -205,6 +211,11 @@ export type GoogleVizEvents = {
     chartWrapper: GoogleChartWrapper,
     name: GoogleVizEventName,
     onEvent: (chartWrapper: GoogleChartWrapper) => any
+  ) => any;
+  removeListener: (
+    chartWrapper: GoogleChartWrapper,
+    name: GoogleVizEventName,
+    callback: Function
   ) => any;
   removeAllListeners: (chartWrapper: GoogleChartWrapper) => any;
 };
@@ -476,6 +487,16 @@ export type ReactGoogleChartEvent = {
   ) => void;
 };
 
+export type GoogleChartToolbarItem = {
+  type: "igoogle" | "html" | "csv" | "htmlcode";
+  datasource: string;
+  gadget?: string;
+  userPrefs?: {
+    "3d": number;
+    [otherKeyMaybe: string]: any;
+  };
+};
+
 export type ReactGoogleChartProps = {
   height?: string | number;
   width?: string | number;
@@ -526,16 +547,24 @@ export type ReactGoogleChartProps = {
   rootProps?: any;
   controls?: GoogleChartControlProp[];
   render?: ReactGoogleChartDashboardRender;
+  //https://developers.google.com/chart/interactive/docs/gallery/toolbar#example_1
+  toolbarItems?: GoogleChartToolbarItem[];
+  toolbarID?: string;
 };
 
 export type GoogleChartDashboard = {
   draw: (data: GoogleDataTable) => void;
+  bind: (
+    controlWrapperOrWrappers: GoogleChartControl | GoogleChartControl[],
+    chartWrapper: GoogleChartWrapper
+  ) => void;
 };
 
 export type ReactGoogleChartDashboardRender = (
   {
     renderControl,
-    renderChart
+    renderChart,
+    renderToolbar
   }: {
     renderControl: (
       filter: (
@@ -546,6 +575,7 @@ export type ReactGoogleChartDashboardRender = (
       ) => boolean
     ) => any;
     renderChart: () => any;
+    renderToolbar: () => any;
   }
 ) => any;
 export type GoogleChartControl = {

@@ -35,6 +35,7 @@ export interface State {
 }
 
 let controlCounter = 0;
+let toolbarCounter = 0;
 export class GoogleChart extends React.Component<Props, State> {
   state = {
     googleChartWrapper: null,
@@ -44,7 +45,7 @@ export class GoogleChart extends React.Component<Props, State> {
   } as State;
   graphID: null | string = null;
   private dashboard_ref: React.RefObject<HTMLDivElement> = React.createRef();
-
+  private toolbar_ref: React.RefObject<HTMLDivElement> = React.createRef();
   private getGraphID = () => {
     const { graphID, graph_id } = this.props;
     let instanceGraphID: string;
@@ -75,14 +76,22 @@ export class GoogleChart extends React.Component<Props, State> {
     return controlID;
   };
 
-  componentDidMount() {
-    const {
-      options,
-      google,
-      chartType,
-      chartWrapperParams,
-      controls
-    } = this.props;
+  private getToolbarID = (id: null | undefined | string) => {
+    toolbarCounter += 1;
+    let toolbarID: string;
+    if (typeof id === "undefined" || id === null) {
+      toolbarID = `googlechart-toolbar-${toolbarCounter}`;
+    } else {
+      toolbarID = id;
+    }
+    return toolbarID;
+  };
+
+  addControls = (
+    googleChartWrapper: GoogleChartWrapper,
+    googleChartDashboard: GoogleChartDashboard
+  ) => {
+    const { google, controls } = this.props;
 
     const googleChartControls =
       controls === null
@@ -105,6 +114,49 @@ export class GoogleChart extends React.Component<Props, State> {
               })
             };
           });
+    if (googleChartControls === null) {
+      return null;
+    }
+    googleChartDashboard.bind(
+      googleChartControls.map(({ control }) => control),
+      googleChartWrapper
+    );
+    for (let chartControl of googleChartControls) {
+      const { control, controlProp } = chartControl;
+      const { controlEvents = [] } = controlProp;
+      for (let event of controlEvents) {
+        const { callback, eventName } = event;
+        google.visualization.events.removeListener(
+          control,
+          eventName,
+          callback
+        );
+        google.visualization.events.addListener(
+          control,
+          eventName,
+          (...args: any[]) => {
+            callback({
+              chartWrapper: googleChartWrapper,
+              controlWrapper: control,
+              props: this.props as any,
+              google: google,
+              eventArgs: args
+            });
+          }
+        );
+      }
+    }
+    return googleChartControls;
+  };
+  componentDidMount() {
+    const {
+      options,
+      google,
+      chartType,
+      chartWrapperParams,
+      toolbarItems
+    } = this.props;
+
     const chartConfig = {
       chartType,
       options,
@@ -118,32 +170,16 @@ export class GoogleChart extends React.Component<Props, State> {
     const googleChartDashboard = new google.visualization.Dashboard(
       this.dashboard_ref
     );
-    if (googleChartControls !== null) {
-      googleChartDashboard.bind(
-        googleChartControls.map(({ control }) => control),
-        googleChartWrapper
+    const googleChartControls = this.addControls(
+      googleChartWrapper,
+      googleChartDashboard
+    );
+    if (toolbarItems !== null) {
+      // console.log(document.getElementById("toolbar"));
+      google.visualization.drawToolbar(
+        this.toolbar_ref.current as HTMLDivElement,
+        toolbarItems
       );
-      for (let chartControl of googleChartControls) {
-        const { control, controlProp } = chartControl;
-        const { controlEvents = [] } = controlProp;
-        google.visualization.events.removeAllListeners(control);
-        for (let event of controlEvents) {
-          const { callback, eventName } = event;
-          google.visualization.events.addListener(
-            control,
-            eventName,
-            (...args: any[]) => {
-              callback({
-                chartWrapper: googleChartWrapper,
-                controlWrapper: control,
-                props: this.props as any,
-                google: google,
-                eventArgs: args
-              });
-            }
-          );
-        }
-      }
     }
     this.setState({
       googleChartControls: googleChartControls,
@@ -221,19 +257,19 @@ export class GoogleChart extends React.Component<Props, State> {
       </React.Fragment>
     ) : null;
   };
+  renderToolBar = () => {
+    if (this.props.toolbarItems === null) return null;
+    return <div ref={this.toolbar_ref} />;
+  };
   render() {
-    const { width, height, options, style } = this.props;
-    const divStyle = {
-      height: height || (options && options.height),
-      width: width || (options && options.width),
-      ...style
-    };
     if (this.props.render !== null) {
       return (
         <div ref={this.dashboard_ref}>
+          <div ref={this.toolbar_ref} id="toolbar" />
           {this.props.render({
             renderChart: this.renderChart,
-            renderControl: this.renderControl
+            renderControl: this.renderControl,
+            renderToolbar: this.renderToolBar
           })}
         </div>
       );
@@ -247,6 +283,7 @@ export class GoogleChart extends React.Component<Props, State> {
           {this.renderControl(({ controlProp }) => {
             return controlProp.controlPosition === "bottom";
           })}
+          {this.renderToolBar()}
         </div>
       );
     }

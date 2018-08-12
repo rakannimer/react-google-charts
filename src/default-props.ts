@@ -38,5 +38,7 @@ export const chartDefaultProps = {
   rootProps: {},
   chartWrapperParams: {},
   controls: null as GoogleChartControlProp[] | null,
-  render: null as ReactGoogleChartDashboardRender | null
+  render: null as ReactGoogleChartDashboardRender | null,
+  toolbarItems: null,
+  toolbarID: null
 };
