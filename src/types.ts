@@ -13,12 +13,24 @@ export type GoogleViz = {
   charts: GoogleChartLoader;
   visualization: {
     ChartWrapper: GoogleChartWrapper;
+    ChartEditor: GoogleChartEditor;
     DataTable: GoogleDataTable;
     events: GoogleVizEvents;
     arrayToDataTable: GoogleArrayToDataTable;
     drawToolbar: GoogleVizDrawToolbar;
     [otherKeys: string]: any;
   };
+};
+
+export type GoogleChartEditor = {
+  new (): GoogleChartEditor;
+  openDialog: (
+    chartWrapper: GoogleChartWrapper,
+    chartEditorOptions?: { dataSourceInput?: any; [otherKeyMaybe: string]: any }
+  ) => null;
+  getChartWrapper: () => GoogleChartWrapper;
+  setChartWrapper: (chartWrapper: GoogleChartWrapper) => GoogleChartWrapper;
+  closeDialog: () => null;
 };
 
 export type GoogleChartLoaderOptions = {
@@ -204,11 +216,13 @@ export type GoogleVizEventName =
   | "select"
   | "animationfinish"
   | "statechange"
+  | "ok"
+  | "cancel"
   | "animationstart";
 
 export type GoogleVizEvents = {
   addListener: (
-    chartWrapper: GoogleChartWrapper,
+    chartWrapper: GoogleChartWrapper | GoogleChartControl | GoogleChartEditor,
     name: GoogleVizEventName,
     onEvent: (chartWrapper: GoogleChartWrapper) => any
   ) => any;
@@ -222,6 +236,8 @@ export type GoogleVizEvents = {
 
 export type GoogleChartPackages =
   | "corechart"
+  | "charteditor"
+  | "controls"
   | "calendar"
   | "gantt"
   | "gauge"
@@ -232,8 +248,7 @@ export type GoogleChartPackages =
   | "table"
   | "timeline"
   | "treemap"
-  | "wordtree"
-  | "controls";
+  | "wordtree";
 
 export type GoogleChartVersion = "current" | "upcoming";
 
@@ -523,6 +538,13 @@ export type ReactGoogleChartProps = {
   getChartWrapper?: (
     chartWrapper: GoogleChartWrapper,
     google: GoogleViz
+  ) => void;
+  getChartEditor?: (
+    args: {
+      chartEditor: GoogleChartEditor;
+      chartWrapper: GoogleChartWrapper;
+      google: GoogleViz;
+    }
   ) => void;
   className?: string;
   style?: React.CSSProperties;

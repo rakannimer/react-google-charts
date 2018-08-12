@@ -34,12 +34,10 @@ export class Chart extends React.Component<
         >
           {this.state.loadingStatus === "ready" &&
           this.state.google !== null ? (
-            <React.Fragment>
-              <GoogleChart
-                {...this.props as ReactGoogleChartPropsWithDefaults}
-                google={this.state.google}
-              />
-            </React.Fragment>
+            <GoogleChart
+              {...this.props as ReactGoogleChartPropsWithDefaults}
+              google={this.state.google}
+            />
           ) : (
             loader
           )}

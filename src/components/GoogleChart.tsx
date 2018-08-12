@@ -5,7 +5,8 @@ import {
   ReactGoogleChartPropsWithDefaults,
   GoogleChartControlProp,
   GoogleChartControl,
-  GoogleChartDashboard
+  GoogleChartDashboard,
+  GoogleChartEditor
 } from "../types";
 import { generateUniqueID } from "../generate-unique-id";
 import { GoogleChartDataTable } from "./GoogleChartDataTable";
@@ -29,6 +30,7 @@ export interface State {
   googleChartWrapper: GoogleChartWrapper | null;
   isReady: boolean;
   googleChartDashboard: GoogleChartDashboard | null;
+  googleChartEditor: GoogleChartEditor | null;
   googleChartControls:
     | { control: GoogleChartControl; controlProp: GoogleChartControlProp }[]
     | null;
@@ -41,6 +43,7 @@ export class GoogleChart extends React.Component<Props, State> {
     googleChartWrapper: null,
     googleChartDashboard: null,
     googleChartControls: null,
+    googleChartEditor: null,
     isReady: false
   } as State;
   graphID: null | string = null;
@@ -154,7 +157,9 @@ export class GoogleChart extends React.Component<Props, State> {
       google,
       chartType,
       chartWrapperParams,
-      toolbarItems
+      toolbarItems,
+      getChartEditor,
+      getChartWrapper
     } = this.props;
 
     const chartConfig = {
@@ -167,6 +172,7 @@ export class GoogleChart extends React.Component<Props, State> {
       chartConfig
     );
     googleChartWrapper.setOptions(options);
+    getChartWrapper(googleChartWrapper, google);
     const googleChartDashboard = new google.visualization.Dashboard(
       this.dashboard_ref
     );
@@ -175,13 +181,18 @@ export class GoogleChart extends React.Component<Props, State> {
       googleChartDashboard
     );
     if (toolbarItems !== null) {
-      // console.log(document.getElementById("toolbar"));
       google.visualization.drawToolbar(
         this.toolbar_ref.current as HTMLDivElement,
         toolbarItems
       );
     }
+    let googleChartEditor: null | GoogleChartEditor = null;
+    if (getChartEditor !== null) {
+      googleChartEditor = new google.visualization.ChartEditor();
+    }
+
     this.setState({
+      googleChartEditor,
       googleChartControls: googleChartControls,
       googleChartDashboard: googleChartDashboard,
       googleChartWrapper,
