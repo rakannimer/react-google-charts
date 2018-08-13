@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang }}">
 
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" type="image/png" href="/assets/logo.png" />
   <title>{{ title }}</title>
-
+  {{ head }}
 </head>
 
 <body>
@@ -51,8 +51,7 @@
       }
     }
   </style>
-  <div id="root" />
-
+  <div id="root" /> {{ footer }}
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123404567-1"></script>
   <script>
