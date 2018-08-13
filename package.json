@@ -1,6 +1,6 @@
 {
   "name": "react-google-charts",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "type": "react-component",
   "description": "react-google-charts React component",
   "main": "dist/index.cjs.js",
@@ -33,6 +33,7 @@
     "react-dom": ">=16.3.0"
   },
   "devDependencies": {
+    "@types/jquery": "^3.3.5",
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
     "cypress": "^3.0.3",
@@ -52,7 +53,7 @@
     "release": "^4.0.2",
     "rollup": "^0.63.5",
     "rollup-plugin-typescript2": "^0.16.1",
-    "typescript": "2.9"
+    "typescript": "^3.0.1"
   },
   "gh-pages-deploy": {
     "staticpath": "demo/dist/"
