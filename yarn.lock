@@ -3718,9 +3718,9 @@ doctrine@^2.0.0:
   dependencies:
     esutils "^2.0.2"
 
-docz-core@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/docz-core/-/docz-core-0.10.0.tgz#da247cd7c7f1d5684f5abd644ca4b82a65654e50"
+docz-core@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.npmjs.org/docz-core/-/docz-core-0.10.2.tgz#54be03167768062583766b8f89a0ef83cd5f937f"
   dependencies:
     "@babel/core" "7.0.0-rc.1"
     "@babel/plugin-syntax-dynamic-import" "^7.0.0-rc.1"
@@ -3799,13 +3799,13 @@ docz-core@^0.10.0:
     ws "^6.0.0"
     yargs "^12.0.1"
 
-docz-theme-default@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/docz-theme-default/-/docz-theme-default-0.10.0.tgz#b4400b4ea7bf1fcf5ffd6eaa3a8e445620e4eec4"
+docz-theme-default@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.npmjs.org/docz-theme-default/-/docz-theme-default-0.10.2.tgz#15ad9475f41c2ae1df4aacec73abf69863b5f648"
   dependencies:
     codemirror "^5.39.2"
     copy-text-to-clipboard "^1.0.4"
-    docz "^0.10.0"
+    docz "^0.10.2"
     emotion "^9.2.6"
     emotion-theming "^9.2.6"
     facepaint "^1.2.1"
@@ -3828,9 +3828,9 @@ docz-theme-default@^0.10.0:
     react-powerplug "^1.0.0-rc.1"
     webfontloader "^1.6.28"
 
-docz@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/docz/-/docz-0.10.0.tgz#2b7957bc03ebd6cd6d4ec444a83faee421a5e98b"
+docz@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.npmjs.org/docz/-/docz-0.10.2.tgz#aa0da50d6713d1c344367d0c08d9dd6b027fd96f"
   dependencies:
     "@mdx-js/tag" "^0.15.0"
     "@sindresorhus/slugify" "^0.3.0"
@@ -3838,8 +3838,8 @@ docz@^0.10.0:
     capitalize "^1.0.0"
     create-react-context "^0.2.2"
     deepmerge "^2.1.1"
-    docz-core "^0.10.0"
-    docz-theme-default "^0.10.0"
+    docz-core "^0.10.2"
+    docz-theme-default "^0.10.2"
     prop-types "^15.6.2"
     react "^16.4.2"
     react-copy-write "^0.8.0"
