@@ -1250,6 +1250,10 @@ agent-base@4, agent-base@^4.1.0:
   dependencies:
     es6-promisify "^5.0.0"
 
+ajv-errors@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/ajv-errors/-/ajv-errors-1.0.0.tgz#ecf021fa108fd17dfb5e6b383f2dd233e31ffc59"
+
 ajv-keywords@^3.0.0, ajv-keywords@^3.1.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
@@ -1766,8 +1770,8 @@ babel-plugin-macros@^2.0.0:
     cosmiconfig "^5.0.5"
 
 babel-plugin-react-docgen@^2.0.0-rc.1:
-  version "2.0.0-rc.1"
-  resolved "https://registry.npmjs.org/babel-plugin-react-docgen/-/babel-plugin-react-docgen-2.0.0-rc.1.tgz#2538ecff4102c9e4e4087dbb90bcc76a8db3658f"
+  version "2.0.0-rc.2"
+  resolved "https://registry.npmjs.org/babel-plugin-react-docgen/-/babel-plugin-react-docgen-2.0.0-rc.2.tgz#6d91c1914cb8a3975037a39f1cbd06e252705886"
   dependencies:
     babel-types "^6.26.0"
     lodash "^4.17.10"
@@ -2996,9 +3000,9 @@ connect-history-api-fallback@^1.5.0:
   version "1.5.0"
   resolved "https://registry.npmjs.org/connect-history-api-fallback/-/connect-history-api-fallback-1.5.0.tgz#b06873934bc5e344fef611a196a6faae0aee015a"
 
-consola@^1.2.0:
-  version "1.4.1"
-  resolved "https://registry.npmjs.org/consola/-/consola-1.4.1.tgz#4b1c6259c8db23f51e7cfb68cd383ec5ee298f0e"
+consola@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.npmjs.org/consola/-/consola-1.4.2.tgz#e61963325abbfded8c4b010da5896aad0b4c92fb"
   dependencies:
     chalk "^2.3.2"
     figures "^2.0.0"
@@ -3090,9 +3094,17 @@ cosmiconfig@3.1.0:
     parse-json "^3.0.0"
     require-from-string "^2.0.1"
 
-cosmiconfig@^5.0.0, cosmiconfig@^5.0.2, cosmiconfig@^5.0.5:
+cosmiconfig@^5.0.0, cosmiconfig@^5.0.2:
   version "5.0.5"
   resolved "https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-5.0.5.tgz#a809e3c2306891ce17ab70359dc8bdf661fe2cd0"
+  dependencies:
+    is-directory "^0.3.1"
+    js-yaml "^3.9.0"
+    parse-json "^4.0.0"
+
+cosmiconfig@^5.0.5:
+  version "5.0.6"
+  resolved "https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-5.0.6.tgz#dca6cf680a0bd03589aff684700858c81abeeb39"
   dependencies:
     is-directory "^0.3.1"
     js-yaml "^3.9.0"
@@ -4078,8 +4090,8 @@ es-to-primitive@^1.1.1:
     is-symbol "^1.0.1"
 
 es5-ext@^0.10.35, es5-ext@^0.10.9, es5-ext@~0.10.14:
-  version "0.10.45"
-  resolved "https://registry.npmjs.org/es5-ext/-/es5-ext-0.10.45.tgz#0bfdf7b473da5919d5adf3bd25ceb754fccc3653"
+  version "0.10.46"
+  resolved "https://registry.npmjs.org/es5-ext/-/es5-ext-0.10.46.tgz#efd99f67c5a7ec789baa3daa7f79870388f7f572"
   dependencies:
     es6-iterator "~2.0.3"
     es6-symbol "~3.1.1"
@@ -4163,8 +4175,8 @@ eslint-scope@^4.0.0:
     estraverse "^4.1.1"
 
 esm@^3.0.74:
-  version "3.0.74"
-  resolved "https://registry.npmjs.org/esm/-/esm-3.0.74.tgz#d9b5ac6d6b210068a41337373b002c502c824fbf"
+  version "3.0.76"
+  resolved "https://registry.npmjs.org/esm/-/esm-3.0.76.tgz#54bdaf751b2a566e5cf50dab3d91a59f484c84ef"
 
 espree@~3.1.7:
   version "3.1.7"
@@ -7102,12 +7114,12 @@ negotiator@0.6.1:
   resolved "https://registry.npmjs.org/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
 neo-async@^2.5.0:
-  version "2.5.1"
-  resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
+  version "2.5.2"
+  resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.5.2.tgz#489105ce7bc54e709d736b195f82135048c50fcc"
 
 nested-error-stacks@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/nested-error-stacks/-/nested-error-stacks-2.0.1.tgz#d2cc9fc5235ddb371fc44d506234339c8e4b0a4b"
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
 
 next-tick@1:
   version "1.0.0"
@@ -8374,7 +8386,7 @@ pretty-format@^23.2.0:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
-pretty-time@^1.0.0:
+pretty-time@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/pretty-time/-/pretty-time-1.1.0.tgz#ffb7429afabb8535c346a34e41873adf3d74dd0e"
 
@@ -8675,8 +8687,8 @@ react-display-name@^0.2.4:
   resolved "https://registry.npmjs.org/react-display-name/-/react-display-name-0.2.4.tgz#e2a670b81d79a2204335510c01246f4c92ff12cf"
 
 react-docgen-typescript-loader@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/react-docgen-typescript-loader/-/react-docgen-typescript-loader-2.1.1.tgz#8ba68dcc0d913c1fe82b2dfb8a837b02a23df74e"
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/react-docgen-typescript-loader/-/react-docgen-typescript-loader-2.2.0.tgz#20d1f9e60e6209013036e28e8acd4eee5bb4c3dd"
   dependencies:
     ajv "^6.5.0"
     react-docgen-typescript "^1.6.0"
@@ -9170,16 +9182,16 @@ remark-parse@^5.0.0:
     xtend "^4.0.1"
 
 remark-slug@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npmjs.org/remark-slug/-/remark-slug-5.0.0.tgz#9de71fcdc2bfae33ebb4a41eb83035288a829980"
+  version "5.1.0"
+  resolved "https://registry.npmjs.org/remark-slug/-/remark-slug-5.1.0.tgz#e55cd92d53395665e26b2994441394127d860abf"
   dependencies:
     github-slugger "^1.0.0"
     mdast-util-to-string "^1.0.0"
     unist-util-visit "^1.0.0"
 
 remark-squeeze-paragraphs@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/remark-squeeze-paragraphs/-/remark-squeeze-paragraphs-3.0.1.tgz#0aae4d14bd943ebf7d0125136f0c419b34f9c92e"
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/remark-squeeze-paragraphs/-/remark-squeeze-paragraphs-3.0.2.tgz#c3d1459cb17c250180fdc8f9814224b44d952b90"
   dependencies:
     mdast-squeeze-paragraphs "^3.0.0"
 
@@ -9546,7 +9558,15 @@ scan-directory@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/scan-directory/-/scan-directory-1.0.0.tgz#46b6769dbd893d9bd7490ae9dcc43811a38b7fbb"
 
-schema-utils@^0.4.2, schema-utils@^0.4.3, schema-utils@^0.4.4, schema-utils@^0.4.5:
+schema-utils@1.0.0, schema-utils@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/schema-utils/-/schema-utils-1.0.0.tgz#0b79a93204d7b600d4b2850d1f66c2a34951c770"
+  dependencies:
+    ajv "^6.1.0"
+    ajv-errors "^1.0.0"
+    ajv-keywords "^3.1.0"
+
+schema-utils@^0.4.2, schema-utils@^0.4.4, schema-utils@^0.4.5:
   version "0.4.7"
   resolved "https://registry.npmjs.org/schema-utils/-/schema-utils-0.4.7.tgz#ba74f597d2be2ea880131746ee17d0a093c68187"
   dependencies:
@@ -9946,7 +9966,7 @@ statuses@~1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
 
-std-env@^1.1.0, std-env@^1.3.0:
+std-env@^1.1.0, std-env@^1.3.1:
   version "1.3.1"
   resolved "https://registry.npmjs.org/std-env/-/std-env-1.3.1.tgz#4e1758412439e9ece1d437b1b098551911aa44ee"
   dependencies:
@@ -10474,15 +10494,15 @@ uglify-es@^3.3.4:
     source-map "~0.6.1"
 
 uglify-js@3.4.x:
-  version "3.4.6"
-  resolved "https://registry.npmjs.org/uglify-js/-/uglify-js-3.4.6.tgz#bc546d53f3e02b05d97d0ca5a7abfe0fb0384ddb"
+  version "3.4.7"
+  resolved "https://registry.npmjs.org/uglify-js/-/uglify-js-3.4.7.tgz#4df6b92e54789aa921a254cb1e33704d6ec12b89"
   dependencies:
     commander "~2.16.0"
     source-map "~0.6.1"
 
 uglifyjs-webpack-plugin@^1.2.4, uglifyjs-webpack-plugin@^1.2.7:
-  version "1.2.7"
-  resolved "https://registry.npmjs.org/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.2.7.tgz#57638dd99c853a1ebfe9d97b42160a8a507f9d00"
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.3.0.tgz#75f548160858163a08643e086d5fefe18a5d67de"
   dependencies:
     cacache "^10.0.4"
     find-cache-dir "^1.0.0"
@@ -10740,12 +10760,12 @@ url-join@^4.0.0:
   resolved "https://registry.npmjs.org/url-join/-/url-join-4.0.0.tgz#4d3340e807d3773bda9991f8305acdcc2a665d2a"
 
 url-loader@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/url-loader/-/url-loader-1.0.1.tgz#61bc53f1f184d7343da2728a1289ef8722ea45ee"
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/url-loader/-/url-loader-1.1.0.tgz#64dd296626d935c68d72ed9d9c69cf3c6ff933ac"
   dependencies:
     loader-utils "^1.1.0"
     mime "^2.0.3"
-    schema-utils "^0.4.3"
+    schema-utils "1.0.0"
 
 url-parse-lax@^1.0.0:
   version "1.0.0"
@@ -10982,8 +11002,8 @@ webpack-serve-overlay@^0.3.0:
     html-entities "^1.2.1"
 
 webpack-serve-waitpage@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/webpack-serve-waitpage/-/webpack-serve-waitpage-1.0.1.tgz#8aee5bf8aafcf997c72a74fc48ae1c495001fde9"
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/webpack-serve-waitpage/-/webpack-serve-waitpage-1.0.2.tgz#de9b4732532b89fa035402afbe6dbda58cc9e50e"
   dependencies:
     ejs "^2.6.1"
 
@@ -11061,18 +11081,18 @@ webpack@^4.16.5:
     webpack-sources "^1.0.1"
 
 webpackbar@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.npmjs.org/webpackbar/-/webpackbar-2.6.1.tgz#d1aff0665c43635ff35672be2f2463d1176bdb6f"
+  version "2.6.2"
+  resolved "https://registry.npmjs.org/webpackbar/-/webpackbar-2.6.2.tgz#5da9e836c4abbf348e1c15a98670ad1eca5ee498"
   dependencies:
-    chalk "^2.3.2"
-    consola "^1.2.0"
+    chalk "^2.4.1"
+    consola "^1.4.2"
     figures "^2.0.0"
     loader-utils "^1.1.0"
-    lodash "^4.17.5"
+    lodash "^4.17.10"
     log-update "^2.3.0"
-    pretty-time "^1.0.0"
-    schema-utils "^0.4.5"
-    std-env "^1.3.0"
+    pretty-time "^1.1.0"
+    schema-utils "^1.0.0"
+    std-env "^1.3.1"
     table "^4.0.3"
 
 websocket-driver@>=0.5.1:

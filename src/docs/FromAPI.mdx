@@ -22,7 +22,7 @@ You can check the raw api response [here.](https://exchangeratesapi.io/api/lates
 <Playground>
   <Component 
     initialState={{dataLoadingStatus: "loading", chartData:[]}}
-    didMount={async (component) => {
+    didMount={async function(component) {
       const response = await fetch("https://exchangeratesapi.io/api/latest?symbols=USD,GBP,CAD");
       const json = await response.json();
       const rateCurrencyNames = Object.keys(json.rates);
@@ -70,7 +70,7 @@ You can check the raw api response [here.](http://api.worldbank.org/v2/countries
 <Playground>
   <Component 
     initialState={{dataLoadingStatus: "loading", chartData:[]}}
-    didMount={async (component) => {
+    didMount={async function(component)  {
       const COUNTRY_CODE = "lb"
       const INDICATOR = "DT.DOD.DECT.CD"
       const response = await fetch("https://api.worldbank.org/v2/countries/"+COUNTRY_CODE+"/indicators/"+INDICATOR+"?format=json");
@@ -101,15 +101,15 @@ You can check the raw api response [here.](http://api.worldbank.org/v2/countries
             data={component.state.chartData}
             options={{
               hAxis: {
-                format: 'yyyy'
+                format: "yyyy"
               },
               vAxis: {
-                format:'short'
+                format:"short"
               },
-              title: 'Debt incurred over time.'
+              title: "Debt incurred over time."
             }}
 
-            rootProps={{ 'data-testid': '2' }}
+            rootProps={{ "data-testid": "2" }}
           />
           : <div>Fetching data from API</div>
       }
@@ -119,4 +119,4 @@ You can check the raw api response [here.](http://api.worldbank.org/v2/countries
 
 
 
-## DataBank Reference
+## [DataBank Reference](https://data.worldbank.org/)
