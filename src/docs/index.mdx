@@ -5,10 +5,14 @@ route: /
 order: 5
 ---
 import Chart from '../index'
+import {Playground} from 'docz'
 
 # React Google Charts
 
 React Google Charts offers a declarative API to make rendering charts fun and easy.
+
+
+
 
 ## Install
 
@@ -32,7 +36,9 @@ var Chart = require('react-google-charts').Chart;
 
 👍 Good to go.
 
+<Playground>
 <div style={{display:'flex', maxWidth: 900}}>
+
 <Chart 
   width={300}
   height={300}
@@ -169,7 +175,6 @@ var Chart = require('react-google-charts').Chart;
     legend: 'none',
   }}
   />
-
   <Chart 
     width={300}
     height={300}
@@ -201,6 +206,7 @@ var Chart = require('react-google-charts').Chart;
     }}
   />
 </div>
+</Playground>
 
 
 #### And many more.
