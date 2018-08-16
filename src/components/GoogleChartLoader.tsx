@@ -24,7 +24,7 @@ export class GoogleChartLoader extends React.Component<Props> {
       onLoad
     } = this.props;
     windowGoogleCharts.charts.load(version || "current", {
-      packages: packages || ["corechart", "controls", "charteditor"],
+      packages: packages || ["corechart", "controls"],
       language: language || "en",
       mapsApiKey
     });
@@ -32,8 +32,8 @@ export class GoogleChartLoader extends React.Component<Props> {
       onLoad(windowGoogleCharts);
     });
   };
-  shouldComponentUpdate() {
-    return false;
+  shouldComponentUpdate(nextProps: Props) {
+    return nextProps.chartPackages === this.props.chartPackages;
   }
   render() {
     const { onError } = this.props;
