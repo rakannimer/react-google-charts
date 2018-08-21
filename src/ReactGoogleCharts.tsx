@@ -28,35 +28,30 @@ export class Chart extends React.Component<
       loader
     } = this.props;
     return (
-      <div>
-        <ContextProvider
-          value={this.props as ReactGoogleChartPropsWithDefaults}
-        >
-          {this.state.loadingStatus === "ready" &&
-          this.state.google !== null ? (
-            <GoogleChart
-              {...this.props as ReactGoogleChartPropsWithDefaults}
-              google={this.state.google}
-            />
-          ) : (
-            loader
-          )}
-          <GoogleChartLoader
-            {...{ chartLanguage, chartPackages, chartVersion, mapsApiKey }}
-            onLoad={google => {
-              this.setState({
-                loadingStatus: "ready",
-                google
-              });
-            }}
-            onError={() => {
-              this.setState({
-                loadingStatus: "errored"
-              });
-            }}
+      <ContextProvider value={this.props as ReactGoogleChartPropsWithDefaults}>
+        {this.state.loadingStatus === "ready" && this.state.google !== null ? (
+          <GoogleChart
+            {...this.props as ReactGoogleChartPropsWithDefaults}
+            google={this.state.google}
           />
-        </ContextProvider>
-      </div>
+        ) : (
+          loader
+        )}
+        <GoogleChartLoader
+          {...{ chartLanguage, chartPackages, chartVersion, mapsApiKey }}
+          onLoad={google => {
+            this.setState({
+              loadingStatus: "ready",
+              google
+            });
+          }}
+          onError={() => {
+            this.setState({
+              loadingStatus: "errored"
+            });
+          }}
+        />
+      </ContextProvider>
     );
   }
 }

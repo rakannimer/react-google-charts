@@ -266,9 +266,16 @@ export class GoogleChart extends React.Component<Props, State> {
     return <div ref={this.toolbar_ref} />;
   };
   render() {
+    const { width, height, options, style } = this.props;
+
+    const divStyle = {
+      height: height || (options && options.height),
+      width: width || (options && options.width),
+      ...style
+    };
     if (this.props.render !== null) {
       return (
-        <div ref={this.dashboard_ref}>
+        <div ref={this.dashboard_ref} style={divStyle}>
           <div ref={this.toolbar_ref} id="toolbar" />
           {this.props.render({
             renderChart: this.renderChart,
@@ -279,7 +286,7 @@ export class GoogleChart extends React.Component<Props, State> {
       );
     } else {
       return (
-        <div ref={this.dashboard_ref}>
+        <div ref={this.dashboard_ref} style={divStyle}>
           {this.renderControl(({ controlProp }) => {
             return controlProp.controlPosition !== "bottom";
           })}
