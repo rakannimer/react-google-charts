@@ -105,6 +105,7 @@ export type GoogleChartWrapperChartType =
   | "GeoChart"
   | "Histogram"
   | "LineChart"
+  | "Line"
   | "Map"
   | "OrgChart"
   | "PieChart"
