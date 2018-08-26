@@ -106,6 +106,7 @@ export type GoogleChartWrapperChartType =
   | "Histogram"
   | "LineChart"
   | "Line"
+  | "Bar"
   | "Map"
   | "OrgChart"
   | "PieChart"
@@ -524,6 +525,7 @@ export type ReactGoogleChartProps = {
   };
   options?: ChartWrapperOptions["options"];
   loader?: JSX.Element;
+  errorElement?: JSX.Element;
   data?: any[] | {};
   rows?: GoogleDataTableRow[];
   columns?: GoogleDataTableColumn[];

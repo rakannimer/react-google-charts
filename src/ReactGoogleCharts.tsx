@@ -25,7 +25,8 @@ export class Chart extends React.Component<
       chartPackages,
       chartVersion,
       mapsApiKey,
-      loader
+      loader,
+      errorElement
     } = this.props;
     return (
       <ContextProvider value={this.props as ReactGoogleChartPropsWithDefaults}>
@@ -34,6 +35,8 @@ export class Chart extends React.Component<
             {...this.props as ReactGoogleChartPropsWithDefaults}
             google={this.state.google}
           />
+        ) : this.state.loadingStatus === "errored" && errorElement ? (
+          errorElement
         ) : (
           loader
         )}

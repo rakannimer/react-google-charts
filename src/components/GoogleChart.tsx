@@ -37,7 +37,7 @@ export interface State {
 }
 
 let controlCounter = 0;
-let toolbarCounter = 0;
+
 export class GoogleChart extends React.Component<Props, State> {
   state = {
     googleChartWrapper: null,
