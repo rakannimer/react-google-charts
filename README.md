@@ -231,19 +231,19 @@ export default ExampleChart;
 
 #### Load Data From SpreadSheet
 
-- [Demo](https://rakannimer.github.io/react-google-charts/#/react-google-charts/data-sources/from-google-spreadsheet)
+- [Demo](https://react-google-charts.com/data-sources/from-google-spreadsheet#simple-example)
 
 ### Charts
 
 #### Area Chart
 
-- [Demo](https://rakannimer.github.io/react-google-charts/#/react-google-charts/area-chart)
+- [Demo](https://react-google-charts.com/area-chart)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/area-chart)
 - [Raw Code](./sandboxes/area-chart/index.js)
 
 #### Bar Chart
 
-- [Demo](https://rakannimer.github.io/react-google-charts/#/react-google-charts/bar-chart)
+- [Demo](https://react-google-charts.com/bar-chart)
 - [Code](./sandboxes/bar-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart)
 
@@ -255,11 +255,13 @@ export default ExampleChart;
 
 #### Calendar Chart
 
+- [Demo](https://react-google-charts.com/calendar-chart)
 - [Code](./sandboxes/calendar/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/calendar)
 
 #### Candlestick Chart
 
+- [Demo](https://react-google-charts.com/candleStick-chart)
 - [Code](./sandboxes/candlestick/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick)
 
@@ -270,11 +272,13 @@ export default ExampleChart;
 
 #### Diff Scatter Chart
 
+- [Demo](https://react-google-charts.com/diff-chart)
 - [Code](./sandboxes/diff-scatter-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/diff-scatter-chart)
 
 #### Diff Column Chart
 
+- [Demo](https://react-google-charts.com/diff-chart#diff-column-charts)
 - [Code](./sandboxes/diff-column-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/diff-column-chart)
 
@@ -285,76 +289,91 @@ export default ExampleChart;
 
 #### Gantt Chart
 
+- [Demo](https://react-google-charts.com/gantt-chart)
 - [Code](./sandboxes/gantt-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gantt-chart)
 
 #### Gauge Chart
 
+- [Demo](https://react-google-charts.com/gauge-chart)
 - [Code](./sandboxes/gauge/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gauge)
 
 #### Geo Chart
 
+- [Demo](https://react-google-charts.com/geo-chart)
 - [Code](./sandboxes/geo-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/geo-chart)
 
 #### Histogram Chart
 
+- [Demo](https://react-google-charts.com/histogram-chart)
 - [Code](./sandboxes/histogram/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/histogram)
 
 #### Line Chart
 
+- [Demo](https://react-google-charts.com/line-chart)
 - [Code](./sandboxes/linechart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/linechart)
 
 #### Material Bar Chart
 
+- [Demo](https://react-google-charts.com/bar-chart#material-design)
 - [Code](./sandboxes/material-bar-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-bar-chart)
 
 #### Material Line Chart
 
+- [Demo](https://react-google-charts.com/line-chart#material-design-linechart)
 - [Code](./sandboxes/material-line-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-line-chart)
 
 #### Org Chart
 
+- [Demo](https://react-google-charts.com/org-chart)
 - [Code](./sandboxes/org-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/org-chart)
 
 #### Pie Chart
 
+- [Demo](https://react-google-charts.com/pie-chart)
 - [Code](./sandboxes/pie-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/pie-chart)
 
 #### Sankey Chart
 
+- [Demo](https://react-google-charts.com/sankey-diagram)
 - [Code](./sandboxes/sankey/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/sankey)
 
 #### Scatter Chart
 
+- [Demo](https://react-google-charts.com/scatter-chart)
 - [Code](./sandboxes/scatter-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/scatter-chart)
 
 #### Stepped Area Chart
 
+- [Demo](https://react-google-charts.com/stepped-area-chart)
 - [Code](./sandboxes/stepped-area-chart/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/stepped-area-chart)
 
 #### Table Chart
 
+- [Demo](https://react-google-charts.com/table-chart)
 - [Code](./sandboxes/table/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/table)
 
 #### Timeline Chart
 
+- [Demo](https://react-google-charts.com/timeline-chart)
 - [Code](./sandboxes/timeline/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/timeline)
 
 #### Treemap Chart
 
+- [Demo](https://react-google-charts.com/treemap-chart)
 - [Code](./sandboxes/treemap/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/treemap)
 
@@ -365,6 +384,7 @@ export default ExampleChart;
 
 #### Wordtree Chart
 
+- [Demo](https://react-google-charts.com/wordtree-chart)
 - [Code](./sandboxes/wordtree/index.js)
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/wordtree)
 
@@ -392,9 +412,9 @@ Contributions are very welcome. Check out [CONTRIBUTING.md](CONTRIBUTING.md)
 
 - [Demo](https://rakannimer.github.io/react-google-charts/#/react-google-charts/bar-chart)
 
-[barchart-demo]: https://rakannimer.github.io/react-google-charts/#/react-google-charts/bar-chart
+[barchart-demo]: https://react-google-charts.com/bar-chart
 [barchart-example-code]: ./sandboxes/bar-chart/index.js
 [barchart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart
-[bubblechart-demo]: https://rakannimer.github.io/react-google-charts/#/react-google-charts/bubble-chart
+[bubblechart-demo]: https://react-google-charts.com/bubble-chart
 [bubblechart-example-code]: ./sandboxes/bubble-chart/index.js
 [bubblechart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart
