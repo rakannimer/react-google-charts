@@ -31,14 +31,10 @@ class App extends React.Component {
           width="100%"
           height="400px"
           data={data}
-          options={{
-            enableRegionInteractivity: true,
-            dataMode: "regions"
-          }}
         />
       </div>
     );
   }
 }
 
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById("root"));
