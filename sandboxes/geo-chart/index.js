@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { Chart } from "../src";
+import { Chart } from "react-google-charts";
 
 const data = [
   ["Country", "Popularity"],
@@ -19,11 +19,12 @@ class App extends React.Component {
           chartEvents={[
             {
               eventName: "select",
-              callback:({chartWrapper}) => {
+              callback: ({ chartWrapper }) => {
                 const chart = chartWrapper.getChart();
                 const [selection] = chart.getSelection();
-                const region = data[selection.row]
-                console.log("Selected : "+region)
+                const region = data[selection.row];
+                console.log("Selected : " + region);
+              }
             }
           ]}
           chartType="GeoChart"
