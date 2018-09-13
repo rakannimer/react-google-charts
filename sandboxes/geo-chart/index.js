@@ -21,8 +21,9 @@ class App extends React.Component {
               eventName: "select",
               callback: ({ chartWrapper }) => {
                 const chart = chartWrapper.getChart();
-                const [selection] = chart.getSelection();
-                const region = data[selection.row];
+                const selection = chart.getSelection();
+                if (selection.length === 0) return;
+                const region = data[selection[0].row];
                 console.log("Selected : " + region);
               }
             }
