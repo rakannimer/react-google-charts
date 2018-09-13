@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Chart from "react-google-charts";
+import * as React from "react";
+import { render } from "react-dom";
+import { Chart } from "../src";
 
 const data = [
   ["Country", "Popularity"],
@@ -15,11 +15,29 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Chart chartType="GeoChart" width="100%" height="400px" data={data} />
+        <Chart
+          chartEvents={[
+            {
+              eventName: "select",
+              callback:({chartWrapper}) => {
+                const chart = chartWrapper.getChart();
+                const [selection] = chart.getSelection();
+                const region = data[selection.row]
+                console.log("Selected : "+region)
+            }
+          ]}
+          chartType="GeoChart"
+          width="100%"
+          height="400px"
+          data={data}
+          options={{
+            enableRegionInteractivity: true,
+            dataMode: "regions"
+          }}
+        />
       </div>
     );
   }
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+render(<App />, document.getElementById("app"));
