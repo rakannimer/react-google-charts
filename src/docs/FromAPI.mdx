@@ -17,13 +17,13 @@ and render them in a chart.
 
 Note : We're using `react-component-component` to avoid having to use a React Class Component. It's not necessary for our use-case to do so.
 
-You can check the raw api response [here.](https://exchangeratesapi.io/api/latest?symbols=USD,GBP,CAD)
+You can check the raw api response [here.](https://api.exchangeratesapi.io/latest?symbols=USD,GBP,CAD)
 
 <Playground>
   <Component 
     initialState={{dataLoadingStatus: "loading", chartData:[]}}
     didMount={async function(component) {
-      const response = await fetch("https://exchangeratesapi.io/api/latest?symbols=USD,GBP,CAD");
+      const response = await fetch("https://api.exchangeratesapi.io/latest?symbols=USD,GBP,CAD");
       const json = await response.json();
       const rateCurrencyNames = Object.keys(json.rates);
       const rateCurrencyValues = Object.values(json.rates);
