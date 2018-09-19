@@ -187,7 +187,7 @@ import { Chart } from "react-google-charts";
 const chartEvents = [
   {
     eventName: "select",
-    callback(chartWrapper) {
+    callback({ chartWrapper }) {
       console.log("Selected ", chartWrapper.getChart().getSelection());
     }
   }
