@@ -134,7 +134,7 @@ export interface ChartWrapperOptions {
       maxValue?: any;
       ticks?: number[];
       title?: string;
-      viewWindow?: { max?: number; min?: number };
+      viewWindow?: { max?: any; min?: any };
       [otherOptionKey: string]: any;
     };
     vAxis?: {
@@ -142,7 +142,7 @@ export interface ChartWrapperOptions {
       maxValue?: any;
       ticks?: number[];
       title?: string;
-      viewWindow?: { max?: number; min?: number };
+      viewWindow?: { max?: any; min?: any };
       [otherOptionKey: string]: any;
     };
     legend: any;
@@ -433,7 +433,7 @@ export type GoogleChartOptions = {
     maxValue?: any;
     ticks?: number[];
     title?: string;
-    viewWindow?: { max?: number; min?: number; [otherOptionKey: string]: any };
+    viewWindow?: { max?: any; min?: any; [otherOptionKey: string]: any };
     [otherOptionKey: string]: any;
   };
   vAxis?: {
@@ -441,7 +441,7 @@ export type GoogleChartOptions = {
     maxValue?: any;
     ticks?: number[];
     title?: string;
-    viewWindow?: { max?: number; min?: number; [otherOptionKey: string]: any };
+    viewWindow?: { max?: any; min?: any; [otherOptionKey: string]: any };
     [otherOptionKey: string]: any;
   };
   bubble?: {};
