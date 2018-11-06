@@ -130,16 +130,16 @@ export interface ChartWrapperOptions {
     title: string;
     backgroundColor: string;
     hAxis?: {
-      minValue?: number;
-      maxValue?: number;
+      minValue?: any;
+      maxValue?: any;
       ticks?: number[];
       title?: string;
       viewWindow?: { max?: number; min?: number };
       [otherOptionKey: string]: any;
     };
     vAxis?: {
-      minValue?: number;
-      maxValue?: number;
+      minValue?: any;
+      maxValue?: any;
       ticks?: number[];
       title?: string;
       viewWindow?: { max?: number; min?: number };
@@ -317,8 +317,8 @@ export type GoogleDataTableJS = {
 export type GoogleDataTableRowFilter = {
   column: number;
   value: any;
-  minValue?: number | null;
-  maxValue?: number | null;
+  minValue?: any;
+  maxValue?: any;
 };
 
 export type GoogleDataTableSortColumns =
@@ -429,16 +429,16 @@ export type GoogleChartOptions = {
 
   title?: string;
   hAxis?: {
-    minValue?: number;
-    maxValue?: number;
+    minValue?: any;
+    maxValue?: any;
     ticks?: number[];
     title?: string;
     viewWindow?: { max?: number; min?: number; [otherOptionKey: string]: any };
     [otherOptionKey: string]: any;
   };
   vAxis?: {
-    minValue?: number;
-    maxValue?: number;
+    minValue?: any;
+    maxValue?: any;
     ticks?: number[];
     title?: string;
     viewWindow?: { max?: number; min?: number; [otherOptionKey: string]: any };
