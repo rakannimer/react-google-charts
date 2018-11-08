@@ -568,6 +568,7 @@ export type ReactGoogleChartProps = {
     gid?: number | string;
     sheet?: string;
     query?: string;
+    access_token?: string;
   };
   rootProps?: any;
   controls?: GoogleChartControlProp[];

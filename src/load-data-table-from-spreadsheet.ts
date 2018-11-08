@@ -8,6 +8,7 @@ export const loadDataTableFromSpreadSheet = async (
     gid?: any;
     sheet?: string;
     query?: string;
+    access_token?: string;
   } = {}
 ) => {
   return new Promise((resolve, reject) => {
@@ -19,7 +20,10 @@ export const loadDataTableFromSpreadSheet = async (
     }`;
     const gid = `${urlParams.gid ? `&gid=${urlParams.gid}` : ""}`;
     const sheet = `${urlParams.sheet ? `&sheet=${urlParams.sheet}` : ""}`;
-    const urlQueryString = `${headers}${gid}${sheet}${queryString}`;
+    const access_token = `${
+      urlParams.access_token ? `&access_token=${urlParams.access_token}` : ""
+    }`;
+    const urlQueryString = `${headers}${gid}${sheet}${queryString}${access_token}`;
     const urlToSpreadSheet = `${spreadSheetUrl}/gviz/tq?${urlQueryString}`; //&tq=${queryString}`;
     const query = new googleViz.visualization.Query(urlToSpreadSheet);
     query.send((response: any) => {
