@@ -13,7 +13,7 @@ const data = [
 const options = {
   title: "My Daily Activities",
   pieHole: 0.4,
-  is3D: true
+  is3D: false
 };
 class App extends React.Component {
   render() {
