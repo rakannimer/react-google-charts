@@ -15,11 +15,16 @@ export class Chart extends React.Component<
   ReactGoogleChartProps,
   ReactGoogleChartState
 > {
+
+  _isMounted = false;
+
   state = {
     loadingStatus: "loading" as ReactGoogleChartState["loadingStatus"],
     google: null as ReactGoogleChartState["google"]
   };
+
   static defaultProps = chartDefaultProps;
+
   render() {
     const {
       chartLanguage,
@@ -50,6 +55,14 @@ export class Chart extends React.Component<
     );
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   onLoad = (google: GoogleViz) => {
     if (this.isFullyLoaded(google)) {
       this.onSuccess(google);
@@ -60,10 +73,15 @@ export class Chart extends React.Component<
           google?: GoogleViz;
         }).google;
 
-        if (google && this.isFullyLoaded(google)) {
+        if (this._isMounted) {
+          if (google && this.isFullyLoaded(google)) {
+            clearInterval(id);
+            this.onSuccess(google);
+          }
+        } else {
           clearInterval(id);
-          this.onSuccess(google);
         }
+
       }, 1000);
     }
   };
