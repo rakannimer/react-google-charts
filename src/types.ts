@@ -604,8 +604,14 @@ export type ReactGoogleChartDashboardRender = (
     renderToolbar: () => any;
   }
 ) => any;
+export type GoogleChartControlOptions = any;
 export type GoogleChartControl = {
   getContainerId: () => string;
+  getOptions: () => GoogleChartControlOptions;
+  getState: () => any;
+  setState: (state: any) => void;
+  setOptions: (options: GoogleChartControlOptions) => void;
+  setControlType: (controlType: string) => void;
 };
 
 export type ReactGoogleChartState = {

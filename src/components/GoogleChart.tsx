@@ -140,6 +140,7 @@ export class GoogleChart extends React.Component<Props, State> {
     }
     return googleChartControls;
   };
+
   componentDidMount() {
     const {
       options,
@@ -165,6 +166,7 @@ export class GoogleChart extends React.Component<Props, State> {
     const googleChartDashboard = new google.visualization.Dashboard(
       this.dashboard_ref
     );
+
     const googleChartControls = this.addControls(
       googleChartWrapper,
       googleChartDashboard
@@ -193,8 +195,28 @@ export class GoogleChart extends React.Component<Props, State> {
       isReady: true
     });
   }
+  componentDidUpdate() {
+    if (this.state.googleChartWrapper === null) return;
+    if (this.state.googleChartDashboard === null) return;
+    if (this.state.googleChartControls === null) return;
+
+    const { controls } = this.props;
+    for (let i = 0; i < controls.length; i += 1) {
+      const { controlType, options, controlWrapperParams } = controls[i];
+      if (controlWrapperParams && "state" in controlWrapperParams) {
+        this.state.googleChartControls[i].control.setState(
+          controlWrapperParams["state"]
+        );
+      }
+      this.state.googleChartControls[i].control.setOptions(options);
+      this.state.googleChartControls[i].control.setControlType(controlType);
+    }
+  }
   shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return this.state.isReady !== nextState.isReady;
+    return (
+      this.state.isReady !== nextState.isReady ||
+      nextProps.controls !== this.props.controls
+    );
   }
   renderChart = () => {
     const {
