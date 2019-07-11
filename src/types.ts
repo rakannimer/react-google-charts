@@ -22,6 +22,8 @@ export type GoogleViz = {
   };
 };
 
+export type GoogleChartTicks = (number | Date)[];
+
 export type GoogleChartEditor = {
   new (): GoogleChartEditor;
   openDialog: (
@@ -76,19 +78,19 @@ export type VizEventsProps = {
   children?: (props: VizEventsProps, chartWrapper: GoogleChartWrapper) => any;
 };
 
-/* 
-*
-* <GoogleChartsTypes>
-*
-*/
+/*
+ *
+ * <GoogleChartsTypes>
+ *
+ */
 
-/* 
-*
-* Reference + Docs: 
-* https://developers.google.com/chart/interactive/docs/reference#constructor_3
-* https://developers.google.com/chart/interactive/docs/reference#google.visualization.drawchart
-*
-*/
+/*
+ *
+ * Reference + Docs:
+ * https://developers.google.com/chart/interactive/docs/reference#constructor_3
+ * https://developers.google.com/chart/interactive/docs/reference#google.visualization.drawchart
+ *
+ */
 export type GoogleChartWrapperChartType =
   | "AnnotationChart"
   | "AreaChart"
@@ -132,7 +134,7 @@ export interface ChartWrapperOptions {
     hAxis?: {
       minValue?: any;
       maxValue?: any;
-      ticks?: number[];
+      ticks?: GoogleChartTicks;
       title?: string;
       viewWindow?: { max?: any; min?: any };
       [otherOptionKey: string]: any;
@@ -140,7 +142,7 @@ export interface ChartWrapperOptions {
     vAxis?: {
       minValue?: any;
       maxValue?: any;
-      ticks?: number[];
+      ticks?: GoogleChartTicks;
       title?: string;
       viewWindow?: { max?: any; min?: any };
       [otherOptionKey: string]: any;
@@ -300,7 +302,8 @@ export type GoogleDataTableCell =
     }
   | string
   | number
-  | boolean;
+  | boolean
+  | Date;
 
 export type GoogleDataTableRow = GoogleDataTableCell[];
 
@@ -431,7 +434,7 @@ export type GoogleChartOptions = {
   hAxis?: {
     minValue?: any;
     maxValue?: any;
-    ticks?: number[];
+    ticks?: GoogleChartTicks;
     title?: string;
     viewWindow?: { max?: any; min?: any; [otherOptionKey: string]: any };
     [otherOptionKey: string]: any;
@@ -439,7 +442,7 @@ export type GoogleChartOptions = {
   vAxis?: {
     minValue?: any;
     maxValue?: any;
-    ticks?: number[];
+    ticks?: GoogleChartTicks;
     title?: string;
     viewWindow?: { max?: any; min?: any; [otherOptionKey: string]: any };
     [otherOptionKey: string]: any;
@@ -483,25 +486,23 @@ export type GoogleChartOptions = {
   [otherOptionKey: string]: any;
 };
 
-/* 
-*
-* </GoogleChartsTypes>
-*
-*/
+/*
+ *
+ * </GoogleChartsTypes>
+ *
+ */
 
 export type WindowWithMaybeGoogle = Window & { google?: any };
 
 export type ReactGoogleChartEvent = {
   eventName: GoogleVizEventName;
-  callback: (
-    eventCallbackArgs: {
-      chartWrapper: GoogleChartWrapper;
-      controlWrapper?: GoogleChartControl;
-      props: ReactGoogleChartProps;
-      google: GoogleViz;
-      eventArgs: any;
-    }
-  ) => void;
+  callback: (eventCallbackArgs: {
+    chartWrapper: GoogleChartWrapper;
+    controlWrapper?: GoogleChartControl;
+    props: ReactGoogleChartProps;
+    google: GoogleViz;
+    eventArgs: any;
+  }) => void;
 };
 
 export type GoogleChartToolbarItem = {
@@ -542,13 +543,11 @@ export type ReactGoogleChartProps = {
     chartWrapper: GoogleChartWrapper,
     google: GoogleViz
   ) => void;
-  getChartEditor?: (
-    args: {
-      chartEditor: GoogleChartEditor;
-      chartWrapper: GoogleChartWrapper;
-      google: GoogleViz;
-    }
-  ) => void;
+  getChartEditor?: (args: {
+    chartEditor: GoogleChartEditor;
+    chartWrapper: GoogleChartWrapper;
+    google: GoogleViz;
+  }) => void;
   className?: string;
   style?: React.CSSProperties;
   formatters?: {
@@ -586,24 +585,23 @@ export type GoogleChartDashboard = {
   ) => void;
 };
 
-export type ReactGoogleChartDashboardRender = (
-  {
-    renderControl,
-    renderChart,
-    renderToolbar
-  }: {
-    renderControl: (
-      filter: (
-        {
-          control,
-          controlProp
-        }: { control: GoogleChartControl; controlProp: GoogleChartControlProp }
-      ) => boolean
-    ) => any;
-    renderChart: () => any;
-    renderToolbar: () => any;
-  }
-) => any;
+export type ReactGoogleChartDashboardRender = ({
+  renderControl,
+  renderChart,
+  renderToolbar
+}: {
+  renderControl: (
+    filter: ({
+      control,
+      controlProp
+    }: {
+      control: GoogleChartControl;
+      controlProp: GoogleChartControlProp;
+    }) => boolean
+  ) => any;
+  renderChart: () => any;
+  renderToolbar: () => any;
+}) => any;
 export type GoogleChartControlOptions = any;
 export type GoogleChartControl = {
   getContainerId: () => string;
