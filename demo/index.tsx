@@ -71,6 +71,39 @@ const gaugeOptions = {
   minorTicks: 5
 };
 
+const Issue317 = () => {
+  const [chartType, setChartType] = React.useState<
+    "AreaChart" | "BarChart" | "Table"
+  >("AreaChart");
+
+  const columns = [
+    {
+      type: "string",
+      label: "year"
+    },
+    {
+      label: "AttentionSpan",
+      type: "number"
+    }
+  ];
+  const rows = [["2015", 5], ["2016", 3], ["2018", 1]];
+  return (
+    <div className="App">
+      <button onClick={() => setChartType("BarChart")}>barChart</button>
+      <button onClick={() => setChartType("Table")}>Table</button>
+      <h3>{chartType}</h3>
+      <Chart
+        chartType={chartType}
+        width="100%"
+        height="400px"
+        legendToggle
+        rows={rows}
+        columns={columns}
+      />
+    </div>
+  );
+};
+
 class InteractiveChart extends React.Component<{}, { data: any[][] }> {
   constructor(props) {
     super(props);
@@ -116,6 +149,7 @@ class InteractiveChart extends React.Component<{}, { data: any[][] }> {
   render() {
     return (
       <div>
+        <Issue317 />
         <Chart
           chartType="Gauge"
           width="100%"
