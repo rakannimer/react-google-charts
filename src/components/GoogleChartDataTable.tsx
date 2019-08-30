@@ -188,7 +188,7 @@ export class GoogleChartDataTableInner extends React.Component<
     if (googleChartWrapper.getChartType() === "Timeline") {
       chart && chart.clearChart();
     }
-
+    googleChartWrapper.setChartType(chartType);
     googleChartWrapper.setOptions(options);
     googleChartWrapper.setDataTable(dataTable);
     googleChartWrapper.draw();
