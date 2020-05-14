@@ -249,9 +249,9 @@ export default ExampleChart;
 
 #### Bubble Chart
 
-- [Demo][barchart-demo]
-- [Code][barchart-example-code]
-- [Sandbox][barchart-example-sandbox]
+- [Demo](https://react-google-charts.com/bubble-chart)
+- [Code](./sandboxes/bubble-chart/index.js)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart)
 
 #### Calendar Chart
 
