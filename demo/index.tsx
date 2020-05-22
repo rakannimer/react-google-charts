@@ -104,14 +104,13 @@ const Issue317 = () => {
   );
 };
 
-class LoaderTest extends React.Component<{data:Array<any>}, {google: any, dataTable:any, rows:any, columns:any, aggregate:boolean}> {
+class LoaderTest extends React.Component<{data:Array<any>}, {google: any, dataTable:any,data:any, aggregate:boolean}> {
   constructor(props) {
     super(props)
   
     this.state = {
       dataTable:null,
-      rows:null,
-      columns:null,
+      data: null,
       google:null,
       aggregate:false
     }
@@ -126,7 +125,7 @@ class LoaderTest extends React.Component<{data:Array<any>}, {google: any, dataTa
   }
   
   render() {
-    const { rows, columns, google } = this.state;
+    const {data, google } = this.state;
     return (
       <div>
         <Chart
@@ -134,8 +133,7 @@ class LoaderTest extends React.Component<{data:Array<any>}, {google: any, dataTa
           width="100%"
           height="400px"
           legendToggle
-          rows={rows}
-          columns={columns}
+          data={data}
         />
 
           
@@ -161,23 +159,14 @@ class LoaderTest extends React.Component<{data:Array<any>}, {google: any, dataTa
       [{column:1, aggregation: google.visualization.data.sum, type:'number'}, {column:2, aggregation: google.visualization.data.sum, type:'number'}]
     ) : dataTable
 
-    let array = this.dataTableToArray(newDataTable)
-    this.setState({rows:array, columns:this.props.data[0]})
+    let data = newDataTable
+    this.setState({data})
   }
   modifierFunc = (ele) => {
     return ele % 20
   }
 
-  dataTableToArray = (dataTable) => {
-    let rows = [[...dataTable.vg]]
-    dataTable.wg.forEach((row, i) => {
-      row.c.forEach((element, j) => {
-        if(!rows[i]) rows[i] = []
-        rows[i][j] = element.v
-      });
-    });
-    return rows
-  }
+
 }
 
 class InteractiveChart extends React.Component<{}, { data: any[][] }> {
