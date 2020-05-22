@@ -48,8 +48,8 @@ jobs:
     - name: Deploy
       uses: s0/git-publish-subdir-action@master
       env:
-        REPO: git@github.com:spoof14/react-google-charts.git
+        REPO: self
         BRANCH: dist
         FOLDER: dist
-        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.GITHUB_TOKEN }}
 
