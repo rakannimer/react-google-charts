@@ -56,16 +56,11 @@ A thin, typed, React wrapper for [Google Charts](https://developers.google.com/c
 With your favorite package manager (yarn, pnpm or npm) :
 
 ```sh
-yarn add react-google-charts
+yarn add react-google-charts2
 # or
-npm i -s react-google-charts
+npm i -s react-google-charts2
 ```
 
-Note : If you're using react < 16.3 then use 2.x version:
-
-```sh
-yarn add react-google-charts@2
-```
 
 ## Quick Start
 
@@ -225,196 +220,14 @@ const ExampleChart = () => {
 export default ExampleChart;
 ```
 
-## Examples
-
-### Load Data
-
-#### Load Data From SpreadSheet
-
-- [Demo](https://react-google-charts.com/data-sources/from-google-spreadsheet#simple-example)
-
-### Charts
-
-#### Area Chart
-
-- [Demo](https://react-google-charts.com/area-chart)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/area-chart)
-- [Raw Code](./sandboxes/area-chart/index.js)
-
-#### Bar Chart
-
-- [Demo](https://react-google-charts.com/bar-chart)
-- [Code](./sandboxes/bar-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart)
-
-#### Bubble Chart
-
-- [Demo][barchart-demo]
-- [Code][barchart-example-code]
-- [Sandbox][barchart-example-sandbox]
-
-#### Calendar Chart
-
-- [Demo](https://react-google-charts.com/calendar-chart)
-- [Code](./sandboxes/calendar/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/calendar)
-
-#### Candlestick Chart
-
-- [Demo](https://react-google-charts.com/candleStick-chart)
-- [Code](./sandboxes/candlestick/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick)
-
-#### Column Chart
-
-- [Code](./sandboxes/column-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/column-chart)
-
-#### Diff Scatter Chart
-
-- [Demo](https://react-google-charts.com/diff-chart)
-- [Code](./sandboxes/diff-scatter-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/diff-scatter-chart)
-
-#### Diff Column Chart
-
-- [Demo](https://react-google-charts.com/diff-chart#diff-column-charts)
-- [Code](./sandboxes/diff-column-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/diff-column-chart)
-
-#### Donut Chart
-
-- [Code](./sandboxes/donut-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/donut-chart)
-
-#### Gantt Chart
-
-- [Demo](https://react-google-charts.com/gantt-chart)
-- [Code](./sandboxes/gantt-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gantt-chart)
-
-#### Gauge Chart
-
-- [Demo](https://react-google-charts.com/gauge-chart)
-- [Code](./sandboxes/gauge/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gauge)
-
-#### Geo Chart
-
-- [Demo](https://react-google-charts.com/geo-chart)
-- [Code](./sandboxes/geo-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/geo-chart)
-
-#### Histogram Chart
-
-- [Demo](https://react-google-charts.com/histogram-chart)
-- [Code](./sandboxes/histogram/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/histogram)
-
-#### Line Chart
-
-- [Demo](https://react-google-charts.com/line-chart)
-- [Code](./sandboxes/linechart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/linechart)
-
-#### Material Bar Chart
-
-- [Demo](https://react-google-charts.com/bar-chart#material-design)
-- [Code](./sandboxes/material-bar-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-bar-chart)
-
-#### Material Line Chart
-
-- [Demo](https://react-google-charts.com/line-chart#material-design-linechart)
-- [Code](./sandboxes/material-line-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-line-chart)
-
-#### Org Chart
-
-- [Demo](https://react-google-charts.com/org-chart)
-- [Code](./sandboxes/org-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/org-chart)
-
-#### Pie Chart
-
-- [Demo](https://react-google-charts.com/pie-chart)
-- [Code](./sandboxes/pie-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/pie-chart)
-
-#### Sankey Chart
-
-- [Demo](https://react-google-charts.com/sankey-diagram)
-- [Code](./sandboxes/sankey/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/sankey)
-
-#### Scatter Chart
-
-- [Demo](https://react-google-charts.com/scatter-chart)
-- [Code](./sandboxes/scatter-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/scatter-chart)
-
-#### Stepped Area Chart
-
-- [Demo](https://react-google-charts.com/stepped-area-chart)
-- [Code](./sandboxes/stepped-area-chart/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/stepped-area-chart)
-
-#### Table Chart
-
-- [Demo](https://react-google-charts.com/table-chart)
-- [Code](./sandboxes/table/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/table)
-
-#### Timeline Chart
-
-- [Demo](https://react-google-charts.com/timeline-chart)
-- [Code](./sandboxes/timeline/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/timeline)
-
-#### Treemap Chart
-
-- [Demo](https://react-google-charts.com/treemap-chart)
-- [Code](./sandboxes/treemap/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/treemap)
-
-#### Waterfall Chart
-
-- [Code](./sandboxes/waterfall/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/waterfall)
-
-#### Wordtree Chart
-
-- [Demo](https://react-google-charts.com/wordtree-chart)
-- [Code](./sandboxes/wordtree/index.js)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/wordtree)
-
 ### Run the example app
 
 ```bash
-git clone https://www.github.com/rakannimer/react-google-charts
+git clone https://www.github.com/spoof14/react-google-charts2
 cd react-google-charts
 npm i
 npm start
 ```
 
-## Contributing
-
-Contributions are very welcome. Check out [CONTRIBUTING.md](CONTRIBUTING.md)
-
-[circleci-href]: https://circleci.com/gh/rakannimer/react-google-charts
-[circleci-badge]: https://img.shields.io/circleci/project/github/rakannimer/react-google-charts.svg
-[npm-href]: https://www.npmjs.com/package/react-google-charts
-[npm-dm-badge]: https://img.shields.io/npm/dm/react-google-charts.svg
-[npm-version-badge]: https://badgen.net/npm/v/react-google-charts
-[npm-license-badge]: https://img.shields.io/github/license/rakannimer/react-google-charts.svg
-[bundlephobia-badge]: https://img.shields.io/bundlephobia/minzip/react-google-charts.svg
-[bundlephobia-href]: https://bundlephobia.com/result?p=react-google-charts
-
-- [Demo](https://rakannimer.github.io/react-google-charts/#/react-google-charts/bar-chart)
-
-[barchart-demo]: https://react-google-charts.com/bar-chart
-[barchart-example-code]: ./sandboxes/bar-chart/index.js
-[barchart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart
-[bubblechart-demo]: https://react-google-charts.com/bubble-chart
-[bubblechart-example-code]: ./sandboxes/bubble-chart/index.js
-[bubblechart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart
+### Credit
+This is a fork of the repo https://www.github.com/rakannimer/react-google-charts. Full credit goes to rakannimer for his nice work, I just needed a few changes for a project.

@@ -138,6 +138,7 @@ class LoaderTest extends React.Component<
           height="400px"
           legendToggle
           data={data}
+          chartVersion={47}
         />
 
         <button
