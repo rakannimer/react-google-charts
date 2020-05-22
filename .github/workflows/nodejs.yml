@@ -36,7 +36,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-:  
     - name: install
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn install --frozen-lockfile
     - run: yarn run build --if-present
     - run: yarn test
