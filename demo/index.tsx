@@ -104,28 +104,31 @@ const Issue317 = () => {
   );
 };
 
-class LoaderTest extends React.Component<{data:Array<any>}, {google: any, dataTable:any,data:any, aggregate:boolean}> {
+class LoaderTest extends React.Component<
+  { data: Array<any> },
+  { google: any; dataTable: any; data: any; aggregate: boolean }
+> {
   constructor(props) {
-    super(props)
-  
+    super(props);
+
     this.state = {
-      dataTable:null,
+      dataTable: null,
       data: null,
-      google:null,
-      aggregate:false
-    }
+      google: null,
+      aggregate: false
+    };
   }
 
-  componentDidUpdate(prevProps, prevState){
-    if(this.state.dataTable && this.state.dataTable !== prevState.dataTable){
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.dataTable && this.state.dataTable !== prevState.dataTable) {
       this.changeData();
     }
-    if(this.state.google && this.props.data !== prevProps.data)
-      this.onSucces(this.state.google)
+    if (this.state.google && this.props.data !== prevProps.data)
+      this.onSucces(this.state.google);
   }
-  
+
   render() {
-    const {data, google } = this.state;
+    const { data, google } = this.state;
     return (
       <div>
         <Chart
@@ -136,37 +139,54 @@ class LoaderTest extends React.Component<{data:Array<any>}, {google: any, dataTa
           data={data}
         />
 
-          
-          <button onClick={() => {this.setState({aggregate:!this.state.aggregate}); this.changeData()}}>Aggregate</button>
-        {!google && <Loader onSucces={this.onSucces}></Loader>}
+        <button
+          onClick={() => {
+            this.setState({ aggregate: !this.state.aggregate });
+            this.changeData();
+          }}
+        >
+          Aggregate
+        </button>
+        {!google && <Loader onSucces={this.onSucces} />}
       </div>
     );
   }
 
-  onSucces = (google) => {
-    let dataTable = new google.visualization.arrayToDataTable(this.props.data)
+  onSucces = google => {
+    let dataTable = new google.visualization.arrayToDataTable(this.props.data);
     this.setState({
       dataTable,
-      google,
-    })
-  }
+      google
+    });
+  };
 
   changeData = () => {
     const { dataTable, google, aggregate } = this.state;
-    let newDataTable = aggregate ? google.visualization.data.group(
-      dataTable, 
-      [{column:0, modifier:this.modifierFunc, type:'number'}],
-      [{column:1, aggregation: google.visualization.data.sum, type:'number'}, {column:2, aggregation: google.visualization.data.sum, type:'number'}]
-    ) : dataTable
+    let newDataTable = aggregate
+      ? google.visualization.data.group(
+          dataTable,
+          [{ column: 0, modifier: this.modifierFunc, type: "number" }],
+          [
+            {
+              column: 1,
+              aggregation: google.visualization.data.sum,
+              type: "number"
+            },
+            {
+              column: 2,
+              aggregation: google.visualization.data.sum,
+              type: "number"
+            }
+          ]
+        )
+      : dataTable;
 
-    let data = newDataTable
-    this.setState({data})
-  }
-  modifierFunc = (ele) => {
-    return ele % 20
-  }
-
-
+    let data = newDataTable;
+    this.setState({ data });
+  };
+  modifierFunc = ele => {
+    return ele % 20;
+  };
 }
 
 class InteractiveChart extends React.Component<{}, { data: any[][] }> {
@@ -214,7 +234,7 @@ class InteractiveChart extends React.Component<{}, { data: any[][] }> {
   render() {
     return (
       <div>
-        <LoaderTest data={this.state.data}></LoaderTest>
+        <LoaderTest data={this.state.data} />
         <Issue317 />
         <Chart
           chartType="Gauge"
@@ -277,8 +297,6 @@ class InteractiveChart extends React.Component<{}, { data: any[][] }> {
           height="400px"
           legendToggle
         />
-        
-       
       </div>
     );
   }
