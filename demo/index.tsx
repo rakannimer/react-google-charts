@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Chart, Loader } from "../src";
+import { GoogleDataTableColumn } from "../src/types";
 // Reference : https://developers.google.com/chart/interactive/docs/gallery/timeline
 const columns = [
   { type: "string", id: "President" },
@@ -76,7 +77,7 @@ const Issue317 = () => {
     "AreaChart" | "BarChart" | "Table"
   >("AreaChart");
 
-  const columns = [
+  const columns: GoogleDataTableColumn[] = [
     {
       type: "string",
       label: "year"
