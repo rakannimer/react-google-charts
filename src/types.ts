@@ -634,7 +634,6 @@ export type ReactGoogleChartContext = {
     | null;
 };
 
-
 export type ReactLoaderProps = {
   chartVersion?: GoogleChartVersion;
   chartPackages?: GoogleChartPackages[];
@@ -648,4 +647,4 @@ export type ReactLoaderProps = {
     google: GoogleViz;
   }) => void;
   onSucces?: (google: GoogleViz) => void;
-}
+};
