@@ -45,3 +45,11 @@ jobs:
         name: dist
         # A file, directory or wildcard pattern that describes what to upload
         path: dist
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@master
+      env:
+        REPO: git@github.com:spoof14/react-google-charts.git
+        BRANCH: dist
+        FOLDER: dist
+        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+
