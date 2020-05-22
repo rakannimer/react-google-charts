@@ -27,3 +27,10 @@ jobs:
     - run: yarn install --frozen-lockfile
     - run: yarn run build --if-present
     - run: yarn test
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        # Artifact name
+        name: dist
+        # A file, directory or wildcard pattern that describes what to upload
+        path: dist
