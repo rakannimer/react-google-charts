@@ -52,5 +52,5 @@ jobs:
         REPO: self
         BRANCH: dist
         FOLDER: dist
-        SSH_PRIVATE_KEY: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
