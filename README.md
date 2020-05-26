@@ -1,11 +1,5 @@
 # React Google Charts
 
-[![CircleCI][circleci-badge]][circleci-href]
-[![NPM][npm-dm-badge]][npm-href]
-[![NPM][npm-version-badge]][npm-href]
-[![NPM][npm-license-badge]][npm-href]
-[![BundlePhobia][bundlephobia-badge]][bundlephobia-href]
-
 A thin, typed, React wrapper for [Google Charts](https://developers.google.com/chart/interactive/docs/reference).
 
 ## [Docs and examples](https://react-google-charts.com/).
@@ -67,7 +61,7 @@ npm i -s react-google-charts2
 ```javascript
 import * as React from "react";
 import { render } from "react-dom";
-import { Chart } from "react-google-charts";
+import { Chart } from "react-google-charts2";
 
 export default class App extends React.Component {
   render() {
@@ -92,7 +86,7 @@ render(<App />, document.querySelector("#app"));
 ### Initialize from data array
 
 ```javascript
-import { Chart } from "react-google-charts";
+import { Chart } from "react-google-charts2";
 import * as React from "react";
 import { render } from "react-dom";
 
@@ -230,4 +224,5 @@ npm start
 ```
 
 ### Credit
-This is a fork of the repo https://www.github.com/rakannimer/react-google-charts. Full credit goes to rakannimer for his nice work, I just needed a few changes for a project.
+This is a fork of the repo https://www.github.com/rakannimer/react-google-charts. Full credit goes to rakannimer for his nice work, I just needed a few changes for a project. 
+FOR SIMPLE USE CASES THERE SHOULD BE NO DIFFERENCES BETWEEN THIS AND THE ORIGINAL
