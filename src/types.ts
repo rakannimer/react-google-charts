@@ -130,7 +130,7 @@ export interface ChartWrapperOptions {
     height: number;
     is3D: boolean;
     title: string;
-    backgroundColor: string;
+    backgroundColor: string | Record<string, any>;
     hAxis?: {
       minValue?: any;
       maxValue?: any;
