@@ -8,7 +8,6 @@
   "umd": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "precommit": "lint-staged && npm run test",
     "start": "parcel demo/index.html -d demo-build/",
     "build": "rollup -c",
     "test": "tsc",
@@ -17,11 +16,6 @@
     "docz:dev": "docz dev",
     "docz:build": "docz build && mkdir docs/react-google-charts && cp -r docs/static docs/react-google-charts/static && mkdir docs/assets/ && cp -r assets/ docs/assets/",
     "docz:deploy": "yarn docz:build && cp now.json docs/ && cd docs/ && now && now alias"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write"
-    ]
   },
   "dependencies": {
     "react-load-script": "^0.0.6"
@@ -38,11 +32,10 @@
     "cypress": "^3.1.5",
     "docz": "^0.10.2",
     "docz-theme-default": "^0.10.2",
-    "husky": "^1.0.0-rc.13",
     "jsdoc": "^3.4.0",
     "jsdom": "^9.5.0",
     "kill-port": "^1.3.2",
-    "lint-staged": "^7.2.0",
+    "lint-staged": "^11.2.6",
     "object-assign": "^4.1.0",
     "parcel-bundler": "^1.12.2",
     "prettier": "^1.13.7",
@@ -52,6 +45,7 @@
     "release": "^6.0.1",
     "rollup": "^0.63.5",
     "rollup-plugin-typescript2": "^0.19.3",
+    "simple-git-hooks": "^2.7.0",
     "typescript": "^3.4.5"
   },
   "gh-pages-deploy": {
