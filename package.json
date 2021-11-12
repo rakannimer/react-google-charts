@@ -15,7 +15,9 @@
     "prepublishOnly": "npm run build",
     "docz:dev": "docz dev",
     "docz:build": "docz build && mkdir docs/react-google-charts && cp -r docs/static docs/react-google-charts/static && mkdir docs/assets/ && cp -r assets/ docs/assets/",
-    "docz:deploy": "yarn docz:build && cp now.json docs/ && cd docs/ && now && now alias"
+    "docz:deploy": "yarn docz:build && cp now.json docs/ && cd docs/ && now && now alias",
+    "commit": "cz",
+    "release": "standard-version"
   },
   "dependencies": {
     "react-load-script": "^0.0.6"
@@ -26,10 +28,14 @@
     "react-dom": ">=16.3.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
     "@types/jquery": "^3.3.5",
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
+    "commitizen": "^4.2.4",
     "cypress": "^3.1.5",
+    "cz-conventional-changelog": "^3.3.0",
     "docz": "^0.10.2",
     "docz-theme-default": "^0.10.2",
     "jsdoc": "^3.4.0",
@@ -42,10 +48,10 @@
     "react": "^16.9.0",
     "react-component-component": "^1.2.1",
     "react-dom": "^16.9.0",
-    "release": "^6.0.1",
     "rollup": "^0.63.5",
     "rollup-plugin-typescript2": "^0.19.3",
     "simple-git-hooks": "^2.7.0",
+    "standard-version": "^9.3.2",
     "typescript": "^3.4.5"
   },
   "gh-pages-deploy": {
