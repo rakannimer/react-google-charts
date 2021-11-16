@@ -1,0 +1,30 @@
+{
+	"testEnvironment": "jsdom",
+  "testEnvironmentOptions": {
+    "resources": "usable",
+    "runScripts": "dangerously"
+  },
+	"testRegex": "test/.*\\.spec\\.(jsx?|tsx?)$",
+  "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"],
+	"transform": {
+		"^.+\\.(t|j)sx?$": ["@swc/jest", {
+			"module": {
+				"type": "commonjs"
+			},
+      "env": {
+        "targets": {
+          "node": 12
+        }
+      }
+		}]
+	},
+	"collectCoverage": true,
+	"collectCoverageFrom": [
+		"src/**/*.{js,jsx,ts,tsx}",
+		"!**/node_modules/**"
+	],
+	"coverageReporters": [
+		"lcovonly",
+		"text"
+	]
+}
