@@ -9,3 +9,6 @@ node_modules
 docs/react-google-charts/
 cypress/videos
 docs/*
+
+# testing
+coverage
