@@ -254,7 +254,7 @@ export type GoogleChartPackages =
   | "treemap"
   | "wordtree";
 
-export type GoogleChartVersion = "current" | "upcoming";
+export type GoogleChartVersion = "current" | "upcoming" | string;
 
 export type GoogleDataTableColumnType =
   | "string"
@@ -278,7 +278,7 @@ export enum GoogleDataTableColumnRoleType {
   scope = "scope",
   style = "style",
   tooltip = "tooltip",
-  domain = "domain"
+  domain = "domain",
 }
 
 export type GoogleDataTableColumn =
@@ -349,9 +349,10 @@ export type GoogleDataTable = {
   getColumnPattern: (columnIndex: number) => string;
   getColumnProperties: (columnIndex: number) => {};
   getColumnProperty: (columnIndex: number, name: string) => any;
-  getColumnRange: (
-    columnIndex: number
-  ) => { min: number | null; max: number | null };
+  getColumnRange: (columnIndex: number) => {
+    min: number | null;
+    max: number | null;
+  };
   getColumnRole: (columnIndex: number) => GoogleDataTableColumnRoleType;
   getColumnType: (columnIndex: number) => GoogleDataTableColumnType;
   getDistinctValues: (columnIndex: number) => any[];
@@ -588,12 +589,12 @@ export type GoogleChartDashboard = {
 export type ReactGoogleChartDashboardRender = ({
   renderControl,
   renderChart,
-  renderToolbar
+  renderToolbar,
 }: {
   renderControl: (
     filter: ({
       control,
-      controlProp
+      controlProp,
     }: {
       control: GoogleChartControl;
       controlProp: GoogleChartControlProp;
