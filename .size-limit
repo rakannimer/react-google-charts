@@ -1,24 +1,24 @@
 [
   {
-    "path": "dist/index.cjs.js",
-    "limit": "7.7 KB",
+    "path": "dist/index.cjs",
+    "limit": "5.4 KB",
     "webpack": false,
     "running": false
   },
   {
-    "path": "dist/index.cjs.js",
-    "limit": "5.9 KB",
+    "path": "dist/index.cjs",
+    "limit": "4.7 KB",
     "import": "{ Chart }"
   },
   {
-    "path": "dist/index.esm.js",
-    "limit": "7.4 KB",
+    "path": "dist/index.mjs",
+    "limit": "5.1 KB",
     "webpack": false,
     "running": false
   },
   {
-    "path": "dist/index.esm.js",
-    "limit": "5.9 KB",
+    "path": "dist/index.mjs",
+    "limit": "4.5 KB",
     "import": "{ Chart }"
   }
 ]

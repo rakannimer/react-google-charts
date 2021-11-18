@@ -1,14 +1,18 @@
 {
-  "include": ["./src/"],
   "compilerOptions": {
-    "jsx": "react",
-    "target": "es5",
-    "module": "ESNext",
+    "outDir": "dist",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
     "moduleResolution": "node",
-    "lib": ["es2018", "dom"],
-    "outDir": "./build/",
-    "strict": true,
+    "jsx": "react",
+    "sourceMap": true,
     "declaration": true,
+    "esModuleInterop": true,
+    "target": "esnext",
+    "skipLibCheck": true,
+    "strict": true,
     "removeComments": true
-  }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
