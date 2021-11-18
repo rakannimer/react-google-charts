@@ -1,0 +1,24 @@
+[
+  {
+    "path": "dist/index.cjs.js",
+    "limit": "7.7 KB",
+    "webpack": false,
+    "running": false
+  },
+  {
+    "path": "dist/index.cjs.js",
+    "limit": "5.9 KB",
+    "import": "{ Chart }"
+  },
+  {
+    "path": "dist/index.esm.js",
+    "limit": "7.4 KB",
+    "webpack": false,
+    "running": false
+  },
+  {
+    "path": "dist/index.esm.js",
+    "limit": "5.9 KB",
+    "import": "{ Chart }"
+  }
+]
