@@ -2,11 +2,11 @@ import * as React from "react";
 import {
   GoogleViz,
   GoogleChartWrapper,
-  ReactGoogleChartPropsWithDefaults,
+  ReactGoogleChartProps,
   GoogleChartControlProp,
   GoogleChartControl,
   GoogleChartDashboard,
-  GoogleChartEditor
+  GoogleChartEditor,
 } from "../types";
 import { generateUniqueID } from "../generate-unique-id";
 import { GoogleChartDataTable } from "./GoogleChartDataTable";
@@ -16,15 +16,15 @@ export type Props = {
   google: GoogleViz;
   graphID?: string | null;
   graph_id?: string | null;
-  options?: ReactGoogleChartPropsWithDefaults["options"];
+  options?: ReactGoogleChartProps["options"];
   chartWrapperParams?: {};
-  chartType: ReactGoogleChartPropsWithDefaults["chartType"];
-  width?: ReactGoogleChartPropsWithDefaults["width"];
-  height?: ReactGoogleChartPropsWithDefaults["height"];
-  style?: ReactGoogleChartPropsWithDefaults["style"];
-  className?: ReactGoogleChartPropsWithDefaults["className"];
-  rootProps?: ReactGoogleChartPropsWithDefaults["rootProps"];
-} & ReactGoogleChartPropsWithDefaults;
+  chartType: ReactGoogleChartProps["chartType"];
+  width?: ReactGoogleChartProps["width"];
+  height?: ReactGoogleChartProps["height"];
+  style?: ReactGoogleChartProps["style"];
+  className?: ReactGoogleChartProps["className"];
+  rootProps?: ReactGoogleChartProps["rootProps"];
+} & ReactGoogleChartProps;
 
 export interface State {
   googleChartWrapper: GoogleChartWrapper | null;
@@ -44,7 +44,7 @@ export class GoogleChart extends React.Component<Props, State> {
     googleChartDashboard: null,
     googleChartControls: null,
     googleChartEditor: null,
-    isReady: false
+    isReady: false,
   } as State;
   graphID: null | string = null;
   private dashboard_ref: React.RefObject<HTMLDivElement> = React.createRef();
@@ -52,15 +52,15 @@ export class GoogleChart extends React.Component<Props, State> {
   private getGraphID = () => {
     const { graphID, graph_id } = this.props;
     let instanceGraphID: string;
-    if (graphID === null && graph_id === null) {
-      if (this.graphID === null) {
+    if (!graphID && !graph_id) {
+      if (!this.graphID) {
         instanceGraphID = generateUniqueID();
       } else {
         instanceGraphID = this.graphID;
       }
-    } else if (graphID !== null && graph_id === null) {
+    } else if (graphID && !graph_id) {
       instanceGraphID = graphID as string;
-    } else if (graph_id !== null && graphID === null) {
+    } else if (graph_id && !graphID) {
       instanceGraphID = graph_id as string;
     } else {
       instanceGraphID = graphID as string;
@@ -85,28 +85,27 @@ export class GoogleChart extends React.Component<Props, State> {
   ) => {
     const { google, controls } = this.props;
 
-    const googleChartControls =
-      controls === null
-        ? null
-        : controls.map((control, i) => {
-            const {
-              controlID: controlIDMaybe,
+    const googleChartControls = !controls
+      ? null
+      : controls.map((control, i) => {
+          const {
+            controlID: controlIDMaybe,
+            controlType,
+            options: controlOptions,
+            controlWrapperParams,
+          } = control;
+          const controlID = this.getControlID(controlIDMaybe, i);
+          return {
+            controlProp: control,
+            control: new google.visualization.ControlWrapper({
+              containerId: controlID,
               controlType,
               options: controlOptions,
-              controlWrapperParams
-            } = control;
-            const controlID = this.getControlID(controlIDMaybe, i);
-            return {
-              controlProp: control,
-              control: new google.visualization.ControlWrapper({
-                containerId: controlID,
-                controlType,
-                options: controlOptions,
-                ...controlWrapperParams
-              })
-            };
-          });
-    if (googleChartControls === null) {
+              ...controlWrapperParams,
+            }),
+          };
+        });
+    if (!googleChartControls) {
       return null;
     }
     googleChartDashboard.bind(
@@ -132,7 +131,7 @@ export class GoogleChart extends React.Component<Props, State> {
               controlWrapper: control,
               props: this.props as any,
               google: google,
-              eventArgs: args
+              eventArgs: args,
             });
           }
         );
@@ -149,20 +148,22 @@ export class GoogleChart extends React.Component<Props, State> {
       chartWrapperParams,
       toolbarItems,
       getChartEditor,
-      getChartWrapper
+      getChartWrapper,
     } = this.props;
 
     const chartConfig = {
       chartType,
       options,
       containerId: this.getGraphID(),
-      ...chartWrapperParams
+      ...chartWrapperParams,
     };
     const googleChartWrapper = new google.visualization.ChartWrapper(
       chartConfig
     );
-    googleChartWrapper.setOptions(options);
-    getChartWrapper(googleChartWrapper, google);
+    googleChartWrapper.setOptions(options || {});
+    if (getChartWrapper) {
+      getChartWrapper(googleChartWrapper, google);
+    }
     const googleChartDashboard = new google.visualization.Dashboard(
       this.dashboard_ref
     );
@@ -171,19 +172,19 @@ export class GoogleChart extends React.Component<Props, State> {
       googleChartWrapper,
       googleChartDashboard
     );
-    if (toolbarItems !== null) {
+    if (toolbarItems) {
       google.visualization.drawToolbar(
         this.toolbar_ref.current as HTMLDivElement,
         toolbarItems
       );
     }
     let googleChartEditor: null | GoogleChartEditor = null;
-    if (getChartEditor !== null) {
+    if (getChartEditor) {
       googleChartEditor = new google.visualization.ChartEditor();
       getChartEditor({
         chartEditor: googleChartEditor,
         chartWrapper: googleChartWrapper,
-        google
+        google,
       });
     }
 
@@ -192,24 +193,26 @@ export class GoogleChart extends React.Component<Props, State> {
       googleChartControls: googleChartControls,
       googleChartDashboard: googleChartDashboard,
       googleChartWrapper,
-      isReady: true
+      isReady: true,
     });
   }
   componentDidUpdate() {
-    if (this.state.googleChartWrapper === null) return;
-    if (this.state.googleChartDashboard === null) return;
-    if (this.state.googleChartControls === null) return;
+    if (!this.state.googleChartWrapper) return;
+    if (!this.state.googleChartDashboard) return;
+    if (!this.state.googleChartControls) return;
 
     const { controls } = this.props;
-    for (let i = 0; i < controls.length; i += 1) {
-      const { controlType, options, controlWrapperParams } = controls[i];
-      if (controlWrapperParams && "state" in controlWrapperParams) {
-        this.state.googleChartControls[i].control.setState(
-          controlWrapperParams["state"]
-        );
+    if (controls) {
+      for (let i = 0; i < controls.length; i += 1) {
+        const { controlType, options, controlWrapperParams } = controls[i];
+        if (controlWrapperParams && "state" in controlWrapperParams) {
+          this.state.googleChartControls[i].control.setState(
+            controlWrapperParams["state"]
+          );
+        }
+        this.state.googleChartControls[i].control.setOptions(options);
+        this.state.googleChartControls[i].control.setControlType(controlType);
       }
-      this.state.googleChartControls[i].control.setOptions(options);
-      this.state.googleChartControls[i].control.setControlType(controlType);
     }
   }
   shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -219,20 +222,13 @@ export class GoogleChart extends React.Component<Props, State> {
     );
   }
   renderChart = () => {
-    const {
-      width,
-      height,
-      options,
-      style,
-      className,
-      rootProps,
-      google
-    } = this.props;
+    const { width, height, options, style, className, rootProps, google } =
+      this.props;
 
     const divStyle = {
       height: height || (options && options.height),
       width: width || (options && options.width),
-      ...style
+      ...style,
     };
     return (
       <div
@@ -260,7 +256,7 @@ export class GoogleChart extends React.Component<Props, State> {
   renderControl = (
     filter = ({
       control,
-      controlProp
+      controlProp,
     }: {
       control: GoogleChartControl;
       controlProp: GoogleChartControlProp;
@@ -284,7 +280,7 @@ export class GoogleChart extends React.Component<Props, State> {
     ) : null;
   };
   renderToolBar = () => {
-    if (this.props.toolbarItems === null) return null;
+    if (!this.props.toolbarItems) return null;
     return <div ref={this.toolbar_ref} />;
   };
   render() {
@@ -293,16 +289,16 @@ export class GoogleChart extends React.Component<Props, State> {
     const divStyle = {
       height: height || (options && options.height),
       width: width || (options && options.width),
-      ...style
+      ...style,
     };
-    if (this.props.render !== null) {
+    if (this.props.render) {
       return (
         <div ref={this.dashboard_ref} style={divStyle}>
           <div ref={this.toolbar_ref} id="toolbar" />
           {this.props.render({
             renderChart: this.renderChart,
             renderControl: this.renderControl,
-            renderToolbar: this.renderToolBar
+            renderToolbar: this.renderToolBar,
           })}
         </div>
       );

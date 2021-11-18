@@ -14,7 +14,7 @@
     "format:test": "prettier --write 'test/**/*.{js,jsx,ts,tsx}'",
     "format": "yarn format:src && yarn format:test",
     "jest": "jest -c jest.config.json",
-    "test:types": "echo 'Need to fix types' # tsc --skipLibCheck --noEmit",
+    "test:types": "tsc --skipLibCheck --noEmit",
     "test:unit": "yarn jest",
     "test": "yarn test:types && yarn test:unit",
     "prepublishOnly": "npm run build",
@@ -63,7 +63,7 @@
     "rollup-plugin-typescript2": "^0.19.3",
     "simple-git-hooks": "^2.7.0",
     "standard-version": "^9.3.2",
-    "typescript": "^3.4.5"
+    "typescript": "^3.8.0"
   },
   "gh-pages-deploy": {
     "staticpath": "demo/dist/"

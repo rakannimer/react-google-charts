@@ -4,7 +4,6 @@ import {
   GoogleChartWrapper,
   ReactGoogleChartProps,
   GoogleChartAction,
-  ReactGoogleChartPropsWithDefaults
 } from "../types";
 
 import { ContextConsumer } from "../Context";
@@ -16,17 +15,17 @@ export type ChartDrawArgs = {
 export interface Props {
   googleChartWrapper: GoogleChartWrapper;
   google: GoogleViz;
-  chartActions: ReactGoogleChartPropsWithDefaults["chartActions"];
+  chartActions: ReactGoogleChartProps["chartActions"];
 }
 
 export class GoogleChartActionsInner extends React.Component<Props> {
   componentDidMount() {
     const { chartActions } = this.props;
-    this.setChartActions(chartActions, []);
+    this.setChartActions(chartActions || [], []);
   }
   componentDidUpdate(prevProps: Props) {
     const { chartActions } = this.props;
-    this.setChartActions(chartActions, prevProps.chartActions);
+    this.setChartActions(chartActions || [], prevProps.chartActions || []);
   }
   shouldComponentUpdate() {
     return false;
@@ -36,7 +35,7 @@ export class GoogleChartActionsInner extends React.Component<Props> {
     previousActions: GoogleChartAction[]
   ) => {
     const { googleChartWrapper } = this.props;
-    if (googleChartWrapper === null) return;
+    if (!googleChartWrapper) return;
     const chart = googleChartWrapper.getChart();
     for (let chartAction of previousActions) {
       chart.removeAction(chartAction.id);
@@ -45,7 +44,7 @@ export class GoogleChartActionsInner extends React.Component<Props> {
       chart.setAction({
         id: chartAction.id,
         text: chartAction.text,
-        action: () => chartAction.action(googleChartWrapper)
+        action: () => chartAction.action(googleChartWrapper),
       });
     }
   };
@@ -59,7 +58,7 @@ export class GoogleChartActions extends React.Component<Props> {
     const { google, googleChartWrapper } = this.props;
     return (
       <ContextConsumer
-        render={propsFromContext => {
+        render={(propsFromContext) => {
           return (
             <GoogleChartActionsInner
               googleChartWrapper={googleChartWrapper}
