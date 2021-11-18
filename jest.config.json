@@ -21,6 +21,7 @@
 	"collectCoverage": true,
 	"collectCoverageFrom": [
 		"src/**/*.{js,jsx,ts,tsx}",
+		"!src/docs/**",
 		"!**/node_modules/**"
 	],
 	"coverageReporters": [
