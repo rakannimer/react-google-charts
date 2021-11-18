@@ -24,11 +24,8 @@
     "release": "standard-version",
     "cleanPublish": "yarn test && clean-publish"
   },
-  "dependencies": {
-    "react-load-script": "^0.0.6"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "prop-types": ">=15",
     "react": ">=16.3.0",
     "react-dom": ">=16.3.0"
   },
@@ -62,7 +59,7 @@
     "prettier": "^2.4.1",
     "react": "^16.9.0",
     "react-component-component": "^1.2.1",
-    "react-dom": "^16.9.0",
+    "react-dom": "^17.0.2",
     "rollup": "^2.60.0",
     "rollup-plugin-swc": "^0.2.0",
     "simple-git-hooks": "^2.7.0",
