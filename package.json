@@ -47,7 +47,7 @@
     "clean-publish": "^3.4.3",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
-    "docz": "^0.10.2",
+    "docz": "^2.3.1",
     "docz-theme-default": "^0.10.2",
     "jest": "^27.3.1",
     "jsdoc": "^3.4.0",
