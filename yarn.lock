@@ -12102,11 +12102,6 @@ react-live@^1.11.0:
     prop-types "^15.5.8"
     unescape "^0.2.0"
 
-react-load-script@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.npmjs.org/react-load-script/-/react-load-script-0.0.6.tgz#db6851236aaa25bb622677a2eb51dad4f8d2c258"
-  integrity sha512-aRGxDGP9VoLxcsaYvKWIW+LRrMOzz2eEcubTS4NvQPPugjk2VvMhow0wWTkSl7RxookomD1MwcP4l5UStg5ShQ==
-
 react-powerplug@^1.0.0-rc.1:
   version "1.0.0"
   resolved "https://registry.npmjs.org/react-powerplug/-/react-powerplug-1.0.0.tgz#f9c10a761ece115661b8fd10920c4e573ea95909"

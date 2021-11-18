@@ -24,11 +24,8 @@
     "release": "standard-version",
     "cleanPublish": "yarn test && clean-publish"
   },
-  "dependencies": {
-    "react-load-script": "^0.0.6"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "prop-types": ">=15",
     "react": ">=16.3.0",
     "react-dom": ">=16.3.0"
   },

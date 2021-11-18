@@ -5,8 +5,8 @@ import {
   ReactGoogleChartProps,
   ReactGoogleChartState,
 } from "./types";
+import { LoadGoogleCharts } from "./hooks";
 import { chartDefaultProps } from "./default-props";
-import { GoogleChartLoader } from "./components/GoogleChartLoader";
 import { GoogleChart } from "./components/GoogleChart";
 import { ContextProvider } from "./Context";
 
@@ -44,8 +44,11 @@ export class Chart extends React.Component<
         ) : (
           loader
         )}
-        <GoogleChartLoader
-          {...{ chartLanguage, chartPackages, chartVersion, mapsApiKey }}
+        <LoadGoogleCharts
+          chartLanguage={chartLanguage}
+          chartPackages={chartPackages}
+          chartVersion={chartVersion}
+          mapsApiKey={mapsApiKey}
           onLoad={this.onLoad}
           onError={this.onError}
         />
