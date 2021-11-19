@@ -65,7 +65,7 @@
     "simple-git-hooks": "^2.7.0",
     "size-limit": "^7.0.0",
     "standard-version": "^9.3.2",
-    "typescript": "^3.8.0"
+    "typescript": "^4.5.2"
   },
   "gh-pages-deploy": {
     "staticpath": "demo/dist/"
