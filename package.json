@@ -56,7 +56,7 @@
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "docz": "^0.10.2",
-    "docz-theme-default": "^0.10.2",
+    "docz-theme-default": "^1.2.0",
     "jest": "^27.3.1",
     "jsdoc": "^3.4.0",
     "jsdom": "^18.1.0",
