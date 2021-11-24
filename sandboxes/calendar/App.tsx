@@ -28,6 +28,18 @@ export const data = [
   [new Date(2013, 9, 30), 38447],
 ];
 
+export const options = {
+  title: "Red Sox Attendance",
+};
+
 export function App() {
-  return <Chart chartType="Calendar" width="100%" height="400px" data={data} />;
+  return (
+    <Chart
+      chartType="Calendar"
+      width="100%"
+      height="400px"
+      data={data}
+      options={options}
+    />
+  );
 }

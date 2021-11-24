@@ -5,7 +5,7 @@ function getRandomNumber() {
   return Math.random() * 100;
 }
 
-function getData() {
+export function getData() {
   return [
     ["Label", "Value"],
     ["Memory", getRandomNumber()],
