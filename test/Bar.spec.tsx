@@ -3,25 +3,26 @@ import { render, cleanup, waitFor } from "@testing-library/react";
 import { Chart } from "../src";
 
 describe("<Chart />", () => {
-  describe("Timeline", () => {
+  describe("Bar", () => {
     afterEach(() => {
       cleanup();
     });
 
-    it("should draw Timeline", async () => {
+    it("should draw Bar", async () => {
       const { getByTestId } = render(
         <Chart
-          chartType="Timeline"
+          chartType="Bar"
           data={[
-            [
-              { type: "string", id: "President" },
-              { type: "date", id: "Start" },
-              { type: "date", id: "End" },
-            ],
-            ["Washington", new Date(1789, 3, 30), new Date(1797, 2, 4)],
-            ["Adams", new Date(1797, 2, 4), new Date(1801, 2, 4)],
-            ["Jefferson", new Date(1801, 2, 4), new Date(1809, 2, 4)],
+            ["Year", "Sales", "Expenses", "Profit"],
+            ["2016", 660, 1120, 300],
+            ["2017", 1030, 540, 350],
           ]}
+          options={{
+            chart: {
+              title: "Company Performance",
+              subtitle: "Sales, Expenses, and Profit: 2014-2017",
+            },
+          }}
           rootProps={{ "data-testid": "1" }}
         />
       );

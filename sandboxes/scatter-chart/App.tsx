@@ -1,6 +1,5 @@
 import React from "react";
 import { Chart } from "react-google-charts";
-// Ref : https://developers.google.com/chart/interactive/docs/gallery/histogram
 
 export const data = [
   ["Year", "Sales", "Expenses"],
@@ -28,7 +27,6 @@ export function App() {
       height="400px"
       data={data}
       options={options}
-      legendToggle
     />
   );
 }

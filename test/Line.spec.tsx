@@ -3,25 +3,31 @@ import { render, cleanup, waitFor } from "@testing-library/react";
 import { Chart } from "../src";
 
 describe("<Chart />", () => {
-  describe("Timeline", () => {
+  describe("Line", () => {
     afterEach(() => {
       cleanup();
     });
 
-    it("should draw Timeline", async () => {
+    it("should draw Line", async () => {
       const { getByTestId } = render(
         <Chart
-          chartType="Timeline"
+          chartType="Line"
           data={[
             [
-              { type: "string", id: "President" },
-              { type: "date", id: "Start" },
-              { type: "date", id: "End" },
+              "Day",
+              "Guardians of the Galaxy",
+              "The Avengers",
+              "Transformers: Age of Extinction",
             ],
-            ["Washington", new Date(1789, 3, 30), new Date(1797, 2, 4)],
-            ["Adams", new Date(1797, 2, 4), new Date(1801, 2, 4)],
-            ["Jefferson", new Date(1801, 2, 4), new Date(1809, 2, 4)],
+            [1, 37.8, 80.8, 41.8],
+            [2, 30.9, 69.5, 32.4],
           ]}
+          options={{
+            chart: {
+              title: "Box Office Earnings in First Two Weeks of Opening",
+              subtitle: "in millions of dollars (USD)",
+            },
+          }}
           rootProps={{ "data-testid": "1" }}
         />
       );

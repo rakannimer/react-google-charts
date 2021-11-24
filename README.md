@@ -262,8 +262,8 @@ export default ExampleChart;
 #### Candlestick Chart
 
 - [Demo](https://react-google-charts.com/candleStick-chart)
-- [Code](./sandboxes/candlestick/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick?file=/App.tsx)
+- [Code](./sandboxes/candlestick-chart/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick-chart?file=/App.tsx)
 
 #### Column Chart
 
@@ -273,25 +273,25 @@ export default ExampleChart;
 #### Diff Scatter Chart
 
 - [Demo](https://react-google-charts.com/diff-chart)
-- [Code](./sandboxes/diff-scatter-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/diff-scatter-chart?file=/App.tsx)
+- [Code](./sandboxes/scatter-chart-diff/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/scatter-chart-diff?file=/App.tsx)
 
 #### Diff Column Chart
 
 - [Demo](https://react-google-charts.com/diff-chart#diff-column-charts)
-- [Code](./sandboxes/diff-column-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/diff-column-chart?file=/App.tsx)
+- [Code](./sandboxes/column-chart-diff/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/column-chart-diff?file=/App.tsx)
 
 #### Donut Chart
 
-- [Code](./sandboxes/donut-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/donut-chart?file=/App.tsx)
+- [Code](./sandboxes/pie-chart-donut/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/pie-chart-donut?file=/App.tsx)
 
 #### Gantt Chart
 
 - [Demo](https://react-google-charts.com/gantt-chart)
-- [Code](./sandboxes/gantt-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gantt-chart?file=/App.tsx)
+- [Code](./sandboxes/gantt/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gantt?file=/App.tsx)
 
 #### Gauge Chart
 
@@ -314,20 +314,20 @@ export default ExampleChart;
 #### Line Chart
 
 - [Demo](https://react-google-charts.com/line-chart)
-- [Code](./sandboxes/linechart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/linechart?file=/App.tsx)
+- [Code](./sandboxes/line-chart/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/line-chart?file=/App.tsx)
 
 #### Material Bar Chart
 
 - [Demo](https://react-google-charts.com/bar-chart#material-design)
-- [Code](./sandboxes/material-bar-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-bar-chart?file=/App.tsx)
+- [Code](./sandboxes/bar/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar?file=/App.tsx)
 
 #### Material Line Chart
 
 - [Demo](https://react-google-charts.com/line-chart#material-design-linechart)
-- [Code](./sandboxes/material-line-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/material-line-chart?file=/App.tsx)
+- [Code](./sandboxes/line/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/line?file=/App.tsx)
 
 #### Org Chart
 
@@ -374,27 +374,27 @@ export default ExampleChart;
 #### Treemap Chart
 
 - [Demo](https://react-google-charts.com/treemap-chart)
-- [Code](./sandboxes/treemap/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/treemap?file=/App.tsx)
+- [Code](./sandboxes/tree-map/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/tree-map?file=/App.tsx)
 
 #### Waterfall Chart
 
-- [Code](./sandboxes/waterfall/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/waterfall?file=/App.tsx)
+- [Code](./sandboxes/candlestick-chart-waterfall/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick-chart-waterfall?file=/App.tsx)
 
 #### Wordtree Chart
 
 - [Demo](https://react-google-charts.com/wordtree-chart)
-- [Code](./sandboxes/wordtree/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/wordtree?file=/App.tsx)
+- [Code](./sandboxes/word-tree/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/word-tree?file=/App.tsx)
 
-### Run the example app
+### Run the Storybook
 
 ```bash
 git clone https://www.github.com/rakannimer/react-google-charts
 cd react-google-charts
-npm i
-npm start
+yarn
+yarn start:storybook
 ```
 
 ## Contributing
