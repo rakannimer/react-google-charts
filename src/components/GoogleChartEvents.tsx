@@ -3,7 +3,7 @@ import {
   GoogleViz,
   GoogleChartWrapper,
   ReactGoogleChartProps,
-  ReactGoogleChartEvent
+  ReactGoogleChartEvent,
 } from "../types";
 
 import { ContextConsumer } from "../Context";
@@ -30,9 +30,9 @@ export class GoogleChartEvents extends React.Component<Props> {
   listenToEvents({
     chartEvents,
     google,
-    googleChartWrapper
+    googleChartWrapper,
   }: ListenToEventsArgs) {
-    if (chartEvents === null) {
+    if (!chartEvents) {
       return;
     }
     google.visualization.events.removeAllListeners(googleChartWrapper);
@@ -46,7 +46,7 @@ export class GoogleChartEvents extends React.Component<Props> {
             chartWrapper: googleChartWrapper,
             props: this.props as any,
             google: google,
-            eventArgs: args
+            eventArgs: args,
           });
         }
       );
@@ -56,11 +56,11 @@ export class GoogleChartEvents extends React.Component<Props> {
     const { google, googleChartWrapper } = this.props;
     return (
       <ContextConsumer
-        render={propsFromContext => {
+        render={(propsFromContext) => {
           this.listenToEvents({
             chartEvents: propsFromContext.chartEvents || null,
             google,
-            googleChartWrapper
+            googleChartWrapper,
           });
           return null;
         }}

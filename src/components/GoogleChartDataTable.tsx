@@ -5,7 +5,6 @@ import {
   GoogleDataTable,
   ReactGoogleChartProps,
   GoogleChartDashboard,
-  ReactGoogleChartPropsWithDefaults
 } from "../types";
 import { DEFAULT_CHART_COLORS } from "../constants";
 
@@ -26,11 +25,11 @@ interface State {
   hiddenColumns: string[];
 }
 export class GoogleChartDataTableInner extends React.Component<
-  ReactGoogleChartPropsWithDefaults & GoogleChartDataTableProps,
+  ReactGoogleChartProps & GoogleChartDataTableProps,
   State
 > {
   state = {
-    hiddenColumns: []
+    hiddenColumns: [],
   } as State;
 
   private listenToLegendToggle = () => {
@@ -45,24 +44,24 @@ export class GoogleChartDataTableInner extends React.Component<
         if (
           selection.length === 0 ||
           // We want to listen to when a whole row is selected. This is the case only when row === null
-          selection[0].row !== null ||
-          dataTable === null
+          selection[0].row ||
+          !dataTable
         ) {
           return;
         }
         const columnIndex = selection[0].column;
         const columnID = this.getColumnID(dataTable, columnIndex);
         if (this.state.hiddenColumns.includes(columnID)) {
-          this.setState(state => ({
+          this.setState((state) => ({
             ...state,
             hiddenColumns: [
-              ...state.hiddenColumns.filter(colID => colID !== columnID)
-            ]
+              ...state.hiddenColumns.filter((colID) => colID !== columnID),
+            ],
           }));
         } else {
-          this.setState(state => ({
+          this.setState((state) => ({
             ...state,
-            hiddenColumns: [...state.hiddenColumns, columnID]
+            hiddenColumns: [...state.hiddenColumns, columnID],
           }));
         }
       }
@@ -139,12 +138,12 @@ export class GoogleChartDataTableInner extends React.Component<
     chartType,
     formatters,
     spreadSheetUrl,
-    spreadSheetQueryParameters
-  }: ReactGoogleChartPropsWithDefaults) => {
+    spreadSheetQueryParameters,
+  }: ReactGoogleChartProps) => {
     const { google, googleChartWrapper } = this.props;
     let dataTable: GoogleDataTable;
     let chartDiff = null;
-    if (diffdata !== null) {
+    if (diffdata) {
       const oldData = google.visualization.arrayToDataTable(diffdata.old);
       const newData = google.visualization.arrayToDataTable(diffdata.new);
       chartDiff = google.visualization[chartType].prototype.computeDiff(
@@ -158,9 +157,9 @@ export class GoogleChartDataTableInner extends React.Component<
       } else {
         dataTable = new google.visualization.DataTable(data);
       }
-    } else if (rows !== null && columns !== null) {
+    } else if (rows && columns) {
       dataTable = google.visualization.arrayToDataTable([columns, ...rows]);
-    } else if (spreadSheetUrl !== null) {
+    } else if (spreadSheetUrl) {
       dataTable = (await loadDataTableFromSpreadSheet(
         google,
         spreadSheetUrl,
@@ -180,7 +179,7 @@ export class GoogleChartDataTableInner extends React.Component<
         dataTable.addColumn({
           label: previousColumnLabel,
           id: previousColumnID,
-          type: previousColumnType
+          type: previousColumnType,
         });
       }
     }
@@ -189,18 +188,18 @@ export class GoogleChartDataTableInner extends React.Component<
       chart && chart.clearChart();
     }
     googleChartWrapper.setChartType(chartType);
-    googleChartWrapper.setOptions(options);
+    googleChartWrapper.setOptions(options || {});
     googleChartWrapper.setDataTable(dataTable);
     googleChartWrapper.draw();
     if (this.props.googleChartDashboard !== null) {
       this.props.googleChartDashboard.draw(dataTable);
     }
 
-    if (chartDiff !== null) {
+    if (chartDiff) {
       googleChartWrapper.setDataTable(chartDiff);
       googleChartWrapper.draw();
     }
-    if (formatters !== null) {
+    if (formatters) {
       this.applyFormatters(dataTable, formatters);
       googleChartWrapper.setDataTable(dataTable);
       googleChartWrapper.draw();
@@ -211,13 +210,13 @@ export class GoogleChartDataTableInner extends React.Component<
     return;
   };
   private grayOutHiddenColumns = ({
-    options
+    options,
   }: {
-    options: ReactGoogleChartPropsWithDefaults["options"];
+    options: ReactGoogleChartProps["options"];
   }) => {
     const { googleChartWrapper } = this.props;
     const dataTable = googleChartWrapper.getDataTable();
-    if (dataTable === null) return;
+    if (!dataTable) return;
     const columnCount = dataTable.getNumberOfColumns();
     const hasAHiddenColumn = this.state.hiddenColumns.length > 0;
     if (hasAHiddenColumn === false) return;
@@ -226,10 +225,7 @@ export class GoogleChartDataTableInner extends React.Component<
         const columnID = this.getColumnID(dataTable, i + 1);
         if (this.state.hiddenColumns.includes(columnID)) {
           return GRAY_COLOR;
-        } else if (
-          typeof options.colors !== "undefined" &&
-          options.colors !== null
-        ) {
+        } else if (options && options.colors) {
           return options.colors[i];
         } else {
           return DEFAULT_CHART_COLORS[i];
@@ -238,7 +234,7 @@ export class GoogleChartDataTableInner extends React.Component<
     );
     googleChartWrapper.setOptions({
       ...options,
-      colors
+      colors,
     });
     googleChartWrapper.draw();
   };
@@ -272,9 +268,7 @@ export class GoogleChartDataTableInner extends React.Component<
   }
 }
 
-export class GoogleChartDataTable extends React.Component<
-  GoogleChartDataTableProps
-> {
+export class GoogleChartDataTable extends React.Component<GoogleChartDataTableProps> {
   componentDidMount() {}
 
   componentWillUnmount() {}
@@ -285,7 +279,7 @@ export class GoogleChartDataTable extends React.Component<
     const { google, googleChartWrapper, googleChartDashboard } = this.props;
     return (
       <ContextConsumer
-        render={props => {
+        render={(props) => {
           return (
             <GoogleChartDataTableInner
               {...props}

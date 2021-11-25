@@ -4,10 +4,9 @@ import {
   GoogleViz,
   ReactGoogleChartProps,
   ReactGoogleChartState,
-  ReactGoogleChartPropsWithDefaults,
 } from "./types";
+import { LoadGoogleCharts } from "./hooks";
 import { chartDefaultProps } from "./default-props";
-import { GoogleChartLoader } from "./components/GoogleChartLoader";
 import { GoogleChart } from "./components/GoogleChart";
 import { ContextProvider } from "./Context";
 
@@ -35,10 +34,10 @@ export class Chart extends React.Component<
       errorElement,
     } = this.props;
     return (
-      <ContextProvider value={this.props as ReactGoogleChartPropsWithDefaults}>
+      <ContextProvider value={this.props as ReactGoogleChartProps}>
         {this.state.loadingStatus === "ready" && this.state.google !== null ? (
           <GoogleChart
-            {...(this.props as ReactGoogleChartPropsWithDefaults)}
+            {...(this.props as ReactGoogleChartProps)}
             google={this.state.google}
           />
         ) : this.state.loadingStatus === "errored" && errorElement ? (
@@ -46,8 +45,11 @@ export class Chart extends React.Component<
         ) : (
           loader
         )}
-        <GoogleChartLoader
-          {...{ chartLanguage, chartPackages, chartVersion, mapsApiKey }}
+        <LoadGoogleCharts
+          chartLanguage={chartLanguage}
+          chartPackages={chartPackages}
+          chartVersion={chartVersion}
+          mapsApiKey={mapsApiKey}
           onLoad={this.onLoad}
           onLoadCallback={onLoad}
           onError={this.onError}

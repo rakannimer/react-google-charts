@@ -1,8 +1,4 @@
 // Complete Google Charts Type Definition : https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/google.visualization/index.d.ts
-import { chartDefaultProps } from "./default-props";
-
-export type ReactGoogleChartPropsWithDefaults = typeof chartDefaultProps &
-  ReactGoogleChartProps;
 
 export type GoogleVizDrawToolbar = (
   toolbarContainer: HTMLDivElement,
@@ -577,6 +573,7 @@ export type ReactGoogleChartProps = {
   //https://developers.google.com/chart/interactive/docs/gallery/toolbar#example_1
   toolbarItems?: GoogleChartToolbarItem[];
   toolbarID?: string;
+  chartWrapperParams?: any;
 };
 
 export type GoogleChartDashboard = {

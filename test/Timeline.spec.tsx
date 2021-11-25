@@ -22,9 +22,6 @@ describe("<Chart />", () => {
             ["Adams", new Date(1797, 2, 4), new Date(1801, 2, 4)],
             ["Jefferson", new Date(1801, 2, 4), new Date(1809, 2, 4)],
           ]}
-          options={{
-            showRowNumber: true,
-          }}
           rootProps={{ "data-testid": "1" }}
         />
       );

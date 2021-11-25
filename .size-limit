@@ -1,0 +1,24 @@
+[
+  {
+    "path": "dist/index.cjs",
+    "limit": "5.9 KB",
+    "webpack": false,
+    "running": false
+  },
+  {
+    "path": "dist/index.cjs",
+    "limit": "4.7 KB",
+    "import": "{ Chart }"
+  },
+  {
+    "path": "dist/index.mjs",
+    "limit": "5.7 KB",
+    "webpack": false,
+    "running": false
+  },
+  {
+    "path": "dist/index.mjs",
+    "limit": "4.5 KB",
+    "import": "{ Chart }"
+  }
+]

@@ -1,27 +1,56 @@
-import typescript from "rollup-plugin-typescript2";
+import swc from "rollup-plugin-swc";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import pkg from "./package.json";
 
-export default {
-  input: "src/index.tsx",
-  output: [
-    {
-      file: "dist/index.umd.js",
-      format: "umd",
-      name: "ReactGoogleCharts"
+const extensions = [".js", ".ts", ".tsx"];
+const external = (_) => /node_modules/.test(_) && !/@swc\/helpers/.test(_);
+const plugins = (targets) => [
+  nodeResolve({
+    extensions,
+  }),
+  swc({
+    jsc: {
+      parser: {
+        syntax: "typescript",
+        tsx: true,
+      },
+      transform: {
+        react: {
+          useBuiltins: true,
+        },
+      },
+      externalHelpers: true,
     },
-    {
-      file: "dist/index.esm.js",
-      format: "esm"
+    env: {
+      targets,
     },
-    {
-      file: "dist/index.cjs.js",
-      format: "cjs"
-    }
-  ],
-  external: ["react-load-script", "react"],
-  plugins: [
-    typescript({
-      typescript: require("typescript"),
-      abortOnError: false
-    })
-  ]
-};
+    module: {
+      type: "es6",
+    },
+    sourceMaps: true,
+  }),
+];
+
+export default [
+  {
+    input: "src/index.tsx",
+    plugins: plugins("defaults, not ie 11, not ie_mob 11"),
+    external,
+    output: {
+      file: pkg.main,
+      format: "cjs",
+      exports: "named",
+      sourcemap: true,
+    },
+  },
+  {
+    input: "src/index.tsx",
+    plugins: plugins("defaults and supports es6-module"),
+    external,
+    output: {
+      file: pkg.module,
+      format: "es",
+      sourcemap: true,
+    },
+  },
+];
