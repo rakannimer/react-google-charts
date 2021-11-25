@@ -9,6 +9,7 @@ export interface Props {
   chartLanguage: ReactGoogleChartProps["chartLanguage"];
   mapsApiKey: ReactGoogleChartProps["mapsApiKey"];
   onLoad: (google: GoogleViz) => void;
+  onLoadCallback?: (google: GoogleViz) => void;
   onError: () => void;
 }
 
@@ -21,14 +22,16 @@ export class GoogleChartLoader extends React.Component<Props> {
       chartPackages: packages,
       chartLanguage: language,
       mapsApiKey,
-      onLoad
+      onLoad,
+      onLoadCallback,
     } = this.props;
     windowGoogleCharts.charts.load(version || "current", {
       packages: packages || ["corechart", "controls"],
       language: language || "en",
-      mapsApiKey
+      mapsApiKey,
     });
     windowGoogleCharts.charts.setOnLoadCallback(() => {
+      onLoadCallback && onLoadCallback(windowGoogleCharts);
       onLoad(windowGoogleCharts);
     });
   };

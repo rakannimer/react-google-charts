@@ -4,7 +4,7 @@ import {
   GoogleViz,
   ReactGoogleChartProps,
   ReactGoogleChartState,
-  ReactGoogleChartPropsWithDefaults
+  ReactGoogleChartPropsWithDefaults,
 } from "./types";
 import { chartDefaultProps } from "./default-props";
 import { GoogleChartLoader } from "./components/GoogleChartLoader";
@@ -15,12 +15,11 @@ export class Chart extends React.Component<
   ReactGoogleChartProps,
   ReactGoogleChartState
 > {
-
   _isMounted = false;
 
   state = {
     loadingStatus: "loading" as ReactGoogleChartState["loadingStatus"],
-    google: null as ReactGoogleChartState["google"]
+    google: null as ReactGoogleChartState["google"],
   };
 
   static defaultProps = chartDefaultProps;
@@ -32,13 +31,14 @@ export class Chart extends React.Component<
       chartVersion,
       mapsApiKey,
       loader,
-      errorElement
+      onLoad,
+      errorElement,
     } = this.props;
     return (
       <ContextProvider value={this.props as ReactGoogleChartPropsWithDefaults}>
         {this.state.loadingStatus === "ready" && this.state.google !== null ? (
           <GoogleChart
-            {...this.props as ReactGoogleChartPropsWithDefaults}
+            {...(this.props as ReactGoogleChartPropsWithDefaults)}
             google={this.state.google}
           />
         ) : this.state.loadingStatus === "errored" && errorElement ? (
@@ -49,6 +49,7 @@ export class Chart extends React.Component<
         <GoogleChartLoader
           {...{ chartLanguage, chartPackages, chartVersion, mapsApiKey }}
           onLoad={this.onLoad}
+          onLoadCallback={onLoad}
           onError={this.onError}
         />
       </ContextProvider>
@@ -69,9 +70,11 @@ export class Chart extends React.Component<
     } else {
       // IE11: window.google is not fully set, we have to wait
       const id = setInterval(() => {
-        const google = (window as Window & {
-          google?: GoogleViz;
-        }).google;
+        const google = (
+          window as Window & {
+            google?: GoogleViz;
+          }
+        ).google;
 
         if (this._isMounted) {
           if (google && this.isFullyLoaded(google)) {
@@ -81,7 +84,6 @@ export class Chart extends React.Component<
         } else {
           clearInterval(id);
         }
-
       }, 1000);
     }
   };
@@ -89,13 +91,13 @@ export class Chart extends React.Component<
   onSuccess = (google: GoogleViz) => {
     this.setState({
       loadingStatus: "ready",
-      google
+      google,
     });
   };
 
   onError = () => {
     this.setState({
-      loadingStatus: "errored"
+      loadingStatus: "errored",
     });
   };
 

@@ -278,7 +278,7 @@ export enum GoogleDataTableColumnRoleType {
   scope = "scope",
   style = "style",
   tooltip = "tooltip",
-  domain = "domain"
+  domain = "domain",
 }
 
 export type GoogleDataTableColumn =
@@ -349,9 +349,10 @@ export type GoogleDataTable = {
   getColumnPattern: (columnIndex: number) => string;
   getColumnProperties: (columnIndex: number) => {};
   getColumnProperty: (columnIndex: number, name: string) => any;
-  getColumnRange: (
-    columnIndex: number
-  ) => { min: number | null; max: number | null };
+  getColumnRange: (columnIndex: number) => {
+    min: number | null;
+    max: number | null;
+  };
   getColumnRole: (columnIndex: number) => GoogleDataTableColumnRoleType;
   getColumnType: (columnIndex: number) => GoogleDataTableColumnType;
   getDistinctValues: (columnIndex: number) => any[];
@@ -539,6 +540,7 @@ export type ReactGoogleChartProps = {
   graph_id?: string;
   legendToggle?: boolean;
   legend_toggle?: boolean;
+  onLoad?: (google: GoogleViz) => void;
   getChartWrapper?: (
     chartWrapper: GoogleChartWrapper,
     google: GoogleViz
@@ -588,12 +590,12 @@ export type GoogleChartDashboard = {
 export type ReactGoogleChartDashboardRender = ({
   renderControl,
   renderChart,
-  renderToolbar
+  renderToolbar,
 }: {
   renderControl: (
     filter: ({
       control,
-      controlProp
+      controlProp,
     }: {
       control: GoogleChartControl;
       controlProp: GoogleChartControlProp;
