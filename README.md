@@ -238,155 +238,155 @@ export default ExampleChart;
 #### Area Chart
 
 - [Demo](https://react-google-charts.com/area-chart)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/area-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/area-chart/default?file=/App.tsx)
 - [Raw Code](./sandboxes/area-chart/App.tsx)
 
 #### Bar Chart
 
 - [Demo](https://react-google-charts.com/bar-chart)
 - [Code](./sandboxes/bar-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart/default?file=/App.tsx)
 
 #### Bubble Chart
 
 - [Demo](https://react-google-charts.com/bubble-chart)
 - [Code](./sandboxes/bubble-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart/default?file=/App.tsx)
 
 #### Calendar Chart
 
 - [Demo](https://react-google-charts.com/calendar-chart)
 - [Code](./sandboxes/calendar/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/calendar?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/calendar/default?file=/App.tsx)
 
 #### Candlestick Chart
 
 - [Demo](https://react-google-charts.com/candleStick-chart)
 - [Code](./sandboxes/candlestick-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick-chart/default?file=/App.tsx)
 
 #### Column Chart
 
 - [Code](./sandboxes/column-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/column-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/column-chart/default?file=/App.tsx)
 
 #### Diff Scatter Chart
 
 - [Demo](https://react-google-charts.com/diff-chart)
 - [Code](./sandboxes/scatter-chart-diff/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/scatter-chart-diff?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/scatter-chart/diff?file=/App.tsx)
 
 #### Diff Column Chart
 
 - [Demo](https://react-google-charts.com/diff-chart#diff-column-charts)
 - [Code](./sandboxes/column-chart-diff/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/column-chart-diff?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/column-chart/diff?file=/App.tsx)
 
 #### Donut Chart
 
 - [Code](./sandboxes/pie-chart-donut/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/pie-chart-donut?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/pie-chart/donut?file=/App.tsx)
 
 #### Gantt Chart
 
 - [Demo](https://react-google-charts.com/gantt-chart)
 - [Code](./sandboxes/gantt/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gantt?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gantt/default?file=/App.tsx)
 
 #### Gauge Chart
 
 - [Demo](https://react-google-charts.com/gauge-chart)
 - [Code](./sandboxes/gauge/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gauge?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/gauge/default?file=/App.tsx)
 
 #### Geo Chart
 
 - [Demo](https://react-google-charts.com/geo-chart)
 - [Code](./sandboxes/geo-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/geo-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/geo-chart/default?file=/App.tsx)
 
 #### Histogram Chart
 
 - [Demo](https://react-google-charts.com/histogram-chart)
 - [Code](./sandboxes/histogram/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/histogram?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/histogram/default?file=/App.tsx)
 
 #### Line Chart
 
 - [Demo](https://react-google-charts.com/line-chart)
 - [Code](./sandboxes/line-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/line-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/line-chart/default?file=/App.tsx)
 
 #### Material Bar Chart
 
 - [Demo](https://react-google-charts.com/bar-chart#material-design)
 - [Code](./sandboxes/bar/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar/default?file=/App.tsx)
 
 #### Material Line Chart
 
 - [Demo](https://react-google-charts.com/line-chart#material-design-linechart)
 - [Code](./sandboxes/line/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/line?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/line/default?file=/App.tsx)
 
 #### Org Chart
 
 - [Demo](https://react-google-charts.com/org-chart)
 - [Code](./sandboxes/org-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/org-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/org-chart/default?file=/App.tsx)
 
 #### Pie Chart
 
 - [Demo](https://react-google-charts.com/pie-chart)
 - [Code](./sandboxes/pie-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/pie-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/pie-chart/default?file=/App.tsx)
 
 #### Sankey Chart
 
 - [Demo](https://react-google-charts.com/sankey-diagram)
 - [Code](./sandboxes/sankey/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/sankey?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/sankey/default?file=/App.tsx)
 
 #### Scatter Chart
 
 - [Demo](https://react-google-charts.com/scatter-chart)
 - [Code](./sandboxes/scatter-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/scatter-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/scatter-chart/default?file=/App.tsx)
 
 #### Stepped Area Chart
 
 - [Demo](https://react-google-charts.com/stepped-area-chart)
 - [Code](./sandboxes/stepped-area-chart/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/stepped-area-chart?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/stepped-area-chart/default?file=/App.tsx)
 
 #### Table Chart
 
 - [Demo](https://react-google-charts.com/table-chart)
 - [Code](./sandboxes/table/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/table?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/table/default?file=/App.tsx)
 
 #### Timeline Chart
 
 - [Demo](https://react-google-charts.com/timeline-chart)
 - [Code](./sandboxes/timeline/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/timeline?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/timeline/default?file=/App.tsx)
 
 #### Treemap Chart
 
 - [Demo](https://react-google-charts.com/treemap-chart)
 - [Code](./sandboxes/tree-map/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/tree-map?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/tree-map/default?file=/App.tsx)
 
 #### Waterfall Chart
 
 - [Code](./sandboxes/candlestick-chart-waterfall/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick-chart-waterfall?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/candlestick-chart/waterfall?file=/App.tsx)
 
 #### Wordtree Chart
 
 - [Demo](https://react-google-charts.com/wordtree-chart)
 - [Code](./sandboxes/word-tree/App.tsx)
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/word-tree?file=/App.tsx)
+- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/word-tree/default?file=/App.tsx)
 
 ### Run the Storybook
 
@@ -414,7 +414,7 @@ Contributions are very welcome. Check out [CONTRIBUTING.md](CONTRIBUTING.md)
 
 [barchart-demo]: https://react-google-charts.com/bar-chart
 [barchart-example-code]: ./sandboxes/bar-chart/App.tsx
-[barchart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart?file=/App.tsx
+[barchart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bar-chart/default?file=/App.tsx
 [bubblechart-demo]: https://react-google-charts.com/bubble-chart
 [bubblechart-example-code]: ./sandboxes/bubble-chart/App.tsx
-[bubblechart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart?file=/App.tsx
+[bubblechart-example-sandbox]: https://codesandbox.io/s/github/rakannimer/react-google-charts/tree/master/sandboxes/bubble-chart/default?file=/App.tsx

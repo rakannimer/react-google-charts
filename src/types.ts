@@ -110,6 +110,7 @@ export type GoogleChartWrapperChartType =
   | "PieChart"
   | "Sankey"
   | "ScatterChart"
+  | "Scatter"
   | "SteppedAreaChart"
   | "Table"
   | "Timeline"
@@ -548,7 +549,7 @@ export type ReactGoogleChartProps = {
   className?: string;
   style?: React.CSSProperties;
   formatters?: {
-    column: number;
+    column: number | number[];
     type:
       | "ArrowFormat"
       | "BarFormat"
