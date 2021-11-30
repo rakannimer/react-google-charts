@@ -1,7 +1,7 @@
 [
   {
     "path": "dist/index.cjs",
-    "limit": "5.9 KB",
+    "limit": "6.1 KB",
     "webpack": false,
     "running": false
   },
@@ -12,7 +12,7 @@
   },
   {
     "path": "dist/index.mjs",
-    "limit": "5.7 KB",
+    "limit": "5.9 KB",
     "webpack": false,
     "running": false
   },
