@@ -1,0 +1,77 @@
+---
+description: Example of sankey in react-google-charts.
+tags:
+  - Sankey
+---
+
+import ContextProvider from '../../src/components/ContextProvider';
+
+# Sankey
+
+## Simple Example
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/sankey/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Sankey Simple Example'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Custom Colors
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/sankey/colors?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Sankey Custom Colors'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Multilvel Sankeys
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/sankey/multilvel?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Sankey Multilvel Sankeys'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Read More
+
+- [Data Format](https://developers.google.com/chart/interactive/docs/gallery/sankey#data-format)
+- [Reference](https://developers.google.com/chart/interactive/docs/gallery/sankey)

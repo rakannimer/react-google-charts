@@ -1,0 +1,56 @@
+---
+description: Example of candlestick chart in react-google-charts.
+tags:
+  - Candlestick Chart
+---
+
+import ContextProvider from '../../src/components/ContextProvider';
+
+# Candlestick Chart
+
+## Simple Example
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/candlestick-chart/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Candlestick Chart Simple Example'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Waterfall Chart
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/candlestick-chart/waterfall?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Candlestick Chart Waterfall Chart'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Read More
+
+- [Data Format](https://developers.google.com/chart/interactive/docs/gallery/candlestickchart#data-format)
+- [Reference](https://developers.google.com/chart/interactive/docs/gallery/candlestickchart)

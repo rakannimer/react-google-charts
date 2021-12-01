@@ -12,3 +12,7 @@ docs/*
 
 # testing
 coverage
+
+# OS stuff
+._*
+.DS_Store

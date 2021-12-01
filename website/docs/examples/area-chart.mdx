@@ -1,0 +1,77 @@
+---
+description: Example of area chart in react-google-charts.
+tags:
+  - Area Chart
+---
+
+import ContextProvider from '../../src/components/ContextProvider';
+
+# Area Chart
+
+## Simple Example
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/area-chart/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Area Chart Simple Example'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Stacking Areas
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/area-chart/stacked?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Area Chart Stacking Areas'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## 100 Percent Stacked Areas
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/area-chart/stacked-relative?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Area Chart 100 Percent Stacked Areas'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Read More
+
+- [Data Format](https://developers.google.com/chart/interactive/docs/gallery/areachart#data-format)
+- [Reference](https://developers.google.com/chart/interactive/docs/gallery/areachart)
