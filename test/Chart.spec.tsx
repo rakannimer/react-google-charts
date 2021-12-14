@@ -59,7 +59,26 @@ describe("<Chart />", () => {
 
     const container = root.parentElement;
 
-    expect(container.style.width).toBe("456px");
-    expect(container.style.height).toBe("345px");
+    expect(container?.style.width).toBe("456px");
+    expect(container?.style.height).toBe("345px");
+  });
+
+  it("should call `onLoad` prop", async () => {
+    const handleLoad = jest.fn().mockImplementationOnce((/* google */) => {});
+    expect(handleLoad).not.toHaveBeenCalled();
+
+    const { getByTestId } = render(
+      <Chart
+        chartType="AreaChart"
+        rootProps={{ "data-testid": "1" }}
+        onLoad={handleLoad}
+      />
+    );
+
+    await waitFor(() => getByTestId("1"), {
+      timeout: 5000,
+    });
+
+    expect(handleLoad).toHaveBeenCalled();
   });
 });

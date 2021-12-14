@@ -65,6 +65,9 @@ export class Chart extends React.Component<
   }
 
   onLoad = (google: GoogleViz) => {
+    if (this.props.onLoad) {
+      this.props.onLoad(google);
+    }
     if (this.isFullyLoaded(google)) {
       this.onSuccess(google);
     } else {

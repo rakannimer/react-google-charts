@@ -537,6 +537,7 @@ export type ReactGoogleChartProps = {
   graph_id?: string;
   legendToggle?: boolean;
   legend_toggle?: boolean;
+  onLoad?: (google: GoogleViz) => void;
   getChartWrapper?: (
     chartWrapper: GoogleChartWrapper,
     google: GoogleViz
