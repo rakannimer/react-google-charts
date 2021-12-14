@@ -84,6 +84,9 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      gtag: {
+        trackingID: "UA-123404567-1",
+      },
       // algolia: {
       //   appId: 'BH4D9OD16A',
       //   apiKey: 'd59187de89e7935f588bbb2fc9273f03',
