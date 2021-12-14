@@ -70,10 +70,8 @@ export function LoadGoogleCharts({
   const [googleCharts, failed] = useLoadGoogleCharts(params);
 
   useEffect(() => {
-    if (googleCharts) {
-      if (onLoad) {
-        onLoad(googleCharts);
-      }
+    if (googleCharts && onLoad) {
+      onLoad(googleCharts);
     }
   }, [googleCharts]);
 
