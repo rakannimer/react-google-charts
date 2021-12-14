@@ -30,7 +30,6 @@ export class Chart extends React.Component<
       chartVersion,
       mapsApiKey,
       loader,
-      onLoad,
       errorElement,
     } = this.props;
     return (
@@ -51,7 +50,6 @@ export class Chart extends React.Component<
           chartVersion={chartVersion}
           mapsApiKey={mapsApiKey}
           onLoad={this.onLoad}
-          onLoadCallback={onLoad}
           onError={this.onError}
         />
       </ContextProvider>
@@ -67,6 +65,9 @@ export class Chart extends React.Component<
   }
 
   onLoad = (google: GoogleViz) => {
+    if (this.props.onLoad) {
+      this.props.onLoad(google);
+    }
     if (this.isFullyLoaded(google)) {
       this.onSuccess(google);
     } else {

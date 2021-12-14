@@ -56,7 +56,6 @@ export function useLoadGoogleCharts({
 
 export interface ILoadGoogleChartsProps extends IUseLoadGoogleChartsParams {
   onLoad?(googleCharts: GoogleViz): void;
-  onLoadCallback?(googleCharts: GoogleViz): void;
   onError?(): void;
 }
 
@@ -65,7 +64,6 @@ export interface ILoadGoogleChartsProps extends IUseLoadGoogleChartsParams {
  */
 export function LoadGoogleCharts({
   onLoad,
-  onLoadCallback,
   onError,
   ...params
 }: ILoadGoogleChartsProps) {
@@ -75,9 +73,6 @@ export function LoadGoogleCharts({
     if (googleCharts) {
       if (onLoad) {
         onLoad(googleCharts);
-      }
-      if (onLoadCallback) {
-        onLoadCallback(googleCharts);
       }
     }
   }, [googleCharts]);
