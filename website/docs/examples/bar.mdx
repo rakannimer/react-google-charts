@@ -1,0 +1,56 @@
+---
+description: Example of bar in react-google-charts.
+tags:
+  - Bar
+---
+
+import ContextProvider from '../../src/components/ContextProvider';
+
+# Bar
+
+## Material design bar chart
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/bar/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Bar Material design bar chart'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Material design horizontal bar chart
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/bar/horizontal?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: '100%',
+        height: '500px',
+        border: 0,
+        borderRadius: '4px',
+        overflow: 'hidden',
+      }}
+      title='RakanNimer/react-google-charts: Bar Material design horizontal bar chart'
+      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+      loading='lazy'
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Read More
+
+- [Data Format](https://developers.google.com/chart/interactive/docs/gallery/barchart#data-format)
+- [Reference](https://developers.google.com/chart/interactive/docs/gallery/barchart#creating-material-bar-charts)
