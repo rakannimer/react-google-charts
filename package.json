@@ -2,9 +2,15 @@
   "name": "react-google-charts",
   "version": "3.0.15",
   "description": "react-google-charts React component",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.mjs"
+  },
   "scripts": {
     "start:storybook": "start-storybook -p 6006 --ci",
     "emitDeclarations": "tsc --skipLibCheck --emitDeclarationOnly",
