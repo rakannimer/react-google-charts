@@ -27,7 +27,8 @@
     "prepublishOnly": "yarn build",
     "commit": "cz",
     "release": "standard-version",
-    "cleanPublish": "yarn test && clean-publish"
+    "cleanPublish": "yarn test && clean-publish",
+    "enableGitHooks": "simple-git-hooks"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -46,7 +47,7 @@
     "@storybook/addons": "^6.3.12",
     "@storybook/react": "^6.3.12",
     "@swc/core": "^1.2.108",
-    "@swc/helpers": "^0.2.14",
+    "@swc/helpers": "^0.3.2",
     "@swc/jest": "^0.2.5",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
@@ -59,7 +60,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "jest": "^27.3.1",
     "jsdom": "^18.1.0",
-    "lint-staged": "^12.0.2",
+    "nano-staged": "^0.5.0",
     "prettier": "^2.4.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
