@@ -8,7 +8,7 @@ const currentBranch = process.env.BRANCH || branch.sync();
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "react-google-charts",
+  title: "React Google Charts",
   tagline: "A thin, typed, React wrapper for Google Charts",
   url: "https://react-google-charts.com/",
   baseUrl: "/",
@@ -45,9 +45,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "react-google-charts",
+        title: "React Google Charts",
         logo: {
-          alt: "react-google-charts logo",
+          alt: "React Google Charts logo",
           src: "img/logo.png",
         },
         items: [
