@@ -1,0 +1,9 @@
+
+blank_issues_enabled: false
+contact_links:
+  - name: 🤔 Have a Question?
+    url: https://stackoverflow.com/questions/tagged/react-google-charts
+    about: Feel free to ask questions on Stack Overflow.
+  - name: 📊 Have a Problem With Google Charts?
+    url: https://stackoverflow.com/questions/tagged/google-visualization
+    about: react-google-charts is just the wrapper around Google Charts, so if you are experiencing an issue with charts rendering, please ask a related question on Stack Overflow.
