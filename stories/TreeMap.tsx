@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as treeMapData from "../sandboxes/tree-map/App";
+import * as treeMapData from "../sandboxes/tree-map/default/App";
 
 export default {
   title: "TreeMap",

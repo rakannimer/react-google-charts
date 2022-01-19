@@ -1,7 +1,7 @@
 import React from "react";
 import { Chart } from "../src";
-import * as scatterChartData from "../sandboxes/scatter-chart/App";
-import * as scatterChartDataDiff from "../sandboxes/scatter-chart-diff/App";
+import * as scatterChartData from "../sandboxes/scatter-chart/default/App";
+import * as scatterChartDataDiff from "../sandboxes/scatter-chart/diff/App";
 
 export default {
   title: "ScatterChart",

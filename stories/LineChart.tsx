@@ -1,7 +1,7 @@
 import React from "react";
 import { Chart } from "../src";
-import * as lineChartData from "../sandboxes/line-chart/App";
-import * as lineChartDataIntervals from "../sandboxes/line-chart-intervals/App";
+import * as lineChartData from "../sandboxes/line-chart/default/App";
+import * as lineChartDataIntervals from "../sandboxes/line-chart/intervals/App";
 
 export default {
   title: "LineChart",

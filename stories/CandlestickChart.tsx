@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as candlestickChartData from "../sandboxes/candlestick-chart/App";
+import * as candlestickChartData from "../sandboxes/candlestick-chart/default/App";
 
 export default {
   title: "CandlestickChart",

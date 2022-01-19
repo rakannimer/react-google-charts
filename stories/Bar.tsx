@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as barData from "../sandboxes/bar/App";
+import * as barData from "../sandboxes/bar/default/App";
 
 export default {
   title: "Bar",

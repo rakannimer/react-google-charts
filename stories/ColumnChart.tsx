@@ -1,7 +1,7 @@
 import React from "react";
 import { Chart } from "../src";
-import * as columnChartData from "../sandboxes/column-chart/App";
-import * as columnChartDataDiff from "../sandboxes/column-chart-diff/App";
+import * as columnChartData from "../sandboxes/column-chart/default/App";
+import * as columnChartDataDiff from "../sandboxes/column-chart/diff/App";
 
 export default {
   title: "ColumnChart",

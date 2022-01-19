@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as pieChartData from "../sandboxes/pie-chart/App";
+import * as pieChartData from "../sandboxes/pie-chart/default/App";
 
 export default {
   title: "PieChart",

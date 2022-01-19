@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as steppedAreaChartData from "../sandboxes/stepped-area-chart/App";
+import * as steppedAreaChartData from "../sandboxes/stepped-area-chart/default/App";
 
 export default {
   title: "SteppedAreaChart",

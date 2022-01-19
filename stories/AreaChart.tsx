@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as areaChartData from "../sandboxes/area-chart/App";
+import * as areaChartData from "../sandboxes/area-chart/default/App";
 
 export default {
   title: "AreaChart",

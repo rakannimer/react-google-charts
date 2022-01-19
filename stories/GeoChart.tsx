@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as geoChartData from "../sandboxes/geo-chart/App";
+import * as geoChartData from "../sandboxes/geo-chart/default/App";
 
 export default {
   title: "GeoChart",

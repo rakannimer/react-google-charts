@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as wordTreeData from "../sandboxes/word-tree/App";
+import * as wordTreeData from "../sandboxes/word-tree/default/App";
 
 export default {
   title: "WordTree",

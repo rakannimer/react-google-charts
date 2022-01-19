@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as ganttData from "../sandboxes/gantt/App";
+import * as ganttData from "../sandboxes/gantt/default/App";
 
 export default {
   title: "Gantt",

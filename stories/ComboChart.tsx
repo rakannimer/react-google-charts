@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as comboChartData from "../sandboxes/combo-chart/App";
+import * as comboChartData from "../sandboxes/combo-chart/default/App";
 
 export default {
   title: "ComboChart",

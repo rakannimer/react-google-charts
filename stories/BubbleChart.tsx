@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as bubbleChartData from "../sandboxes/bubble-chart/App";
+import * as bubbleChartData from "../sandboxes/bubble-chart/default/App";
 
 export default {
   title: "BubbleChart",

@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as tableData from "../sandboxes/table/App";
+import * as tableData from "../sandboxes/table/default/App";
 
 export default {
   title: "Table",
