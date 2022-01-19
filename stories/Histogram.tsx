@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as histogramData from "../sandboxes/histogram/App";
+import * as histogramData from "../sandboxes/histogram/default/App";
 
 export default {
   title: "Histogram",

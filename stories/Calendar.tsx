@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as calendarData from "../sandboxes/calendar/App";
+import * as calendarData from "../sandboxes/calendar/default/App";
 
 export default {
   title: "Calendar",

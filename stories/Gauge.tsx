@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as gaugeData from "../sandboxes/gauge/App";
+import * as gaugeData from "../sandboxes/gauge/default/App";
 
 export default {
   title: "Gauge",

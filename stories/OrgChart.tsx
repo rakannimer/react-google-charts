@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as orgChartData from "../sandboxes/org-chart/App";
+import * as orgChartData from "../sandboxes/org-chart/default/App";
 
 export default {
   title: "OrgChart",

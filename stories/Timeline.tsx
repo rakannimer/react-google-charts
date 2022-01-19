@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as timelineData from "../sandboxes/timeline/App";
+import * as timelineData from "../sandboxes/timeline/default/App";
 
 export default {
   title: "Timeline",

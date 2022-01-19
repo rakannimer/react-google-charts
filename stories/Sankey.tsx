@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as sankeyData from "../sandboxes/sankey/App";
+import * as sankeyData from "../sandboxes/sankey/default/App";
 
 export default {
   title: "Sankey",
