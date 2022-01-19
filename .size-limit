@@ -11,13 +11,13 @@
     "import": "{ Chart }"
   },
   {
-    "path": "dist/index.mjs",
+    "path": "dist/index.js",
     "limit": "6 KB",
     "webpack": false,
     "running": false
   },
   {
-    "path": "dist/index.mjs",
+    "path": "dist/index.js",
     "limit": "4.5 KB",
     "import": "{ Chart }"
   }
