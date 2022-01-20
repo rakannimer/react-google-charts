@@ -50,9 +50,9 @@ import { Chart } from "react-google-charts";
 
 # Docs
 
-- [Quick Walkthrough](https://react-google-charts-docs.netlify.app/docs/quick-walkthrough)
-- [Components](https://react-google-charts-docs.netlify.app/components)
-- [Examples](https://react-google-charts-docs.netlify.app/examples)
+- [Quick Walkthrough](https://react-google-charts.com/docs/quick-walkthrough)
+- [Components](https://react-google-charts.com/components)
+- [Examples](https://react-google-charts.com/examples)
 
 ## Contributing
 
