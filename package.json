@@ -65,7 +65,7 @@
     "jsdom": "^19.0.0",
     "nano-staged": "^0.5.0",
     "prettier": "^2.4.1",
-    "react": "^16.9.0",
+    "react": "^17.0.2",
     "react-dom": "^16.9.0",
     "rollup": "^2.60.0",
     "rollup-plugin-swc": "^0.2.0",
