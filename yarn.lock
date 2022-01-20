@@ -4744,16 +4744,15 @@ clean-css@^4.2.3:
   dependencies:
     source-map "~0.6.0"
 
-clean-publish@^3.4.3:
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/clean-publish/-/clean-publish-3.4.5.tgz#c46c943f81f7316fb3c12ec35449308fcce63176"
-  integrity sha512-wxtaEqCy/B7lch+bpTPmx9wI8owTODa619UOVA1XfyNaM2bjwv1SkR1IJNDA6rtf89bjiz6UkpfU5HcEL8YJIw==
+clean-publish@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/clean-publish/-/clean-publish-4.0.0.tgz#4f7c8e20c4f43916c41934be776a3761155d62ff"
+  integrity sha512-PcOxJSnPgncx/ANmgPw8hj9DDtdLHTxIc6Vh/yXCX7IA9w1oUSx2POL0Vno/7omhyrKxMKTpnRh2wlzwH5zaCw==
   dependencies:
     cross-spawn "^7.0.3"
-    fast-glob "^3.2.7"
-    fs-extra "^10.0.0"
-    hosted-git-info "^4.0.2"
+    fast-glob "^3.2.11"
     lilconfig "^2.0.4"
+    micromatch "^4.0.4"
 
 clean-stack@^2.0.0:
   version "2.2.0"
@@ -6370,7 +6369,7 @@ fast-glob@^2.2.6:
     merge2 "^1.2.3"
     micromatch "^3.1.10"
 
-fast-glob@^3.1.1, fast-glob@^3.2.7, fast-glob@^3.2.9:
+fast-glob@^3.1.1, fast-glob@^3.2.11, fast-glob@^3.2.9:
   version "3.2.11"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.11.tgz#a1172ad95ceb8a16e20caa5c5e56480e5129c1d9"
   integrity sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==
@@ -7313,7 +7312,7 @@ hosted-git-info@^2.1.4:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
   integrity sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==
 
-hosted-git-info@^4.0.0, hosted-git-info@^4.0.1, hosted-git-info@^4.0.2:
+hosted-git-info@^4.0.0, hosted-git-info@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-4.0.2.tgz#5e425507eede4fea846b7262f0838456c4209961"
   integrity sha512-c9OGXbZ3guC/xOlCg1Ci/VgWlwsqDv1yMQL1CWqXDL0hDjXuNcq0zuR4xqPSuasI3kqFDhqSyTjREz5gzq0fXg==

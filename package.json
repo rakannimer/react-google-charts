@@ -58,7 +58,7 @@
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
     "browserslist": "^4.18.1",
-    "clean-publish": "^3.4.3",
+    "clean-publish": "^4.0.0",
     "commitizen": "^4.2.4",
     "del-cli": "^4.0.1",
     "jest": "^27.3.1",
