@@ -48,11 +48,13 @@ import { Chart } from "react-google-charts";
 />
 ```
 
-# Docs
+## Docs
 
 - [Quick Walkthrough](https://react-google-charts.com/docs/quick-walkthrough)
 - [Components](https://react-google-charts.com/components)
 - [Examples](https://react-google-charts.com/examples)
+
+You can also check this [step-by-step tutorial](https://cube.dev/blog/react-google-charts-dashboard/?ref=eco-react-google-charts) that will walk you through the creation of a full-fledged dashboard with this library.
 
 ## Contributing
 
