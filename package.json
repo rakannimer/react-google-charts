@@ -61,7 +61,7 @@
     "clean-publish": "^4.0.0",
     "commitizen": "^4.2.4",
     "del-cli": "^4.0.1",
-    "jest": "^27.3.1",
+    "jest": "^28.1.0",
     "jsdom": "^19.0.0",
     "nano-staged": "^0.5.0",
     "prettier": "^2.4.1",
