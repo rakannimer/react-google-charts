@@ -64,7 +64,7 @@
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "jsdom": "^19.0.0",
-    "nano-staged": "^0.5.0",
+    "nano-staged": "^0.8.0",
     "prettier": "^2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
