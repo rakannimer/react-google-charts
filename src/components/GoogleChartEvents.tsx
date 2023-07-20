@@ -24,6 +24,7 @@ export interface ListenToEventsArgs {
 }
 
 export class GoogleChartEvents extends React.Component<Props> {
+  propsFromContext: ReactGoogleChartProps | null;
   shouldComponentUpdate() {
     return false;
   }
@@ -52,19 +53,31 @@ export class GoogleChartEvents extends React.Component<Props> {
       );
     }
   }
+
+  componentDidMount() {
+    const { google, googleChartWrapper } = this.props;
+
+    this.listenToEvents({
+      chartEvents: this.propsFromContext?.chartEvents || null,
+      google,
+      googleChartWrapper,
+    });
+  }
+
   render() {
     const { google, googleChartWrapper } = this.props;
     return (
       <ContextConsumer
         render={(propsFromContext) => {
-          this.listenToEvents({
-            chartEvents: propsFromContext.chartEvents || null,
-            google,
-            googleChartWrapper,
-          });
+          this.propsFromContext = propsFromContext;
           return null;
         }}
       />
     );
+  }
+
+  constructor(props: Props) {
+    super(props);
+    this.propsFromContext = null;
   }
 }
