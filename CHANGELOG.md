@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1](https://github.com/RakanNimer/react-google-charts/compare/v4.0.0...v4.0.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* fix problem loading events in tables when displayed for the first time ([#709](https://github.com/RakanNimer/react-google-charts/issues/709)) ([b2ce2c3](https://github.com/RakanNimer/react-google-charts/commit/b2ce2c330c4951f6735e44e943c3556a8651c58a))
+
 ## [4.0.0](https://github.com/RakanNimer/react-google-charts/compare/v2.0.29...v4.0.0) (2022-01-20)
 
 
