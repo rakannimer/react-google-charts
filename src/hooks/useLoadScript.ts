@@ -51,13 +51,5 @@ export function useLoadScript(
     if (!foundScript) {
       document.head.append(script);
     }
-
-    return () => {
-      script.removeEventListener("load", onLoadWithMarker);
-
-      if (onError) {
-        script.removeEventListener("error", onError);
-      }
-    };
   }, []);
 }
