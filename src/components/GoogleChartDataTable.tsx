@@ -151,7 +151,7 @@ export class GoogleChartDataTableInner extends React.Component<
         newData
       );
     }
-    if (data !== null) {
+    if (data) {
       if (Array.isArray(data)) {
         dataTable = google.visualization.arrayToDataTable(data);
       } else {
