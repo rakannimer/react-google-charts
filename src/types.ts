@@ -189,7 +189,7 @@ export type GoogleChartWrapper = {
     removeAction: (actionID: string) => void;
     getSelection: () => { row?: any; column?: any }[];
     setAction: (ChartAction: GoogleChartAction) => void;
-    getImageURI: () => void;
+    getImageURI: () => string | undefined;
     clearChart: () => void; // Clears the chart, and releases all of its allocated resources.
   }; // ref to chart
   getContainerId: () => string;
