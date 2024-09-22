@@ -1,10 +1,10 @@
 ---
 slug: /docs/sponsor
-description: supported and maintained by cube
+description: Interested in sponsoring ? Reach out.
 ---
 
-# Sponsor
+If you are interested in sponsoring this library please reach out.
 
-This library is maintained by the creators of [Cube](https://cube.dev/?ref=eco-react-google-charts), the headless business intelligence for building powerful, fast, and consistent data applications.
+### History
 
-Need an API to fetch data? Consider Cube, it [works great](https://cube.dev/blog/react-google-charts-dashboard/?ref=eco-react-google-charts) with React Google Charts.
+- [Cube](https://cube.dev/?ref=eco-react-google-charts) helped migrate the docs section to Docusaurus in 2021.

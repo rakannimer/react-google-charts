@@ -36,7 +36,6 @@ const config = {
         },
         docs: {
           routeBasePath: "/",
-          sidebarPath: require.resolve("./sidebars.js"),
           editUrl:
             "https://github.com/RakanNimer/react-google-charts/edit/master/website/",
         },
@@ -57,12 +56,6 @@ const config = {
           src: "img/logo.png",
         },
         items: [
-          {
-            type: "doc",
-            docId: "components/index",
-            position: "left",
-            label: "Components",
-          },
           {
             type: "doc",
             docId: "examples/index",
