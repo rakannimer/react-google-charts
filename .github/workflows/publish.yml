@@ -18,6 +18,6 @@ jobs:
       - name: Publish
         run: |
           npm run cleanPublish
-          npm run publish --non-interactive package
+          npm publish --non-interactive package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
