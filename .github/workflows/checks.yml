@@ -12,7 +12,7 @@ jobs:
       CI_JOB_NUMBER: 1
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Check size
         uses: andresz1/size-limit-action@v1
         with:
@@ -27,10 +27,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: 20
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          install-command: yarn --frozen-lockfile --ignore-engines
+        run: npm i
       - name: Check storybook
-        run: yarn build:storybook
+        run: npm run build:storybook

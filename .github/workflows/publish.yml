@@ -11,15 +11,13 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          install-command: yarn --frozen-lockfile --ignore-engines
+        run: npm i
       - name: Publish
         run: |
-          yarn cleanPublish --without-publish --temp-dir package
-          yarn publish --non-interactive package
+          npm run cleanPublish --without-publish --temp-dir package
+          npm run publish --non-interactive package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

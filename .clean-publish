@@ -1,4 +1,6 @@
 {
-  "packageManager": "yarn",
-  "files": ["website"]
+  "packageManager": "npm",
+  "files": [
+    "website"
+  ]
 }
