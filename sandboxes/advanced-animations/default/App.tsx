@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import faker from "faker";
 
@@ -13,49 +13,49 @@ function getData() {
 }
 
 export const options = {
-  colors: ["#8e0152", "#276419"],
-  pointSize: 10,
+  title: "Company Performance",
+  curveType: "function",
+  legend: { position: "bottom" },
   animation: {
     duration: 1000,
     easing: "out",
-    startup: true,
   },
   vAxis: {
     viewWindow: {
-      max: -10,
-      min: 100,
+      max: 100,
+      min: 0,
     },
   },
   hAxis: {
     viewWindow: {
       max: 100,
-      min: -10,
+      min: 0,
     },
   },
-  legend: { position: "none" },
-  enableInteractivity: false,
 };
 
 export function App() {
   const [chartData, setChartData] = useState(getData);
-
+  const [year, setYear] = useState(new Date().getFullYear());
   useEffect(() => {
     const intervalId = setInterval(() => {
       setChartData(getData());
-    }, 900);
-
+      setYear((y) => y - 1);
+    }, 1000);
     return () => {
       clearInterval(intervalId);
     };
-  });
-
+  }, [setChartData]);
   return (
-    <Chart
-      chartType="ScatterChart"
-      width="80%"
-      height="400px"
-      data={chartData}
-      options={options}
-    />
+    <>
+      <Chart
+        chartType="ScatterChart"
+        width="100%"
+        height="400px"
+        data={chartData}
+        options={options}
+      />
+      <div style={{ width: "100%", textAlign: "center" }}>{year}</div>
+    </>
   );
 }
