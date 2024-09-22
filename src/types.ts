@@ -300,7 +300,8 @@ export type GoogleDataTableCell =
   | string
   | number
   | boolean
-  | Date;
+  | Date
+  | null;
 
 export type GoogleDataTableRow = GoogleDataTableCell[];
 
