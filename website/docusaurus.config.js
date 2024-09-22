@@ -1,8 +1,9 @@
 // @ts-check
 
 const branch = require("git-branch");
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const { themes } = require("prism-react-renderer");
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 const currentBranch = process.env.BRANCH || branch.sync();
 
@@ -28,6 +29,11 @@ const config = {
       "@docusaurus/preset-classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
+        // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-google-gtag
+        gtag: {
+          trackingID: "UA-123404567-1",
+          anonymizeIP: true,
+        },
         docs: {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
@@ -84,14 +90,6 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-      gtag: {
-        trackingID: "UA-123404567-1",
-      },
-      // algolia: {
-      //   appId: 'BH4D9OD16A',
-      //   apiKey: 'd59187de89e7935f588bbb2fc9273f03',
-      //   indexName: 'react-google-charts-2',
-      // },
     }),
 
   plugins: [

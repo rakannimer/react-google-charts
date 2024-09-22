@@ -25,13 +25,7 @@ A thin, typed, React wrapper for [Google Charts](https://developers.google.com/c
 Install this library with your favorite package manager:
 
 ```bash
-yarn add react-google-charts
-```
-
-or
-
-```bash
-npm install --save react-google-charts
+npm i react-google-charts
 ```
 
 Then, import and use it:
@@ -41,11 +35,15 @@ import { Chart } from "react-google-charts";
 
 <Chart
   chartType="ScatterChart"
-  data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
+  data={[
+    ["Age", "Weight"],
+    [4, 5.5],
+    [8, 12],
+  ]}
   width="100%"
   height="400px"
   legendToggle
-/>
+/>;
 ```
 
 ## Docs
@@ -65,6 +63,6 @@ Contributions are very welcome. Check out [CONTRIBUTING.md](CONTRIBUTING.md)
 ```bash
 git clone https://www.github.com/rakannimer/react-google-charts
 cd react-google-charts
-yarn
-yarn start:storybook
+npm i
+npm run start:storybook
 ```
