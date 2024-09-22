@@ -4,9 +4,52 @@ tags:
   - Timeline
 ---
 
-import ContextProvider from '../../src/components/ContextProvider';
+import ContextProvider from "../../src/components/ContextProvider";
 
 # Timeline
+
+A timeline is a chart that depicts how a set of resources are used over time. If you're managing a software project and want to illustrate who is doing what and when, or if you're organizing a conference and need to schedule meeting rooms, a timeline is often a reasonable visualization choice. One popular type of timeline is the Gantt chart.
+
+## Usage
+
+### Install the package
+
+```sh
+npm i react-google-charts
+```
+
+### Create your chart
+
+```jsx
+return (
+  <Chart
+    chartType="Timeline"
+    data={[
+      [
+        "President",
+        "George Washington",
+        new Date(1789, 3, 30),
+        new Date(1797, 2, 4),
+      ],
+      ["President", "John Adams", new Date(1797, 2, 4), new Date(1801, 2, 4)],
+      [
+        "President",
+        "Thomas Jefferson",
+        new Date(1801, 2, 4),
+        new Date(1809, 2, 4),
+      ],
+      [
+        "Vice President",
+        "John Adams",
+        new Date(1789, 3, 21),
+        new Date(1797, 2, 4),
+      ],
+    ]}
+    width="100%"
+    height="400px"
+  />
+);
+```
 
 ## Simple Example
 
@@ -15,16 +58,16 @@ import ContextProvider from '../../src/components/ContextProvider';
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/timeline/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Timeline Simple Example'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Timeline Simple Example"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
@@ -36,16 +79,16 @@ import ContextProvider from '../../src/components/ContextProvider';
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/timeline/advanced?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Timeline An Advanced Example'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Timeline An Advanced Example"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
@@ -57,16 +100,16 @@ import ContextProvider from '../../src/components/ContextProvider';
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/timeline/colors?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Timeline Controlling The Colors'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Timeline Controlling The Colors"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
@@ -78,16 +121,16 @@ import ContextProvider from '../../src/components/ContextProvider';
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/timeline/gridlines?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Timeline Overlapping GridLines'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Timeline Overlapping GridLines"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
@@ -99,16 +142,16 @@ import ContextProvider from '../../src/components/ContextProvider';
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/timeline/labels?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Timeline Labeling the bars'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Timeline Labeling the bars"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
@@ -120,16 +163,16 @@ import ContextProvider from '../../src/components/ContextProvider';
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/timeline/row?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Timeline Putting bars on one row'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Timeline Putting bars on one row"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
@@ -141,16 +184,16 @@ import ContextProvider from '../../src/components/ContextProvider';
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/timeline/tooltips?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Timeline Customizing Tooltips'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Timeline Customizing Tooltips"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
