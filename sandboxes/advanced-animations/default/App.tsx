@@ -14,7 +14,6 @@ function getData() {
 
 export const options = {
   title: "Company Performance",
-  curveType: "function",
   legend: { position: "bottom" },
   animation: {
     duration: 1000,

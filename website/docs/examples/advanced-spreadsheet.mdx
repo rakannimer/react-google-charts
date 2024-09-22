@@ -4,9 +4,26 @@ tags:
   - Spreadsheet
 ---
 
-import ContextProvider from '../../src/components/ContextProvider';
+import ContextProvider from "../../src/components/ContextProvider";
 
 # Spreadsheet
+
+To render a chart sourced from a Google Spreadsheet, just pass the spreadSheetUrl parameter with a url to your spread sheet.
+
+```jsx
+<Chart
+  chartType="ScatterChart"
+  spreadSheetUrl="https://docs.google.com/spreadsheets/d/1jN0iw0usssnsG1_oi-NXtuKfsUsGme09GsFidbqxFYA/edit#gid=0"
+  options={{
+    hAxis: {
+      format: "short",
+    },
+    vAxis: {
+      format: "decimal",
+    },
+  }}
+/>
+```
 
 ## Simple Example
 
@@ -15,16 +32,16 @@ import ContextProvider from '../../src/components/ContextProvider';
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/advanced-spreadsheet/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Spreadsheet Simple Example'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Spreadsheet Simple Example"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
@@ -36,16 +53,16 @@ import ContextProvider from '../../src/components/ContextProvider';
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/advanced-spreadsheet/query?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Spreadsheet Query data from spreadsheet'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Spreadsheet Query data from spreadsheet"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
