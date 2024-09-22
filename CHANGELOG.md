@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.2](https://github.com/RakanNimer/react-google-charts/compare/v4.0.1...v4.0.2) (2024-09-22)
+
+
+### Bug Fixes
+
+* add null as cell type ([07487d1](https://github.com/RakanNimer/react-google-charts/commit/07487d1aa28bd3b07adc69b273070948f470b1a6)), closes [#388](https://github.com/RakanNimer/react-google-charts/issues/388)
+* **docs:** Update homepage link. ([944afc1](https://github.com/RakanNimer/react-google-charts/commit/944afc1f1766af52184bd07aa9196b2e56ae9cbb))
+* fix empty columns check ([88e77f2](https://github.com/RakanNimer/react-google-charts/commit/88e77f2cba2923518d116f3ad23310abd7356940))
+* switch to using a dataView to hide columns ([2d91574](https://github.com/RakanNimer/react-google-charts/commit/2d91574f6286ab88ac9f75a68ead5f8d90783af9)), closes [#391](https://github.com/RakanNimer/react-google-charts/issues/391)
+* update backgroundColor type ([d560a30](https://github.com/RakanNimer/react-google-charts/commit/d560a30d63fff94ca0585b9fa5d9d61e6e1191fd)), closes [#375](https://github.com/RakanNimer/react-google-charts/issues/375)
+
 ### [4.0.1](https://github.com/RakanNimer/react-google-charts/compare/v4.0.0...v4.0.1) (2023-07-20)
 
 
