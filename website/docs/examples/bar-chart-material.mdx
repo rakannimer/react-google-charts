@@ -1,0 +1,192 @@
+---
+title: Bar Charts - Material Design
+description: Examples of Material Bar Charts using React and Google Charts
+tags:
+  - Bar Chart
+  - Material Design
+---
+
+import ContextProvider from "../../src/components/ContextProvider";
+
+# Bar Chart - Material Design
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/bar/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="RakanNimer/react-google-charts: Bar Material Design Bar Chart"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>
+
+---
+
+## High-Level Overview
+
+To render a Material Bar Chart, you need to provide the following props to the `Chart` component:
+
+- **`chartType`**: Set this to `"Bar"` for Material Design bar charts or `"BarChart"` for classic bar charts.
+- **`data`**: Provide the chart data in a tabular format.
+- **`options`**: (Optional) Customize the chart with various options like title, colors, and display settings.
+- **`width`** and **`height`**:(Optional) Define the size of the chart.
+
+### Basic Usage
+
+#### Material Chart
+
+```jsx
+import React from "react";
+import { Chart } from "react-google-charts";
+
+const data = [
+  ["Year", "Sales", "Expenses"],
+  ["2014", 1000, 400],
+  ["2015", 1170, 460],
+  ["2016", 660, 1120],
+  ["2017", 1030, 540],
+];
+
+// Material chart options
+const options = {
+  chart: {
+    title: "Company Performance",
+    subtitle: "Sales and Expenses over the Years",
+  },
+};
+
+function App() {
+  return (
+    <Chart
+      // Note the usage of Bar and not BarChart for the material version
+      chartType="Bar"
+      data={data}
+      options={options}
+    />
+  );
+}
+
+export default App;
+```
+
+## Examples
+
+Below are interactive examples of material design Bar Charts rendered using `react-google-charts`.
+
+Each example demonstrates different features and customization options. You can interact with the charts and the code directly in your browser.
+
+### Material Design Bar Chart
+
+This example demonstrates a Material Design Bar Chart with default settings.
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/bar/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="RakanNimer/react-google-charts: Bar Material Design Bar Chart"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>
+
+### Material Design Horizontal Bar Chart
+
+This example shows a horizontal Material Design Bar Chart.
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/bar/horizontal?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="RakanNimer/react-google-charts: Bar Material Design Horizontal Bar Chart"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>
+
+## Customizing the Bar Chart
+
+You can customize various aspects of the Bar Chart using the `options` prop.
+
+## Styling Options
+
+Customize the chart's appearance:
+
+```jsx
+const options = {
+  chart: {
+    title: "Company Performance",
+    subtitle: "Sales and Expenses over the Years",
+  },
+  bars: "vertical", // Required for Material Bar Charts.
+  colors: ["#1b9e77", "#d95f02", "#7570b3"],
+  bar: { groupWidth: "75%" },
+  legend: { position: "bottom" },
+};
+```
+
+### Horizontal Bar Chart
+
+To create a horizontal bar chart, set the `bars` option to `"horizontal"`:
+
+```jsx
+const options = {
+  chart: {
+    title: "Company Performance",
+    subtitle: "Sales and Expenses over the Years",
+  },
+  bars: "horizontal",
+};
+```
+
+### Stacked Bar Chart
+
+To stack the bars, set the `isStacked` option to `true`:
+
+```jsx
+const options = {
+  isStacked: true,
+  chart: {
+    title: "Company Performance",
+    subtitle: "Sales and Expenses over the Years",
+  },
+};
+```
+
+---
+
+## Additional Resources
+
+- [Data Format](https://developers.google.com/chart/interactive/docs/gallery/barchart#data-format)
+- [Reference](https://developers.google.com/chart/interactive/docs/gallery/barchart)
+- [Diff Charts Data Format](https://developers.google.com/chart/interactive/docs/gallery/diffchart#data-format)
+- [Diff Charts Reference](https://developers.google.com/chart/interactive/docs/gallery/diffchart)
+- [React Google Charts GitHub Repository](https://github.com/RakanNimer/react-google-charts)
+
+---

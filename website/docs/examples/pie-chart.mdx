@@ -8,23 +8,43 @@ import ContextProvider from "../../src/components/ContextProvider";
 
 # Pie Chart
 
-React Google Charts provides several pie chart types, including simple, 3D, donut, and additional interactive chart features.
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/pie-chart/default?view=preview&fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="RakanNimer/react-google-charts: Pie Chart Simple Example"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>
 
-## Usage
+---
 
-### Install the package
+## High-Level Overview
 
-```sh
-npm i react-google-charts
-```
+To render a Pie Chart, you need to provide the following props to the `Chart` component:
 
-### Create your chart
+- **`chartType`**: Set this to `"PieChart"` to specify the chart type.
+- **`data`**: Provide the chart data in a tabular format. First row containing the column definitions and subsequent rows the data.
+- **`options`**: (Optional) Customize the chart with various options like title, colors, and display settings.
+- **`width`** and **`height`**: (Optional) Define the size of the chart.
 
-```tsx
+### Basic Usage
+
+```jsx
 import React from "react";
 import { Chart } from "react-google-charts";
 
-export const data = [
+const data = [
   ["Task", "Hours per Day"],
   ["Work", 11],
   ["Eat", 2],
@@ -33,24 +53,27 @@ export const data = [
   ["Sleep", 7],
 ];
 
-export const options = {
+// Optional
+const options = {
   title: "My Daily Activities",
 };
 
-export function App() {
-  return (
-    <Chart
-      chartType="PieChart"
-      data={data}
-      options={options}
-      width={"100%"}
-      height={"400px"}
-    />
-  );
+function App() {
+  return <Chart chartType="PieChart" data={data} options={options} />;
 }
+
+export default App;
 ```
 
-## Simple Example
+---
+
+## Examples
+
+Below are interactive examples of Pie Charts rendered using `react-google-charts`. Each example demonstrates different features and customization options. You can interact with the charts directly in your browser.
+
+### Simple Example
+
+This is a basic Pie Chart illustrating simple data visualization.
 
 <ContextProvider>
   {({ branch, theme }) => (
@@ -71,7 +94,9 @@ export function App() {
   )}
 </ContextProvider>
 
-## 3D Pie Chart
+### 3D Pie Chart
+
+This example demonstrates how to create a 3D Pie Chart.
 
 <ContextProvider>
   {({ branch, theme }) => (
@@ -92,7 +117,9 @@ export function App() {
   )}
 </ContextProvider>
 
-## Diff Pie Chart
+### Diff Pie Chart
+
+This example shows how to create a Diff Pie Chart to compare two sets of data.
 
 <ContextProvider>
   {({ branch, theme }) => (
@@ -113,7 +140,9 @@ export function App() {
   )}
 </ContextProvider>
 
-## Donut Chart
+### Donut Chart
+
+You can create a Donut Chart by adding a hole to the center of the pie using the .
 
 <ContextProvider>
   {({ branch, theme }) => (
@@ -134,7 +163,9 @@ export function App() {
   )}
 </ContextProvider>
 
-## Exploding a slice
+### Exploding a Slice
+
+Learn how to "explode" or offset a slice from the pie chart for emphasis.
 
 <ContextProvider>
   {({ branch, theme }) => (
@@ -147,7 +178,7 @@ export function App() {
         borderRadius: "4px",
         overflow: "hidden",
       }}
-      title="RakanNimer/react-google-charts: Pie Chart Exploding a slice"
+      title="RakanNimer/react-google-charts: Pie Chart Exploding a Slice"
       allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
       loading="lazy"
@@ -155,7 +186,9 @@ export function App() {
   )}
 </ContextProvider>
 
-## Removing Slices
+### Removing Slices
+
+This example demonstrates how to remove slices below a certain threshold from the pie chart.
 
 <ContextProvider>
   {({ branch, theme }) => (
@@ -176,7 +209,9 @@ export function App() {
   )}
 </ContextProvider>
 
-## Rotating A Pie Chart
+### Rotating a Pie Chart
+
+Learn how to rotate the pie chart to start from a different angle.
 
 <ContextProvider>
   {({ branch, theme }) => (
@@ -189,7 +224,7 @@ export function App() {
         borderRadius: "4px",
         overflow: "hidden",
       }}
-      title="RakanNimer/react-google-charts: Pie Chart Rotating A Pie Chart"
+      title="RakanNimer/react-google-charts: Pie Chart Rotating a Pie Chart"
       allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
       loading="lazy"
@@ -197,7 +232,9 @@ export function App() {
   )}
 </ContextProvider>
 
-## Slice Visibility Threshold
+### Slice Visibility Threshold
+
+This example shows how to set a visibility threshold to group smaller slices into an "Other" category.
 
 <ContextProvider>
   {({ branch, theme }) => (
@@ -218,9 +255,73 @@ export function App() {
   )}
 </ContextProvider>
 
-## Read More
+---
 
-- [Data Format](https://developers.google.com/chart/interactive/docs/gallery/piechart#data-format)
-- [Reference](https://developers.google.com/chart/interactive/docs/gallery/piechart)
+## Customizing the Pie Chart
+
+You can customize various aspects of the Pie Chart using the `options` prop.
+
+### Styling Options
+
+Customize the chart's appearance:
+
+```jsx
+const options = {
+  title: "My Daily Activities",
+  is3D: true, // Enables 3D view
+  pieHole: 0.4, // Will be ignored if is3D is set to true
+  slices: {
+    1: { offset: 0.2 }, // Explodes the second slice
+  },
+  pieStartAngle: 10, // Rotates the chart
+  sliceVisibilityThreshold: 0.02, // Hides slices smaller than 2%
+  legend: {
+    position: "bottom",
+    alignment: "center",
+  },
+  colors: ["#AFCBFF", "#C2E0C6", "#D8A7B1", "#FFC107", "#D3D3D3"],
+};
+```
+
+### Exploding a Slice
+
+To emphasize a particular slice, you can "explode" it by setting an offset:
+
+```jsx
+const options = {
+  slices: {
+    2: { offset: 0.2 }, // Explodes the third slice
+  },
+};
+```
+
+### Rotating the Pie Chart
+
+Adjust the starting angle of the pie chart:
+
+```jsx
+const options = {
+  pieStartAngle: 135, // Rotates the chart by 135 degrees
+};
+```
+
+### Slice Visibility Threshold
+
+Group smaller slices into an "Other" category:
+
+```jsx
+const options = {
+  sliceVisibilityThreshold: 0.05, // Slices smaller than 5% will be grouped
+};
+```
+
+---
+
+## Additional Resources
+
+- [Google Charts Pie Chart Data Format](https://developers.google.com/chart/interactive/docs/gallery/piechart#data-format)
+- [Google Charts Pie Chart Reference](https://developers.google.com/chart/interactive/docs/gallery/piechart)
 - [Diff Charts Data Format](https://developers.google.com/chart/interactive/docs/gallery/diffchart#data-format)
 - [Diff Charts Reference](https://developers.google.com/chart/interactive/docs/gallery/diffchart)
+
+---

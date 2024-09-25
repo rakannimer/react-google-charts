@@ -4,10 +4,6 @@ exports.docs = [
     slug: "/examples/area-chart",
   },
   {
-    title: "Bar",
-    slug: "/examples/bar",
-  },
-  {
     title: "Bar Chart",
     slug: "/examples/bar-chart",
   },

@@ -4,244 +4,400 @@ tags:
   - Line Chart
 ---
 
-import ContextProvider from '../../src/components/ContextProvider';
+import ContextProvider from "../../src/components/ContextProvider";
 
 # Line Chart
 
-## Basic line chart with default styling
+Line charts are essential tools for visualizing data trends over time or continuous data points. Using the `react-google-charts` library, you can easily integrate interactive line charts into your React applications, leveraging the powerful features of Google Charts.
+
+Each example below is interactive, rendered directly in your browser using SVG, and offers tooltips for detailed views when hovered. Dive into each example to understand how line charts can be customized and utilized to represent your data effectively.
+
+---
+
+## High-Level Overview
+
+To render a Line Chart, you need to provide the following props to the `Chart` component:
+
+- **`chartType`**: Set this to `"LineChart"` for classic line charts or `"Line"` for Material Design line charts.
+- **`data`**: Provide the chart data in a tabular format.
+- **`options`**: (Optional) Customize the chart with various options like title, colors, and display settings.
+- **`width`** and **`height`**: (Optional) Define the size of the chart.
+
+### Basic Usage
+
+#### Classic Line Chart
+
+```jsx
+import React from "react";
+import { Chart } from "react-google-charts";
+
+const data = [
+  ["x", "dogs"],
+  [0, 0],
+  [1, 10],
+  [2, 23],
+  [3, 17],
+  [4, 18],
+  [5, 9],
+  [6, 11],
+  [7, 27],
+  [8, 33],
+  [9, 40],
+  [10, 32],
+  [11, 35],
+];
+
+const options = {
+  title: "Line Chart Example",
+  hAxis: { title: "Time" },
+  vAxis: { title: "Popularity" },
+  legend: "none",
+};
+
+function App() {
+  return (
+    <Chart
+      chartType="LineChart"
+      width="100%"
+      height="400px"
+      data={data}
+      options={options}
+    />
+  );
+}
+
+export default App;
+```
+
+#### Material Design Line Chart
+
+```jsx
+import React from "react";
+import { Chart } from "react-google-charts";
+
+const data = [
+  ["Year", "Sales", "Expenses"],
+  ["2013", 1000, 400],
+  ["2014", 1170, 460],
+  ["2015", 660, 1120],
+  ["2016", 1030, 540],
+];
+
+const options = {
+  chart: {
+    title: "Company Performance",
+    subtitle: "Sales and Expenses over the Years",
+  },
+};
+
+function App() {
+  return (
+    <Chart
+      chartType="Line"
+      width="100%"
+      height="400px"
+      data={data}
+      options={options}
+    />
+  );
+}
+
+export default App;
+```
+
+---
+
+## Examples
+
+Below are interactive examples of Line Charts rendered using `react-google-charts`. Each example demonstrates different features and customization options. You can interact with the charts directly in your browser.
+
+### Basic Line Chart with Default Styling
+
+This example shows a basic line chart with default settings.
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Line Chart Basic line chart with default styling'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Line Chart Basic Line Chart with Default Styling"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## Area Intervals
+### Material Design Line Chart
+
+This example demonstrates a Material Design Line Chart with default settings.
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/area-intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Line Chart Area Intervals'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Material Design Line Chart"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## Bar Intervals
+### Material Design Dual Y-Axis Chart
+
+This example shows how to create a Material Design Line Chart with dual Y-axes.
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/bar-intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line/dual-charts?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Line Chart Bar Intervals'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Material Design Dual Y-Axis Chart"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## Box Intervals
+### Multiple Series Line Chart
 
-<ContextProvider>
-  {({ branch, theme }) => (
-    <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/box-intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
-      style={{
-        width: '100%',
-        height: '500px',
-        border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
-      }}
-      title='RakanNimer/react-google-charts: Line Chart Box Intervals'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
-    ></iframe>
-  )}
-</ContextProvider>
-
-## Line Intervals
-
-<ContextProvider>
-  {({ branch, theme }) => (
-    <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
-      style={{
-        width: '100%',
-        height: '500px',
-        border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
-      }}
-      title='RakanNimer/react-google-charts: Line Chart Line Intervals'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
-    ></iframe>
-  )}
-</ContextProvider>
-
-## Combining Interval Styles
-
-<ContextProvider>
-  {({ branch, theme }) => (
-    <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/intervals-styles?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
-      style={{
-        width: '100%',
-        height: '500px',
-        border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
-      }}
-      title='RakanNimer/react-google-charts: Line Chart Combining Interval Styles'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
-    ></iframe>
-  )}
-</ContextProvider>
-
-## Line Intervals Tailored
-
-<ContextProvider>
-  {({ branch, theme }) => (
-    <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/intervals-tailored?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
-      style={{
-        width: '100%',
-        height: '500px',
-        border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
-      }}
-      title='RakanNimer/react-google-charts: Line Chart Line Intervals Tailored'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
-    ></iframe>
-  )}
-</ContextProvider>
-
-## Multiple Series
+This example demonstrates how to plot multiple data series in a single line chart.
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/multiple?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Line Chart Multiple Series'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Line Chart Multiple Series"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## Multiple line types
+### Intervals and Error Bars
+
+Google Charts allows you to add intervals or error bars to your line charts to represent data variability or uncertainty. Below are examples of different interval styles.
+
+#### Area Intervals
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/multiple-types?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/area-intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Line Chart Multiple line types'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Line Chart Area Intervals"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## Point Intervals
+#### Bar Intervals
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/point-intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/bar-intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Line Chart Point Intervals'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Line Chart Bar Intervals"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## Stick Intervals
+#### Box Intervals
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/stick-intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/box-intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Line Chart Stick Intervals'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Line Chart Box Intervals"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## Read More
+#### Line Intervals
 
-- [Data Format](https://developers.google.com/chart/interactive/docs/gallery/linechart#data-format)
-- [Reference](https://developers.google.com/chart/interactive/docs/gallery/linechart)
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/intervals?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="Line Chart Line Intervals"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>
+
+#### Combining Interval Styles
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line-chart/intervals-styles?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="Line Chart Combining Interval Styles"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>
+
+---
+
+## Customizing the Line Chart
+
+You can customize various aspects of the Line Chart using the `options` prop.
+
+### Styling Options
+
+Customize the chart's appearance:
+
+```jsx
+const options = {
+  title: "Company Performance",
+  curveType: "function", // Smooths the lines
+  legend: { position: "bottom" },
+  hAxis: {
+    title: "Year",
+    gridlines: { count: 15 },
+  },
+  vAxis: {
+    title: "Sales",
+    gridlines: { color: "none" },
+  },
+  colors: ["#a52714", "#097138"],
+  lineWidth: 4,
+  intervals: { style: "area" }, // Adds area intervals
+};
+```
+
+### Dual Y-Axis
+
+To create a chart with dual Y-axes, you can specify multiple axes in the `series` option:
+
+```jsx
+const options = {
+  chart: {
+    title: "Average Temperatures and Daylight in Iceland Throughout the Year",
+  },
+  series: {
+    0: { axis: "Temps" },
+    1: { axis: "Daylight" },
+  },
+  axes: {
+    y: {
+      Temps: { label: "Temps (Celsius)" },
+      Daylight: { label: "Daylight" },
+    },
+  },
+};
+```
+
+### Intervals and Error Bars
+
+To add intervals or error bars to your chart, include additional columns in your data and specify the `intervals` option:
+
+```jsx
+const data = [
+  ["x", "values", { role: "interval" }, { role: "interval" }],
+  [1, 100, 90, 110],
+  [2, 120, 95, 130],
+  [3, 130, 100, 140],
+  [4, 90, 85, 95],
+  [5, 70, 60, 75],
+  [6, 30, 39, 22],
+  [7, 80, 77, 83],
+  [8, 60, 55, 60],
+  [9, 100, 90, 110],
+];
+
+const options = {
+  title: "Line Chart with Intervals",
+  curveType: "function",
+  intervals: { style: "line" },
+};
+```
+
+---
+
+## Additional Resources
+
+- [Google Charts Line Chart Data Format](https://developers.google.com/chart/interactive/docs/gallery/linechart#data-format)
+- [Google Charts Line Chart Reference](https://developers.google.com/chart/interactive/docs/gallery/linechart)
 - [Intervals Data Format](https://developers.google.com/chart/interactive/docs/gallery/intervals#data-format)
 - [Intervals Reference](https://developers.google.com/chart/interactive/docs/gallery/intervals)
+- [React Google Charts GitHub Repository](https://github.com/RakanNimer/react-google-charts)
+
+---
+
+**Happy Charting!**

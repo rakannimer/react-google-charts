@@ -101,6 +101,23 @@ const config = {
         },
       },
     ],
+    // Client-side redirect is not ideal, just adding this temporarily to avoid broken links.
+    // TODO: Migrate to server-side redirect
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        redirects: [
+          {
+            to: "/examples/bar-chart-material",
+            from: ["/examples/bar"],
+          },
+          {
+            to: "/examples/line-chart-material",
+            from: ["/examples/line"],
+          },
+        ],
+      },
+    ],
   ],
 };
 

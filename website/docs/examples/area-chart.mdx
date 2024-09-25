@@ -1,77 +1,180 @@
 ---
-description: Example of area chart in react-google-charts.
+description: Examples of Area Charts using React and Google Charts.
 tags:
   - Area Chart
 ---
 
-import ContextProvider from '../../src/components/ContextProvider';
+import ContextProvider from "../../src/components/ContextProvider";
 
 # Area Chart
 
-## Simple Example
+## High-Level Overview
+
+To render an Area Chart, you need to provide the following props to the `Chart` component:
+
+- **`chartType`**: Set this to `"AreaChart"` to specify the chart type.
+- **`data`**: Provide the chart data in a tabular format.
+- **`options`**: (Optional) Customize the chart with various options like title, colors, and display settings.
+- **`width`** and **`height`**: (Optional) Define the size of the chart.
+
+### Basic Usage
+
+```jsx
+import React from "react";
+import { Chart } from "react-google-charts";
+
+const data = [
+  ["Year", "Sales", "Expenses"],
+  ["2013", 1000, 400],
+  ["2014", 1170, 460],
+  ["2015", 660, 1120],
+  ["2016", 1030, 540],
+];
+
+const options = {
+  title: "Company Performance",
+  hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
+  vAxis: { minValue: 0 },
+  chartArea: { width: "70%", height: "70%" },
+};
+
+function App() {
+  return <Chart chartType="AreaChart" data={data} options={options} />;
+}
+
+export default App;
+```
+
+---
+
+## Examples
+
+Below are interactive examples of Area Charts rendered using `react-google-charts`. Each example demonstrates different features and customization options. You can interact with the charts directly in your browser.
+
+### Simple Example
+
+This is a basic Area Chart illustrating simple data visualization.
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/area-chart/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Area Chart Simple Example'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Area Chart Simple Example"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## Stacking Areas
+### Stacking Areas
+
+This example demonstrates how to create a stacked area chart to show the cumulative value over time.
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/area-chart/stacked?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Area Chart Stacking Areas'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Area Chart Stacking Areas"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## 100 Percent Stacked Areas
+### 100% Stacked Areas
+
+This example shows how to create a 100% stacked area chart, where the cumulative proportion of each category is shown.
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/area-chart/stacked-relative?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Area Chart 100 Percent Stacked Areas'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="Area Chart 100% Stacked Areas"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
-## Read More
+---
 
-- [Data Format](https://developers.google.com/chart/interactive/docs/gallery/areachart#data-format)
-- [Reference](https://developers.google.com/chart/interactive/docs/gallery/areachart)
+## Customizing the Area Chart
+
+You can customize various aspects of the Area Chart using the `options` prop.
+
+### Styling Options
+
+Customize the chart's appearance:
+
+```jsx
+const options = {
+  title: "Company Performance",
+  hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
+  vAxis: { minValue: 0 },
+  // To make a stacked area chart.
+  isStacked: true,
+  colors: ["#a52714", "#097138"],
+  areaOpacity: 0.8,
+  legend: { position: "bottom" },
+};
+```
+
+### 100% Stacked Area Chart
+
+To create a 100% stacked area chart, set the `isStacked` option to `'relative'`:
+
+```jsx
+const options = {
+  title: "Company Performance",
+  hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
+  vAxis: { minValue: 0 },
+  isStacked: "relative",
+  legend: { position: "bottom" },
+};
+```
+
+### Area Opacity
+
+Adjust the transparency of the area using the `areaOpacity` option:
+
+```jsx
+const options = {
+  areaOpacity: 0.4, // Value between 0.0 (transparent) and 1.0 (opaque)
+};
+```
+
+---
+
+## Additional Resources
+
+- [Google Charts Area Chart Data Format](https://developers.google.com/chart/interactive/docs/gallery/areachart#data-format)
+- [Google Charts Area Chart Reference](https://developers.google.com/chart/interactive/docs/gallery/areachart)
+- [React Google Charts GitHub Repository](https://github.com/RakanNimer/react-google-charts)
+
+---
+
+**Happy Charting!**

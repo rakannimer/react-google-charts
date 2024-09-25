@@ -1,156 +1,252 @@
 ---
-description: Example of gantt in react-google-charts.
+description: Learn how to create interactive Gantt charts in React using react-google-charts. This guide provides examples with live demos and covers data formatting, customization options and task dependencies.
 tags:
   - Gantt
 ---
 
-import ContextProvider from '../../src/components/ContextProvider';
+import ContextProvider from "../../src/components/ContextProvider";
 
-# Gantt
+# Gantt Chart
+
+Gantt charts help you visualize project schedules and dependencies between tasks.
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/gantt/default?view=preview&fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "90%",
+        height: "300px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="RakanNimer/react-google-charts: Gantt Simple Example"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>
+
+## High-Level Overview
+
+To render a Gantt chart, you need to provide the following props to the Chart component:
+
+- `chartType`: Set this to "Gantt" to specify the chart type.
+- `data`: Provide the chart data in a tabular format. The first row defines the columns, and each subsequent row represents a task in the Gantt chart.
+
+### Basic Usage
+
+```jsx
+import { Chart } from "react-google-charts";
+
+<Chart
+  chartType="Gantt"
+  data={data} // Example input data below
+/>;
+```
+
+### Example Input Data
+
+```jsx
+// First row defines the columns
+const columns = [
+  { type: "string", label: "Task ID" },
+  { type: "string", label: "Task Name" },
+  { type: "date", label: "Start Date" },
+  { type: "date", label: "End Date" },
+  { type: "number", label: "Duration" },
+  { type: "number", label: "Percent Complete" },
+  { type: "string", label: "Dependencies" },
+];
+
+// Each subsequent row represents a task
+const rows = [
+  [
+    "Research",
+    "Find sources",
+    new Date(2015, 0, 1),
+    new Date(2015, 0, 5),
+    null,
+    100,
+    null,
+  ],
+  [
+    "Write",
+    "Write paper",
+    null,
+    new Date(2015, 0, 9),
+    daysToMilliseconds(3),
+    25,
+    "Research,Outline",
+  ],
+];
+
+const data = [columns, ...rows];
+```
+
+## Examples
+
+Below are interactive examples of Gantt charts rendered using react-google-charts. Each example demonstrates different features and customization options. You can interact with the charts directly in your browser.
 
 ## Simple Example
+
+This is a basic Gantt chart illustrating simple task scheduling.
 
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/gantt/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Gantt Simple Example'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Gantt Simple Example"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
 ## Computed Start End From Duration
 
+This example demonstrates how to compute the start and end dates from the duration of tasks.
+
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/gantt/computed?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Gantt Computed Start End From Duration'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Gantt Computed Start End From Duration"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
 ## Critical Path
 
+This example highlights the critical path in your project schedule.
+
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/gantt/critical-path?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Gantt Critical Path'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Gantt Critical Path"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
 ## Grouping Resources
 
+Learn how to group resources in your Gantt chart.
+
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/gantt/grouping?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Gantt Grouping Resources'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Gantt Grouping Resources"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
 ## No Dependencies
 
+An example of a Gantt chart without task dependencies.
+
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/gantt/no-dependencies?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Gantt No Dependencies'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Gantt No Dependencies"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
 ## Styling Arrows
 
+Customize the arrows that represent task dependencies.
+
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/gantt/styling-arrows?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Gantt Styling Arrows'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Gantt Styling Arrows"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>
 
 ## Styling Tracks
 
+Learn how to style the task bars (tracks) in your Gantt chart.
+
 <ContextProvider>
   {({ branch, theme }) => (
     <iframe
       src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/gantt/styling-tracks?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
       style={{
-        width: '100%',
-        height: '500px',
+        width: "100%",
+        height: "500px",
         border: 0,
-        borderRadius: '4px',
-        overflow: 'hidden',
+        borderRadius: "4px",
+        overflow: "hidden",
       }}
-      title='RakanNimer/react-google-charts: Gantt Styling Tracks'
-      allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-      sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
-      loading='lazy'
+      title="RakanNimer/react-google-charts: Gantt Styling Tracks"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
     ></iframe>
   )}
 </ContextProvider>

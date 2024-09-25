@@ -1,0 +1,200 @@
+---
+description: Examples of Material Design Line Charts using React and Google Charts
+tags:
+  - Line Chart
+  - Material Design
+---
+
+import ContextProvider from "../../src/components/ContextProvider";
+
+# Line Chart - Material Design
+
+Material Design Line Charts offer a modern and visually appealing way to represent data trends over time. Using the `react-google-charts` library, you can integrate interactive Material Design Line Charts into your React applications, leveraging the features of Google Charts.
+
+Each example below is interactive, rendered directly in your browser using SVG, and offers tooltips for detailed views when hovered.
+
+---
+
+## High-Level Overview
+
+To render a **Material Design Line Chart**, you need to provide the following props to the `Chart` component:
+
+- **`chartType`**: Set this to `"Line"` to specify the Material Design Line Chart.
+- **`data`**: Provide the chart data in a tabular format.
+- **`options`**: (Optional) Customize the chart with various options like title, colors, and display settings.
+- **`width`** and **`height`**: (Optional) Define the size of the chart.
+
+### Basic Usage
+
+```jsx
+import React from "react";
+import { Chart } from "react-google-charts";
+
+const data = [
+  ["Year", "Sales", "Expenses"],
+  ["2013", 1000, 400],
+  ["2014", 1170, 460],
+  ["2015", 660, 1120],
+  ["2016", 1030, 540],
+];
+
+const options = {
+  chart: {
+    title: "Company Performance",
+    subtitle: "Sales and Expenses over the Years",
+  },
+};
+
+function App() {
+  return (
+    <Chart
+      chartType="Line"
+      width="100%"
+      height="400px"
+      data={data}
+      options={options}
+    />
+  );
+}
+
+export default App;
+```
+
+---
+
+## Examples
+
+Below are interactive examples of Material Design Line Charts rendered using `react-google-charts`. Each example demonstrates different features and customization options. You can interact with the charts directly in your browser.
+
+### Basic Material Design Line Chart
+
+This example shows a basic Material Design Line Chart with default settings.
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="Material Design Line Chart"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>
+
+### Dual Y-Axis Material Design Line Chart
+
+This example shows how to create a Material Design Line Chart with dual Y-axes.
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/line/dual-charts?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="Dual Y-Axis Material Design Line Chart"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>
+
+---
+
+## Customizing the Material Design Line Chart
+
+You can customize various aspects of the Material Design Line Chart using the `options` prop.
+
+### Styling Options
+
+Customize the chart's appearance:
+
+```jsx
+const options = {
+  chart: {
+    title: "Company Performance",
+    subtitle: "Sales and Expenses over the Years",
+  },
+  width: 900,
+  height: 500,
+  colors: ["#e2431e", "#f1ca3a"],
+  curveType: "function", // Smooths the lines
+  lineWidth: 4,
+  pointSize: 7,
+  legend: { position: "bottom" },
+};
+```
+
+### Dual Y-Axis
+
+To create a chart with dual Y-axes, specify multiple axes in the `series` and `axes` options:
+
+```jsx
+const options = {
+  chart: {
+    title: "Average Temperatures and Daylight in Iceland Throughout the Year",
+    subtitle: "in degrees Celsius and hours",
+  },
+  width: 900,
+  height: 500,
+  series: {
+    0: { axis: "Temps" },
+    1: { axis: "Daylight" },
+  },
+  axes: {
+    y: {
+      Temps: { label: "Temps (Celsius)" },
+      Daylight: { label: "Daylight (Hours)" },
+    },
+  },
+};
+```
+
+### Colors and Line Styles
+
+Customize colors and line styles to match your application's theme:
+
+```jsx
+const options = {
+  chart: {
+    title: "Sales Growth",
+  },
+  colors: ["#6f9654", "#1c91c0"],
+  lineWidth: 3,
+  pointSize: 5,
+  legend: { position: "right" },
+};
+```
+
+---
+
+## Additional Resources
+
+- [Google Charts Material Line Chart Documentation](https://developers.google.com/chart/interactive/docs/gallery/linechart#material-line-charts)
+- [Google Charts Configuration Options](https://developers.google.com/chart/interactive/docs/gallery/linechart#configuration-options)
+- [React Google Charts GitHub Repository](https://github.com/RakanNimer/react-google-charts)
+
+---
+
+## Conclusion
+
+Integrating Material Design Line Charts into your React applications with `react-google-charts` provides a modern and visually appealing way to represent data trends. By following this guide and exploring the interactive examples provided, you can create customized Material Design Line Charts that effectively communicate your data.
+
+Feel free to explore the additional resources and examples to deepen your understanding and expand your charting capabilities.
+
+---
+
+**Happy Charting!**

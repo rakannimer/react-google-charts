@@ -9,9 +9,18 @@ import logoUrl from "@site/static/img/logo.png";
 
 <img src={logoUrl} alt="Logo" className="logo" />
 
-A thin, typed, React wrapper for [Google Charts](https://developers.google.com/chart/interactive/docs/reference).
+React Google Charts is a lightweight and fully typed React wrapper for [Google Charts](https://developers.google.com/chart/interactive/docs/reference).
 
-Supports 25+ chart types.
+It's easy to use, supports over 25 chart types, and is highly customizable when needed.
+
+- **Lightweight and Typed**: A thin layer over Google Charts with TypeScript support for type safety.
+- **25+ Chart Types**: Access a diverse set of charts like Line, Bar, Pie, Gantt, Timeline, Sankey and more.
+- **Flexible API**: Easily switch between chart types and customize them to suit your needs.
+- **Interactive and Animated**: Enhance user engagement with interactive features and animations.
+- **Easy Integration**: Simple to set up and integrate into your existing React projects.
+- **Complete Customization**: Full control to customize every aspect of your charts, from colors to labels and tooltips.
+
+Start creating dynamic and interactive charts with minimal effort using React Google Charts.
 
 [![version](https://img.shields.io/npm/v/react-google-charts.svg)](https://www.npmjs.com/package/react-google-charts)
 [![downloads](https://img.shields.io/npm/dm/react-google-charts.svg)](https://www.npmjs.com/package/react-google-charts)
@@ -32,12 +41,14 @@ Then, import and use it:
 import { Chart } from "react-google-charts";
 
 <Chart
+  // Required
   chartType="ScatterChart"
   data={[
     ["Age", "Weight"],
     [4, 5.5],
     [8, 12],
   ]}
+  // Optional
   width="100%"
   height="400px"
   legendToggle
@@ -46,12 +57,10 @@ import { Chart } from "react-google-charts";
 
 ## Examples
 
-Please see [live examples](/examples).
-
-You can also check this [step-by-step tutorial](https://cube.dev/blog/react-google-charts-dashboard/?ref=eco-react-google-charts) that will walk you through the creation of a full-fledged dashboard with this library.
+Browse through our large list of [live editable examples](/examples) or check out the [1 minute quick walkthrough](/docs/quick-walkthrough).
 
 ## Getting Help
 
-Need help? Ask your question on [Slack](https://slack.cube.dev/?ref=eco-react-google-charts) or [Stack Overflow](https://stackoverflow.com/questions/tagged/react-google-charts).
+Need help? Ask your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/react-google-charts).
 
 If you've encountered an issue, please [file it on GitHub](https://github.com/RakanNimer/react-google-charts/issues).

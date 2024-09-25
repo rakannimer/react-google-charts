@@ -1,17 +1,8 @@
 ---
-slug: /examples
-description: List of react-google-charts usage examples.
+title: Examples
+description: List of all React Google Charts examples
 ---
 
-import Link from '@docusaurus/Link';
-import { docs } from './docs';
+import DocList from "../..//src/components/DocList";
 
-# Examples
-
-<ul>
-  {docs.map(({ title, slug }, i) => (
-    <li key={i}>
-      <Link to={slug}>{title}</Link>
-    </li>
-  ))}
-</ul>
+<DocList />
