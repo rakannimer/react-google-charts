@@ -8,24 +8,39 @@ import ContextProvider from "../../src/components/ContextProvider";
 
 # Pie Chart
 
-<ContextProvider>
-  {({ branch, theme }) => (
-    <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/pie-chart/default?view=preview&fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
-      style={{
-        width: "100%",
-        height: "500px",
-        border: 0,
-        borderRadius: "4px",
-        overflow: "hidden",
-      }}
-      title="RakanNimer/react-google-charts: Pie Chart Simple Example"
-      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-      loading="lazy"
-    ></iframe>
-  )}
-</ContextProvider>
+Start by importing the Chart component :
+
+```jsx
+import { Chart } from "react-google-charts";
+```
+
+```jsx live
+function App() {
+  const data = [
+    ["Task", "Hours per Day"],
+    ["Work", 9],
+    ["Eat", 2],
+    ["Commute", 2],
+    ["Watch TV", 2],
+    ["Sleep", 7],
+  ];
+
+  const options = {
+    title: "My Daily Activities",
+  };
+  return (
+    <Chart
+      chartType="PieChart"
+      data={data}
+      options={options}
+      width={"100%"}
+      height={"400px"}
+    />
+  );
+}
+```
+
+[![Edit chart example in CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/RakanNimer/react-google-charts/tree/master/sandboxes/pie-chart/default?file=%2FApp.tsx&from-embed=)
 
 ---
 
@@ -71,51 +86,51 @@ export default App;
 
 Below are interactive examples of Pie Charts rendered using `react-google-charts`. Each example demonstrates different features and customization options. You can interact with the charts directly in your browser.
 
-### Simple Example
-
-This is a basic Pie Chart illustrating simple data visualization.
-
-<ContextProvider>
-  {({ branch, theme }) => (
-    <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/pie-chart/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
-      style={{
-        width: "100%",
-        height: "500px",
-        border: 0,
-        borderRadius: "4px",
-        overflow: "hidden",
-      }}
-      title="RakanNimer/react-google-charts: Pie Chart Simple Example"
-      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-      loading="lazy"
-    ></iframe>
-  )}
-</ContextProvider>
-
 ### 3D Pie Chart
 
 This example demonstrates how to create a 3D Pie Chart.
 
-<ContextProvider>
-  {({ branch, theme }) => (
-    <iframe
-      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/pie-chart/3d?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
-      style={{
-        width: "100%",
-        height: "500px",
-        border: 0,
-        borderRadius: "4px",
-        overflow: "hidden",
-      }}
-      title="RakanNimer/react-google-charts: Pie Chart 3D Pie Chart"
-      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-      loading="lazy"
-    ></iframe>
-  )}
-</ContextProvider>
+```jsx live
+function App() {
+  const data = [
+    ["Task", "Hours per Day"],
+    ["Work", 11],
+    ["Eat", 2],
+    ["Commute", 2],
+    ["Watch TV", 2],
+    ["Sleep", 7],
+  ];
+
+  const options = {
+    title: "My Daily Activities",
+    pieHole: 0.4, // Creates a Donut Chart. Does not do anything when is3D is enabled
+    is3D: true, // Enables 3D view
+    // slices: {
+    //   1: { offset: 0.2 }, // Explodes the second slice
+    // },
+    pieStartAngle: 100, // Rotates the chart
+    sliceVisibilityThreshold: 0.02, // Hides slices smaller than 2%
+    legend: {
+      position: "bottom",
+      alignment: "center",
+      textStyle: {
+        color: "#233238",
+        fontSize: 14,
+      },
+    },
+    colors: ["#8AD1C2", "#9F8AD1", "#D18A99", "#BCD18A", "#D1C28A"],
+  };
+  return (
+    <Chart
+      chartType="PieChart"
+      data={data}
+      options={options}
+      width={"100%"}
+      height={"400px"}
+    />
+  );
+}
+```
 
 ### Diff Pie Chart
 

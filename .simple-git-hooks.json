@@ -1,5 +1,5 @@
 {
   "commit-msg": "npm run commitlint",
   "pre-commit": "npm run nano-staged",
-  "pre-push": "npm run test"
+  "pre-push": "npm run build && npm run test && cd website && npm run build"
 }

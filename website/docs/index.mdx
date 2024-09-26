@@ -11,16 +11,7 @@ import logoUrl from "@site/static/img/logo.png";
 
 React Google Charts is a lightweight and fully typed React wrapper for [Google Charts](https://developers.google.com/chart/interactive/docs/reference).
 
-It's easy to use, supports over 25 chart types, and is highly customizable when needed.
-
-- **Lightweight and Typed**: A thin layer over Google Charts with TypeScript support for type safety.
-- **25+ Chart Types**: Access a diverse set of charts like Line, Bar, Pie, Gantt, Timeline, Sankey and more.
-- **Flexible API**: Easily switch between chart types and customize them to suit your needs.
-- **Interactive and Animated**: Enhance user engagement with interactive features and animations.
-- **Easy Integration**: Simple to set up and integrate into your existing React projects.
-- **Complete Customization**: Full control to customize every aspect of your charts, from colors to labels and tooltips.
-
-Start creating dynamic and interactive charts with minimal effort using React Google Charts.
+It's easy to use, supports over 25 chart types, supports animations and is highly customizable when needed.
 
 [![version](https://img.shields.io/npm/v/react-google-charts.svg)](https://www.npmjs.com/package/react-google-charts)
 [![downloads](https://img.shields.io/npm/dm/react-google-charts.svg)](https://www.npmjs.com/package/react-google-charts)
@@ -35,29 +26,82 @@ Install this library with your favorite package manager:
 npm install --save react-google-charts
 ```
 
-Then, import and use it:
+Then, import the Chart component
 
-```jsx
+```js
 import { Chart } from "react-google-charts";
+```
 
-<Chart
-  // Required
-  chartType="ScatterChart"
-  data={[
-    ["Age", "Weight"],
-    [4, 5.5],
-    [8, 12],
-  ]}
-  // Optional
-  width="100%"
-  height="400px"
-  legendToggle
-/>;
+and use it:
+
+```jsx live
+function MyChart(props) {
+  return (
+    <Chart
+      // Try different chart types by changing this property with one of: LineChart, BarChart, AreaChart...
+      chartType="ScatterChart"
+      data={[
+        ["Age", "Weight"],
+        [4, 16],
+        [8, 25],
+        [12, 40],
+        [16, 55],
+        [20, 70],
+      ]}
+      height="400px"
+      options={{
+        hAxis: {
+          maxValue: 22,
+          title: "Age (Years)",
+        },
+        vAxis: {
+          maxValue: 90,
+          title: "Weight (kg)",
+        },
+        title: "Average Weight by Age",
+      }}
+      legendToggle
+    />
+  );
+}
+```
+
+You can also use the material design versions available for [Bar Charts](/examples/bar-chart-material) and [Line Charts](/examples/bar-chart-material)
+
+```jsx live
+function App() {
+  const data = [
+    ["Year", "Sales", "Expenses", "Profit"],
+    ["2014", 1000, 400, 200],
+    ["2015", 1170, 460, 250],
+    ["2016", 660, 1120, 300],
+    ["2017", 1030, 540, 350],
+  ];
+  const options = {
+    chart: {
+      title: "Company Performance",
+      subtitle: "Sales, Expenses, and Profit: 2014-2017",
+    },
+  };
+  return (
+    <Chart
+      chartType="Bar"
+      width="100%"
+      height="400px"
+      data={data}
+      options={options}
+    />
+  );
+}
 ```
 
 ## Examples
 
 Browse through our large list of [live editable examples](/examples) or check out the [1 minute quick walkthrough](/docs/quick-walkthrough).
+
+import DocList from "../src/components/DocList";
+
+<DocList />
 
 ## Getting Help
 

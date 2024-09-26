@@ -9,6 +9,8 @@ const currentBranch = process.env.BRANCH || branch.sync();
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  themes: ["@docusaurus/theme-live-codeblock"],
+
   title: "React Google Charts",
   tagline: "A thin, typed, React wrapper for Google Charts",
   url: "https://react-google-charts.com/",
@@ -63,8 +65,8 @@ const config = {
             label: "Examples",
           },
           {
-            href: "https://slack.cube.dev/?ref=eco-react-google-charts",
-            label: "Slack",
+            href: "https://discord.gg/nNa2EEgUkS",
+            label: "Discord",
             position: "right",
           },
           {
@@ -83,6 +85,13 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      liveCodeBlock: {
+        /**
+         * The position of the live playground, above or under the editor
+         * Possible values: "top" | "bottom"
+         */
+        playgroundPosition: "bottom",
+      },
     }),
 
   plugins: [
@@ -99,6 +108,13 @@ const config = {
             return true;
           },
         },
+      },
+    ],
+    [
+      "posthog-docusaurus",
+      {
+        apiKey: "phc_a4v2PPmMF7yAuSLzYQqi10zWR8StnhiardAM4dRfWKp",
+        enableInDevelopment: true, // optional
       },
     ],
     // Client-side redirect is not ideal, just adding this temporarily to avoid broken links.
