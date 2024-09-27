@@ -7,16 +7,14 @@ export const data = [
     "Density",
     { role: "style" },
     {
-      sourceColumn: 0,
       role: "annotation",
       type: "string",
-      calc: "stringify",
     },
   ],
-  ["Copper", 8.94, "#b87333", null],
-  ["Silver", 10.49, "silver", null],
-  ["Gold", 19.3, "gold", null],
-  ["Platinum", 21.45, "color: #e5e4e2", null],
+  ["Copper", 8.94, "#b87333", "Cu"],
+  ["Silver", 10.49, "silver", "Ag"],
+  ["Gold", 19.3, "gold", "Au"],
+  ["Platinum", 21.45, "color: #e5e4e2", "Pt"],
 ];
 
 export const options = {
