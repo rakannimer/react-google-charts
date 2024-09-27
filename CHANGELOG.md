@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.7](https://github.com/RakanNimer/react-google-charts/compare/v4.0.6...v4.0.7) (2024-09-27)
+
 ### [4.0.6](https://github.com/RakanNimer/react-google-charts/compare/v4.0.5...v4.0.6) (2024-09-27)
 
 
