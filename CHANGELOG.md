@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.6](https://github.com/RakanNimer/react-google-charts/compare/v4.0.5...v4.0.6) (2024-09-27)
+
+
+### Bug Fixes
+
+* mitigates the infinite loading issue while the root cause is being investigated ([9957ab7](https://github.com/RakanNimer/react-google-charts/commit/9957ab70249bc6ef92bf1a9b0eb10eb5a9a8168e)), closes [#710](https://github.com/RakanNimer/react-google-charts/issues/710) [#714](https://github.com/RakanNimer/react-google-charts/issues/714) [#714](https://github.com/RakanNimer/react-google-charts/issues/714)
+
 ### [4.0.5](https://github.com/RakanNimer/react-google-charts/compare/v4.0.3...v4.0.5) (2024-09-22)
 
 ### [4.0.4](https://github.com/RakanNimer/react-google-charts/compare/v4.0.1...v4.0.4) (2024-09-22)
