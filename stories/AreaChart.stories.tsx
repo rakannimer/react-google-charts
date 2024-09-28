@@ -12,11 +12,17 @@ export default {
     chartType: "AreaChart",
     width: 800,
     height: 600,
+    legendToggle: true,
   },
 };
 
 export function Default(args) {
-  return <Chart {...args} />;
+  return (
+    <>
+      <Chart {...args} />
+      <Chart {...args} />
+    </>
+  );
 }
 
 Default.args = {

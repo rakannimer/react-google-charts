@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 
-function getRandomNumber() {
-  return Math.random() * 100;
-}
-
 export function getData() {
   return [
     ["Label", "Value"],
-    ["Memory", getRandomNumber()],
-    ["CPU", getRandomNumber()],
-    ["Network", getRandomNumber()],
+    ["Memory", 24],
+    ["CPU", 51],
+    ["Network", 90],
   ];
 }
 

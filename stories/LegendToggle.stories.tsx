@@ -13,7 +13,7 @@ export default {
     width: 800,
     height: 600,
     data: lineChartData.data,
-    legend_toggle: true,
+    legendToggle: true,
   },
 };
 

@@ -16,3 +16,5 @@ coverage
 # OS stuff
 ._*
 .DS_Store
+.env
+build-storybook.log

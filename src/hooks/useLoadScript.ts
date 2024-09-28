@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Hook to load external script.
@@ -6,13 +6,20 @@ import { useEffect } from "react";
  * @param onLoad - Success callback.
  * @param onError - Error callback.
  */
-export function useLoadScript(
-  src: string,
-  onLoad?: () => void,
-  onError?: () => void
-) {
+export function useLoadScript(src: string) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const onLoad = () => {
+    setIsLoading(false);
+    setIsSuccess(true);
+  };
   useEffect(() => {
     if (!document) {
+      const error = new Error(
+        `[ScriptLoadingError] document not defined when attempting to load ${src}`
+      );
+      setError(error);
       return;
     }
 
@@ -23,7 +30,7 @@ export function useLoadScript(
 
     // Call onLoad if script marked as loaded.
     if (foundScript?.dataset.loaded) {
-      onLoad?.();
+      onLoad();
       return;
     }
 
@@ -38,18 +45,27 @@ export function useLoadScript(
     // Mark script as loaded on load event.
     const onLoadWithMarker = () => {
       script.dataset.loaded = "1";
-      onLoad?.();
+      onLoad();
     };
 
     script.addEventListener("load", onLoadWithMarker);
 
-    if (onError) {
-      script.addEventListener("error", onError);
-    }
+    script.addEventListener("error", (err) => {
+      console.error("Failed to load script:", src, err);
+      const error = new Error(
+        `[ScriptLoadingError] Failed to load script: ${src}`
+      );
+      setError(error);
+    });
 
     // Add to DOM if not yet added.
     if (!foundScript) {
       document.head.append(script);
     }
   }, []);
+  return {
+    isLoading,
+    error,
+    isSuccess,
+  };
 }

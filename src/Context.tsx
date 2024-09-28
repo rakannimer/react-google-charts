@@ -2,7 +2,8 @@ import * as React from "react";
 import { chartDefaultProps } from "./default-props";
 
 import { ReactGoogleChartProps } from "./types";
-const { Provider, Consumer } = React.createContext(chartDefaultProps);
+
+export const ChartContext = React.createContext(chartDefaultProps);
 
 export const ContextProvider = ({
   children,
@@ -11,7 +12,9 @@ export const ContextProvider = ({
   children: any;
   value: ReactGoogleChartProps;
 }) => {
-  return <Provider value={value}>{children}</Provider>;
+  return (
+    <ChartContext.Provider value={value}>{children}</ChartContext.Provider>
+  );
 };
 
 export const ContextConsumer = ({
@@ -20,10 +23,10 @@ export const ContextConsumer = ({
   render: (context: ReactGoogleChartProps) => JSX.Element | null;
 }) => {
   return (
-    <Consumer>
+    <ChartContext.Consumer>
       {(context) => {
         return render(context as ReactGoogleChartProps);
       }}
-    </Consumer>
+    </ChartContext.Consumer>
   );
 };

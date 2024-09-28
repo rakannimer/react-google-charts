@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup, waitFor } from "@testing-library/react";
+import { render, cleanup, waitFor, screen } from "@testing-library/react";
 import { Chart } from "../src";
 
 describe("<Chart />", () => {
@@ -28,9 +28,7 @@ describe("<Chart />", () => {
       />
     );
 
-    await waitFor(() => getByTestId("1"), {
-      timeout: 5000,
-    });
+    await screen.findByTestId("1");
 
     const root = getByTestId("1");
 
@@ -48,9 +46,7 @@ describe("<Chart />", () => {
       />
     );
 
-    await waitFor(() => getByTestId("1"), {
-      timeout: 5000,
-    });
+    await screen.findByTestId("1");
 
     const root = getByTestId("1");
 
@@ -74,10 +70,7 @@ describe("<Chart />", () => {
         onLoad={handleLoad}
       />
     );
-
-    await waitFor(() => getByTestId("1"), {
-      timeout: 5000,
-    });
+    await screen.findByTestId("1");
 
     expect(handleLoad).toHaveBeenCalled();
   });

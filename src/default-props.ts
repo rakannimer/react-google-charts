@@ -13,4 +13,5 @@ export const chartDefaultProps: Partial<ReactGoogleChartProps> = {
   },
   rootProps: {},
   chartWrapperParams: {},
+  chartLoaderScriptUrl: "https://www.gstatic.com/charts/loader.js",
 };
