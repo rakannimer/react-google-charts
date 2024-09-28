@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup, waitFor } from "@testing-library/react";
+import { render, cleanup, screen } from "@testing-library/react";
 import { Chart } from "../src";
 
 describe("<Chart />", () => {
@@ -27,9 +27,7 @@ describe("<Chart />", () => {
         />
       );
 
-      await waitFor(() => getByTestId("1"), {
-        timeout: 5000,
-      });
+      await screen.findAllByTestId("1");
 
       const root = getByTestId("1");
 

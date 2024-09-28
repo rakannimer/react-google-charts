@@ -127,7 +127,9 @@ export interface ChartWrapperOptions {
     height: number;
     is3D: boolean;
     title: string;
-    backgroundColor: string | {fill: string, stroke: string, strokeWidth: number};
+    backgroundColor:
+      | string
+      | { fill: string; stroke: string; strokeWidth: number };
     hAxis?: {
       minValue?: any;
       maxValue?: any;
@@ -228,7 +230,7 @@ export type GoogleVizEvents = {
     onEvent: (chartWrapper: GoogleChartWrapper) => any
   ) => any;
   removeListener: (
-    chartWrapper: GoogleChartWrapper,
+    chartWrapper: GoogleChartWrapper | GoogleChartControl,
     name: GoogleVizEventName,
     callback: Function
   ) => any;
@@ -502,7 +504,7 @@ export type WindowWithMaybeGoogle = Window & { google?: any };
 export type ReactGoogleChartEvent = {
   eventName: GoogleVizEventName;
   callback: (eventCallbackArgs: {
-    chartWrapper: GoogleChartWrapper;
+    chartWrapper: GoogleChartWrapper | null;
     controlWrapper?: GoogleChartControl;
     props: ReactGoogleChartProps;
     google: GoogleViz;
@@ -518,6 +520,28 @@ export type GoogleChartToolbarItem = {
     "3d": number;
     [otherKeyMaybe: string]: any;
   };
+};
+
+export type GoogleChartFormatter = {
+  column: number | number[];
+  type:
+    | "ArrowFormat"
+    | "BarFormat"
+    | "ColorFormat"
+    | "DateFormat"
+    | "NumberFormat"
+    | "PatternFormat";
+  options?: {};
+  ranges?: [
+    // from
+    any,
+    // to
+    any,
+    // color
+    string,
+    // bgcolor
+    string
+  ][];
 };
 
 export type ReactGoogleChartProps = {
@@ -544,7 +568,15 @@ export type ReactGoogleChartProps = {
   graph_id?: string;
   legendToggle?: boolean;
   legend_toggle?: boolean;
-  onLoad?: (google: GoogleViz) => void;
+  onLoad?: (
+    google: GoogleViz,
+    paramsV2: {
+      google: GoogleViz;
+      chartWrapper: GoogleChartWrapper;
+      chartDashboard: GoogleChartDashboard;
+      chartEditor?: GoogleChartEditor | null;
+    }
+  ) => void;
   getChartWrapper?: (
     chartWrapper: GoogleChartWrapper,
     google: GoogleViz
@@ -556,17 +588,7 @@ export type ReactGoogleChartProps = {
   }) => void;
   className?: string;
   style?: React.CSSProperties;
-  formatters?: {
-    column: number | number[];
-    type:
-      | "ArrowFormat"
-      | "BarFormat"
-      | "ColorFormat"
-      | "DateFormat"
-      | "NumberFormat"
-      | "PatternFormat";
-    options?: {};
-  }[];
+  formatters?: GoogleChartFormatter[];
   spreadSheetUrl?: string;
   spreadSheetQueryParameters?: {
     headers: number;
@@ -582,6 +604,11 @@ export type ReactGoogleChartProps = {
   toolbarItems?: GoogleChartToolbarItem[];
   toolbarID?: string;
   chartWrapperParams?: any;
+  /**
+   * URL of the chart loader script. Defaults to https://www.gstatic.com/charts/loader.js
+   * Added to support loading from a different CDN in China to optimize performance
+   */
+  chartLoaderScriptUrl?: string;
 };
 
 export type GoogleChartDashboard = {
@@ -639,4 +666,21 @@ export type ReactGoogleChartContext = {
   spreadSheetQueryParameters:
     | ReactGoogleChartProps["spreadSheetQueryParameters"]
     | null;
+};
+
+export interface ApplyFormattersParams {
+  dataTable: GoogleDataTable;
+  formatters: GoogleChartFormatter[];
+  google: GoogleViz;
+}
+
+export type GoogleChartControlAndProp = {
+  controlProp: GoogleChartControlProp;
+  control: GoogleChartControl;
+};
+
+export type UseChartControlsParams = ReactGoogleChartProps & {
+  google: GoogleViz;
+  chartWrapper: GoogleChartWrapper | null;
+  chartDashboard: GoogleChartDashboard | null;
 };

@@ -31,4 +31,4 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Check storybook
-        run: npm run build:storybook
+        run: npm run build-storybook

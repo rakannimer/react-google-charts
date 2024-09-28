@@ -1,4 +1,4 @@
-import { Chart } from "./ReactGoogleCharts";
+import { Chart } from "./Chart";
 
 export * from "./types";
 export { Chart };
