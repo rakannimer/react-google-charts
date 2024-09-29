@@ -66,5 +66,5 @@ const rows = [
 export const data = [columns, ...rows];
 
 export function App() {
-  return <Chart chartType="Gantt" width="100%" height="50%" data={data} />;
+  return <Chart chartType="Gantt" width="100%" height="100%" data={data} />;
 }

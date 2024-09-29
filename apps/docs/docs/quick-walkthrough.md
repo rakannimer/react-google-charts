@@ -7,7 +7,7 @@ description: react-google-charts quick walkthrough
 
 ## Initialize from a Data Array
 
-You can easily create charts using a simple data array. The example below demonstrates how to create a **ScatterChart** that compares age and weight:
+The example below demonstrates how to create a **ScatterChart** that compares age and weight data. The chart data is represented as an array of arrays, with the first row defining the column names and subsequent rows representing the data points.
 
 ```js
 import { Chart } from "react-google-charts";
@@ -110,7 +110,6 @@ const options = {
 
 - **`eventName`**: Specifies the event to listen for (e.g., `"select" | "error" | "ready"`).
 - **`callback`**: The function that gets triggered when the event occurs, providing access to the chart instance and event data.
-- **Interaction Tracking**: Capture user interactions like selections, mouseovers, or clicks and respond accordingly.
 
 ---
 
@@ -120,6 +119,11 @@ Explore more use cases and live, editable examples by visiting our [Examples Pag
 
 ---
 
-By following this guide, you now have the essential building blocks for creating interactive charts with `react-google-charts`. Customize your charts further, handle events, and visualize your data with ease!
+## Additional Resources
+
+- [Google Charts Documentation](https://developers.google.com/chart/interactive/docs)
+- [Google Charts Gallery](https://developers.google.com/chart/interactive/docs/gallery)
+
+---
 
 Happy charting!

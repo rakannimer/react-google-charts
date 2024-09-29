@@ -16,5 +16,5 @@ const rows = [
 export const data = [columns, ...rows];
 
 export function App() {
-  return <Chart chartType="Timeline" data={data} width="100%" height="400px" />;
+  return <Chart chartType="Timeline" data={data} width="100%" height="100%" />;
 }

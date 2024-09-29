@@ -17,6 +17,7 @@ export const chartEvents: ReactGoogleChartEvent[] = [
     callback: ({ chartWrapper }) => {
       const chart = chartWrapper.getChart();
       const selection = chart.getSelection();
+
       if (selection.length === 1) {
         const [selectedItem] = selection;
         const dataTable = chartWrapper.getDataTable();
@@ -25,9 +26,25 @@ export const chartEvents: ReactGoogleChartEvent[] = [
         console.log("You selected:", {
           row,
           column,
-          value: dataTable?.getValue(row, column),
+          value:
+            // If a whole row is selected, row is null
+            row !== null
+              ? dataTable?.getValue(row, column)
+              : dataTable?.getDistinctValues(column),
         });
       }
+    },
+  },
+  {
+    eventName: "error",
+    callback: ({ chartWrapper, eventArgs }) => {
+      console.error("Error:", eventArgs);
+    },
+  },
+  {
+    eventName: "ready",
+    callback: ({ chartWrapper }) => {
+      console.log("Chart ready:", chartWrapper);
     },
   },
 ];
@@ -36,10 +53,13 @@ export function App() {
   return (
     <Chart
       chartType="ScatterChart"
-      width="80%"
-      height="400px"
+      width="100%"
+      height="100%"
       data={data}
       chartEvents={chartEvents}
+      options={{
+        legend: { position: "bottom" },
+      }}
     />
   );
 }

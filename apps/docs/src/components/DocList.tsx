@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useAllDocsData } from "@docusaurus/plugin-content-docs/client";
+import { docs } from "../../docs/examples/docs";
+import sortBy from "lodash/sortBy";
 
 function formatPathToTitle(path) {
   // Step 1: Remove the "/examples/" part of the path
@@ -14,15 +15,16 @@ function formatPathToTitle(path) {
 
   return formatted;
 }
-export default function DocList() {
-  const allDocsData = useAllDocsData();
 
-  const docs = allDocsData.default.versions[0].docs;
+export default function DocList() {
   const [searchTerm, setSearchTerm] = useState("");
-  const docsWithTitle = docs.map((doc) => ({
-    ...doc,
-    title: formatPathToTitle(doc.path),
-  }));
+  const docsWithTitle = sortBy(
+    docs.map((doc) => ({
+      ...doc,
+      title: formatPathToTitle(doc.url),
+    })),
+    "frontMatter.sidebar_position",
+  );
   const filteredDocs = docsWithTitle.filter((doc) =>
     doc.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
@@ -39,13 +41,30 @@ export default function DocList() {
       </header>
       <ul className="library">
         {filteredDocs
-          ?.filter((el) => Boolean(el.path))
-          .filter((el) => el.path !== "/examples/" && el.path !== "/")
-          .map((doc) => (
-            <a href={doc.path} className="chart-card" role="listitem">
-              <h4>{doc.title}</h4>
-            </a>
-          ))}
+          ?.filter((el) => Boolean(el.url))
+          .filter(
+            (el) =>
+              el.url !== "/examples/" &&
+              !el.url.includes("/index") &&
+              !el.url.includes("walkthrough") &&
+              !el.url.includes("sponsor"),
+          )
+          .map((doc) => {
+            const name = doc.url.split("/").pop();
+            const { App } = require(
+              `../../../../sandboxes/${name}/default/App`,
+            );
+            return (
+              <div className="chart-card" role="listitem" key={doc.url}>
+                <div className="chart-card-chart-container">
+                  <App />
+                </div>
+                <a href={doc.url} className="chart-card-cta">
+                  <h4>{doc.title}</h4>
+                </a>
+              </div>
+            );
+          })}
       </ul>
     </div>
   );

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
-import faker from "faker";
+
+function getRandomNumber() {
+  return Math.floor(Math.random() * 100) + 1;
+}
 
 function getData() {
   return [
     ["Age", "Weight"],
-    ...Array.from({ length: 16 }, () => [
-      faker.datatype.number({ min: 1, max: 100 }),
-      faker.datatype.number({ min: 1, max: 100 }),
-    ]),
+    ...Array.from({ length: 16 }, () => [getRandomNumber(), getRandomNumber()]),
   ];
 }
 
@@ -50,7 +50,7 @@ export function App() {
       <Chart
         chartType="ScatterChart"
         width="100%"
-        height="400px"
+        height="100%"
         data={chartData}
         options={options}
       />

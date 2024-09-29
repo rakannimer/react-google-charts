@@ -13,7 +13,9 @@ export function App() {
         vAxis: {
           format: "decimal",
         },
+        legend: { position: "bottom" },
       }}
+      height="100%"
     />
   );
 }

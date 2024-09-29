@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "../src";
-import * as lineData from "../../../sandboxes/line/default/App";
+import * as lineData from "../../../sandboxes/line-chart-material/default/App";
 
 export default {
   title: "Line",

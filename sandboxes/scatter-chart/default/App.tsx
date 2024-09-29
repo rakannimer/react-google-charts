@@ -23,8 +23,8 @@ export function App() {
   return (
     <Chart
       chartType="ScatterChart"
-      width="80%"
-      height="400px"
+      width="100%"
+      height="100%"
       data={data}
       options={options}
     />

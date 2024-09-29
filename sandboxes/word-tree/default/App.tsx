@@ -35,7 +35,7 @@ export function App() {
     <Chart
       chartType="WordTree"
       width="100%"
-      height="400px"
+      height="100%"
       data={data}
       options={options}
     />

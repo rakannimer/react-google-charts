@@ -4,7 +4,7 @@ import {
   GoogleChartWrapper,
   GoogleViz,
   Chart,
-} from "../../../packages/react-google-charts/src";
+} from "react-google-charts";
 
 export const data = [
   ["Age", "Weight"],
@@ -52,8 +52,8 @@ export function App() {
       <button onClick={onEditClick}>Edit Chart</button>
       <Chart
         chartType="ScatterChart"
-        width="80%"
-        height="400px"
+        width="100%"
+        height="100%"
         data={data}
         options={options}
         chartPackages={["corechart", "controls", "charteditor"]}

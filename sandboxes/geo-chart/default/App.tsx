@@ -28,7 +28,7 @@ export function App() {
       ]}
       chartType="GeoChart"
       width="100%"
-      height="400px"
+      height="100%"
       data={data}
     />
   );

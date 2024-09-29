@@ -19,13 +19,18 @@ export function App() {
         ["Margareth", 42],
         ["Miranda", 33],
       ]}
+      options={{
+        legend: { position: "bottom" },
+      }}
       rootProps={{ "data-testid": "6" }}
       chartPackages={["corechart", "controls"]}
       render={({ renderControl, renderChart }) => {
         return (
-          <div style={{ display: "flex" }}>
-            <div style={{ width: "40%" }}>{renderControl(() => true)}</div>
-            <div style={{ width: "60%" }}>{renderChart()}</div>
+          <div
+            style={{ display: "flex", height: "100%", flexDirection: "column" }}
+          >
+            <div>{renderControl(() => true)}</div>
+            <div>{renderChart()}</div>
           </div>
         );
       }}

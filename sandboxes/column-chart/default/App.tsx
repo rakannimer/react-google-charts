@@ -11,6 +11,6 @@ export const data = [
 
 export function App() {
   return (
-    <Chart chartType="ColumnChart" width="100%" height="400px" data={data} />
+    <Chart chartType="ColumnChart" width="100%" height="100%" data={data} />
   );
 }

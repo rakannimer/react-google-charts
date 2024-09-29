@@ -36,9 +36,10 @@ export function App() {
     <Chart
       chartType="Line"
       width="100%"
-      height="400px"
+      height="100%"
       data={data}
       options={options}
+      legendToggle
     />
   );
 }

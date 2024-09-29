@@ -3,11 +3,10 @@ import { Chart } from "react-google-charts";
 
 export const data = [
   ["Task", "Hours per Day"],
-  ["Work", 11],
+  ["Work", 10],
   ["Eat", 2],
   ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
+  ["Sleep", 8],
 ];
 
 export const options = {
@@ -21,7 +20,7 @@ export function App() {
       data={data}
       options={options}
       width={"100%"}
-      height={"400px"}
+      height="100%"
     />
   );
 }

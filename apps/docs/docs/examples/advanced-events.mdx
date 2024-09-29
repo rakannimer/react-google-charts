@@ -1,0 +1,90 @@
+---
+description: Example of interactions in react-google-charts.
+tags:
+  - Interactions
+---
+
+import ContextProvider from "../../src/components/ContextProvider";
+
+# Events
+
+## Listen to Chart Events
+
+`react-google-charts` also supports event listeners, enabling you to trigger callbacks when chart interactions occur. For example, you can log the selected chart items on a **ScatterChart** using the `select` event.
+
+```js
+import { Chart } from "react-google-charts";
+
+const chartEvents = [
+  {
+    eventName: "select",
+    callback({ chartWrapper }) {
+      console.log("Selected ", chartWrapper.getChart().getSelection());
+    },
+  },
+  {
+    eventName: "ready",
+    callback({ chartWrapper }) {
+      console.log("Chart ready. ", chartWrapper.getChart());
+    },
+  },
+  {
+    eventName: "error",
+    callback(args) {
+      console.log("Chart errored. ", args);
+    },
+  },
+];
+
+const data = [
+  ["age", "weight"],
+  [8, 12],
+  [4, 5.5],
+  [11, 14],
+  [4, 5],
+  [3, 3.5],
+  [6.5, 7],
+];
+
+const options = {
+  title: "Age vs. Weight Comparison",
+  hAxis: { title: "Age", viewWindow: { min: 0, max: 15 } },
+  vAxis: { title: "Weight", viewWindow: { min: 0, max: 15 } },
+  legend: "none",
+};
+
+<Chart
+  chartType="ScatterChart"
+  data={data}
+  options={options}
+  chartEvents={chartEvents}
+/>;
+```
+
+### Event Highlights
+
+- **`eventName`**: Specifies the event to listen for (e.g., `"select" | "error" | "ready"`).
+- **`callback`**: The function that gets triggered when the event occurs, providing access to the chart instance and event data.
+
+---
+
+## Simple Example
+
+<ContextProvider>
+  {({ branch, theme }) => (
+    <iframe
+      src={`https://codesandbox.io/embed/github/RakanNimer/react-google-charts/tree/${branch}/sandboxes/advanced-events/default?fontsize=14&hidenavigation=1&module=%2FApp.tsx&theme=${theme}`}
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+      title="RakanNimer/react-google-charts: Interactions Simple Example"
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      loading="lazy"
+    ></iframe>
+  )}
+</ContextProvider>

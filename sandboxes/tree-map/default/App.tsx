@@ -52,7 +52,7 @@ export function App() {
     <Chart
       chartType="TreeMap"
       width="100%"
-      height="400px"
+      height="100%"
       data={data}
       options={options}
     />
