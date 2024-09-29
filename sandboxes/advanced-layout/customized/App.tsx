@@ -40,7 +40,7 @@ export function App() {
                 }}
               >
                 {renderControl(
-                  ({ controlProp }) => controlProp.controlID === "select-age"
+                  ({ controlProp }) => controlProp.controlID === "select-age",
                 )}
               </div>
               <div
@@ -52,7 +52,8 @@ export function App() {
                 }}
               >
                 {renderControl(
-                  ({ controlProp }) => controlProp.controlID === "select-gender"
+                  ({ controlProp }) =>
+                    controlProp.controlID === "select-gender",
                 )}
               </div>
             </div>

@@ -1,0 +1,23 @@
+build
+demo-build
+.cache
+dist
+node_modules
+.rpt2_cache
+.vscode
+.docz
+docs/react-google-charts/
+cypress/videos
+docs/*
+
+# testing
+coverage
+
+# OS stuff
+._*
+.DS_Store
+.env
+build-storybook.log
+.turbo
+storybook-static
+package

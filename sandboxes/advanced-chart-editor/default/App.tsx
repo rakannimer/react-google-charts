@@ -4,7 +4,7 @@ import {
   GoogleChartWrapper,
   GoogleViz,
   Chart,
-} from "react-google-charts";
+} from "../../../packages/react-google-charts/src";
 
 export const data = [
   ["Age", "Weight"],

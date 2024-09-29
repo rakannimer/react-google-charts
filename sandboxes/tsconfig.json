@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "react-google-charts": ["../src"]
+      "react-google-charts": ["../packages/react-google-charts/src"]
     }
   },
   "include": ["./"]

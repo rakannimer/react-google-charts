@@ -1,111 +1,32 @@
 {
-  "name": "react-google-charts",
-  "version": "5.0.0-beta.0",
-  "description": "react-google-charts React component",
-  "type": "module",
-  "sideEffects": false,
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    "require": "./dist/index.cjs",
-    "import": "./dist/index.js"
-  },
+  "name": "react-google-charts-monorepo",
+  "private": true,
   "scripts": {
-    "emitDeclarations": "tsc --skipLibCheck --emitDeclarationOnly",
-    "build": "rollup -c & npm run emitDeclarations",
-    "start": "storybook dev -p 6006",
-    "start:storybook": "storybook dev -p 6006 --ci",
-    "build-storybook": "del ./storybook-static; NODE_ENV=production storybook build",
-    "format:src": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
-    "format:test": "prettier --write 'test/**/*.{js,jsx,ts,tsx}'",
-    "format:sandboxes": "prettier --write 'sandboxes/**/*.{js,jsx,ts,tsx}'",
-    "format:stories": "prettier --write 'stories/**/*.{js,jsx,ts,tsx}'",
-    "format": "npm run format:src && npm run format:test && npm run format:sandboxes && npm run format:stories",
-    "jest": "jest -c jest.config.json",
-    "test:unit": "npm run jest",
-    "test:size": "size-limit",
-    "test": "npm run test:unit",
-    "commit": "cz",
-    "bumpVersion": "standard-version",
-    "createGithubRelease": "simple-github-release",
-    "release": "npm run bumpVersion && git push origin master --tags && npm run createGithubRelease",
-    "cleanPublish": "npm run test && npm run build && clean-publish --without-publish --temp-dir package",
+    "build": "turbo build",
+    "start": "turbo start",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "build-storybook": "turbo build-storybook --",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "updateGitHooks": "simple-git-hooks",
     "nano-staged": "nano-staged",
     "commitlint": "commitlint --edit $1",
-    "chromatic": "npx chromatic"
-  },
-  "peerDependencies": {
-    "react": ">=16.3.0",
-    "react-dom": ">=16.3.0"
+    "//": "//"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
-    "@chromatic-com/storybook": "^1.9.0",
-    "@commitlint/cli": "^17.0.1",
-    "@commitlint/config-conventional": "^17.0.0",
-    "@commitlint/cz-commitlint": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.6",
-    "@size-limit/preset-big-lib": "^7.0.0",
-    "@storybook/addon-actions": "^8.3.2",
-    "@storybook/addon-controls": "^8.3.2",
-    "@storybook/addon-docs": "^8.3.2",
-    "@storybook/addon-webpack5-compiler-babel": "^3.0.3",
-    "@storybook/react": "^8.3.2",
-    "@storybook/react-webpack5": "^8.3.2",
-    "@storybook/theming": "^8.3.2",
-    "@swc/core": "^1.2.108",
-    "@swc/helpers": "^0.3.2",
-    "@swc/jest": "^0.2.5",
-    "@testing-library/jest-dom": "^5.15.0",
-    "@testing-library/react": "^12.1.2",
-    "@types/jest": "^28.1.0",
-    "@types/react": "^17.0.34",
-    "@types/react-dom": "^17.0.11",
-    "browserslist": "^4.18.1",
-    "chromatic": "^11.10.4",
-    "clean-publish": "^4.0.0",
-    "commitizen": "^4.2.4",
-    "del-cli": "^4.0.1",
-    "jest": "^28.1.0",
-    "jest-environment-jsdom": "^28.1.0",
-    "jsdom": "^19.0.0",
+    "@size-limit/preset-big-lib": "^11.1.5",
     "nano-staged": "^0.8.0",
-    "prettier": "^2.4.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "rollup": "^2.60.0",
-    "rollup-plugin-swc": "^0.2.0",
-    "simple-git-hooks": "^2.7.0",
-    "simple-github-release": "^1.0.0",
-    "size-limit": "^7.0.0",
-    "standard-version": "^9.3.2",
-    "storybook": "^8.3.2",
-    "typescript": "^4.5.2",
-    "webpack": "^5.64.2"
+    "prettier": "^3.2.5",
+    "size-limit": "^11.1.5",
+    "turbo": "^2.1.2",
+    "typescript": "^5.4.5"
   },
-  "author": {
-    "name": "Rakan Nimer"
+  "engines": {
+    "node": ">=18"
   },
-  "homepage": "https://react-google-charts.com",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RakanNimer/react-google-charts.git"
-  },
-  "keywords": [
-    "react",
-    "google",
-    "charts"
-  ],
-  "files": [
-    "dist/"
-  ],
-  "bugs": {
-    "url": "https://github.com/RakanNimer/react-google-charts/issues"
-  }
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

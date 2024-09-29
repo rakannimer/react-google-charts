@@ -1,24 +1,12 @@
 [
   {
-    "path": "dist/index.cjs",
+    "path": "packages/react-google-charts/dist/index.cjs",
     "limit": "6.3 KB",
-    "webpack": false,
-    "running": false
-  },
-  {
-    "path": "dist/index.cjs",
-    "limit": "4.7 KB",
     "import": "{ Chart }"
   },
   {
-    "path": "dist/index.js",
+    "path": "packages/react-google-charts/dist/index.js",
     "limit": "6.3 KB",
-    "webpack": false,
-    "running": false
-  },
-  {
-    "path": "dist/index.js",
-    "limit": "4.5 KB",
     "import": "{ Chart }"
   }
 ]
