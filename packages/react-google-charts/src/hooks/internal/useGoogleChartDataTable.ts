@@ -20,7 +20,7 @@ export type UseGoogleChartDataTableParams = ReactGoogleChartProps & {
 export const useGoogleChartDataTable = (
   props: UseGoogleChartDataTableParams,
 ) => {
-  const { google, googleChartWrapper, googleChartDashboard } = props;
+  const { google, googleChartWrapper, googleChartDashboard, options } = props;
   const [hiddenColumns, setHiddenColumns] = React.useState<string[]>([]);
   // Re-draw the chart when hiddenColumns change
   React.useEffect(() => {
@@ -34,7 +34,7 @@ export const useGoogleChartDataTable = (
       googleChartDashboard,
       google,
     });
-  }, [hiddenColumns]);
+  }, [hiddenColumns, props.data, props.rows, props.columns]);
 
   // Re-draw the chart when the window is resized
   const onResize = () => {
