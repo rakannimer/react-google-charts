@@ -23,7 +23,7 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-html[data-theme='dark'] .docusaurus-highlight-code-line {
+html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -37,4 +37,77 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
     display: block;
     margin: 0 auto;
   }
+}
+
+/**
+ * Examples Library page
+ */
+.library-page {
+}
+
+ul {
+  list-style-type: none;
+}
+.search-input {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+}
+
+.library-header {
+  /* background-color: #ffffff; */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.library {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  border: 0.1px solid rgba(0, 0, 0, 0.1);
+  background: #f6f9fc;
+  /* background: #f0f0f0; */
+}
+
+.chart-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  cursor: pointer;
+  background-color: white;
+}
+
+.chart-card:hover {
+  transform: scale(1.01); /* Scale up the card on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+h4 {
+  margin-bottom: 0px;
 }

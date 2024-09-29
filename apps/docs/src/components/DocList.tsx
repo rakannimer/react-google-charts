@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAllDocsData } from "@docusaurus/plugin-content-docs/client";
 
 function formatPathToTitle(path) {
@@ -18,17 +18,33 @@ export default function DocList() {
   const allDocsData = useAllDocsData();
 
   const docs = allDocsData.default.versions[0].docs;
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const docsWithTitle = docs.map((doc) => ({
+    ...doc,
+    title: formatPathToTitle(doc.path),
+  }));
+  const filteredDocs = docsWithTitle.filter((doc) =>
+    doc.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
   return (
-    <div>
-      <ul>
-        {docs
+    <div className="library-page">
+      <header className="library-header">
+        <input
+          type="text"
+          placeholder="Find component"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </header>
+      <ul className="library">
+        {filteredDocs
           ?.filter((el) => Boolean(el.path))
           .filter((el) => el.path !== "/examples/" && el.path !== "/")
           .map((doc) => (
-            <li key={doc.id}>
-              <a href={doc.path}>{formatPathToTitle(doc.path) || doc.path}</a>
-            </li>
+            <a href={doc.path} className="chart-card" role="listitem">
+              <h4>{doc.title}</h4>
+            </a>
           ))}
       </ul>
     </div>
