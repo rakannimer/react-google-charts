@@ -17,7 +17,8 @@ jobs:
         run: npm i
       - name: Publish
         run: |
+          cd packages/react-google-charts
           npm run cleanPublish
-          npm publish --non-interactive package
+          npm publish package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
