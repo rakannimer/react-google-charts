@@ -83,8 +83,10 @@ export const useChartControls = (props: UseChartControlsParams) => {
   };
 
   return {
-    addControls: GoogleChartControlsInternal.addControls,
-    setChartControls,
+    addControls: (props: UseChartControlsParams) => {
+      const controls = GoogleChartControlsInternal.addControls(props);
+      setChartControls(controls?.map((control) => control.control) ?? null);
+    },
     renderControl,
   };
 };

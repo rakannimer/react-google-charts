@@ -22,7 +22,7 @@ export const GoogleChart: React.FC<Props> = (props) => {
   const [googleChartDashboard, setGoogleChartDashboard] =
     React.useState<GoogleChartDashboard | null>(null);
 
-  const { addControls, setChartControls, renderControl } = useChartControls({
+  const { addControls, renderControl } = useChartControls({
     ...props,
     chartDashboard: googleChartDashboard,
     chartWrapper: googleChartWrapper,
@@ -82,14 +82,9 @@ export const GoogleChart: React.FC<Props> = (props) => {
       });
     }
     // Create and add controls to the chart / dashboard
-    const chartControls = addControls({
-      ...props,
-      chartDashboard,
-      chartWrapper,
-    });
+    addControls({ ...props, chartDashboard, chartWrapper });
     setGoogleChartWrapper(chartWrapper);
     setGoogleChartDashboard(chartDashboard);
-    setChartControls(chartControls?.map(({ control }) => control) ?? null);
     onLoad?.(google, {
       google,
       chartWrapper,
