@@ -1,14 +1,15 @@
-import swc from "rollup-plugin-swc";
+import { default as swc } from "rollup-plugin-swc";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-import pkg from "./package.json";
+import pkg from "./package.json" assert { type: "json" };
 
+const swcPlugin = swc.default;
 const extensions = [".js", ".ts", ".tsx"];
 const external = (_) => /node_modules/.test(_) && !/@swc\/helpers/.test(_);
 const plugins = (targets) => [
   nodeResolve({
     extensions,
   }),
-  swc({
+  swcPlugin({
     jsc: {
       parser: {
         syntax: "typescript",
