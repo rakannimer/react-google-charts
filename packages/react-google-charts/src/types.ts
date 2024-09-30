@@ -9,6 +9,7 @@ export type GoogleViz = {
   charts: GoogleChartLoader;
   visualization: {
     ChartWrapper: GoogleChartWrapper;
+    ControlWrapper: GoogleChartControl;
     ChartEditor: GoogleChartEditor;
     DataTable: GoogleDataTable;
     events: GoogleVizEvents;
@@ -216,6 +217,10 @@ export type GoogleChartWrapper = {
   setOptions: (options_obj: Partial<ChartWrapperOptions["options"]>) => void; //
 };
 
+export type GoogleVizEventListener = {
+  key: Record<string, unknown>;
+};
+
 export type GoogleVizEventName =
   | "ready"
   | "error"
@@ -231,12 +236,8 @@ export type GoogleVizEvents = {
     chartWrapper: GoogleChartWrapper | GoogleChartControl | GoogleChartEditor,
     name: GoogleVizEventName,
     onEvent: (chartWrapper: GoogleChartWrapper) => any,
-  ) => any;
-  removeListener: (
-    chartWrapper: GoogleChartWrapper | GoogleChartControl,
-    name: GoogleVizEventName,
-    callback: Function,
-  ) => any;
+  ) => GoogleVizEventListener;
+  removeListener: (eventListener: GoogleVizEventListener) => any;
   removeAllListeners: (chartWrapper: GoogleChartWrapper) => any;
 };
 
@@ -641,6 +642,7 @@ export type ReactGoogleChartDashboardRender = ({
 }) => any;
 export type GoogleChartControlOptions = any;
 export type GoogleChartControl = {
+  new (chartWrapperOptions: GoogleChartControlOptions): GoogleChartControl;
   getContainerId: () => string;
   getOptions: () => GoogleChartControlOptions;
   getState: () => any;

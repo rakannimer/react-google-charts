@@ -89,7 +89,7 @@ export const GoogleChart: React.FC<Props> = (props) => {
     });
     setGoogleChartWrapper(chartWrapper);
     setGoogleChartDashboard(chartDashboard);
-    setChartControls(chartControls);
+    setChartControls(chartControls?.map(({ control }) => control) ?? null);
     onLoad?.(google, {
       google,
       chartWrapper,

@@ -59,7 +59,7 @@ export class GoogleChartInternal {
       console.error("googleChartWrapper is not defined");
       return;
     }
-    google.visualization.events.addListener(
+    return google.visualization.events.addListener(
       googleChartWrapper,
       "select",
       () => {

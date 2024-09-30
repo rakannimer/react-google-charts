@@ -4,6 +4,7 @@ import {
   GoogleChartWrapper,
   ReactGoogleChartProps,
   GoogleChartDashboard,
+  GoogleVizEventListener,
 } from "../../types";
 import { GoogleChartInternal } from "../../utils";
 
@@ -20,7 +21,7 @@ export type UseGoogleChartDataTableParams = ReactGoogleChartProps & {
 export const useGoogleChartDataTable = (
   props: UseGoogleChartDataTableParams,
 ) => {
-  const { google, googleChartWrapper, googleChartDashboard, options } = props;
+  const { google, googleChartWrapper, googleChartDashboard } = props;
   const [hiddenColumns, setHiddenColumns] = React.useState<string[]>([]);
   // Re-draw the chart when hiddenColumns change
   React.useEffect(() => {
@@ -60,6 +61,8 @@ export const useGoogleChartDataTable = (
 
   // Draw the chart when the google charts wrapper is ready and when the hiddenColumns change
   const initialize = (googleChartWrapper: GoogleChartWrapper) => {
+    const listeners: GoogleVizEventListener[] = [];
+
     const { legendToggle, legend_toggle } = props;
     GoogleChartInternal.draw({
       ...props,
@@ -70,18 +73,26 @@ export const useGoogleChartDataTable = (
     });
     window.addEventListener("resize", onResize);
     if (legend_toggle || legendToggle) {
-      GoogleChartInternal.listenToLegendToggle(props, [
+      const listener = GoogleChartInternal.listenToLegendToggle(props, [
         hiddenColumns,
         setHiddenColumns,
       ]);
+
+      if (listener) listeners.push(listener);
     }
+
+    return listeners;
   };
 
   // Remove event listeners and clear the chart when the component is unmounted
-  const destroy = (googleChartWrapper: GoogleChartWrapper) => {
-    const { google } = props;
+  const destroy = (
+    googleChartWrapper: GoogleChartWrapper,
+    listeners: GoogleVizEventListener[],
+  ) => {
     window.removeEventListener("resize", onResize);
-    google.visualization.events.removeAllListeners(googleChartWrapper);
+    listeners.forEach((listener) => {
+      google.visualization.events.removeListener(listener);
+    });
     if (googleChartWrapper.getChartType() === "Timeline") {
       googleChartWrapper.getChart() &&
         googleChartWrapper.getChart().clearChart();
@@ -92,9 +103,9 @@ export const useGoogleChartDataTable = (
     if (!googleChartWrapper) {
       return;
     }
-    initialize(googleChartWrapper);
+    const listeners = initialize(googleChartWrapper);
     return () => {
-      destroy(googleChartWrapper);
+      destroy(googleChartWrapper, listeners);
     };
-  }, [googleChartWrapper, googleChartDashboard, hiddenColumns]);
+  }, [googleChartWrapper, initialize, destroy]);
 };
