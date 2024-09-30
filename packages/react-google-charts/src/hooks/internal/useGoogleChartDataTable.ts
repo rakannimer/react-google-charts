@@ -34,7 +34,20 @@ export const useGoogleChartDataTable = (
       googleChartDashboard,
       google,
     });
-  }, [hiddenColumns, props.data, props.rows, props.columns]);
+  }, [
+    hiddenColumns,
+    props.data,
+    props.rows,
+    props.columns,
+    props.options,
+    props.chartLoaderScriptUrl,
+    props.chartType,
+    props.formatters,
+    props.spreadSheetUrl,
+    props.spreadSheetQueryParameters,
+    props.legendToggle,
+    props.legend_toggle,
+  ]);
 
   // Re-draw the chart when the window is resized
   const onResize = () => {
