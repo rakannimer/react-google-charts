@@ -25,14 +25,13 @@ const ChartView: React.FC<ReactGoogleChartProps> = (props) => {
 /**
  * Updates the context with the props and renders ChartView.
  */
-export const Chart: React.FC<ReactGoogleChartProps> = (props) => {
+export const Chart: React.FC<ReactGoogleChartProps> = (userProps) => {
+  const props = { ...chartDefaultProps, ...userProps };
   return (
     <ContextProvider value={props}>
       <ChartView {...props} />
     </ContextProvider>
   );
 };
-
-Chart.defaultProps = chartDefaultProps;
 
 export default Chart;

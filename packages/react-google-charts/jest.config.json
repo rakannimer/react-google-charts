@@ -6,7 +6,7 @@
   },
   "testRegex": "test/.*\\.spec\\.(jsx?|tsx?)$",
   "setupFilesAfterEnv": [
-    "@testing-library/jest-dom/extend-expect",
+    "@testing-library/jest-dom",
     "./scripts/test-setup.js"
   ],
   "transform": {
