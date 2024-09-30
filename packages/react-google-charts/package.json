@@ -1,6 +1,6 @@
 {
   "name": "react-google-charts",
-  "version": "5.0.0-beta.2",
+  "version": "5.0.0-beta.3",
   "description": "react-google-charts React component",
   "type": "module",
   "sideEffects": false,
