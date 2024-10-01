@@ -17,7 +17,7 @@ const config = {
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.ico",
+  favicon: "img/logo-v2.svg",
   organizationName: "RakanNimer",
   projectName: "react-google-charts",
   noIndex: currentBranch !== "master",
@@ -55,7 +55,7 @@ const config = {
         title: "React Google Charts",
         logo: {
           alt: "React Google Charts logo",
-          src: "img/logo.png",
+          src: "img/logo-v2.svg",
         },
         items: [
           {
