@@ -13,7 +13,7 @@ const config = {
 
   title: "React Google Charts",
   tagline: "A thin, typed, React wrapper for Google Charts",
-  url: "https://react-google-charts.com/",
+  url: "https://www.react-google-charts.com/",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -91,6 +91,18 @@ const config = {
          * Possible values: "top" | "bottom"
          */
         playgroundPosition: "bottom",
+      },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: "6F6D5HVC1F",
+
+        // Public API key: it is safe to commit it
+        apiKey: "92d81a798940fa2a43a15193e60ea9ef",
+
+        indexName: "react-google-charts",
+
+        // Optional: whether the insights feature is enabled or not on Docsearch
+        insights: true,
       },
     }),
 
