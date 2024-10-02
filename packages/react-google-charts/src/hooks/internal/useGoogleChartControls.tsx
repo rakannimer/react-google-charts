@@ -12,6 +12,45 @@ import {
 } from "../../components/GoogleChartControls";
 import { GoogleChartControlsInternal } from "../../utils/GoogleChartControlsInternal";
 
+const useCreateChartControls = (
+  controls: ReactGoogleChartProps["controls"],
+) => {
+  const [chartControls, setChartControls] = React.useState<
+    GoogleChartControl[] | null
+  >(null);
+
+  const controlAndProp = React.useMemo(() => {
+    if (!chartControls || !controls) return null;
+
+    return controls
+      .map((controlProp, i): GoogleChartControlAndProp | undefined => {
+        const control: GoogleChartControl | undefined = chartControls[i];
+        return control ? { controlProp, control } : undefined;
+      })
+      .flatMap((controlAndProp) => (controlAndProp ? [controlAndProp] : []));
+  }, [chartControls, controls]);
+
+  return [controlAndProp, setChartControls] as const;
+};
+
+const useListenToControlEvents = (
+  chartControls: GoogleChartControlAndProp[],
+  props: UseChartControlsParams,
+) => {
+  React.useEffect(() => {
+    const listeners = GoogleChartControlsInternal.listenToControlEvents(
+      chartControls ?? [],
+      props,
+    );
+
+    return () => {
+      listeners.forEach((listener) => {
+        props.google.visualization.events.removeListener(listener);
+      });
+    };
+  }, [chartControls, props]);
+};
+
 export type Props = ReactGoogleChartProps & {
   google: GoogleViz;
 };
@@ -22,10 +61,11 @@ export type GoogleChartControlAndProp = {
 };
 
 export const useChartControls = (props: UseChartControlsParams) => {
-  const [chartControls, setChartControls] = React.useState<
-    | { control: GoogleChartControl; controlProp: GoogleChartControlProp }[]
-    | null
-  >(null);
+  const [chartControls, setChartControls] = useCreateChartControls(
+    props.controls,
+  );
+
+  useListenToControlEvents(chartControls ?? [], props);
 
   /**
    * Render the container divs for the controls
@@ -43,9 +83,10 @@ export const useChartControls = (props: UseChartControlsParams) => {
   };
 
   return {
-    addControls: GoogleChartControlsInternal.addControls,
-    chartControls,
-    setChartControls,
+    addControls: (props: UseChartControlsParams) => {
+      const controls = GoogleChartControlsInternal.addControls(props);
+      setChartControls(controls?.map((control) => control.control) ?? null);
+    },
     renderControl,
   };
 };

@@ -39,27 +39,22 @@ export class GoogleChartControlsInternal {
   };
 
   /**
-   * After the controls are initialized, listen to the control events (ready, statechange, error) specified in the controlEvents prop
+   * listen to the control events (ready, statechange, error) specified in the controlEvents prop
    */
-  private static listenToControlEvents = (
+  public static listenToControlEvents = (
     googleChartControls: GoogleChartControlAndProp[],
     props: UseChartControlsParams,
   ) => {
     const { google } = props;
-    for (let chartControl of googleChartControls) {
+    return googleChartControls.flatMap((chartControl) => {
       const { control, controlProp } = chartControl;
       const { controlEvents = [] } = controlProp;
-      for (let event of controlEvents) {
+      return controlEvents.map((event) => {
         const { callback, eventName } = event;
-        google.visualization.events.removeListener(
+        return google.visualization.events.addListener(
           control,
           eventName,
-          callback,
-        );
-        google.visualization.events.addListener(
-          control,
-          eventName,
-          (...args: any[]) => {
+          (...args) => {
             callback({
               chartWrapper: null,
               controlWrapper: control,
@@ -69,8 +64,8 @@ export class GoogleChartControlsInternal {
             });
           },
         );
-      }
-    }
+      });
+    });
   };
 
   /**
@@ -125,7 +120,6 @@ export class GoogleChartControlsInternal {
       googleChartControls.map(({ control }) => control),
       chartWrapper,
     );
-    this.listenToControlEvents(googleChartControls, props);
     this.initializeControls(googleChartControls);
     return googleChartControls;
   };

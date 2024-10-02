@@ -1,16 +1,13 @@
-import { useContext, useEffect } from "react";
-import { ChartContext } from "../../Context";
+import { useEffect } from "react";
 import {
   GoogleChartWrapper,
   GoogleViz,
-  ReactGoogleChartEvent,
   ReactGoogleChartProps,
 } from "../../types";
 
 export type GoogleChartEventsParams = ReactGoogleChartProps & {
   googleChartWrapper?: GoogleChartWrapper | null;
   google: GoogleViz;
-  chartEvents?: ReactGoogleChartEvent[] | null;
 };
 
 const listenToEvents = (props: GoogleChartEventsParams) => {
@@ -22,13 +19,11 @@ const listenToEvents = (props: GoogleChartEventsParams) => {
     console.warn("listenToEvents was called before chart wrapper ready.");
     return;
   }
-  google.visualization.events.removeAllListeners(googleChartWrapper);
-  for (let event of chartEvents) {
-    const { eventName, callback } = event;
-    google.visualization.events.addListener(
+  return chartEvents.map(({ eventName, callback }) => {
+    return google.visualization.events.addListener(
       googleChartWrapper,
       eventName,
-      (...args: any[]) => {
+      (...args) => {
         callback({
           chartWrapper: googleChartWrapper,
           props,
@@ -37,16 +32,19 @@ const listenToEvents = (props: GoogleChartEventsParams) => {
         });
       },
     );
-  }
+  });
 };
 
 export const useGoogleChartEvents = (props: GoogleChartEventsParams) => {
-  const { googleChartWrapper, google } = props;
-  const { chartEvents } = useContext(ChartContext);
   useEffect(() => {
-    if (!googleChartWrapper) {
-      return;
-    }
-    listenToEvents({ chartEvents, ...props });
-  }, [chartEvents, googleChartWrapper, google]);
+    if (!props.googleChartWrapper) return;
+
+    const listeners = listenToEvents(props);
+
+    return () => {
+      listeners?.forEach((listener) => {
+        props.google.visualization.events.removeListener(listener);
+      });
+    };
+  }, [props]);
 };
