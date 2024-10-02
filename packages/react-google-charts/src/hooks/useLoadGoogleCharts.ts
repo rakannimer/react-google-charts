@@ -66,7 +66,9 @@ export function useLoadGoogleCharts(props: ReactGoogleChartProps) {
     isLoading,
     error: scriptLoadingError,
     isSuccess,
-  } = useLoadScript("https://www.gstatic.com/charts/loader.js");
+  } = useLoadScript(
+    props.chartLoaderScriptUrl || "https://www.gstatic.com/charts/loader.js",
+  );
 
   useEffect(() => {
     if (!isSuccess) {

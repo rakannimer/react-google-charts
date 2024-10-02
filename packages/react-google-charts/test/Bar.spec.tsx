@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup, waitFor } from "@testing-library/react";
+import { render, cleanup, screen, waitFor } from "@testing-library/react";
 import { Chart } from "../src";
 
 describe("<Chart />", () => {
@@ -27,14 +27,11 @@ describe("<Chart />", () => {
         />,
       );
 
-      await waitFor(() => expect(getByTestId("1")).toContainHTML("svg"), {
-        timeout: 5000,
+      const root = await screen.findByTestId("1");
+      await waitFor(() => {
+        expect(root).toBeVisible();
+        expect(root.querySelector("svg")).toBeVisible();
       });
-
-      const root = getByTestId("1");
-
-      expect(root).toBeVisible();
-      expect(root.querySelector("svg")).toBeVisible();
     });
   });
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup, waitFor, act } from "@testing-library/react";
+import { render, cleanup, waitFor, act, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import {
   Chart,
@@ -106,8 +106,7 @@ describe("Event Listening", () => {
       rootProps: { "data-testid": "1" },
     };
     const { getByTestId, rerender } = render(<Chart {...props} />);
-
-    await waitFor(() => expect(getByTestId("1")), { timeout: 5_000 });
+    await screen.findByTestId("1");
     await waitFor(() =>
       expect(eventCallback).toHaveBeenCalledWith("first rendering"),
     );
@@ -163,7 +162,7 @@ describe("Event Listening", () => {
     };
     const { getByTestId, rerender, container } = render(<Chart {...props} />);
 
-    await waitFor(() => expect(getByTestId("1")), { timeout: 5_000 });
+    await screen.findByTestId("1");
     await waitFor(() =>
       expect(eventCallback).toHaveBeenCalledWith("first rendering"),
     );
@@ -233,8 +232,8 @@ describe("Event Listening", () => {
       </>,
     );
 
-    await waitFor(() => expect(getByTestId("alphaChart")), { timeout: 5_000 });
-    await waitFor(() => expect(getByTestId("betaChart")), { timeout: 5_000 });
+    await screen.findByTestId("alphaChart");
+    await screen.findByTestId("betaChart");
     await waitFor(() =>
       expect(eventCallback).toHaveBeenCalledWith("first rendering of alpha"),
     );
@@ -318,8 +317,8 @@ describe("Event Listening", () => {
       </>,
     );
 
-    await waitFor(() => expect(getByTestId("alphaChart")), { timeout: 5_000 });
-    await waitFor(() => expect(getByTestId("betaChart")), { timeout: 5_000 });
+    await screen.findByTestId("alphaChart");
+    await screen.findByTestId("betaChart");
     await waitFor(() =>
       expect(eventCallback).toHaveBeenCalledWith("first rendering of alpha"),
     );
