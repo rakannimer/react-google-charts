@@ -1,6 +1,6 @@
 # React Google Charts
 
-<img align="right" alt="Logo" src="apps/docs/static/img/logo-v2.svg">
+<img align="right" alt="Logo" src="https://www.react-google-charts.com/img/logo-v2.svg">
 
 React Google Charts is a lightweight and fully typed React wrapper for [Google Charts](https://developers.google.com/chart/interactive/docs/reference).
 
