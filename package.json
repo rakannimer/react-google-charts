@@ -14,7 +14,7 @@
     "//": "//"
   },
   "devDependencies": {
-    "@size-limit/preset-big-lib": "^11.1.5",
+    "@size-limit/preset-big-lib": "^11.1.6",
     "nano-staged": "^0.8.0",
     "prettier": "^3.2.5",
     "size-limit": "^11.1.6",
