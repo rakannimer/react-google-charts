@@ -20,6 +20,26 @@ function getRandomNumber() {
   return Math.floor(Math.random() * 100) + 1;
 }
 
+const initialData = [
+  ["Age", "Weight"],
+  [84, 39],
+  [6, 16],
+  [81, 32],
+  [48, 38],
+  [47, 81],
+  [98, 35],
+  [50, 5],
+  [32, 85],
+  [98, 44],
+  [2, 11],
+  [14, 88],
+  [36, 87],
+  [72, 88],
+  [25, 27],
+  [72, 70],
+  [79, 37],
+];
+
 function getData() {
   return [
     ["Age", "Weight"],
@@ -28,7 +48,7 @@ function getData() {
 }
 
 export function Default(args) {
-  const [chartData, setChartData] = useState(getData);
+  const [chartData, setChartData] = useState(initialData);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   useEffect(() => {
     if (!shouldAnimate) {
