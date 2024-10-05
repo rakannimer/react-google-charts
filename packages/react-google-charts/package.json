@@ -54,7 +54,7 @@
     "@size-limit/preset-big-lib": "^11.1.6",
     "@storybook/addon-actions": "^8.3.4",
     "@storybook/addon-controls": "^8.3.4",
-    "@storybook/addon-docs": "^8.3.4",
+    "@storybook/addon-docs": "^8.3.5",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.3",
     "@storybook/react": "^8.3.4",
     "@storybook/react-webpack5": "^8.3.4",
