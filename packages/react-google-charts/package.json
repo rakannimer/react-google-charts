@@ -58,7 +58,7 @@
     "@storybook/addon-webpack5-compiler-babel": "^3.0.3",
     "@storybook/react": "^8.3.6",
     "@storybook/react-webpack5": "^8.3.4",
-    "@storybook/theming": "^8.3.4",
+    "@storybook/theming": "^8.3.6",
     "@swc/core": "^1.7.26",
     "@swc/helpers": "^0.5.13",
     "@swc/jest": "^0.2.36",
