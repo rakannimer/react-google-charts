@@ -16,7 +16,7 @@
     "create-doc-barrels": "npx bun ./scripts/create-markdown-barrel.ts"
   },
   "dependencies": {
-    "@algolia/client-search": "^5.7.0",
+    "@algolia/client-search": "^5.10.1",
     "@docusaurus/core": "3.5.2",
     "@docusaurus/plugin-client-redirects": "^3.5.2",
     "@docusaurus/preset-classic": "3.5.2",
