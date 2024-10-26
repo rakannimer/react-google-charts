@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/RakanNimer/react-google-charts/compare/v5.1.0...v5.2.0) (2024-10-26)
+
+
+### Features
+
+* allow initialization from a DataTable ([#766](https://github.com/RakanNimer/react-google-charts/issues/766)) ([01e21d4](https://github.com/RakanNimer/react-google-charts/commit/01e21d4245bb04c90d64627ad509ecf12fe47492))
+
 ## [5.1.0](https://github.com/RakanNimer/react-google-charts/compare/v4.0.7...v5.1.0) (2024-10-03)
 
 
