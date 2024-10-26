@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.2.1](https://github.com/RakanNimer/react-google-charts/compare/v5.2.0...v5.2.1) (2024-10-26)
+
+
+### Bug Fixes
+
+* **typings:** fix setValue value param should accept same types as getValue ([#765](https://github.com/RakanNimer/react-google-charts/issues/765)) ([5f58bee](https://github.com/RakanNimer/react-google-charts/commit/5f58bee60a8e2a631d8976380e6d762458b78afc))
+
 ## [5.2.0](https://github.com/RakanNimer/react-google-charts/compare/v5.1.0...v5.2.0) (2024-10-26)
 
 
