@@ -419,7 +419,7 @@ export type GoogleDataTable = {
   setRowProperty: (rowIndex: number, name: string, value: any) => void;
   setRowProperties: (rowIndex: number, properties: {} | null) => void;
   setTableProperties: (properties: {} | null) => void;
-  setValue: (rowIndex: number, columnIndex: number, value: string) => void;
+  setValue: (rowIndex: number, columnIndex: number, value: boolean | string | number | Date | number[] | null) => void;
   sort: (sortColumns: GoogleDataTableSortColumns) => void;
   toJSON: () => string; // GoogleDataTableJS
 };
