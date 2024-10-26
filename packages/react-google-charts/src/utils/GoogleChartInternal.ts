@@ -127,7 +127,9 @@ export class GoogleChartInternal {
       );
     }
     if (data) {
-      if (Array.isArray(data)) {
+      if (data instanceof google.visualization.DataTable) {
+        dataTable = data;
+      } else if (Array.isArray(data)) {
         dataTable = google.visualization.arrayToDataTable(data);
       } else {
         dataTable = new google.visualization.DataTable(data);
