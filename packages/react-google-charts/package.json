@@ -61,7 +61,7 @@
     "@storybook/theming": "^8.3.6",
     "@swc/core": "^1.9.1",
     "@swc/helpers": "^0.5.13",
-    "@swc/jest": "^0.2.36",
+    "@swc/jest": "^0.2.37",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
     "@types/jest": "^29.5.13",
