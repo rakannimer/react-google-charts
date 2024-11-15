@@ -143,6 +143,10 @@ const config = {
             to: "/examples/line-chart-material",
             from: ["/examples/line"],
           },
+          {
+            to: "/examples/scatter-chart-material",
+            from: ["/examples/scatter"],
+          },
         ],
       },
     ],
