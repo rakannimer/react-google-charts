@@ -19,7 +19,7 @@
     "@algolia/client-search": "^5.10.2",
     "@docusaurus/core": "3.5.2",
     "@docusaurus/plugin-client-redirects": "^3.5.2",
-    "@docusaurus/preset-classic": "3.5.2",
+    "@docusaurus/preset-classic": "3.6.3",
     "@docusaurus/theme-live-codeblock": "^3.5.2",
     "@docusaurus/theme-search-algolia": "^3.6.3",
     "@mdx-js/react": "^3.1.0",
