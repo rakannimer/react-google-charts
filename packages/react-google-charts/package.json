@@ -60,7 +60,7 @@
     "@storybook/react": "^8.4.4",
     "@storybook/react-webpack5": "^8.4.4",
     "@storybook/theming": "^8.4.4",
-    "@swc/helpers": "^0.5.13",
+    "@swc/helpers": "^0.5.15",
     "@swc/jest": "^0.2.37",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
