@@ -218,14 +218,14 @@ export class GoogleChartInternal {
             formatter.options,
           );
           vizFormatter.format(dataTable, formatter.column);
-          return;
+          break;
         }
         case "BarFormat": {
           const vizFormatter = new google.visualization.BarFormat(
             formatter.options,
           );
           vizFormatter.format(dataTable, formatter.column);
-          return;
+          break;
         }
         case "ColorFormat": {
           const vizFormatter = new google.visualization.ColorFormat(
@@ -238,32 +238,32 @@ export class GoogleChartInternal {
             }
           }
           vizFormatter.format(dataTable, formatter.column);
-          return;
+          break;
         }
         case "DateFormat": {
           const vizFormatter = new google.visualization.DateFormat(
             formatter.options,
           );
           vizFormatter.format(dataTable, formatter.column);
-          return;
+          break;
         }
         case "NumberFormat": {
           const vizFormatter = new google.visualization.NumberFormat(
             formatter.options,
           );
           vizFormatter.format(dataTable, formatter.column);
-          return;
+          break;
         }
         case "PatternFormat": {
           const vizFormatter = new google.visualization.PatternFormat(
             formatter.options,
           );
           vizFormatter.format(dataTable, formatter.column);
-          return;
+          break;
         }
         default: {
           console.warn(`Unknown formatter type: ${formatter.type}`);
-          return;
+          break;
         }
       }
     }
