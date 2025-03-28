@@ -28,7 +28,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 20
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Install dependencies
-        run: npm i
+        run: pnpm install
       - name: Check storybook
-        run: npm run build-storybook
+        run: pnpm run build-storybook

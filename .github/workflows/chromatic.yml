@@ -14,9 +14,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
-        run: npm ci
+        run: pnpm install --frozen-lockfile
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:

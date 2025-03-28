@@ -13,12 +13,16 @@ jobs:
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Install dependencies
-        run: npm i
+        run: pnpm install
       - name: Publish
         run: |
           cd packages/react-google-charts
-          npm run cleanPublish
-          cd package && npm publish
+          pnpm run cleanPublish
+          cd package && pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
