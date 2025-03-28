@@ -59,7 +59,7 @@
     "@storybook/manager-api": "^8.4.4",
     "@storybook/react": "^8.4.4",
     "@storybook/react-webpack5": "^8.4.4",
-    "@storybook/theming": "^8.4.4",
+    "@storybook/theming": "^8.6.11",
     "@swc/helpers": "^0.5.13",
     "@swc/jest": "^0.2.37",
     "@testing-library/jest-dom": "^6.5.0",
