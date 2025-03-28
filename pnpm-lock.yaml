@@ -172,8 +172,8 @@ importers:
         specifier: ^8.4.4
         version: 8.6.10(@swc/core@1.11.13(@swc/helpers@0.5.15))(esbuild@0.25.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/theming':
-        specifier: ^8.4.4
-        version: 8.6.10(storybook@8.6.10(prettier@3.5.3))
+        specifier: ^8.6.11
+        version: 8.6.11(storybook@8.6.10(prettier@3.5.3))
       '@swc/core':
         specifier: ^1.9.1
         version: 1.11.13(@swc/helpers@0.5.15)
@@ -2223,6 +2223,11 @@ packages:
 
   '@storybook/theming@8.6.10':
     resolution: {integrity: sha512-4E5ArcJ/bhrWtlYzQDbtA3O3pha/Ys0Ja6X4waJQ5UJENzUMdVz6vTLSUHtG5hNRmSqreogxe4Ed88+0JtY7NQ==}
+    peerDependencies:
+      storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+
+  '@storybook/theming@8.6.11':
+    resolution: {integrity: sha512-G7IK5P9gzofUjfYhMo9Pdgbqcr22eoKFLD808Q8RxJopDoypdZKg4tes2iD+6YnrtnHS0nEoP/soMmfFYl9FIw==}
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
@@ -11758,6 +11763,10 @@ snapshots:
       typescript: 5.8.2
 
   '@storybook/theming@8.6.10(storybook@8.6.10(prettier@3.5.3))':
+    dependencies:
+      storybook: 8.6.10(prettier@3.5.3)
+
+  '@storybook/theming@8.6.11(storybook@8.6.10(prettier@3.5.3))':
     dependencies:
       storybook: 8.6.10(prettier@3.5.3)
 
