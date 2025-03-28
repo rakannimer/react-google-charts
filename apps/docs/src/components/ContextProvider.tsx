@@ -13,10 +13,11 @@ export default function ContextProvider({
   children(context: IContext): ReactNode;
 }) {
   const ctx = useDocusaurusContext();
-  const { isDarkTheme } = useColorMode();
+  // const { isDarkTheme } = useColorMode();
   const context = {
     branch: ctx.siteConfig.customFields.branch as string,
-    theme: isDarkTheme ? ("dark" as const) : ("light" as const),
+    // theme: isDarkTheme ? ("dark" as const) : ("light" as const),
+    theme: "light" as const,
   };
 
   return children(context);

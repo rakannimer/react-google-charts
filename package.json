@@ -18,13 +18,13 @@
     "nano-staged": "^0.8.0",
     "prettier": "^3.2.5",
     "size-limit": "^11.1.6",
-    "turbo": "^2.2.3",
+    "turbo": "^2.4.4",
     "typescript": "^5.6.3"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "npm@10.8.2",
+  "packageManager": "pnpm@9.14.2",
   "workspaces": [
     "apps/*",
     "packages/*"
