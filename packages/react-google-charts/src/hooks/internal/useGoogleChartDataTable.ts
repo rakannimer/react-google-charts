@@ -56,7 +56,13 @@ export const useGoogleChartDataTable = (
     if (!googleChartWrapper) {
       return;
     }
-    googleChartWrapper.draw();
+    GoogleChartInternal.draw({
+      ...props,
+      hiddenColumns,
+      googleChartWrapper,
+      googleChartDashboard,
+      google,
+    });
   };
 
   // Draw the chart when the google charts wrapper is ready and when the hiddenColumns change
