@@ -12,14 +12,20 @@ export function useLoadScript(src: string) {
   const [isSuccess, setIsSuccess] = useState(false);
   const onLoad = () => {
     setIsLoading(false);
+    setError(null);
     setIsSuccess(true);
+  };
+  const onError = (error: Error | null) => {
+    setError(error);
+    setIsLoading(false);
+    setIsSuccess(false);
   };
   useEffect(() => {
     if (!document) {
       const error = new Error(
         `[ScriptLoadingError] document not defined when attempting to load ${src}`,
       );
-      setError(error);
+      onError(error);
       return;
     }
 
@@ -55,7 +61,7 @@ export function useLoadScript(src: string) {
       const error = new Error(
         `[ScriptLoadingError] Failed to load script: ${src}`,
       );
-      setError(error);
+      onError(error);
     });
 
     // Add to DOM if not yet added.
